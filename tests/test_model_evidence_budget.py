@@ -5,14 +5,14 @@ import uuid
 
 import pytest
 
-from prometheist.model_evidence_budget import (
+from persistent_cognition.model_evidence_budget import (
     ModelEvidenceBudget,
     ModelEvidenceBudgetExceeded,
     configured_model_evidence_budget,
     validate_capability_result_content,
     validate_memory_packet_content,
 )
-from prometheist.models import EventType, MemoryEvidence, MemoryNeed, MemoryPacket
+from persistent_cognition.models import EventType, MemoryEvidence, MemoryNeed, MemoryPacket
 
 
 def _evidence(content: str, seq: int) -> MemoryEvidence:
@@ -61,15 +61,15 @@ def test_capability_results_share_the_same_aggregate_evidence_budget():
 
 
 def test_budget_environment_values_are_governed_and_validated(monkeypatch):
-    monkeypatch.setenv("PROMETHEIST_MAX_MODEL_EVIDENCE_ITEM_BYTES", "8192")
-    monkeypatch.setenv("PROMETHEIST_MAX_MODEL_EVIDENCE_TOTAL_BYTES", "32768")
+    monkeypatch.setenv("PCR_MAX_MODEL_EVIDENCE_ITEM_BYTES", "8192")
+    monkeypatch.setenv("PCR_MAX_MODEL_EVIDENCE_TOTAL_BYTES", "32768")
     budget = configured_model_evidence_budget()
     assert budget.max_item_bytes == 8192
     assert budget.max_total_bytes == 32768
 
 
 def test_invalid_budget_configuration_fails_closed(monkeypatch):
-    monkeypatch.setenv("PROMETHEIST_MAX_MODEL_EVIDENCE_ITEM_BYTES", "0")
+    monkeypatch.setenv("PCR_MAX_MODEL_EVIDENCE_ITEM_BYTES", "0")
     with pytest.raises(ValueError, match="must be positive"):
         configured_model_evidence_budget()
 

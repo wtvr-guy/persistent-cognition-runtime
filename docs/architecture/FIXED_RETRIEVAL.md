@@ -6,12 +6,12 @@ Policy: `fixed-retrieval/v1`. Introduced 2026-09-28.
 The active path is:
 
 1. Resolve references and classify the current prompt's source/surface policy.
-2. Open the bounded attention aperture; activate derived self-context.
+2. Open the bounded attention aperture and activate derived navigation context.
 3. Select and execute any registered non-memory work. Empty catalogs need no model call.
-4. Retrieve canonical self-model support/opposition roots where applicable and one bounded canonical neighborhood. Cues match learned statements, tags, and their admissible linked source text, so paraphrasing during learning does not erase the original navigation cues.
+4. Retrieve canonical roots and one bounded canonical neighborhood. Cues match learned statements, tags, and their admissible linked source text, so paraphrasing during learning does not erase the original navigation cues.
 5. Run BROAD, ASSOCIATIVE, RELATIONAL, FOCUSED in that fixed order. A route without its required focus roots is explicitly recorded as skipped. An empty result from one route does not stop later routes.
 6. Merge bounded route results deterministically, deduplicate event IDs, enforce source types and the exclusive history cutoff, alternate newer/older evidence within routes, and interleave routes and known evidence roles. Record budget exclusions without truncating or deleting canonical events.
-7. Give the final responder admitted memory, separately labeled derived self-context, and authoritative capability results. Persist the response and final disposition.
+7. Give the final responder admitted memory, separately labeled derived memory context, and authoritative capability results. Persist the response and final disposition.
 
 The retrieval stage performs no LLM calls. It stops after exhausting the configured finite routes. It uses the original prompt and existing derived navigation hints, never a generated `memory_deficit`. Packet size and UTF-8 byte bounds remain the existing governed tunables. The initial implementation deliberately spends the bounded route budget even when an earlier route appears useful. Selective retrieval is a later experiment.
 
@@ -27,15 +27,9 @@ The retrieval stage performs no LLM calls. It stops after exhausting the configu
 - `benchmarks/constraint_registry.json`: classified numeric bounds and calibration obligations.
 - `schema.sql`: idempotent database bootstrap for canonical events and derived state.
 
-`uv run python scripts/audit_registries.py` resolves the entire live contract catalog without a DB or model. CI runs this and the numeric constraint audit. LLM artifacts retain actual prompts/schemas and registered contract identities. Dynamic personality text and actual schemas remain visible in the invocation envelope.
+`uv run python scripts/audit_registries.py` resolves the entire live contract catalog without a DB or model. CI runs this and the numeric constraint audit. LLM artifacts retain actual prompts/schemas and registered contract identities. Actual schemas remain visible in the invocation envelope.
 
 The former Composer contracts remain in upstream Git history. They are absent from this engine’s active stage and prompt registries.
-
-## Self-model epistemic policy
-
-The proposal worker suggests evidence-linked interpretations. The review worker identifies possible opposition in a separately retrieved packet. Review output contains `opposition_indices` and `rationale`, never an establish/contest/reject verdict.
-
-Ordinary code resolves source indices, rejects invalid links, deduplicates canonical roots, and applies the existing support, context breadth, and opposition policy. Known opposition prevents establishment. AVOWED, OBSERVED, INFERRED, ASPIRATIONAL, NORMATIVE, and SOCIAL_ATTRIBUTION remain distinct perspectives. An established derived representation is not canonical truth. The numeric support/breadth thresholds remain provisional and require longitudinal validation.
 
 ## Protocol transition
 

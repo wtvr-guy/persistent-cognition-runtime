@@ -1,30 +1,30 @@
 # Runtime Engineering Constitution
 
-Engineering rules inherited from the pinned source revision. The source article numbers are retained so the accompanying specifications remain traceable. This document governs persistent state, memory, inference and execution; application mission and personhood policy are outside this engine repository.
+Engineering rules inherited from the pinned source revision. The source article numbers are retained so the accompanying specifications remain traceable. This document governs persistent state, memory, inference and execution; application mission policy are outside this engine repository.
 
 Changes to these rules require explicit documentation and appropriate regression evidence. A source-code change or passing test does not silently redefine an invariant.
 
 ### Article 7 — Continuity belongs to the system
 
-**Rule.** Identity, memory, active working state, tasks, attention, interaction continuity, policy, execution state, and causal provenance belong to Prometheist itself. They must not depend on an LLM context window, chat transcript, worker process, or named agent remaining alive.
+**Rule.** Memory, active working state, tasks, attention, interaction continuity, policy, execution state, and causal provenance belong to Persistent Cognition itself. They must not depend on an LLM context window, chat transcript, worker process, or named agent remaining alive.
 
 **Why it matters.** A persistent cognitive system cannot be persistent if its state disappears when disposable compute disappears.
 
-**Deep dive:** [`docs/architecture/COGNITIVE_ARCHITECTURE.md`](https://github.com/wtvr-guy/prometheist/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/architecture/COGNITIVE_ARCHITECTURE.md)
+**Deep dive:** [`docs/architecture/COGNITIVE_ARCHITECTURE.md`](https://github.com/wtvr-guy/persistent_cognition/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/architecture/COGNITIVE_ARCHITECTURE.md)
 
 ### Article 8 — Every LLM invocation is stateless; workers are disposable
 
-**Rule.** Every LLM call starts fresh. No model invocation may inherit a hidden transcript or private context from an earlier invocation. Workers receive only bounded system-owned durable/task-local inputs, persist their result or checkpoint, and may then disappear. Agent-like names may describe temporary roles, but permanent agents are not owners of durable identity or executive authority.
+**Rule.** Every LLM call starts fresh. No model invocation may inherit a hidden transcript or private context from an earlier invocation. Workers receive only bounded system-owned durable/task-local inputs, persist their result or checkpoint, and may then disappear. Agent-like names may describe temporary roles, but permanent agents are not owners of durable continuity or executive authority.
 
 **Why it matters.** Stateless inference makes continuity inspectable, restart-safe, model-replaceable, and independent of process lifetime.
 
-**Deep dive:** [`docs/architecture/COGNITIVE_ARCHITECTURE.md`](https://github.com/wtvr-guy/prometheist/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/architecture/COGNITIVE_ARCHITECTURE.md)
+**Deep dive:** [`docs/architecture/COGNITIVE_ARCHITECTURE.md`](https://github.com/wtvr-guy/persistent_cognition/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/architecture/COGNITIVE_ARCHITECTURE.md)
 
 ### Article 9 — Admitted durable memory is lossless, append-only canonical evidence
 
 **Rule.** Once information is admitted as canonical durable memory or authoritative internal history, ordinary retention, indexing, summarization, aggregation, or storage-pressure policy must not replace, rewrite, or delete the exact canonical evidence. Canonical historical events are append-only: corrections, contradictions, and supersession are represented by new provenance-bearing records that refer to earlier evidence rather than mutating history. Derived structures are navigation aids, not substitute memories.
 
-**Why it matters.** Prometheist's accuracy objective depends on being able to return to exact source evidence and reconstruct what the system actually knew at a point in time rather than trusting successively lossy or retrospectively rewritten history.
+**Why it matters.** Persistent Cognition's accuracy objective depends on being able to return to exact source evidence and reconstruct what the system actually knew at a point in time rather than trusting successively lossy or retrospectively rewritten history.
 
 **Deep dive:** [`docs/architecture/LOSSLESS_PROGRESSIVE_MEMORY.md`](docs/architecture/LOSSLESS_PROGRESSIVE_MEMORY.md)
 
@@ -32,7 +32,7 @@ Changes to these rules require explicit documentation and appropriate regression
 
 **Rule.** Indexes, embeddings, entity links, association edges, salience/activation metadata, summaries used as aids, and other derived structures must be explicitly non-authoritative and rebuildable wherever their derivation permits it. Non-deterministically derived assertions must retain provenance, method/version, and non-authoritative status.
 
-**Why it matters.** Prometheist must be able to improve its retrieval machinery without rewriting its history.
+**Why it matters.** Persistent Cognition must be able to improve its retrieval machinery without rewriting its history.
 
 **Deep dive:** [`docs/architecture/LOSSLESS_PROGRESSIVE_MEMORY.md`](docs/architecture/LOSSLESS_PROGRESSIVE_MEMORY.md)
 
@@ -64,13 +64,13 @@ Changes to these rules require explicit documentation and appropriate regression
 
 **Rule.** Stored conversation IDs and interface/session/device identifiers may constrain provenance, ordering, UI, debugging, or an explicitly scoped request, but they are not default semantic walls around memory or continuity.
 
-**Why it matters.** Prometheist is intended to maintain one persistent identity and history rather than fragment cognition into chat containers.
+**Why it matters.** Persistent Cognition is intended to maintain one persistent history and interaction continuity rather than fragment cognition into chat containers.
 
 **Deep dive:** [`docs/architecture/INTERACTION_CONTINUITY.md`](docs/architecture/INTERACTION_CONTINUITY.md)
 
 ### Article 15 — System control is deterministic wherever deterministic control is possible
 
-**Rule.** Stable identity, total ordering, priority derivation, dependency handling, capability identity, execution order, resource policy, retention/deletion authority, permissions, validation, retry semantics, and other control-plane decisions belong to ordinary software whenever they can be represented deterministically. Given the same authoritative durable state, authoritative observations, and policy versions, Prometheist must reconstruct the same system decision.
+**Rule.** Stable identity, total ordering, priority derivation, dependency handling, capability identity, execution order, resource policy, retention/deletion authority, permissions, validation, retry semantics, and other control-plane decisions belong to ordinary software whenever they can be represented deterministically. Given the same authoritative durable state, authoritative observations, and policy versions, Persistent Cognition must reconstruct the same system decision.
 
 **Why it matters.** Models may interpret semantics, but durable system authority must remain replayable, auditable, and independent of races or model preference.
 
@@ -78,15 +78,15 @@ Changes to these rules require explicit documentation and appropriate regression
 
 ### Article 16 — Race conditions never decide durable authority
 
-**Rule.** Prometheist must not let independently racing workers determine which durable task, resource, capability, or side effect wins. Selection is committed by deterministic system policy before workers act.
+**Rule.** Persistent Cognition must not let independently racing workers determine which durable task, resource, capability, or side effect wins. Selection is committed by deterministic system policy before workers act.
 
-**Why it matters.** Operating-system scheduling may be nondeterministic; Prometheist's durable executive decisions must not be.
+**Why it matters.** Operating-system scheduling may be nondeterministic; Persistent Cognition's durable executive decisions must not be.
 
 **Deep dive:** [`docs/architecture/SYSTEM_DETERMINISM.md`](docs/architecture/SYSTEM_DETERMINISM.md)
 
 ### Article 17 — Attention priority and resource admission are separate
 
-**Rule.** Attention determines which durable work deserves execution and its deterministic order. Resource admission determines which compatible subset can safely run concurrently under current authoritative capacity, reservations, and headroom. Prometheist should exploit safe parallelism rather than serialize work unnecessarily.
+**Rule.** Attention determines which durable work deserves execution and its deterministic order. Resource admission determines which compatible subset can safely run concurrently under current authoritative capacity, reservations, and headroom. Persistent Cognition should exploit safe parallelism rather than serialize work unnecessarily.
 
 **Why it matters.** Priority is a semantic/executive property; physical concurrency is a hardware-safety property. Collapsing them wastes resources or creates unsafe oversubscription.
 
@@ -94,7 +94,7 @@ Changes to these rules require explicit documentation and appropriate regression
 
 ### Article 18 — Resource safety is fail-closed and preserves headroom
 
-**Rule.** Work may start only after the authoritative resource policy says its reservation fits safely. Prometheist reserves headroom for the operating system and required or identity-authorized processes. Local LLM inference defaults conservatively to one concurrent slot until evidence justifies another value. Transient pressure may delay and trigger bounded re-observation; it must not silently weaken the committed safety thresholds.
+**Rule.** Work may start only after the authoritative resource policy says its reservation fits safely. Persistent Cognition reserves headroom for the operating system and required or operator-authorized processes. Local LLM inference defaults conservatively to one concurrent slot until evidence justifies another value. Transient pressure may delay and trigger bounded re-observation; it must not silently weaken the committed safety thresholds.
 
 **Why it matters.** A scheduler that can crash or severely degrade the host is not a valid attention mechanism.
 
@@ -104,7 +104,7 @@ Changes to these rules require explicit documentation and appropriate regression
 
 **Rule.** Higher-priority work does not preempt lower-priority work merely because it is higher priority. Preemption is considered only when relevant occupied capacity prevents safe admission and the victim's declared interruption policy permits yielding. The minimum deterministically selected work necessary to resolve the contention should be disturbed.
 
-**Why it matters.** Prometheist should focus resources when necessary without throwing away useful safe concurrency or violating execution safety.
+**Why it matters.** Persistent Cognition should focus resources when necessary without throwing away useful safe concurrency or violating execution safety.
 
 **Deep dive:** [`docs/architecture/ATTENTION_AND_EXECUTION_GOVERNANCE.md`](docs/architecture/ATTENTION_AND_EXECUTION_GOVERNANCE.md)
 
@@ -116,13 +116,13 @@ Changes to these rules require explicit documentation and appropriate regression
 
 **Deep dive:** [`docs/architecture/ATTENTION_AND_EXECUTION_GOVERNANCE.md`](docs/architecture/ATTENTION_AND_EXECUTION_GOVERNANCE.md)
 
-### Article 21 — Models select semantic requirements; Prometheist owns execution policy
+### Article 21 — Models select semantic requirements; Persistent Cognition owns execution policy
 
 **Rule.** Models may select among bounded application-owned semantic alternatives or capabilities. They do not author capability IDs, dependencies, execution order, resource policy, permissions, durable identifiers, or scheduling authority. Capability results should be structured evidence/state whenever possible.
 
 **Why it matters.** Semantic interpretation is useful; model-authored control planes are difficult to validate, replay, secure, and audit.
 
-**Deep dives:** [`docs/architecture/COGNITIVE_ARCHITECTURE.md`](https://github.com/wtvr-guy/prometheist/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/architecture/COGNITIVE_ARCHITECTURE.md), [`docs/architecture/INTERACTION_CONTINUITY.md`](docs/architecture/INTERACTION_CONTINUITY.md)
+**Deep dives:** [`docs/architecture/COGNITIVE_ARCHITECTURE.md`](https://github.com/wtvr-guy/persistent_cognition/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/architecture/COGNITIVE_ARCHITECTURE.md), [`docs/architecture/INTERACTION_CONTINUITY.md`](docs/architecture/INTERACTION_CONTINUITY.md)
 
 ### Article 22 — Model-generated natural language is control/state of last resort
 
@@ -130,31 +130,31 @@ Changes to these rules require explicit documentation and appropriate regression
 
 **Why it matters.** Closed representations reduce ambiguity, hallucinated control data, brittle parsers, and nondeterministic protocol behavior.
 
-**Deep dives:** [`docs/architecture/COGNITIVE_ARCHITECTURE.md`](https://github.com/wtvr-guy/prometheist/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/architecture/COGNITIVE_ARCHITECTURE.md), [`docs/architecture/INTERACTION_CONTINUITY.md`](docs/architecture/INTERACTION_CONTINUITY.md)
+**Deep dives:** [`docs/architecture/COGNITIVE_ARCHITECTURE.md`](https://github.com/wtvr-guy/persistent_cognition/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/architecture/COGNITIVE_ARCHITECTURE.md), [`docs/architecture/INTERACTION_CONTINUITY.md`](docs/architecture/INTERACTION_CONTINUITY.md)
 
 ### Article 23 — Relevance, activation, evidence sufficiency, and truth are distinct
 
-**Rule.** Attention and retrieval do not promote content to truth. Prometheist must preserve distinctions among canonical evidence, user statements/beliefs, system interpretation, derived hypotheses, corrections/supersession, counterevidence, confidence, and unknown. Unsupported facts may remain unknown.
+**Rule.** Attention and retrieval do not promote content to truth. Persistent Cognition must preserve distinctions among canonical evidence, user statements/beliefs, system interpretation, derived hypotheses, corrections/supersession, counterevidence, confidence, and unknown. Unsupported facts may remain unknown.
 
 **Why it matters.** High-recall memory activation is useful only if it does not silently lower epistemic standards.
 
-**Deep dives:** [`docs/architecture/COGNITIVE_ARCHITECTURE.md`](https://github.com/wtvr-guy/prometheist/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/architecture/COGNITIVE_ARCHITECTURE.md), [`docs/architecture/LOSSLESS_PROGRESSIVE_MEMORY.md`](docs/architecture/LOSSLESS_PROGRESSIVE_MEMORY.md)
+**Deep dives:** [`docs/architecture/COGNITIVE_ARCHITECTURE.md`](https://github.com/wtvr-guy/persistent_cognition/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/architecture/COGNITIVE_ARCHITECTURE.md), [`docs/architecture/LOSSLESS_PROGRESSIVE_MEMORY.md`](docs/architecture/LOSSLESS_PROGRESSIVE_MEMORY.md)
 
 ### Article 24 — Material influence must leave durable causal provenance
 
-**Rule.** Anything that materially influences Prometheist's attention, reasoning, decisions, commitments, actions, or meaningful interaction continuity must leave enough durable provenance to explain that behavior later. High-volume external raw input may remain ephemeral before admission, but the causal record of what actually influenced the system must survive.
+**Rule.** Anything that materially influences Persistent Cognition's attention, reasoning, decisions, commitments, actions, or meaningful interaction continuity must leave enough durable provenance to explain that behavior later. High-volume external raw input may remain ephemeral before admission, but the causal record of what actually influenced the system must survive.
 
 **Why it matters.** A persistent system must be able to explain why it acted as it did even if raw sensor/input buffers are later gone.
 
-**Deep dives:** [`docs/architecture/COGNITIVE_ARCHITECTURE.md`](https://github.com/wtvr-guy/prometheist/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/architecture/COGNITIVE_ARCHITECTURE.md), [`docs/architecture/LOSSLESS_PROGRESSIVE_MEMORY.md`](docs/architecture/LOSSLESS_PROGRESSIVE_MEMORY.md)
+**Deep dives:** [`docs/architecture/COGNITIVE_ARCHITECTURE.md`](https://github.com/wtvr-guy/persistent_cognition/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/architecture/COGNITIVE_ARCHITECTURE.md), [`docs/architecture/LOSSLESS_PROGRESSIVE_MEMORY.md`](docs/architecture/LOSSLESS_PROGRESSIVE_MEMORY.md)
 
 ### Article 25 — Internal memory and external knowledge remain distinct evidence domains
 
-**Rule.** Retrieval from Prometheist's own persistent memory is distinct from external knowledge retrieval such as web/API/tool calls. Their provenance, authority, freshness, and failure semantics must remain explicit; one source must not silently masquerade as the other.
+**Rule.** Retrieval from Persistent Cognition's own persistent memory is distinct from external knowledge retrieval such as web/API/tool calls. Their provenance, authority, freshness, and failure semantics must remain explicit; one source must not silently masquerade as the other.
 
 **Why it matters.** Remembering what the system/user previously experienced is epistemically different from learning something from the outside world now.
 
-**Deep dive:** [`docs/architecture/COGNITIVE_ARCHITECTURE.md`](https://github.com/wtvr-guy/prometheist/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/architecture/COGNITIVE_ARCHITECTURE.md)
+**Deep dive:** [`docs/architecture/COGNITIVE_ARCHITECTURE.md`](https://github.com/wtvr-guy/persistent_cognition/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/architecture/COGNITIVE_ARCHITECTURE.md)
 
 ### Article 26 — Natural-language continuity must not become vocabulary patchwork
 
@@ -174,7 +174,7 @@ Changes to these rules require explicit documentation and appropriate regression
 
 **Rule.** Freeze a measurable baseline, change one mechanism, rerun the same experiment, and keep the mechanism only if the evidence justifies it. Preserve negative results. Do not add infrastructure, retrieval machinery, optimization solvers, models, or architectural layers because they are fashionable or theoretically attractive; add them when a frozen failure or measured limitation justifies the complexity.
 
-**Why it matters.** Prometheist is trying to discover which mechanisms are necessary. Changing several mechanisms at once destroys causal evidence and makes complexity accumulate without proof.
+**Why it matters.** Persistent Cognition is trying to discover which mechanisms are necessary. Changing several mechanisms at once destroys causal evidence and makes complexity accumulate without proof.
 
 **Deep dive:** [`docs/engineering/EMPIRICAL_CONSTRAINT_GOVERNANCE.md`](docs/engineering/EMPIRICAL_CONSTRAINT_GOVERNANCE.md)
 
@@ -192,7 +192,7 @@ Changes to these rules require explicit documentation and appropriate regression
 
 **Why it matters.** Synthetic determinism catches regressions; real-machine acceptance proves that assumptions about processes, memory pressure, local models, databases, and recovery survive contact with the actual deployment environment.
 
-**Deep dive:** [`docs/engineering/TESTING_AND_ACCEPTANCE.md`](https://github.com/wtvr-guy/prometheist/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/engineering/TESTING_AND_ACCEPTANCE.md)
+**Deep dive:** [`docs/engineering/TESTING_AND_ACCEPTANCE.md`](https://github.com/wtvr-guy/persistent_cognition/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/engineering/TESTING_AND_ACCEPTANCE.md)
 
 ### Article 32 — Constitutional changes must be explicit
 
@@ -200,17 +200,17 @@ Changes to these rules require explicit documentation and appropriate regression
 
 **Why it matters.** The Constitution is useful for audits only if architectural drift cannot redefine the rules implicitly.
 
-**Deep dive:** [`docs/engineering/CONSTITUTIONAL_GOVERNANCE.md`](https://github.com/wtvr-guy/prometheist/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/engineering/CONSTITUTIONAL_GOVERNANCE.md)
+**Deep dive:** [`docs/engineering/CONSTITUTIONAL_GOVERNANCE.md`](https://github.com/wtvr-guy/persistent_cognition/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/engineering/CONSTITUTIONAL_GOVERNANCE.md)
 
 ### Article 33 — Retrieval control is bounded, deterministic, and evidence-preserving
 
-**Rule.** Prometheist owns the retrieval sequence, source scope, history cutoff,
+**Rule.** Persistent Cognition owns the retrieval sequence, source scope, history cutoff,
 merging, evidence budgets, and stop conditions in ordinary replayable software.
 The initial replacement policy runs a fixed finite sequence of retrieval routes;
 models do not certify memory sufficiency, author free-form deficits as control
 state, or become a second executive. Completion of retrieval does not establish
 that a question is answerable. The final responder receives admissible canonical
-evidence, separately labeled derived self-context, and authoritative completed
+evidence, separately labeled derived memory context, and authoritative completed
 capability results, and must preserve uncertainty and legitimate unknowns.
 
 **Why it matters.** A semantic coverage judge can suppress useful evidence or
@@ -230,7 +230,7 @@ separation of memory, action authority, and response realization.
 
 ### Article 35 — Insufficient authority or evidence fails closed
 
-**Rule.** Prometheist must not guess past invalid, stale, contradictory, missing, or ambiguous control authority. Invalid model-control output, unusable resource state, unresolved dependency authority, unsupported factual evidence, and ambiguous irreversible side effects must produce an explicit failure, abstention, wait, or reconciliation state as appropriate rather than fabricated success or weakened policy.
+**Rule.** Persistent Cognition must not guess past invalid, stale, contradictory, missing, or ambiguous control authority. Invalid model-control output, unusable resource state, unresolved dependency authority, unsupported factual evidence, and ambiguous irreversible side effects must produce an explicit failure, abstention, wait, or reconciliation state as appropriate rather than fabricated success or weakened policy.
 
 **Why it matters.** Determinism, provenance, resource safety, and epistemic accuracy all fail if the system silently invents authority when the evidence or control contract is insufficient.
 
@@ -238,9 +238,9 @@ separation of memory, action authority, and response realization.
 
 ### Article 36 — Meaningful state transitions require independent artifact durability
 
-**Rule.** Canonical events and meaningful cognitive or operational boundaries that matter for explanation, replay, recovery, or reconstruction must have an immutable, inspectable durable artifact outside the primary operational database. A disposable worker must durably publish its stage result before that stage is treated as terminal. Completed interactions must have a final-disposition manifest over their artifact chain; interrupted interactions retain their partial chain as recoverable state. PostgreSQL or any future primary database may be the indexed operational representation, but it must not be the only surviving copy from which Prometheist's canonical history and recoverable cognitive progress can be reconstructed.
+**Rule.** Canonical events and meaningful cognitive or operational boundaries that matter for explanation, replay, recovery, or reconstruction must have an immutable, inspectable durable artifact outside the primary operational database. A disposable worker must durably publish its stage result before that stage is treated as terminal. Completed interactions must have a final-disposition manifest over their artifact chain; interrupted interactions retain their partial chain as recoverable state. PostgreSQL or any future primary database may be the indexed operational representation, but it must not be the only surviving copy from which Persistent Cognition's canonical history and recoverable cognitive progress can be reconstructed.
 
-**Why it matters.** Stateless cognition is only genuinely restart-safe and user-auditable if the exact artifacts that crossed worker boundaries survive process failure and database loss. Independent artifacts also let Prometheist diagnose what a worker actually knew, resume without repeating completed cognition, and rebuild canonical history after storage corruption.
+**Why it matters.** Stateless cognition is only genuinely restart-safe and user-auditable if the exact artifacts that crossed worker boundaries survive process failure and database loss. Independent artifacts also let Persistent Cognition diagnose what a worker actually knew, resume without repeating completed cognition, and rebuild canonical history after storage corruption.
 
 **Deep dive:** [`docs/architecture/IMMUTABLE_ARTIFACT_JOURNAL.md`](docs/architecture/IMMUTABLE_ARTIFACT_JOURNAL.md)
 
@@ -248,7 +248,7 @@ separation of memory, action authority, and response realization.
 
 **Rule.** One guarded LLM worker process may own only one coherent semantic
 responsibility. Independent decisions such as percept triage, evidence policy,
-work selection, self-evidence interpretation, and response realization require separate
+work selection, evidence interpretation, and response realization require separate
 specialist stages with typed inputs and outputs. Retries or bounded reassessment may
 repeat the same role, but a worker must not accumulate unrelated duties, hidden
 intermediate cognition, or cross-role context merely to reduce process count.

@@ -4,9 +4,9 @@ import pytest
 
 import httpx
 
-from prometheist.attention_observation import HostResourceMetrics
-from prometheist.native_policy import native_resource_safety_policy
-from prometheist.ollama_runtime import OllamaClaimHostResourceProbe, OllamaRuntimeProbe
+from persistent_cognition.attention_observation import HostResourceMetrics
+from persistent_cognition.native_policy import native_resource_safety_policy
+from persistent_cognition.ollama_runtime import OllamaClaimHostResourceProbe, OllamaRuntimeProbe
 
 
 _MIB = 1024 * 1024

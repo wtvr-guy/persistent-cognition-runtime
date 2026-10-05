@@ -4,20 +4,20 @@
 **Constitutional authority:** implements Article 36 of [`../../CONSTITUTION.md`](../../CONSTITUTION.md).  
 **Applies to:** canonical events, percept-to-response stage boundaries, stateless LLM invocations, content-addressed blob storage, inspection and human auditing, signed journal heads, interruption recovery, and database reconstruction
 
-Prometheist maintains an independent append-only artifact journal in addition to PostgreSQL. Each logical record is immutable and hash-checked. PostgreSQL remains the indexed operational store used for efficient retrieval, scheduling, and execution. It is not the only surviving representation of Prometheist's memory, cognition, or completed work.
+Persistent Cognition maintains an independent append-only artifact journal in addition to PostgreSQL. Each logical record is immutable and hash-checked. PostgreSQL remains the indexed operational store used for efficient retrieval, scheduling, and execution. It is not the only surviving representation of Persistent Cognition's memory, cognition, or completed work.
 
 The artifact journal exists for four reasons:
 
 1. **Exact observability.** A developer must be able to inspect what each disposable worker received and produced without reconstructing it from logs or model behavior.
 2. **Crash recovery.** A process may disappear after computing a result but before downstream operational state is committed. A durable stage artifact allows a replacement worker to rehydrate that result instead of repeating cognition or side effects.
 3. **Disaster recovery.** Canonical event history must remain reconstructable when PostgreSQL is corrupted, lost, or deliberately recreated.
-4. **Independent auditability.** Prometheist's causal history must remain inspectable even when the primary database or scheduler tables are unavailable.
+4. **Independent auditability.** Persistent Cognition's causal history must remain inspectable even when the primary database or scheduler tables are unavailable.
 
-This design extends the system-continuity, append-only evidence, disposable-worker recovery, causal-provenance, local-first, and identity-stewardship rules in the Constitution.
+This design extends the system-continuity, append-only evidence, disposable-worker recovery, causal-provenance, local-first, and operator-stewardship rules in the Constitution.
 
 ## 1. Persistence domains
 
-Prometheist currently has two durable persistence domains.
+Persistent Cognition currently has two durable persistence domains.
 
 ### 1.1 PostgreSQL
 
@@ -37,27 +37,27 @@ PostgreSQL is optimized for querying and coordinated operational mutation. Its l
 The independent artifact root defaults to:
 
 ```text
-.prometheist/artifacts/
+.pcr/artifacts/
 ```
 
 and may be moved with:
 
 ```text
-PROMETHEIST_ARTIFACT_ROOT=<path>
+PCR_ARTIFACT_ROOT=<path>
 ```
 
-The `.prometheist/` directory is local and Git-ignored. It may eventually contain
+The `.pcr/` directory is local and Git-ignored. It may eventually contain
 personal cognitive records, so its contents must not be checked into a public
 repository. The previously tracked synthetic examples remain recoverable in earlier
 commits, but new runtime artifacts stay in the user-controlled local root. A
-deployment may also set `PROMETHEIST_ARTIFACT_ROOT` outside the checkout.
+deployment may also set `PCR_ARTIFACT_ROOT` outside the checkout.
 
 Public fictional benchmark journals under `benchmarks/generated/` are retained
-locally and excluded from new Git commits. A native person-fidelity run writes a
+locally and excluded from new Git commits. A native benchmark run writes a
 content-addressed manifest over every raw event and interaction artifact so the
 compact result under `benchmarks/results/` remains connected to the exact causal
 record. A verified Git-visible ZIP in `.tmp/` makes the latest run portable for review; see
-[`BENCHMARK_SHARING_BUNDLE.md`](https://github.com/wtvr-guy/prometheist/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/architecture/BENCHMARK_SHARING_BUNDLE.md). Historical Git commits
+[`BENCHMARK_SHARING_BUNDLE.md`](https://github.com/wtvr-guy/persistent_cognition/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/architecture/BENCHMARK_SHARING_BUNDLE.md). Historical Git commits
 still contain the previously checked-in raw evidence.
 
 Current mechanism-run manifests also bind the host/runtime evidence used to interpret
@@ -166,21 +166,20 @@ Each artifact envelope contains at least:
 }
 ```
 
-Artifacts after the first point to the immediately preceding artifact ID and hash. `prometheist verify` recomputes payload and envelope hashes and checks chain continuity.
+Artifacts after the first point to the immediately preceding artifact ID and hash. `pcr verify` recomputes payload and envelope hashes and checks chain continuity.
 
 The interaction chain currently records:
 
 - the original percept;
-- each completed v2 architectural stage result;
+- each completed architectural stage result;
 - stage errors;
-- each exact v2 stateless LLM invocation envelope;
+- each exact stateless LLM invocation envelope;
 - one parse/schema validation artifact linked to every LLM invocation;
-- the exact current-only evidence policy and closed source allowlist as its own stage artifact;
-- the exact pre-cognitive aperture/disposition and execution plan as part of the work-triage stage artifact;
-- exact work/tool results as part of the work stage artifact;
-- the exact Composer-approved memory package and Adaptive Recall outcome as part of the Compose stage artifact;
+- the exact triage policy and closed source allowlist as its own stage artifact;
+- exact work/tool results as part of the EXECUTE stage artifact;
+- the exact fixed-retrieval memory package and route receipts as part of the RETRIEVE stage artifact;
 - the exact final responder output;
-- persistent-result state;
+- PERSIST state;
 - a final-disposition manifest for completed interactions.
 
 Because the stage result is the same structured output used to complete the durable worker claim, the artifact is not a later summary of what the worker probably saw. It is the checkpointed boundary object itself.
@@ -241,13 +240,12 @@ the stage result establishes acceptance. If the worker crashes before that resul
 the surviving invocation is an incomplete attempt, not proof of successful validation.
 Historical journals with `VALID` records remain readable and verifiable.
 
-For natural response this includes the resolved Prometheist personality/identity
+For natural response this includes the resolved Persistent Cognition evidence
 system prompt. For response policy it proves that only current authority was
 presented. For exact-source selection it preserves the admitted candidate payload.
 Canonical event references allow native acceptance to establish which stored facts
 reached response realization even when opaque literals are represented by
-model-facing placeholders and restored by application code. For the Composer and
-pre-cognitive worker it records memory separately from the later current
+model-facing placeholders and restored by application code. For triage and retrieval it records memory separately from the later current
 prompt/catalog. The layout field states whether the backend used chat
 system/tool/user roles or raw Qwen system/evidence/current-user blocks.
 
@@ -303,18 +301,18 @@ An interrupted interaction has no final disposition. Its partial chain is intent
 The CLI exposes artifact-backed recovery:
 
 ```powershell
-uv run prometheist recover --latest
+uv run pcr recover --latest
 ```
 
 or:
 
 ```powershell
-uv run prometheist recover --interaction-id <uuid>
+uv run pcr recover --interaction-id <uuid>
 ```
 
 Recovery verifies the artifact chain first.
 
-If operational interaction state still exists in PostgreSQL, Prometheist continues that interaction. For each architectural stage:
+If operational interaction state still exists in PostgreSQL, Persistent Cognition continues that interaction. For each architectural stage:
 
 1. an existing PostgreSQL worker result is accepted;
 2. otherwise an existing stage artifact is rehydrated into the durable worker result;
@@ -329,7 +327,7 @@ The artifact journal is designed to survive recreation of PostgreSQL.
 After creating an empty database and applying the current schema, canonical event history can be restored with:
 
 ```powershell
-uv run prometheist restore-events
+uv run pcr restore-events
 ```
 
 This operation:
@@ -342,7 +340,7 @@ This operation:
 - advances the PostgreSQL global event sequence;
 - fails closed on conflicting existing rows.
 
-After event restoration, an interrupted interaction can be resumed from its filesystem artifacts. If its operational interaction/scheduler rows were lost, Prometheist reconstructs the deterministic interaction identity from:
+After event restoration, an interrupted interaction can be resumed from its filesystem artifacts. If its operational interaction/scheduler rows were lost, Persistent Cognition reconstructs the deterministic interaction identity from:
 
 - the original conversation ID;
 - the original correlation ID;
@@ -359,9 +357,9 @@ recreate PostgreSQL database
         ↓
 apply schema.sql and normal permissions
         ↓
-prometheist restore-events
+pcr restore-events
         ↓
-prometheist recover --latest   # if an interaction was incomplete
+pcr recover --latest   # if an interaction was incomplete
         ↓
 rebuild disposable/derived projections as required
 ```
@@ -375,25 +373,25 @@ Artifact inspection and integrity verification do not require a working database
 Latest interaction:
 
 ```powershell
-uv run prometheist inspect --latest
+uv run pcr inspect --latest
 ```
 
 Specific interaction:
 
 ```powershell
-uv run prometheist inspect --interaction-id <uuid>
+uv run pcr inspect --interaction-id <uuid>
 ```
 
 Verify hash-chain integrity:
 
 ```powershell
-uv run prometheist verify --latest
+uv run pcr verify --latest
 ```
 
 or:
 
 ```powershell
-uv run prometheist verify --interaction-id <uuid>
+uv run pcr verify --interaction-id <uuid>
 ```
 
 This allows response diagnosis even when PostgreSQL or scheduler state is offline. In particular, `inspect` exposes the exact memory packet and exact final-responder LLM invocation that produced a suspicious answer.
@@ -401,13 +399,13 @@ This allows response diagnosis even when PostgreSQL or scheduler state is offlin
 `inspect`/`verify` print the raw artifact chain and machine-readable verification result. For a human-readable forensic timeline over the same data, use:
 
 ```powershell
-uv run prometheist audit --latest
+uv run pcr audit --latest
 ```
 
 or:
 
 ```powershell
-uv run prometheist audit --interaction-id <uuid>
+uv run pcr audit --interaction-id <uuid>
 ```
 
 See [Section 9](#9-content-addressed-blob-store) and [Section 12](#12-current-scope-and-future-hardening) for what `audit` renders and why it is not itself authoritative.
@@ -427,7 +425,7 @@ A journal artifact does not have to register its use of the blob store anywhere.
 Verify one blob independently of any interaction:
 
 ```powershell
-uv run prometheist blob-verify --digest sha256:<hex>
+uv run pcr blob-verify --digest sha256:<hex>
 ```
 
 Deduplication is scoped to one local artifact root (one installation), not globally across unrelated people/security domains. A shared global blob store would let two otherwise-isolated domains learn that they hold identical bytes merely by comparing digests. A future multi-tenant deployment should partition blob storage per security domain rather than widen this store, matching the per-root scoping the rest of the artifact journal already uses.
@@ -441,8 +439,8 @@ Hash chaining alone (Sections 2-3) makes ordinary local corruption or truncation
 `journal_signing.py` adds one additional, independent, and strictly optional trust primitive: an Ed25519 digital signature over a *finalized* interaction's current journal head.
 
 ```powershell
-uv run prometheist sign --interaction-id <uuid>
-uv run prometheist verify-signature --interaction-id <uuid>
+uv run pcr sign --interaction-id <uuid>
+uv run pcr verify-signature --interaction-id <uuid>
 ```
 
 `sign` fails closed unless the interaction's artifact chain is both internally valid and already carries a `FINAL_DISPOSITION` artifact — a signature must never assert integrity or completeness the journal itself cannot already demonstrate. It generates a local Ed25519 keypair on first use (`<artifact root>/keys/<key_id>.private` / `.public`; the key id is a truncated SHA-256 fingerprint of the public key, used only as a lookup label) and writes a small signed anchor to `<artifact root>/anchors/<interaction_id>.json` containing the interaction id, current journal head hash, record count, timestamp, signing key id, and the signature itself.
@@ -462,7 +460,7 @@ Current policy:
 - artifacts are immutable;
 - ordinary retention/compaction does not delete them;
 - the artifact root is user-controlled;
-- `.prometheist/` is Git-ignored. Runtime journals remain in their user-controlled
+- `.pcr/` is Git-ignored. Runtime journals remain in their user-controlled
   local root; deliberately selected synthetic evidence may be shared separately;
 - public fictional benchmark journals and generated corpora are permanent local
   evidence. They are ignored by Git for new runs and shared as verified run ZIPs;
@@ -474,7 +472,7 @@ Current policy:
 - large binary objects should use the content-addressed blob store (Section 9), with JSON artifacts referring to their OCI-style descriptor rather than embedding arbitrary binary payloads;
 - a locally generated Ed25519 signing key (Section 10) is not itself backed up or escrowed by this implementation; losing it does not lose any journal data, only the ability to produce *new* signatures under that key id, and previously-published anchors remain independently verifiable with the already-exported public key.
 
-Explicit identity-governed erasure remains a separate stewardship/sovereignty operation and must not be confused with automatic compaction.
+Explicit policy-governed erasure remains a separate stewardship/sovereignty operation and must not be confused with automatic compaction.
 
 ## 12. Current scope and future hardening
 

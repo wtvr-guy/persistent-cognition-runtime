@@ -8,12 +8,12 @@ import json
 from types import SimpleNamespace
 from uuid import uuid4
 
-from prometheist import artifact_journal
-from prometheist.llm import _render_qwen_evidence_bound_prompt
-from prometheist.models import EventType, MemoryEvidence, MemoryNeed, MemoryPacket
-from prometheist.percept_response_runtime import PerceptStage, ResponseMemoryPackage
-from prometheist.percept_response_worker import UserPromptLLM
-from prometheist.response_policy import (
+from persistent_cognition import artifact_journal
+from persistent_cognition.llm import _render_qwen_evidence_bound_prompt
+from persistent_cognition.models import EventType, MemoryEvidence, MemoryNeed, MemoryPacket
+from persistent_cognition.percept_response_runtime import PerceptStage, ResponseMemoryPackage
+from persistent_cognition.percept_response_worker import UserPromptLLM
+from persistent_cognition.response_policy import (
     HistoricalEvidenceScope,
     ResponsePolicy,
     ResponseSurfaceMode,

@@ -7,10 +7,10 @@ from uuid import uuid4
 
 import pytest
 
-from prometheist.models import EventType, MemoryEvidence, MemoryNeed, MemoryPacket
-from prometheist.percept_response_runtime import PerceptStage, ResponseMemoryPackage
-from prometheist.percept_response_worker import UserPromptLLM
-from prometheist.response_policy import (
+from persistent_cognition.models import EventType, MemoryEvidence, MemoryNeed, MemoryPacket
+from persistent_cognition.percept_response_runtime import PerceptStage, ResponseMemoryPackage
+from persistent_cognition.percept_response_worker import UserPromptLLM
+from persistent_cognition.response_policy import (
     HistoricalEvidenceScope,
     ResponsePolicy,
     ResponseSurfaceMode,
@@ -120,7 +120,7 @@ def test_real_ollama_response_reconciles_recent_relational_evidence():
     )
     assert answer.strip()
     print_transcript(f"\nRelational response smoke — User:\n{prompt}")
-    print_transcript(f"\nRelational response smoke — Prometheist:\n{answer}")
+    print_transcript(f"\nRelational response smoke — Persistent Cognition:\n{answer}")
     print_artifact_receipt(
         "Relational response smoke",
         assert_response_evidence_receipt(

@@ -6,12 +6,12 @@ from uuid import uuid4
 
 import pytest
 
-from prometheist import llm
-from prometheist.llm import _strip_thinking
-from prometheist.models import EventType, MemoryEvidence, MemoryNeed, MemoryPacket
-from prometheist.percept_response_runtime import ResponseMemoryPackage, _FINAL_RESPONSE_PROMPT
-from prometheist.percept_response_worker import UserPromptLLM
-from prometheist.response_policy import (
+from persistent_cognition import llm
+from persistent_cognition.llm import _strip_thinking
+from persistent_cognition.models import EventType, MemoryEvidence, MemoryNeed, MemoryPacket
+from persistent_cognition.percept_response_runtime import ResponseMemoryPackage, _FINAL_RESPONSE_PROMPT
+from persistent_cognition.percept_response_worker import UserPromptLLM
+from persistent_cognition.response_policy import (
     HistoricalEvidenceScope,
     ResponsePolicy,
     ResponseSurfaceMode,
@@ -132,7 +132,7 @@ def test_response_prompt_does_not_leak_acceptance_scenario_facts():
 def test_user_facing_answers_use_expressive_temperature_with_structured_envelope(
     monkeypatch,
 ):
-    monkeypatch.delenv("PROMETHEIST_RESPONSE_TEMPERATURE", raising=False)
+    monkeypatch.delenv("PCR_RESPONSE_TEMPERATURE", raising=False)
     client = UserPromptLLM(base_url="http://ollama.test", model="model:test")
     fake_http = _FakeHTTPClient(['{"answer":"Final answer only."}'])
     client._client = fake_http
@@ -151,7 +151,7 @@ def test_user_facing_answers_use_expressive_temperature_with_structured_envelope
 def test_explicit_ollama_keep_alive_is_sent_without_changing_default(
     monkeypatch,
 ):
-    monkeypatch.setenv("PROMETHEIST_OLLAMA_KEEP_ALIVE", "30m")
+    monkeypatch.setenv("PCR_OLLAMA_KEEP_ALIVE", "30m")
     client = llm.OllamaClient(base_url="http://ollama.test", model="model:test")
     fake_http = _FakeHTTPClient(['{"ok":true}'])
     client._client = fake_http
@@ -170,7 +170,7 @@ def test_explicit_ollama_keep_alive_is_sent_without_changing_default(
 def test_control_llm_kinds_remain_deterministic_when_response_temperature_is_high(
     monkeypatch,
 ):
-    monkeypatch.setenv("PROMETHEIST_RESPONSE_TEMPERATURE", "1.25")
+    monkeypatch.setenv("PCR_RESPONSE_TEMPERATURE", "1.25")
     client = llm.OllamaClient(base_url="http://ollama.test", model="model:test")
     fake_http = _FakeHTTPClient(['{"ok":true}'])
     client._client = fake_http

@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from prometheist.derived_associative_benchmark import run_derived_benchmark
+from persistent_cognition.derived_associative_benchmark import run_derived_benchmark
 
 
 ROOT = Path(__file__).resolve().parent.parent

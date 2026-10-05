@@ -3,11 +3,11 @@ from __future__ import annotations
 from datetime import datetime, timezone
 from uuid import uuid4
 
-from prometheist.epistemic_authority import (
+from persistent_cognition.epistemic_authority import (
     authority_for_event_type,
     format_authority_bound_memory_packet,
 )
-from prometheist.models import EventType, MemoryEvidence, MemoryNeed, MemoryPacket
+from persistent_cognition.models import EventType, MemoryEvidence, MemoryNeed, MemoryPacket
 
 
 def _evidence(event_type: EventType, content: str, seq: int) -> MemoryEvidence:
@@ -27,7 +27,7 @@ def test_assistant_output_cannot_establish_user_testimony():
     authority = authority_for_event_type(EventType.INTERACTION_RESPONSE)
 
     assert authority.authority_class == "MODEL_OUTPUT_ONLY"
-    assert "what Prometheist or another model previously emitted" in authority.may_establish
+    assert "what Persistent Cognition or another model previously emitted" in authority.may_establish
     assert "that the user said" in authority.cannot_establish
 
 

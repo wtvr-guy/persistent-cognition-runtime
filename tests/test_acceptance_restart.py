@@ -10,8 +10,8 @@ import uuid
 
 import pytest
 
-from prometheist import db, event_store
-from prometheist.models import EventType
+from persistent_cognition import db, event_store
+from persistent_cognition.models import EventType
 from tests._cli_helpers import ollama_available, print_transcript, run_once
 from tests._native_artifact_assertions import (
     assert_response_evidence_receipt,
@@ -46,7 +46,7 @@ def _review_response(
     question_event = _prompt_event(question_conversation, prompt)
     assert answer.strip()
     print_transcript(f"\n{label} — User:\n{prompt}")
-    print_transcript(f"\n{label} — Prometheist:\n{answer}")
+    print_transcript(f"\n{label} — Persistent Cognition:\n{answer}")
     print_artifact_receipt(
         label,
         assert_response_evidence_receipt(

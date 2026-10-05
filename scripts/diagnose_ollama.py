@@ -11,8 +11,8 @@ import time
 
 import httpx
 from dotenv import load_dotenv
-from prometheist.contract_registry import SEMANTIC_CONTRACTS
-from prometheist.network_consent import NetworkPurpose, require_destination
+from persistent_cognition.contract_registry import SEMANTIC_CONTRACTS
+from persistent_cognition.network_consent import NetworkPurpose, require_destination
 
 load_dotenv()
 

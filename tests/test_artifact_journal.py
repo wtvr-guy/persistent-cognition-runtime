@@ -4,12 +4,12 @@ from datetime import datetime, timezone
 from pathlib import Path
 from uuid import uuid4
 
-from prometheist import artifact_journal, event_artifact_store, llm_artifact_store
+from persistent_cognition import artifact_journal, event_artifact_store, llm_artifact_store
 from tests._native_artifact_assertions import assert_response_evidence_receipt
 
 
 def test_interaction_artifacts_are_hash_linked_idempotent_and_complete(tmp_path, monkeypatch) -> None:
-    monkeypatch.setenv("PROMETHEIST_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
+    monkeypatch.setenv("PCR_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
     interaction_id = uuid4()
     conversation_id = uuid4()
     correlation_id = uuid4()
@@ -74,7 +74,7 @@ def test_interaction_artifacts_are_hash_linked_idempotent_and_complete(tmp_path,
 
 
 def test_llm_invocation_artifact_preserves_exact_stateless_contract(tmp_path, monkeypatch) -> None:
-    monkeypatch.setenv("PROMETHEIST_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
+    monkeypatch.setenv("PCR_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
     interaction_id = uuid4()
     conversation_id = uuid4()
     correlation_id = uuid4()
@@ -134,7 +134,7 @@ def test_llm_validation_artifact_links_parse_outcome_to_invocation(
     tmp_path,
     monkeypatch,
 ) -> None:
-    monkeypatch.setenv("PROMETHEIST_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
+    monkeypatch.setenv("PCR_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
     interaction_id = uuid4()
     conversation_id = uuid4()
     correlation_id = uuid4()
@@ -192,7 +192,7 @@ def test_llm_validation_artifact_links_parse_outcome_to_invocation(
 def test_successful_llm_validation_does_not_create_a_second_artifact(
     tmp_path, monkeypatch
 ) -> None:
-    monkeypatch.setenv("PROMETHEIST_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
+    monkeypatch.setenv("PCR_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
     interaction_id = uuid4()
     conversation_id = uuid4()
     correlation_id = uuid4()
@@ -260,7 +260,7 @@ def test_llm_invocation_filename_is_bounded_independently_of_semantic_key(
     monkeypatch,
 ) -> None:
     nested_root = tmp_path / "deep-path-segment" / "another-segment" / "artifacts"
-    monkeypatch.setenv("PROMETHEIST_ARTIFACT_ROOT", str(nested_root))
+    monkeypatch.setenv("PCR_ARTIFACT_ROOT", str(nested_root))
     interaction_id = uuid4()
     claim_id = uuid4()
 
@@ -298,7 +298,7 @@ def test_evidence_bound_llm_artifact_records_separate_transport_channels(
     tmp_path,
     monkeypatch,
 ) -> None:
-    monkeypatch.setenv("PROMETHEIST_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
+    monkeypatch.setenv("PCR_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
     artifact = llm_artifact_store.write_llm_invocation(
         interaction_id=uuid4(),
         conversation_id=uuid4(),
@@ -339,7 +339,7 @@ def test_native_artifact_oracle_verifies_response_evidence_receipt(
     tmp_path,
     monkeypatch,
 ) -> None:
-    monkeypatch.setenv("PROMETHEIST_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
+    monkeypatch.setenv("PCR_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
     interaction_id = uuid4()
     required_event_id = uuid4()
     forbidden_event_id = uuid4()
@@ -380,7 +380,7 @@ def test_native_artifact_oracle_verifies_response_evidence_receipt(
 
 
 def test_event_artifacts_are_semantically_idempotent_and_verifiable(tmp_path, monkeypatch) -> None:
-    monkeypatch.setenv("PROMETHEIST_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
+    monkeypatch.setenv("PCR_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
     event_id = uuid4()
     conversation_id = uuid4()
     correlation_id = uuid4()
@@ -439,7 +439,7 @@ def test_event_artifacts_are_semantically_idempotent_and_verifiable(tmp_path, mo
 def test_event_stream_repairs_only_a_matching_interrupted_commit(tmp_path, monkeypatch):
     import pytest
 
-    monkeypatch.setenv("PROMETHEIST_ARTIFACT_ROOT", str(tmp_path))
+    monkeypatch.setenv("PCR_ARTIFACT_ROOT", str(tmp_path))
     event_id, conversation_id, correlation_id = uuid4(), uuid4(), uuid4()
     record = event_artifact_store.write_event_record(
         event_id=event_id,
@@ -503,7 +503,7 @@ def test_event_stream_repairs_only_a_matching_interrupted_commit(tmp_path, monke
 def test_event_stream_rejects_corrupt_tail_and_reads_legacy_pair(tmp_path, monkeypatch):
     import pytest
 
-    monkeypatch.setenv("PROMETHEIST_ARTIFACT_ROOT", str(tmp_path))
+    monkeypatch.setenv("PCR_ARTIFACT_ROOT", str(tmp_path))
     event_id, conversation_id, correlation_id = uuid4(), uuid4(), uuid4()
     record = event_artifact_store.write_event_record(
         event_id=event_id,
@@ -546,7 +546,7 @@ def test_event_stream_rejects_corrupt_tail_and_reads_legacy_pair(tmp_path, monke
 def test_parallel_event_commit_retries_append_only_one_stamp(tmp_path, monkeypatch):
     from concurrent.futures import ThreadPoolExecutor
 
-    monkeypatch.setenv("PROMETHEIST_ARTIFACT_ROOT", str(tmp_path))
+    monkeypatch.setenv("PCR_ARTIFACT_ROOT", str(tmp_path))
     event_id = uuid4()
     event_artifact_store.write_event_record(
         event_id=event_id,

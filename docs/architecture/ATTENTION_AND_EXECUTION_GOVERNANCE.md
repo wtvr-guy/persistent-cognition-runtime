@@ -3,11 +3,11 @@
 **Status:** constitutional architecture deep dive.  
 **Constitutional authority:** implements Articles 17–20, 34, and 35 of [`../../CONSTITUTION.md`](../../CONSTITUTION.md).
 
-This document defines Prometheist's durable executive-control and worker-execution invariants independent of any one milestone implementation. The v0.7 scheduler, resource-admission, preemption, and worker-protocol documents are implementation evidence for these rules; this document is the long-lived normative authority beneath the Constitution.
+This document defines Persistent Cognition's durable executive-control and worker-execution invariants independent of any one milestone implementation. The v0.7 scheduler, resource-admission, preemption, and worker-protocol documents are implementation evidence for these rules; this document is the long-lived normative authority beneath the Constitution.
 
 ## Core separation
 
-Prometheist asks two different questions before work runs:
+Persistent Cognition asks two different questions before work runs:
 
 1. **Attention:** Which durable runnable work deserves execution, and in what deterministic order?
 2. **Resource admission:** Which compatible subset of that work can execute concurrently inside the current safe physical-resource envelope?
@@ -60,7 +60,7 @@ Resource classes and dimensions should be introduced when a concrete safety or p
 
 Installed hardware is not equivalent to schedulable capacity.
 
-Prometheist must reserve capacity for the operating system, required services, Prometheist's own control-plane work, and developmental-steward- or identity-authorized applications.
+Persistent Cognition must reserve capacity for the operating system, required services, Persistent Cognition's own control-plane work, and operator-authorized applications.
 
 Conceptually:
 
@@ -68,7 +68,7 @@ Conceptually:
 observed/configured physical capacity
     - required system/user headroom
     - uncertainty reserve
-    - live Prometheist reservations
+    - live Persistent Cognition reservations
     = currently admissible capacity
 ```
 
@@ -78,7 +78,7 @@ The local-model baseline is conservative: **one concurrent local LLM inference s
 
 ## Authoritative observations
 
-Physical availability varies. Prometheist handles that variability by converting relevant observations into explicit decision inputs.
+Physical availability varies. Persistent Cognition handles that variability by converting relevant observations into explicit decision inputs.
 
 A resource observation that materially controls admission should identify at least:
 
@@ -114,7 +114,7 @@ A partially persisted epoch or reservation set is not worker-visible authority.
 
 ## Safe parallelism
 
-Prometheist should execute as much compatible work concurrently as safe capacity permits.
+Persistent Cognition should execute as much compatible work concurrently as safe capacity permits.
 
 It must not serialize the machine simply because one task has higher priority or because the original implementation used one focus slot.
 
@@ -136,7 +136,7 @@ Can I be admitted safely beside current work?
 
 Only work occupying relevant deficient capacity is considered as a victim.
 
-Prometheist then respects declared interruption semantics, at minimum the concepts represented by:
+Persistent Cognition then respects declared interruption semantics, at minimum the concepts represented by:
 
 - **PREEMPTIBLE** — may yield when selected by policy;
 - **CHECKPOINT_ONLY** — may be asked to yield, but releases authority/resources only at a declared safe checkpoint;
@@ -234,7 +234,7 @@ Lease/heartbeat/abandonment parameters are empirical safety tunables, but the pr
 
 A model may identify that one or more application-owned capabilities are required. That selection does not supersede Attention governance.
 
-Prometheist owns:
+Persistent Cognition owns:
 
 - canonical capability identity;
 - dependency closure;
@@ -286,17 +286,17 @@ Deterministic tests should cover:
 
 Native acceptance should cover actual host CPU/RAM pressure, local model startup/inference behavior, database/process interaction, resource re-observation, and failure/restart paths where simulation is insufficient.
 
-See [`../engineering/TESTING_AND_ACCEPTANCE.md`](https://github.com/wtvr-guy/prometheist/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/engineering/TESTING_AND_ACCEPTANCE.md).
+See [`../engineering/TESTING_AND_ACCEPTANCE.md`](https://github.com/wtvr-guy/persistent_cognition/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/engineering/TESTING_AND_ACCEPTANCE.md).
 
 ## Historical implementation evidence
 
 The following remain useful implementation records, but are subordinate to this constitutional deep dive and the Constitution:
 
-- [`../milestones/v0.7/JIT_ATTENTION_DESIGN.md`](https://github.com/wtvr-guy/prometheist/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/milestones/v0.7/JIT_ATTENTION_DESIGN.md)
-- [`../milestones/v0.7/RESOURCE_ADMISSION_CLARIFICATION_2026-08-24.md`](https://github.com/wtvr-guy/prometheist/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/milestones/v0.7/RESOURCE_ADMISSION_CLARIFICATION_2026-08-24.md)
-- [`../milestones/v0.7/ATTENTION_FOCUS_CONCENTRATION_2026-08-26.md`](https://github.com/wtvr-guy/prometheist/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/milestones/v0.7/ATTENTION_FOCUS_CONCENTRATION_2026-08-26.md)
-- [`../milestones/v0.7/INCREMENT_F_WORKER_PROTOCOL_2026-08-26.md`](https://github.com/wtvr-guy/prometheist/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/milestones/v0.7/INCREMENT_F_WORKER_PROTOCOL_2026-08-26.md)
+- [`../milestones/v0.7/JIT_ATTENTION_DESIGN.md`](https://github.com/wtvr-guy/persistent_cognition/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/milestones/v0.7/JIT_ATTENTION_DESIGN.md)
+- [`../milestones/v0.7/RESOURCE_ADMISSION_CLARIFICATION_2026-08-24.md`](https://github.com/wtvr-guy/persistent_cognition/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/milestones/v0.7/RESOURCE_ADMISSION_CLARIFICATION_2026-08-24.md)
+- [`../milestones/v0.7/ATTENTION_FOCUS_CONCENTRATION_2026-08-26.md`](https://github.com/wtvr-guy/persistent_cognition/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/milestones/v0.7/ATTENTION_FOCUS_CONCENTRATION_2026-08-26.md)
+- [`../milestones/v0.7/INCREMENT_F_WORKER_PROTOCOL_2026-08-26.md`](https://github.com/wtvr-guy/persistent_cognition/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/milestones/v0.7/INCREMENT_F_WORKER_PROTOCOL_2026-08-26.md)
 
 ## Invariant
 
-> **Prometheist owns attention, admission, preemption, assignments, resource safety, launch authority, and recovery semantics. Workers merely execute bounded committed work and may disappear at any time.**
+> **Persistent Cognition owns attention, admission, preemption, assignments, resource safety, launch authority, and recovery semantics. Workers merely execute bounded committed work and may disappear at any time.**

@@ -17,13 +17,13 @@ import platform
 
 os.environ["DATABASE_URL"] = os.environ.get(
     "TEST_DATABASE_URL",
-    "postgresql://prometheist_app@localhost:5432/prometheist_test",
+    "postgresql://persistent_cognition_app@localhost:5432/persistent_cognition_test",
 )
 
 import pytest
 import httpx
 
-from prometheist import db
+from persistent_cognition import db
 
 SCHEMA_PATH = pathlib.Path(__file__).resolve().parent.parent / "schema.sql"
 
@@ -35,8 +35,8 @@ def consented_mock_ollama(_isolated_artifact_root):
     This does not bypass the production guard or grant real remote endpoints.
     Tests using this fixture replace the HTTP transport with an in-memory fake.
     """
-    from prometheist.content_digest import content_digest
-    from prometheist.network_consent import NetworkPurpose, consent_proposal, grant_consent
+    from persistent_cognition.content_digest import content_digest
+    from persistent_cognition.network_consent import NetworkPurpose, consent_proposal, grant_consent
     purpose = NetworkPurpose.MODEL
     url = "http://ollama.test"
     grant_consent(url, purpose, accepted_digest=content_digest(consent_proposal(url, purpose)))
@@ -95,8 +95,8 @@ def _isolated_artifact_root(tmp_path, monkeypatch):
     """Give each test and its child processes an independent immutable journal."""
 
     monkeypatch.setenv(
-        "PROMETHEIST_ARTIFACT_ROOT",
-        str(tmp_path / "prometheist-artifacts"),
+        "PCR_ARTIFACT_ROOT",
+        str(tmp_path / "persistent_cognition-artifacts"),
     )
     yield
 

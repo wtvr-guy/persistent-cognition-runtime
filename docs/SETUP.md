@@ -29,7 +29,7 @@ The test harness applies the schema automatically to its disposable database.
 
 Start Ollama, pull `qwen3:4b-instruct-2507-q4_K_M`, and run `uv run pcr`. Keep the same model when comparing behavior with the source project. Resource admission may reject a model that does not fit available host resources.
 
-Use a dedicated artifact root. The inherited environment name is `PROMETHEIST_ARTIFACT_ROOT`; `.env.example` uses the checkout's ignored `.prometheist/artifacts` folder. Do not point this extraction at the live application's database or artifact root.
+Use a dedicated artifact root. The inherited environment name is `PCR_ARTIFACT_ROOT`; `.env.example` uses the checkout's ignored `.pcr/artifacts` folder. Do not point this extraction at the live application's database or artifact root.
 
 Local loopback model/database endpoints work without remote-service enrollment. Nonlocal destinations retain the source engine's explicit outbound-consent policy. No hosted model service is required.
 

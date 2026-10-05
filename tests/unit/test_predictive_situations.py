@@ -4,11 +4,11 @@ from uuid import uuid4
 
 import pytest
 
-from prometheist.expectations import Expectation, SemanticDelta, compare_expectation
-from prometheist.percept_context import Observation, PerceptContext
-from prometheist.perception import PerceptKind, PerceptModality, PerceptSource, normalize_percept, evaluate_salience
-from prometheist.percept_triage import SourcePolicy, TaskClass, TriageDecision, UrgencyClass, deterministic_triage, semantic_triage
-from prometheist.situations import form_situation, situation_keys
+from persistent_cognition.expectations import Expectation, SemanticDelta, compare_expectation
+from persistent_cognition.percept_context import Observation, PerceptContext
+from persistent_cognition.perception import PerceptKind, PerceptModality, PerceptSource, normalize_percept, evaluate_salience
+from persistent_cognition.percept_triage import SourcePolicy, TaskClass, TriageDecision, UrgencyClass, deterministic_triage, semantic_triage
+from persistent_cognition.situations import form_situation, situation_keys
 
 NOW = datetime(2026, 9, 12, tzinfo=timezone.utc)
 
@@ -120,8 +120,8 @@ def test_triage_schema_and_inference_have_no_execution_powers():
 
 
 def test_every_nonuser_stage_rejects_another_model_role():
-    from prometheist.situation_runtime import SituationStage
-    from prometheist.situation_worker import SituationLLM
+    from persistent_cognition.situation_runtime import SituationStage
+    from persistent_cognition.situation_worker import SituationLLM
     worker = object.__new__(SituationLLM)
     for stage in SituationStage:
         worker._artifact_stage = stage
@@ -130,7 +130,7 @@ def test_every_nonuser_stage_rejects_another_model_role():
 
 
 def test_media_preserves_bytes_and_detects_corruption(tmp_path):
-    from prometheist.percept_adapters import preserve_media, verify_media
+    from persistent_cognition.percept_adapters import preserve_media, verify_media
     source = tmp_path / "original.bin"
     source.write_bytes(b"exact media bytes")
     reference = preserve_media(source, mime_type="application/octet-stream")

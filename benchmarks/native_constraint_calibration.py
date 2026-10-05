@@ -19,10 +19,10 @@ from typing import Any
 
 import httpx
 
-from prometheist.admission_diagnostics import RESOURCE_ADMISSION_DIAGNOSTIC_PREFIX
-from prometheist.attention_observation import SystemHostResourceProbe
-from prometheist.native_policy import native_resource_safety_policy
-from prometheist.ollama_runtime import (
+from persistent_cognition.admission_diagnostics import RESOURCE_ADMISSION_DIAGNOSTIC_PREFIX
+from persistent_cognition.attention_observation import SystemHostResourceProbe
+from persistent_cognition.native_policy import native_resource_safety_policy
+from persistent_cognition.ollama_runtime import (
     OllamaRuntimeProbe,
     configured_ollama_base_url,
     configured_ollama_model,

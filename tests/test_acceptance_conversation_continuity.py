@@ -17,8 +17,8 @@ import uuid
 
 import pytest
 
-from prometheist import db, event_store
-from prometheist.models import EventType
+from persistent_cognition import db, event_store
+from persistent_cognition.models import EventType
 from tests._cli_helpers import ollama_available, print_transcript, run_once
 from tests._native_artifact_assertions import (
     assert_response_evidence_receipt,
@@ -110,7 +110,7 @@ def _seed_distractors(count: int = 12) -> None:
 
 def _print_turn(number: int, prompt: str, answer: str) -> None:
     print_transcript(f"\nTurn {number} — User:\n{prompt}")
-    print_transcript(f"\nTurn {number} — Prometheist:\n{answer}")
+    print_transcript(f"\nTurn {number} — Persistent Cognition:\n{answer}")
 
 
 def test_stateless_four_turn_continuity_survives_sessions_and_distractors():
@@ -125,7 +125,7 @@ def test_stateless_four_turn_continuity_survives_sessions_and_distractors():
     )
     historical_answer = run_once(historical_rule, historical_conversation)
     print_transcript(f"\nHistorical seed — User:\n{historical_rule}")
-    print_transcript(f"\nHistorical seed — Prometheist:\n{historical_answer}")
+    print_transcript(f"\nHistorical seed — Persistent Cognition:\n{historical_answer}")
     historical_rule_event = _event_for_text(
         historical_conversation,
         EventType.USER_PROMPT,
@@ -254,4 +254,4 @@ def test_stateless_four_turn_continuity_survives_sessions_and_distractors():
         "\nSTRUCTURAL PASS: v0.7 task/worker continuity delivered recent and older "
         "canonical evidence to each fresh responder."
     )
-    print("HUMAN REVIEW REQUIRED: judge the four printed Prometheist answers above.")
+    print("HUMAN REVIEW REQUIRED: judge the four printed Persistent Cognition answers above.")

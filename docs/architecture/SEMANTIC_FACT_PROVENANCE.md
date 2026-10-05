@@ -6,14 +6,14 @@
 **Applies to:** durable derived claims, their supporting/opposing evidence,
 current semantic conclusions, and historical belief reconstruction.
 
-Prometheist does not store one mutable fact object and silently rewrite it as
+Persistent Cognition does not store one mutable fact object and silently rewrite it as
 new information arrives. Semantic memory is split into three immutable record
 families:
 
 1. **SemanticAssertion** — a claim that may be true.
 2. **SemanticEvidence** — one exact provenance-bearing observation that bears
    on an assertion.
-3. **SemanticResolution** — Prometheist's current derived conclusion for one
+3. **SemanticResolution** — Persistent Cognition's current derived conclusion for one
    subject/property.
 
 This separation is required for lifelong memory. A historical observation can
@@ -62,7 +62,7 @@ Assertion identity is based on semantic content and explicit validity, not on
 confidence, source, or derivation method. Repeated evidence for the same claim
 therefore points to the same assertion.
 
-Observation time is deliberately not treated as validity start. If Prometheist
+Observation time is deliberately not treated as validity start. If Persistent Cognition
 learns today that a person has been vegetarian since 2012, the evidence may
 have observed_at=today, while the assertion may have claim_valid_from=2012.
 
@@ -80,7 +80,7 @@ A SemanticEvidence record captures one exact support/opposition relationship:
     source_id
     relation             SUPPORTS | OPPOSES
     observed_at           when the source evidence describes/was observed
-    known_at              when Prometheist admitted/learned this evidence
+    known_at              when Persistent Cognition admitted/learned this evidence
     confidence            preserved source/derivation confidence
     derivation_method
 
@@ -102,7 +102,7 @@ minimum, or vote.
 
 ### SemanticResolution
 
-A SemanticResolution is Prometheist's current derived conclusion for exactly
+A SemanticResolution is Persistent Cognition's current derived conclusion for exactly
 one subject/property:
 
     resolution_id
@@ -120,7 +120,7 @@ assertion written. Therefore inserting historical evidence cannot silently
 replace the current belief.
 
 Resolution history is itself append-only. supersedes means only that one
-resolution replaced a prior resolution as Prometheist's current derived
+resolution replaced a prior resolution as Persistent Cognition's current derived
 conclusion. It is not used to label contradictory assertions.
 
 ## Temporal coordinates
@@ -132,7 +132,7 @@ Semantic memory keeps distinct temporal roles instead of collapsing them:
 - **observation time** — evidence observed_at, used to order competing
   observations without pretending that observation automatically defines the
   assertion's full validity interval;
-- **knowledge time** — evidence known_at, when Prometheist actually admitted or
+- **knowledge time** — evidence known_at, when Persistent Cognition actually admitted or
   learned that evidence; and
 - **resolution time** — resolution resolved_at, when the semantic resolver
   formed that derived conclusion.
@@ -140,14 +140,14 @@ Semantic memory keeps distinct temporal roles instead of collapsing them:
 semantic_resolution_as_of(valid_at=..., known_at=...) answers the bi-temporal
 historical query over represented-world validity and system knowledge:
 
-> Given only evidence Prometheist had learned by known_at, what could it
+> Given only evidence Persistent Cognition had learned by known_at, what could it
 > conclude about the subject/property at real-world time valid_at?
 
 Example:
 
     2026-01-01  historical reality: role = manager
     2026-06-01  historical reality: role = engineer
-    2026-09-01  Prometheist learns the old manager evidence
+    2026-09-01  Persistent Cognition learns the old manager evidence
 
 A query with known_at=2026-08-01 cannot use the manager evidence even when
 asking about January. A later query may.
@@ -223,7 +223,7 @@ content fails closed.
 
 The existing command remains:
 
-    uv run prometheist memory-fact --subject "person:mike" --property "preferred_drink"
+    uv run pcr memory-fact --subject "person:mike" --property "preferred_drink"
 
 It now prints:
 
@@ -252,30 +252,10 @@ history.
 This follows the project's rule that derived cognitive structures are
 replaceable while admitted source evidence is lossless.
 
-## Relationship to the Self-Memory System
-
-Semantic assertion/evidence/resolution remains the factual derived-memory layer.
-The higher-order [Self-Memory System](https://github.com/wtvr-guy/prometheist/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/architecture/SELF_MEMORY_SYSTEM.md) is separate because
-roles, values, traits, aspirations, decision tendencies, relational schemas, and
-narrative hypotheses have different evidentiary and plasticity requirements than a
-subject/property fact.
-
-Scheduled consolidation may now feed a separate two-specialist self-reflection
-path. Free-text canonical provenance can participate in that path even when no
-structured `Observation` was extracted. This does not turn free text into an
-ordinary `SemanticAssertion` automatically.
-
-Semantic/self-derived context may guide Adaptive Recall, and the response policy
-can admit self-model conclusions for inferential identity questions. Exact-source
-or source-restricted requests still require qualifying canonical evidence.
-
 ## Deliberate remaining boundaries
 
 - Free-text conversation is not automatically converted into ordinary structured
-  semantic assertions; self reflection and semantic fact extraction remain distinct.
+  semantic assertions.
 - Confidence remains evidence metadata, not a universal belief score.
 - Historical bi-temporal semantic queries may scan all evidence for one exact
   subject/property through bounded pages; ordinary cognition uses indexed heads.
-- Self-memory promotion is experimental until person-fidelity and native-model
-  evaluation establish that it improves prediction/response fidelity without
-  unsupported identity generalization.

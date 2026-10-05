@@ -4,13 +4,13 @@
 
 **Constitutional status:** primary architecture authority for Articles 9, 10, 11, 23, and 24 of [`../../CONSTITUTION.md`](../../CONSTITUTION.md). This document explains those constitutional rules in depth and is subordinate to the Constitution where wording conflicts.
 
-This document freezes the memory-scaling constraints that future Prometheist milestones must preserve. It supplements `COGNITIVE_ARCHITECTURE.md`, `MEMORY_KERNEL.md`, and `ASSOCIATIVE_MEMORY.md` and supersedes any older wording that would permit an already-admitted durable memory to be replaced by a summary, abstraction, embedding, aggregation, or other lossy derivative. [`SEMANTIC_FACT_PROVENANCE.md`](SEMANTIC_FACT_PROVENANCE.md) implements the append-only, non-destructive supersession model this document requires for one concrete kind of derived structure: a durable belief about a subject/property value.
+This document freezes the memory-scaling constraints that future Persistent Cognition milestones must preserve. It supplements `COGNITIVE_ARCHITECTURE.md`, `MEMORY_KERNEL.md`, and `ASSOCIATIVE_MEMORY.md` and supersedes any older wording that would permit an already-admitted durable memory to be replaced by a summary, abstraction, embedding, aggregation, or other lossy derivative. [`SEMANTIC_FACT_PROVENANCE.md`](SEMANTIC_FACT_PROVENANCE.md) implements the append-only, non-destructive supersession model this document requires for one concrete kind of derived structure: a durable belief about a subject/property value.
 
 ## Core rule
 
-> **Prometheist keeps durable memory lossless. It may reduce the active working set, but it may not reduce a persisted memory into a substitute representation.**
+> **Persistent Cognition keeps durable memory lossless. It may reduce the active working set, but it may not reduce a persisted memory into a substitute representation.**
 
-Storage is treated as comparatively abundant. The scarce resources are attention, active RAM, CPU/GPU/VRAM, inference time, I/O bandwidth, and model context. Prometheist therefore optimizes the movement and computation performed over memory rather than the existence of memory itself.
+Storage is treated as comparatively abundant. The scarce resources are attention, active RAM, CPU/GPU/VRAM, inference time, I/O bandwidth, and model context. Persistent Cognition therefore optimizes the movement and computation performed over memory rather than the existence of memory itself.
 
 ## Durable-memory admission boundary
 
@@ -30,7 +30,7 @@ not admitted         admitted
                 canonical durable memory
 ```
 
-Before admission, deterministic retention policy may discard data that never became durable memory. After admission, ordinary retention, compaction, indexing, or storage-pressure policy must not replace or delete the canonical memory. Explicit identity-governed erasure, if later supported, is a separate governance operation and must never be confused with automatic compression or retention policy.
+Before admission, deterministic retention policy may discard data that never became durable memory. After admission, ordinary retention, compaction, indexing, or storage-pressure policy must not replace or delete the canonical memory. Explicit policy-governed erasure, if later supported, is a separate governance operation and must never be confused with automatic compression or retention policy.
 
 ## Source authority
 
@@ -63,7 +63,7 @@ association/index -> candidate activation -> canonical source memory -> evidence
 
 Canonical historical events are append-only under ordinary system operation.
 
-If a prior observation, statement, belief, interpretation, or derived claim is later discovered to be wrong, stale, contradicted, or superseded, Prometheist records the new evidence and the correction/supersession relationship. It does not edit the earlier record to make the historical state appear as though the correction had always been known.
+If a prior observation, statement, belief, interpretation, or derived claim is later discovered to be wrong, stale, contradicted, or superseded, Persistent Cognition records the new evidence and the correction/supersession relationship. It does not edit the earlier record to make the historical state appear as though the correction had always been known.
 
 Conceptually:
 
@@ -77,11 +77,11 @@ new provenance-bearing event
 
 This preserves both current understanding and historical reconstructability: the system can distinguish “what is now believed/supported” from “what was actually present in the record when an earlier decision was made.” [`SEMANTIC_FACT_PROVENANCE.md`](SEMANTIC_FACT_PROVENANCE.md) implements this with separate immutable SemanticAssertion, SemanticEvidence, and SemanticResolution records. Assertions never overwrite one another; evidence accumulates exact provenance; and only resolution records supersede prior resolution records. Historical backfill, ambiguity, and bi-temporal knowledge reconstruction therefore remain explicit rather than being encoded as destructive fact replacement.
 
-Explicit identity-governed erasure, if implemented, is a separate governance path and must define its audit/integrity semantics explicitly. It is not an ordinary correction mechanism.
+Explicit policy-governed erasure, if implemented, is a separate governance path and must define its audit/integrity semantics explicitly. It is not an ordinary correction mechanism.
 
 ## No memory summaries
 
-Prometheist must not create or persist summaries of durable memories as memory substitutes, retrieval substitutes, or supposedly equivalent compressed representations.
+Persistent Cognition must not create or persist summaries of durable memories as memory substitutes, retrieval substitutes, or supposedly equivalent compressed representations.
 
 A later model invocation must not be asked to trust a prose condensation of earlier evidence when the factual answer depends on that evidence. Factual recall must ultimately dereference exact source memories.
 
@@ -99,7 +99,7 @@ Derived assertions that are not deterministically reconstructable must carry exp
 
 ## Progressive associative recall
 
-Prometheist must not interpret a memory request as a request to retrieve everything associated with a subject.
+Persistent Cognition must not interpret a memory request as a request to retrieve everything associated with a subject.
 
 Ordinary recall is progressive:
 
@@ -114,7 +114,7 @@ A cue such as a person's name should normally activate a small set of distinctiv
 
 ## Activation, salience, and storage temperature are distinct
 
-Prometheist must not collapse these into one score.
+Persistent Cognition must not collapse these into one score.
 
 **Salience** describes how significant or distinctive an observation or memory is under the current policy/history.
 
@@ -126,7 +126,7 @@ A decades-old memory may have high salience, low current activation, and cold ph
 
 ## Semantic identity is independent of storage location
 
-Prometheist must not make a physical volume semantically own a person, topic, or situation. One memory may participate in many associations.
+Persistent Cognition must not make a physical volume semantically own a person, topic, or situation. One memory may participate in many associations.
 
 Each durable memory should eventually have:
 
@@ -136,7 +136,7 @@ Each durable memory should eventually have:
 - one or more physical storage locations;
 - availability/integrity state for each replica.
 
-A storage manifest may map the same canonical memory to internal NVMe, external SSD/HDD, removable media, NAS, cloud, or future archival backends. If a replica is unavailable, Prometheist may know that the memory exists and where it lives, but must not pretend to have inspected unavailable source evidence.
+A storage manifest may map the same canonical memory to internal NVMe, external SSD/HDD, removable media, NAS, cloud, or future archival backends. If a replica is unavailable, Persistent Cognition may know that the memory exists and where it lives, but must not pretend to have inspected unavailable source evidence.
 
 ## Bounded LLM context is a hard invariant
 
@@ -177,7 +177,7 @@ The capability may use derived indexes to identify candidate evidence, but the p
 
 ## Scaling hypothesis
 
-Prometheist's central memory-scaling hypothesis is:
+Persistent Cognition's central memory-scaling hypothesis is:
 
 > **Recall quality can remain accurate over an increasingly large lossless corpus without proportional growth in any individual LLM context window or in ordinary-case LLM inference count.**
 
@@ -235,4 +235,4 @@ A defensible v1.0 must demonstrate lossless source-backed durable memory and bou
 
 ## Constitutional relationship
 
-Articles 9 and 10 govern canonical/derived memory fidelity; Article 11 governs bounded recall; Articles 23 and 24 govern epistemic separation and durable causal provenance. Explicit identity-governed erasure is governed separately by [`LOCAL_FIRST_PORTABILITY.md`](https://github.com/wtvr-guy/prometheist/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/architecture/LOCAL_FIRST_PORTABILITY.md) and must never be implemented as ordinary compaction.
+Articles 9 and 10 govern canonical/derived memory fidelity; Article 11 governs bounded recall; Articles 23 and 24 govern epistemic separation and durable causal provenance. Explicit policy-governed erasure is governed separately by [`LOCAL_FIRST_PORTABILITY.md`](https://github.com/wtvr-guy/persistent_cognition/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/architecture/LOCAL_FIRST_PORTABILITY.md) and must never be implemented as ordinary compaction.

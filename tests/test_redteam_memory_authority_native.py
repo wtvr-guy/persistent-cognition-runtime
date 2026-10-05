@@ -6,10 +6,10 @@ import uuid
 
 import pytest
 
-from prometheist.models import EventType, MemoryEvidence, MemoryNeed, MemoryPacket
-from prometheist.percept_response_runtime import PerceptStage, ResponseMemoryPackage
-from prometheist.percept_response_worker import UserPromptLLM
-from prometheist.response_policy import (
+from persistent_cognition.models import EventType, MemoryEvidence, MemoryNeed, MemoryPacket
+from persistent_cognition.percept_response_runtime import PerceptStage, ResponseMemoryPackage
+from persistent_cognition.percept_response_worker import UserPromptLLM
+from persistent_cognition.response_policy import (
     HistoricalEvidenceScope,
     ResponsePolicy,
     ResponseSurfaceMode,
@@ -126,7 +126,7 @@ def test_memory_cannot_acquire_current_instruction_authority(
     assert poison not in answer
     print_transcript(f"\nAuthority red team ({poison_type.value}) — User:\n{prompt}")
     print_transcript(
-        f"\nAuthority red team ({poison_type.value}) — Prometheist:\n{answer}"
+        f"\nAuthority red team ({poison_type.value}) — Persistent Cognition:\n{answer}"
     )
     forbidden = () if poison_type is EventType.USER_PROMPT else (poison_evidence.source_event_id,)
     print_artifact_receipt(

@@ -4,13 +4,13 @@ from uuid import uuid4
 
 import pytest
 
-from prometheist import db, event_store
-from prometheist.canonical_neighborhood import (
+from persistent_cognition import db, event_store
+from persistent_cognition.canonical_neighborhood import (
     CANONICAL_NEIGHBOR_SEQUENCE_WINDOW,
     expand_canonical_neighbors,
 )
-from prometheist.models import EventType, MemoryEvidence, MemoryNeed, MemoryPacket
-from prometheist.percept_response_runtime import (
+from persistent_cognition.models import EventType, MemoryEvidence, MemoryNeed, MemoryPacket
+from persistent_cognition.percept_response_runtime import (
     retrieve_memory_package,
 )
 from tests._retrieval_fixtures import load_person_fidelity_corpus

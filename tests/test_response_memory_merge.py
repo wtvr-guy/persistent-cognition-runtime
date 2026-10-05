@@ -4,8 +4,8 @@ from datetime import datetime, timezone
 from types import SimpleNamespace
 from uuid import uuid4
 
-from prometheist.models import EventType, MemoryEvidence, MemoryNeed, MemoryPacket
-from prometheist.fixed_retrieval import merge_evidence
+from persistent_cognition.models import EventType, MemoryEvidence, MemoryNeed, MemoryPacket
+from persistent_cognition.fixed_retrieval import merge_evidence
 
 
 def _evidence(label: str, seq: int) -> MemoryEvidence:

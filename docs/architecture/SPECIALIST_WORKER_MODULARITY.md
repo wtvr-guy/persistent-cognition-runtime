@@ -19,7 +19,7 @@ handoff artifact, and future non-user-percept pipeline.
 An LLM worker is disposable semantic compute for one coherent decision. It is not a
 container into which adjacent reasoning tasks are placed for convenience.
 
-Prometheist therefore separates roles when they differ in any of these ways:
+Persistent Cognition therefore separates roles when they differ in any of these ways:
 
 - output schema or decision authority;
 - required evidence classes or provenance boundary;
@@ -55,22 +55,19 @@ The implemented fixed retrieval user-prompt path uses these process boundaries:
 
 | Stage | Responsibility | LLM use |
 |---|---|---|
-| Reference resolution | Expose deterministic WorkingState availability | None |
-| Evidence policy | Select historical source scope and response surface from the current prompt only | One policy role, with bounded validation retries |
-| Work triage | Select required non-memory capability indices from the admitted aperture | One work-selection role, with bounded validation retries |
-| Capability execution | Execute the committed application-owned plan | None in the stage itself; invoked capabilities own their contracts |
-| Memory retrieval | Execute fixed bounded routes and merge source-admissible evidence with explicit budgets and diversity | None |
-| Response realization | Produce exact-source or natural output under the committed policy | One realization mode per path, with bounded validation retries |
-| Result persistence | Persist and emit the completed disposition | None |
+| MEMORY | Reconstruct bounded working state and admit relevant memory context | None |
+| TRIAGE | Select source policy and required non-memory capability indices from the admitted aperture | One narrow role when semantic selection is required, with bounded validation retries |
+| EXECUTE | Execute the committed application-owned plan | None in the stage itself; invoked capabilities own their contracts |
+| RETRIEVE | Execute fixed bounded routes and merge source-admissible evidence with explicit budgets and diversity | None |
+| RESPOND | Produce exact-source or natural output under the committed policy | One realization mode per path, with bounded validation retries |
+| PERSIST | Persist and emit the completed disposition | None |
 
-The evidence-policy result is an immutable stage artifact. Work triage, Adaptive
-Recall, fixed retrieval, and response realization inherit that exact policy. They may
-not reclassify it.
+The triage result is an immutable stage artifact. Execution, fixed retrieval, and response realization inherit that exact policy. They may not reclassify it.
 
 The retrieval result is an immutable stage artifact containing evidence and route
 receipts. It has no requirements, deficit, coverage decision, or sufficiency flag.
 The retired split is preserved as an experiment in
-[COMPOSER_REQUIREMENTS_001.md](https://github.com/wtvr-guy/prometheist/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/experiments/COMPOSER_REQUIREMENTS_001.md).
+[COMPOSER_REQUIREMENTS_001.md](https://github.com/wtvr-guy/persistent_cognition/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/experiments/COMPOSER_REQUIREMENTS_001.md).
 
 ## Percept triage for non-user inputs
 

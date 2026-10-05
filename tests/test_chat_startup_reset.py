@@ -4,9 +4,9 @@ import uuid
 
 from psycopg.types.json import Json
 
-from prometheist import cli, db, event_store
-from prometheist.chat_startup import reset_chat_execution_state
-from prometheist.models import EventType
+from persistent_cognition import cli, db, event_store
+from persistent_cognition.chat_startup import reset_chat_execution_state
+from persistent_cognition.models import EventType
 
 
 def test_chat_execution_reset_preserves_memory_resources_and_other_scheduler() -> None:
@@ -100,7 +100,19 @@ def test_chat_execution_reset_preserves_memory_resources_and_other_scheduler() -
 
 def test_run_chat_resets_execution_state_before_accepting_input(monkeypatch) -> None:
     calls: list[object] = []
-    fake_conn = object()
+
+    class FakeCursorResult:
+        def fetchone(self):
+            return [True]
+
+    class FakeConnection:
+        def execute(self, *args, **kwargs):
+            return FakeCursorResult()
+
+        def commit(self):
+            return None
+
+    fake_conn = FakeConnection()
 
     class ConnectionContext:
         def __enter__(self):

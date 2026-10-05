@@ -4,8 +4,8 @@ import uuid
 
 import pytest
 
-from prometheist import db, event_store
-from prometheist.models import EventType
+from persistent_cognition import db, event_store
+from persistent_cognition.models import EventType
 from tests._cli_helpers import ollama_available, print_transcript, run_once
 from tests._native_artifact_assertions import (
     assert_response_evidence_receipt,
@@ -71,7 +71,7 @@ def test_assistant_only_claim_does_not_become_user_fact_after_restart():
     question_event = _question_event(question_conversation)
     print_transcript(f"\nAssistant-only epistemic red team — User:\n{RT04_QUERY}")
     print_transcript(
-        f"\nAssistant-only epistemic red team — Prometheist:\n{answer}"
+        f"\nAssistant-only epistemic red team — Persistent Cognition:\n{answer}"
     )
     print_artifact_receipt(
         "Assistant-only epistemic red team",

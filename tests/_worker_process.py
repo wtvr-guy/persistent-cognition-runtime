@@ -7,9 +7,9 @@ import sys
 from datetime import datetime, timezone
 from uuid import UUID
 
-from prometheist import db
-from prometheist.attention_observation import HostResourceMetrics
-from prometheist.worker_store import guarded_claim_worker_step
+from persistent_cognition import db
+from persistent_cognition.attention_observation import HostResourceMetrics
+from persistent_cognition.worker_store import guarded_claim_worker_step
 
 
 CAPTURED_AT = datetime(2026, 8, 26, 16, 0, tzinfo=timezone.utc)

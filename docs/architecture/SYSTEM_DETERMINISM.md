@@ -3,11 +3,11 @@
 **Status:** constitutional architecture deep dive.  
 **Constitutional authority:** implements Articles 15, 16, and 35 of [`../../CONSTITUTION.md`](../../CONSTITUTION.md).
 
-Prometheist uses probabilistic models as disposable semantic compute inside a deterministic application envelope. The system does not require every physical execution detail to be deterministic; it requires every durable control-plane decision that can be made deterministically to be owned, recorded, and replayable by ordinary software.
+Persistent Cognition uses probabilistic models as disposable semantic compute inside a deterministic application envelope. The system does not require every physical execution detail to be deterministic; it requires every durable control-plane decision that can be made deterministically to be owned, recorded, and replayable by ordinary software.
 
 ## Core invariant
 
-> **Given the same authoritative durable state, the same authoritative external/resource observations, and the same policy versions, Prometheist must reconstruct the same durable system decision.**
+> **Given the same authoritative durable state, the same authoritative external/resource observations, and the same policy versions, Persistent Cognition must reconstruct the same durable system decision.**
 
 This is the determinism boundary.
 
@@ -46,11 +46,11 @@ Examples include:
 - explicitly admitted external observations;
 - model result when a semantic classification is deliberately part of the contract.
 
-If a measured value materially changes a durable decision, Prometheist must retain enough information to explain which value was used. “The machine was busy at the time” is not sufficient if the exact resource observation decided whether a worker was launched.
+If a measured value materially changes a durable decision, Persistent Cognition must retain enough information to explain which value was used. “The machine was busy at the time” is not sufficient if the exact resource observation decided whether a worker was launched.
 
 ## Ordering and identity
 
-Prometheist should prefer authoritative logical ordering over wall-clock inference when both are available.
+Persistent Cognition should prefer authoritative logical ordering over wall-clock inference when both are available.
 
 Examples:
 
@@ -88,7 +88,7 @@ Workers do not race to “grab the next task.” A worker race may affect which 
 
 Model-selected capability indices represent requirements, not an execution schedule.
 
-Prometheist resolves them through application-owned metadata:
+Persistent Cognition resolves them through application-owned metadata:
 
 ```text
 bounded model selection
@@ -172,7 +172,7 @@ Replay need not reproduce incidental process timing. It must reproduce the durab
 
 ## Policy changes
 
-Deterministic behavior is versioned behavior. If a policy changes, Prometheist should preserve enough version/provenance information to explain why the same underlying evidence produced a different decision under a later policy.
+Deterministic behavior is versioned behavior. If a policy changes, Persistent Cognition should preserve enough version/provenance information to explain why the same underlying evidence produced a different decision under a later policy.
 
 A policy migration must not rewrite historical decisions as if the newer policy had always been active.
 
@@ -189,13 +189,13 @@ Constitutional determinism should be tested through:
 - process-destruction tests proving decisions survive loss of process-local state;
 - explicit assertions that unordered/racing worker behavior cannot choose durable authority.
 
-See [`../engineering/TESTING_AND_ACCEPTANCE.md`](https://github.com/wtvr-guy/prometheist/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/engineering/TESTING_AND_ACCEPTANCE.md).
+See [`../engineering/TESTING_AND_ACCEPTANCE.md`](https://github.com/wtvr-guy/persistent_cognition/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/engineering/TESTING_AND_ACCEPTANCE.md).
 
 ## Relationship to probabilistic intelligence
 
-This rule does not require Prometheist to pretend semantic uncertainty is deterministic. A model may produce different interpretations when the architecture intentionally asks it to reason. The constitutional requirement is that the uncertainty is represented as an explicit input/result with provenance and bounded authority.
+This rule does not require Persistent Cognition to pretend semantic uncertainty is deterministic. A model may produce different interpretations when the architecture intentionally asks it to reason. The constitutional requirement is that the uncertainty is represented as an explicit input/result with provenance and bounded authority.
 
-Prometheist's design target is therefore:
+Persistent Cognition's design target is therefore:
 
 > **Probabilistic cognition inside deterministic governance.**
 

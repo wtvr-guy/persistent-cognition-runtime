@@ -1,8 +1,7 @@
 import pytest
-from prometheist.contract_registry import STAGE_CONTRACTS, SEMANTIC_CONTRACTS, contract_manifest
-from prometheist.percept_response_runtime import PERCEPT_STAGES, PerceptLLM
-from prometheist.situation_runtime import SituationStage
-from prometheist.self_reflection import SelfSchemaReview
+from persistent_cognition.contract_registry import STAGE_CONTRACTS, SEMANTIC_CONTRACTS, contract_manifest
+from persistent_cognition.percept_response_runtime import PERCEPT_STAGES, PerceptLLM
+from persistent_cognition.situation_runtime import SituationStage
 
 
 def test_every_stage_has_one_registered_contract_and_capability():
@@ -22,12 +21,9 @@ def test_retired_control_contracts_are_absent():
     assert not hasattr(PerceptLLM, "generate_final_response")
 
 
-def test_self_review_cannot_request_a_status():
-    assert set(SelfSchemaReview.model_fields) == {"opposition_indices", "rationale"}
-    with pytest.raises(ValueError):
-        SelfSchemaReview(verdict="ESTABLISH", opposition_indices=[], rationale="model assertion")
-    with pytest.raises(ValueError):
-        SelfSchemaReview(opposition_indices=[1, 1], rationale="duplicate")
+def test_self_model_contracts_are_absent():
+    assert not any("SELF" in k for k in SEMANTIC_CONTRACTS)
+    assert not any("SELF" in k for k in STAGE_CONTRACTS)
 
 
 @pytest.mark.parametrize("kind", list(SEMANTIC_CONTRACTS))

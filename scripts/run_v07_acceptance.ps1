@@ -68,7 +68,7 @@ try {
         "clean=true"
     )
     Write-Host (
-        "HUMAN REVIEW REQUIRED: judge every printed native Prometheist response " +
+        "HUMAN REVIEW REQUIRED: judge every printed native Persistent Cognition response " +
         "before accepting this SHA."
     )
 }

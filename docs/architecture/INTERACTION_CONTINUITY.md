@@ -13,7 +13,7 @@ descriptions below record the previous design and do not override this update.
 
 ## Rule
 
-Natural interaction continuity belongs to Prometheist. It must survive fresh model
+Natural interaction continuity belongs to Persistent Cognition. It must survive fresh model
 calls, worker destruction, process restart, and changes of conversation/session/device
 without relying on a hidden transcript or asking users to operate internal IDs.
 
@@ -82,8 +82,8 @@ current prompt + bounded aperture
   -> fresh current-only evidence-policy specialist
   -> durable source/surface policy
   -> bounded aperture filtered by that policy
-  -> bounded Working Self activation under the same evidence policy
-  -> fresh pre-cognitive non-memory work-triage specialist
+  -> bounded derived memory activation under the same evidence policy
+  -> fresh non-memory work-triage specialist
   -> deterministic external work execution
   -> fixed bounded retrieval routes and deterministic evidence merge
   -> application filters event roles
@@ -109,11 +109,7 @@ give a model search-language authority or make recall a tool alongside web/API w
 
 Each expansion returns exact source-backed memory items, merges them deterministically
 within the response memory bound, and persists enough stage provenance for replay.
-Active self-schema statements may be supplied as bounded supplemental retrieval cues,
-including when they are not admissible as response evidence. This lets a derived
-person model improve navigation without laundering its conclusions into canonical
-history. `SELF_MODEL` natural-language requests may additionally receive the
-admitted self context directly; source-restricted and exact-source requests may not.
+Derived memory statements may be supplied as bounded supplemental retrieval cues when they are provenance-linked and admissible under the current source policy. They guide navigation without laundering derived conclusions into canonical history.
 The initially activated aperture is retained before newly appended expansion items,
 so a saturated later recall cannot evict the evidence that motivated expansion.
 When the fixed expansion policy is exhausted, the memory package explicitly carries
@@ -146,7 +142,7 @@ must not require repeating a completed irreversible effect.
 ## Model-facing evidence limits
 
 Bounded item counts are not sufficient when one item can be arbitrarily large.
-Prometheist therefore validates explicit per-item and aggregate UTF-8 byte limits for
+Persistent Cognition therefore validates explicit per-item and aggregate UTF-8 byte limits for
 memory items, structured work results, and rendered evidence before model transport.
 Oversized evidence fails closed. Canonical durable evidence is not truncated or
 rewritten to make a model call fit.
@@ -221,7 +217,7 @@ required for closure.
 
 ## Invariant
 
-> A user can move naturally through one persistent relationship with Prometheist
+> A user can move naturally through one persistent interaction history
 > while every LLM call remains fresh, because exact history, bounded activation,
 > memory expansion, work results, and interaction progress are all system-owned,
 > provenance-bearing, and reconstructable.

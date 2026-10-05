@@ -3,10 +3,10 @@ import json
 import httpx
 import pytest
 
-from prometheist.runtime_settings import AppSettings, GUI_CONFIG_ENV, ModelSelection, load_settings, save_settings
-from prometheist.model_parameters import parameter_catalog
-from prometheist.native_policy import native_resource_safety_policy
-from prometheist.openai_transport import response_request, strict_schema
+from persistent_cognition.runtime_settings import AppSettings, GUI_CONFIG_ENV, ModelSelection, load_settings, save_settings
+from persistent_cognition.model_parameters import parameter_catalog
+from persistent_cognition.native_policy import native_resource_safety_policy
+from persistent_cognition.openai_transport import response_request, strict_schema
 
 
 def test_typed_settings_reject_unknown_routes_and_unsafe_parameters(tmp_path):
@@ -50,7 +50,7 @@ def test_model_specific_controls_and_reasoning_requests():
 
 
 def test_routed_resource_policy_never_reuses_another_models_credit(monkeypatch):
-    from prometheist.model_runtime import configured_runtime_probe
+    from persistent_cognition.model_runtime import configured_runtime_probe
     local = AppSettings(selection=ModelSelection(model="small"), routes={"V2_RESPOND": ModelSelection(model="large")})
     monkeypatch.setenv(GUI_CONFIG_ENV, local.model_dump_json())
     assert not configured_runtime_probe().capture().probe_ok
@@ -63,7 +63,7 @@ def test_routed_resource_policy_never_reuses_another_models_credit(monkeypatch):
 
 
 def test_final_sampler_overrides_leave_control_calls_deterministic(monkeypatch):
-    from prometheist.llm import OllamaClient
+    from persistent_cognition.llm import OllamaClient
     requests = []
     def handler(request):
         requests.append(json.loads(request.content))
@@ -80,11 +80,11 @@ def test_final_sampler_overrides_leave_control_calls_deterministic(monkeypatch):
 
 
 def test_openai_requires_current_consent_and_preserves_bounded_artifacts(monkeypatch, tmp_path):
-    from prometheist.llm import OllamaClient
-    from prometheist.network_consent import NetworkPurpose, consent_proposal, grant_consent, revoke_consent
-    from prometheist.content_digest import content_digest
-    from prometheist.openai_transport import OPENAI_ORIGIN
-    monkeypatch.setenv("PROMETHEIST_ARTIFACT_ROOT", str(tmp_path))
+    from persistent_cognition.llm import OllamaClient
+    from persistent_cognition.network_consent import NetworkPurpose, consent_proposal, grant_consent, revoke_consent
+    from persistent_cognition.content_digest import content_digest
+    from persistent_cognition.openai_transport import OPENAI_ORIGIN
+    monkeypatch.setenv("PCR_ARTIFACT_ROOT", str(tmp_path))
     monkeypatch.setenv("OPENAI_API_KEY", "test-secret-never-persist")
     requests = []
     real_client = httpx.Client
@@ -105,8 +105,8 @@ def test_openai_requires_current_consent_and_preserves_bounded_artifacts(monkeyp
     assert "test-secret-never-persist" not in encoded and "hidden" not in encoded
     assert requests[0].headers["Authorization"] == "Bearer test-secret-never-persist"
     assert requests[0].url == "https://api.openai.com/v1/responses"
-    monkeypatch.setenv("PROMETHEIST_MAX_MODEL_INPUT_BYTES", "100")
-    from prometheist.model_evidence_budget import ModelEvidenceBudgetExceeded
+    monkeypatch.setenv("PCR_MAX_MODEL_INPUT_BYTES", "100")
+    from persistent_cognition.model_evidence_budget import ModelEvidenceBudgetExceeded
     with pytest.raises(ModelEvidenceBudgetExceeded, match="byte budget"):
         client._structured("FINAL_RESPONSE_V2", "system", "x" * 200, {}, 256)
     assert len(requests) == 1
@@ -117,14 +117,14 @@ def test_openai_requires_current_consent_and_preserves_bounded_artifacts(monkeyp
 
 
 def test_catalog_parser_does_not_turn_links_into_external_download_targets():
-    from prometheist.model_catalog import CatalogParser
+    from persistent_cognition.model_catalog import CatalogParser
     parser = CatalogParser()
     parser.feed('<a href="/library/qwen3">x</a><a href="/library/qwen3">x</a><a href="https://evil.example/library/evil">e</a><a href="/library/name/tags">t</a><a href="/library/foo-cloud">cloud</a>')
     assert parser.names == ["qwen3"]
 
 
 def test_installed_huggingface_model_names_are_valid_but_download_scopes_stay_exact(monkeypatch):
-    from prometheist.model_catalog import pull_model
+    from persistent_cognition.model_catalog import pull_model
     name = "hf.co/example/small-model-GGUF:Q4_K_M"
     assert ModelSelection(model=name).model == name
     with pytest.raises(ValueError, match="registry names"):
@@ -132,11 +132,11 @@ def test_installed_huggingface_model_names_are_valid_but_download_scopes_stay_ex
 
 
 def test_measured_cost_and_remote_ollama_capacity_are_local_host_scoped(monkeypatch):
-    from prometheist.model_runtime import configured_runtime_probe
+    from persistent_cognition.model_runtime import configured_runtime_probe
     local = AppSettings(selection=ModelSelection(model="large"))
     floor = 8704
     monkeypatch.setenv(GUI_CONFIG_ENV, local.model_dump_json())
-    monkeypatch.setenv("PROMETHEIST_GUI_MODEL_MEMORY_FLOOR_MIB", str(floor))
+    monkeypatch.setenv("PCR_GUI_MODEL_MEMORY_FLOOR_MIB", str(floor))
     assert native_resource_safety_policy().default_llm_process_memory_mib == floor
     remote = AppSettings(ollama_url="https://192.0.2.1:11434", selection=local.selection)
     monkeypatch.setenv(GUI_CONFIG_ENV, remote.model_dump_json())
@@ -145,7 +145,7 @@ def test_measured_cost_and_remote_ollama_capacity_are_local_host_scoped(monkeypa
 
 
 def test_reasoning_final_overrides_never_change_control_budgets():
-    from prometheist.openai_transport import DEFAULT_REASONING_BUDGET
+    from persistent_cognition.openai_transport import DEFAULT_REASONING_BUDGET
     selection = ModelSelection(provider="openai", model="gpt-5", parameters={"max_output_tokens":256, "reasoning_effort":"low", "verbosity":"high"})
     args = {"system":"policy", "user":"task", "evidence":"", "schema":{"type":"object", "properties":{}}, "max_tokens":128}
     control = response_request(selection, kind="V2_RESPONSE_POLICY", **args)
@@ -158,7 +158,7 @@ def test_reasoning_final_overrides_never_change_control_budgets():
 
 def test_invocation_artifact_records_real_provider(monkeypatch):
     from uuid import uuid4
-    from prometheist import artifact_journal, llm_artifact_store
+    from persistent_cognition import artifact_journal, llm_artifact_store
     captured = {}
     def write(**kwargs):
         captured.update(kwargs)

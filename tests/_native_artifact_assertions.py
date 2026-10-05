@@ -10,8 +10,8 @@ from collections.abc import Iterable
 import json
 from uuid import UUID
 
-from prometheist import artifact_journal
-from prometheist.interaction_contracts import deterministic_interaction_id
+from persistent_cognition import artifact_journal
+from persistent_cognition.interaction_contracts import deterministic_interaction_id
 from tests._cli_helpers import print_transcript
 
 

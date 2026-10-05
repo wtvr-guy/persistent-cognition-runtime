@@ -4,8 +4,8 @@ import stat
 
 import pytest
 
-from prometheist.content_digest import content_digest
-from prometheist.network_consent import (
+from persistent_cognition.content_digest import content_digest
+from persistent_cognition.network_consent import (
     NetworkPurpose, consent_path, consent_proposal, grant_consent,
     normalize_destination, require_database_destination, require_destination, revoke_consent,
 )
@@ -13,7 +13,7 @@ from prometheist.network_consent import (
 
 @pytest.fixture(autouse=True)
 def private_root(tmp_path, monkeypatch):
-    monkeypatch.setenv("PROMETHEIST_ARTIFACT_ROOT", str(tmp_path))
+    monkeypatch.setenv("PCR_ARTIFACT_ROOT", str(tmp_path))
     for key in ("PGHOST", "PGHOSTADDR", "PGPORT", "PGSERVICE"):
         monkeypatch.delenv(key, raising=False)
     return tmp_path
@@ -83,8 +83,8 @@ def test_active_connectivity_requires_exact_https_url():
 
 def test_all_model_transports_check_actual_destination_before_io(monkeypatch):
     import httpx
-    from prometheist.llm import OllamaClient
-    from prometheist.ollama_runtime import OllamaRuntimeProbe
+    from persistent_cognition.llm import OllamaClient
+    from persistent_cognition.ollama_runtime import OllamaRuntimeProbe
     calls = []
     transport = httpx.MockTransport(lambda request: calls.append(request) or httpx.Response(200, json={}))
     with httpx.Client(base_url="https://remote.example", transport=transport) as http:
@@ -100,7 +100,7 @@ def test_all_model_transports_check_actual_destination_before_io(monkeypatch):
 
 def test_connectivity_does_not_follow_redirects_or_send_inventory(monkeypatch):
     import httpx
-    from prometheist.network_consent import check_connectivity
+    from persistent_cognition.network_consent import check_connectivity
     purpose, url = NetworkPurpose.CONNECTIVITY, "https://endpoint.example/health"
     grant_consent(url, purpose, accepted_digest=content_digest(consent_proposal(url, purpose)))
     client_type = httpx.Client

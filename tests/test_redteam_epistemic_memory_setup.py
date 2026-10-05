@@ -4,9 +4,9 @@ import uuid
 
 import pytest
 
-from prometheist import db, event_store
-from prometheist.attention_aperture import open_attention_aperture
-from prometheist.models import EventType
+from persistent_cognition import db, event_store
+from persistent_cognition.attention_aperture import open_attention_aperture
+from persistent_cognition.models import EventType
 
 
 RT04_QUERY = "Favorite color? USER_PROMPT only; otherwise INSUFFICIENT."

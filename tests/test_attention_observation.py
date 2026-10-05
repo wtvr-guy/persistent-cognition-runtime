@@ -5,8 +5,8 @@ from uuid import UUID
 
 import pytest
 
-from prometheist import attention_store, db
-from prometheist.attention import (
+from persistent_cognition import attention_store, db
+from persistent_cognition.attention import (
     AttentionTask,
     JITAttentionScheduler,
     SchedulingMetadata,
@@ -14,7 +14,7 @@ from prometheist.attention import (
     TaskCriticality,
     deterministic_task_id,
 )
-from prometheist.attention_observation import (
+from persistent_cognition.attention_observation import (
     HOST_CPU_RESOURCE_ID,
     HOST_MEMORY_RESOURCE_ID,
     LOCAL_LLM_RESOURCE_ID,
@@ -25,12 +25,12 @@ from prometheist.attention_observation import (
     build_resource_observation,
     discover_local_execution_resources,
 )
-from prometheist.attention_resources import (
+from persistent_cognition.attention_resources import (
     ExecutionResourceClass,
     ProcessResourceEstimate,
     ResourceEstimateSource,
 )
-from prometheist.attention_store import load_scheduler, save_scheduler
+from persistent_cognition.attention_store import load_scheduler, save_scheduler
 
 
 NAMESPACE = UUID("23ffacb4-6996-44ea-8d63-c9ed7cd326f5")

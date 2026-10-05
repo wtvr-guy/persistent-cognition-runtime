@@ -37,7 +37,7 @@ CREATE INDEX IF NOT EXISTS idx_events_payload_text_fts
     ON events USING GIN (to_tsvector('english', coalesce(payload_text, '')));
 
 -- ---------------------------------------------------------------------------
--- Prometheist Memory Kernel derived state.
+-- Persistent Cognition Memory Kernel derived state.
 --
 -- `events` remains the sole authoritative history. Everything below is
 -- disposable: it can be deleted and regenerated solely from `events`.
@@ -113,7 +113,7 @@ CREATE INDEX IF NOT EXISTS idx_memory_association_entries_target
 -- JIT Attention durable execution state.
 --
 -- Unlike derived memory projections, this is authoritative operational state:
--- it records what Prometheist is doing and what can be resumed after process
+-- it records what Persistent Cognition is doing and what can be resumed after process
 -- destruction. The transition journal is append-only at the application
 -- layer; the task table is the current-state snapshot for fast restart.
 -- ---------------------------------------------------------------------------
@@ -732,15 +732,6 @@ CREATE TABLE IF NOT EXISTS cognitive_heads (
     PRIMARY KEY (record_kind, record_key)
 );
 CREATE INDEX IF NOT EXISTS idx_cognitive_heads_sequence ON cognitive_heads(record_kind, global_seq);
--- Learned descriptions are routing hints; exact source records retain authority.
-CREATE INDEX IF NOT EXISTS idx_self_memory_navigation_terms
-    ON cognitive_heads USING GIN (to_tsvector('english',
-        coalesce(payload->>'statement', '') || ' ' ||
-        replace(coalesce((payload->'context_tags')::text, ''), '_', ' ')))
-    WHERE record_kind = 'self_representation';
-CREATE INDEX IF NOT EXISTS idx_self_evidence_representation
-    ON cognitive_heads ((payload->>'representation_id'), global_seq)
-    WHERE record_kind = 'self_evidence';
 CREATE OR REPLACE FUNCTION project_cognitive_event() RETURNS trigger AS $$
 BEGIN
     IF NEW.source = 'cognitive_runtime' AND NEW.payload->>'kind' = 'COGNITIVE_RECORD' THEN

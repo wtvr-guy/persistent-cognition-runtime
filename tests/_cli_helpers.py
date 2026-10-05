@@ -30,7 +30,7 @@ def run_once(prompt: str, conversation_id: uuid.UUID, timeout: int = 900) -> str
         [
             sys.executable,
             "-m",
-            "prometheist.cli",
+            "persistent_cognition.cli",
             "--once",
             prompt,
             "--conversation-id",

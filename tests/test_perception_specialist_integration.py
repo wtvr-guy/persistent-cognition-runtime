@@ -3,22 +3,21 @@ from datetime import datetime, timezone
 from types import SimpleNamespace
 from uuid import uuid4
 
-from prometheist.capability_registry import DEFAULT_REGISTRY, CapabilityDescriptor, CapabilityKind
-from prometheist.models import EventType, MemoryNeed, MemoryPacket
-from prometheist.perception import (
+from persistent_cognition.capability_registry import DEFAULT_REGISTRY, CapabilityDescriptor, CapabilityKind
+from persistent_cognition.models import EventType, MemoryNeed, MemoryPacket
+from persistent_cognition.perception import (
     AdvisorySemanticClassification,
     evaluate_salience,
     normalize_user_interaction_percept,
 )
-from prometheist.percept_response_runtime import PerceptStage, PreCognitiveDisposition, _execute_stage
-from prometheist.percept_response_worker import UserPromptLLM
-from prometheist.response_policy import (
+from persistent_cognition.percept_response_runtime import PerceptStage, PreCognitiveDisposition, _execute_stage
+from persistent_cognition.percept_response_worker import UserPromptLLM
+from persistent_cognition.response_policy import (
     RESPONSE_POLICY_VERSION,
     HistoricalEvidenceScope,
     ResponsePolicy,
     ResponseSurfaceMode,
 )
-from prometheist.self_memory import SelfContextAdmission, SelfContextPacket
 
 
 def _percept():
@@ -70,19 +69,8 @@ def test_work_triage_inherits_source_scope_and_salience_after_memory_activation(
         order.append("work")
         return PreCognitiveDisposition(response_required=True, capability_indices=[])
 
-    monkeypatch.setattr("prometheist.percept_response_runtime._stage_result", stage_result)
-    monkeypatch.setattr("prometheist.percept_response_runtime.open_attention_aperture", aperture)
-    monkeypatch.setattr(
-        "prometheist.percept_response_runtime.activate_self_context",
-        lambda *_args, **_kwargs: SelfContextPacket(
-            admission=SelfContextAdmission.ROUTING_ONLY,
-            items=(),
-        ),
-    )
-    monkeypatch.setattr(
-        "prometheist.percept_response_runtime.persist_working_self",
-        lambda *_args, **_kwargs: None,
-    )
+    monkeypatch.setattr("persistent_cognition.percept_response_runtime._stage_result", stage_result)
+    monkeypatch.setattr("persistent_cognition.percept_response_runtime.open_attention_aperture", aperture)
     interaction = SimpleNamespace(
         interaction_id=uuid4(),
         user_text=percept.normalized_text,

@@ -5,21 +5,21 @@ from uuid import uuid4
 
 import pytest
 
-from prometheist.capability_registry import DEFAULT_REGISTRY
-from prometheist.interaction_contracts import DurableInteraction
-from prometheist.models import MemoryNeed, MemoryPacket
-from prometheist.percept_response_runtime import (
+from persistent_cognition.capability_registry import DEFAULT_REGISTRY
+from persistent_cognition.interaction_contracts import DurableInteraction
+from persistent_cognition.models import MemoryNeed, MemoryPacket
+from persistent_cognition.percept_response_runtime import (
     PerceptStage,
     ResponseMemoryPackage,
     _execute_stage,
     _validated_response_policy,
 )
-from prometheist.percept_response_worker import (
+from persistent_cognition.percept_response_worker import (
     USER_PROMPT_STAGE_SPECIALIST_ROLES,
     UserPromptLLM,
     _ALLOWED_LLM_KINDS_BY_STAGE,
 )
-from prometheist.response_policy import (
+from persistent_cognition.response_policy import (
     RESPONSE_POLICY_VERSION,
     HistoricalEvidenceScope,
     ResponsePolicy,
@@ -128,7 +128,7 @@ def test_response_stage_inherits_exact_policy_without_reclassification(monkeypat
         PerceptStage.EXECUTE_WORK: {"work_results": []},
     }
     monkeypatch.setattr(
-        "prometheist.percept_response_runtime._stage_result",
+        "persistent_cognition.percept_response_runtime._stage_result",
         lambda _conn, _interaction, stage, _scheduler_key: results[stage],
     )
     received: list[ResponsePolicy] = []

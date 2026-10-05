@@ -5,10 +5,10 @@ import pytest
 from datetime import datetime, timezone
 from uuid import uuid4
 
-from prometheist.models import EventType, MemoryEvidence, MemoryNeed, MemoryPacket
-from prometheist.percept_response_runtime import ResponseMemoryPackage
-from prometheist.percept_response_worker import UserPromptLLM
-from prometheist.response_policy import (
+from persistent_cognition.models import EventType, MemoryEvidence, MemoryNeed, MemoryPacket
+from persistent_cognition.percept_response_runtime import ResponseMemoryPackage
+from persistent_cognition.percept_response_worker import UserPromptLLM
+from persistent_cognition.response_policy import (
     HistoricalEvidenceScope,
     ResponsePolicy,
     ResponseSurfaceMode,

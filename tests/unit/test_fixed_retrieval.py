@@ -4,12 +4,12 @@ from uuid import UUID, uuid4
 
 import pytest
 
-from prometheist import jit_memory
-from prometheist.fixed_retrieval import merge_evidence
-from prometheist.models import EventType, MemoryEvidence, MemoryNeed, MemoryPacket
-from prometheist import percept_response_runtime as runtime
-from prometheist.percept_response_worker import UserPromptLLM
-from prometheist.response_policy import HistoricalEvidenceScope, ResponsePolicy, ResponseSurfaceMode
+from persistent_cognition import jit_memory
+from persistent_cognition.fixed_retrieval import merge_evidence
+from persistent_cognition.models import EventType, MemoryEvidence, MemoryNeed, MemoryPacket
+from persistent_cognition import percept_response_runtime as runtime
+from persistent_cognition.percept_response_worker import UserPromptLLM
+from persistent_cognition.response_policy import HistoricalEvidenceScope, ResponsePolicy, ResponseSurfaceMode
 
 
 def context():
@@ -100,8 +100,8 @@ def test_merge_keeps_exact_bytes_and_combines_duplicate_provenance():
 
 
 def test_byte_bound_skips_oversized_views_without_truncating_sources(monkeypatch):
-    monkeypatch.setenv("PROMETHEIST_MAX_MODEL_EVIDENCE_ITEM_BYTES", "20")
-    monkeypatch.setenv("PROMETHEIST_MAX_MODEL_EVIDENCE_TOTAL_BYTES", "20")
+    monkeypatch.setenv("PCR_MAX_MODEL_EVIDENCE_ITEM_BYTES", "20")
+    monkeypatch.setenv("PCR_MAX_MODEL_EVIDENCE_TOTAL_BYTES", "20")
     too_big = evidence(3, content="é" * 11)
     result = merge_evidence(context(), [packet(too_big, evidence(1, content="retained"))], [EventType.USER_PROMPT], 2)
     assert result.items[0].content == "retained"

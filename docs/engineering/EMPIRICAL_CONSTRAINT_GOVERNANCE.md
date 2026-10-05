@@ -5,7 +5,7 @@
 
 ## Constitutional experimental method
 
-Prometheist treats architectural mechanisms as falsifiable claims.
+Persistent Cognition treats architectural mechanisms as falsifiable claims.
 
 > **Freeze a measurable baseline, change exactly one mechanism, rerun the same experiment, and keep the mechanism only if the evidence justifies it.**
 
@@ -33,12 +33,12 @@ fixture check to parsed-JSON equality or silently ignore an arbitrary hash misma
 
 ## Rule
 
-Prometheist must not treat an arbitrary numeric bound as correct merely because it passes the tests that happened to exist when it was introduced.
+Persistent Cognition must not treat an arbitrary numeric bound as correct merely because it passes the tests that happened to exist when it was introduced.
 
 Any numeric value that changes runtime behavior must be one of the following:
 
 1. **Structural invariant** — follows from the representation or algorithm itself (for example, a sequence number is non-negative, a percentage is bounded by 0 and 100, or a selected index must exist in its application-owned catalog).
-2. **External contract** — imposed by a protocol, dependency, operating system, model API, or other authority outside Prometheist.
+2. **External contract** — imposed by a protocol, dependency, operating system, model API, or other authority outside Persistent Cognition.
 3. **Identifier collision bound** — chosen from an explicit collision-risk calculation rather than a performance benchmark.
 4. **Empirical tunable** — quality/cost trade-off whose value must be selected by a reproducible benchmark.
 5. **Safety tunable** — operational trade-off whose value must be derived from failure-injection/load evidence under an explicit safety objective.
@@ -50,7 +50,7 @@ The machine-readable source of record is `benchmarks/constraint_registry.json`. 
 
 There is rarely one scalar objective that can honestly combine correctness, abstention, latency, memory use, throughput, and safety. Inventing arbitrary utility weights would merely move the arbitrary number one level upward.
 
-Prometheist therefore uses a **constraint + Pareto + lexicographic** decision procedure:
+Persistent Cognition therefore uses a **constraint + Pareto + lexicographic** decision procedure:
 
 1. Reject candidates that violate a hard correctness, provenance, determinism, safety, or recovery invariant.
 2. Compare the remaining candidates on every scenario family independently, not only on a pooled average.
@@ -192,4 +192,4 @@ A release is not considered empirically calibrated merely because all functional
 
 When current evidence cannot establish an optimum, the registry must say so explicitly. The accepted value is then a documented provisional bound, not falsely presented as optimal.
 
-Testing and environment-evidence requirements are further defined in [`TESTING_AND_ACCEPTANCE.md`](https://github.com/wtvr-guy/prometheist/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/engineering/TESTING_AND_ACCEPTANCE.md).
+Testing and environment-evidence requirements are further defined in [`TESTING_AND_ACCEPTANCE.md`](https://github.com/wtvr-guy/persistent_cognition/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/engineering/TESTING_AND_ACCEPTANCE.md).
