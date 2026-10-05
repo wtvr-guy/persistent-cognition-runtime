@@ -37,4 +37,6 @@ Local extraction checks:
 - Deterministic constraint calibration completed; provisional/insufficient-discrimination results remain provisional.
 - Source and wheel distributions built; both command help paths loaded successfully.
 
-Full PostgreSQL CI is being run on the extraction branch; its result will be recorded before completion. This workspace cannot start a normal unprivileged PostgreSQL server, so no local database test pass is claimed. Real Ollama and native Windows acceptance remain separate from hosted deterministic CI; no model-quality improvement is claimed by this extraction.
+Hosted PostgreSQL 16 CI passed on extraction commit [`3d7e845`](https://github.com/wtvr-guy/persistent-cognition-runtime/commit/3d7e8458f9eadac81f232b8270d616a684294ea8): **576 passed, 13 skipped in 115.43 seconds**. The [complete run](https://github.com/wtvr-guy/persistent-cognition-runtime/actions/runs/37344783424) also passed static checks, source verification, both registry audits, and deterministic calibration. Its JUnit report is attached as `engine-test-results`.
+
+All 13 skips require a reachable Ollama instance. Those live-model checks, including cross-process recall and memory-authority red-team tests, remain unverified here. Native Windows acceptance was not run. The passing suite verifies deterministic engine behavior and PostgreSQL integration; no model-quality improvement is claimed by this extraction.
