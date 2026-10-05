@@ -1,0 +1,430 @@
+{
+  "benchmark_id": "MEM-ADAPT-007",
+  "cases": [
+    {
+      "adaptive_policy": {
+        "association_effort": "MODERATE",
+        "association_limit": 750,
+        "candidate_limit": 600,
+        "decay": 0.88,
+        "focus_mode": "UNANCHORED",
+        "max_hops": 3,
+        "minimum_score": 0.15,
+        "scope": "CONTEXTUAL",
+        "use_focus_anchors": false
+      },
+      "answer": "routine duplicate-11",
+      "answer_exact": false,
+      "answer_value_complete": false,
+      "elapsed_ms": 39083.653,
+      "error": null,
+      "evidence_complete": true,
+      "expected_answer": "COPPER-LANTERN-47",
+      "failure_layer": "reasoning",
+      "format_only_failure": false,
+      "packet_event_ids": [
+        "f0741783-c42e-4727-8b91-67af73bbab10",
+        "171e58b5-a360-41d1-afb5-23aa7ffd61e9",
+        "f942375c-9963-4489-bd22-5311b5f52206",
+        "5df4bfb6-13ca-4519-88c7-a442f74640ab",
+        "90cd0620-21bb-4204-9b88-6776bd7d47ed",
+        "3133413a-c75c-48bf-b984-1c46360e8f34"
+      ],
+      "packet_item_count": 6,
+      "purpose": "Test whether a stateless model can answer from a uniquely informative old fact that remains in the shared retrieval pool below repetitive newer evidence.",
+      "question": "In the archive recall benchmark, what vault phrase was recorded? Return exactly the phrase and nothing else.",
+      "required_available_to_composer": true,
+      "required_event_ids": [
+        "171e58b5-a360-41d1-afb5-23aa7ffd61e9"
+      ],
+      "required_pool_ranks": {
+        "171e58b5-a360-41d1-afb5-23aa7ffd61e9": 13
+      },
+      "retrieval_query": "archive recall benchmark vault phrase recorded",
+      "scenario_id": "duplicate_pressure_old_fact",
+      "shared_pool_item_count": 13
+    },
+    {
+      "adaptive_policy": {
+        "association_effort": "DEEP",
+        "association_limit": 1200,
+        "candidate_limit": 600,
+        "decay": 0.92,
+        "focus_mode": "UNANCHORED",
+        "max_hops": 5,
+        "minimum_score": 0.15,
+        "scope": "CONTEXTUAL",
+        "use_focus_anchors": false
+      },
+      "answer": "",
+      "answer_exact": false,
+      "answer_value_complete": false,
+      "elapsed_ms": 17265.713,
+      "error": "ValueError: model altered an application-owned verbatim placeholder",
+      "evidence_complete": true,
+      "expected_answer": "ORBIT-OLD-17 | ORBIT-NEW-29",
+      "failure_layer": "model_runtime",
+      "format_only_failure": false,
+      "packet_event_ids": [
+        "ca3dbbac-1615-4923-878f-1b06a5a596f8",
+        "88cbc7b5-202d-4172-910c-fb0cd2296e46",
+        "e91c0f2f-5ba2-445e-8364-8ddfaf94066e",
+        "13cc026f-6947-44af-9b5f-9cd6ebaa7516",
+        "34c6a42e-099b-4d8d-8993-2ab1567a17d3",
+        "f42126e9-4676-4d86-b2d3-a4df22ee533d"
+      ],
+      "packet_item_count": 6,
+      "purpose": "Require cognition to preserve and distinguish an older claim from its correction, rather than answering from whichever statement happens to survive composition.",
+      "question": "For the Atlas benchmark code, what were the earlier original value and the later corrected value? Return exactly '<original> | <corrected>' and nothing else.",
+      "required_available_to_composer": true,
+      "required_event_ids": [
+        "e91c0f2f-5ba2-445e-8364-8ddfaf94066e",
+        "88cbc7b5-202d-4172-910c-fb0cd2296e46"
+      ],
+      "required_pool_ranks": {
+        "88cbc7b5-202d-4172-910c-fb0cd2296e46": 13,
+        "e91c0f2f-5ba2-445e-8364-8ddfaf94066e": 14
+      },
+      "retrieval_query": "Atlas benchmark code earlier original later corrected value",
+      "scenario_id": "correction_pair_reasoning",
+      "shared_pool_item_count": 14
+    },
+    {
+      "adaptive_policy": {
+        "association_effort": "MODERATE",
+        "association_limit": 750,
+        "candidate_limit": 600,
+        "decay": 0.88,
+        "focus_mode": "UNANCHORED",
+        "max_hops": 3,
+        "minimum_score": 0.15,
+        "scope": "CONTEXTUAL",
+        "use_focus_anchors": false
+      },
+      "answer": "71 | 2048 | 18",
+      "answer_exact": true,
+      "answer_value_complete": true,
+      "elapsed_ms": 16925.187,
+      "error": null,
+      "evidence_complete": true,
+      "expected_answer": "71 | 2048 | 18",
+      "failure_layer": "success",
+      "format_only_failure": false,
+      "packet_event_ids": [
+        "ddadf7fc-300c-4b90-af33-572e775a5587",
+        "10620969-5a49-43b9-9597-ad5da47f4179",
+        "29862485-9c18-4591-b98b-629dd911ec3e",
+        "f91d1ebf-598c-402c-9daf-b1cde72136fd",
+        "7ed41714-c033-4f2e-afd3-dfb281ab384a",
+        "beb6199a-51d0-41c1-9be2-8b761fbbe22b"
+      ],
+      "packet_item_count": 6,
+      "purpose": "Require a six-item context to preserve three complementary lower-ranked facts and require the model to synthesize them in the requested order.",
+      "question": "For Orion planning, what are the thermal ceiling, memory reserve, and scheduler margin? Return exactly '<thermal> | <memory> | <margin>' using only the recorded numeric values.",
+      "required_available_to_composer": true,
+      "required_event_ids": [
+        "f91d1ebf-598c-402c-9daf-b1cde72136fd",
+        "29862485-9c18-4591-b98b-629dd911ec3e",
+        "10620969-5a49-43b9-9597-ad5da47f4179"
+      ],
+      "required_pool_ranks": {
+        "10620969-5a49-43b9-9597-ad5da47f4179": 13,
+        "29862485-9c18-4591-b98b-629dd911ec3e": 14,
+        "f91d1ebf-598c-402c-9daf-b1cde72136fd": 15
+      },
+      "retrieval_query": "Orion planning thermal ceiling memory reserve scheduler margin",
+      "scenario_id": "distributed_clues_reasoning",
+      "shared_pool_item_count": 15
+    },
+    {
+      "adaptive_policy": {
+        "association_effort": "MODERATE",
+        "association_limit": 750,
+        "candidate_limit": 600,
+        "decay": 0.88,
+        "focus_mode": "UNANCHORED",
+        "max_hops": 3,
+        "minimum_score": 0.15,
+        "scope": "CONTEXTUAL",
+        "use_focus_anchors": false
+      },
+      "answer": "10 | 20 | 30 | 40 | 50 | 60",
+      "answer_exact": true,
+      "answer_value_complete": true,
+      "elapsed_ms": 16440.429,
+      "error": null,
+      "evidence_complete": true,
+      "expected_answer": "10 | 20 | 30 | 40 | 50 | 60",
+      "failure_layer": "success",
+      "format_only_failure": false,
+      "packet_event_ids": [
+        "d4ae2560-d0e2-40fd-918b-a5eb7dde35b9",
+        "c4600bc8-e9bd-4fee-acdb-ceb0cb9defa2",
+        "e30d6ec8-d362-4a15-a64e-883375600e05",
+        "cf65648b-1322-4d3f-8743-b3cf2da99e7c",
+        "5b95c00f-3019-483e-b0a7-b9ea4a096615",
+        "970549b5-5a0e-4a5d-b9ac-2468f922666f"
+      ],
+      "packet_item_count": 6,
+      "purpose": "Attack novelty-first composition with six highly relevant facts whose payload is numeric.",
+      "question": "What are the six calibration threshold values in recorded order? Return exactly '<v1> | <v2> | <v3> | <v4> | <v5> | <v6>'.",
+      "required_available_to_composer": true,
+      "required_event_ids": [
+        "970549b5-5a0e-4a5d-b9ac-2468f922666f",
+        "5b95c00f-3019-483e-b0a7-b9ea4a096615",
+        "cf65648b-1322-4d3f-8743-b3cf2da99e7c",
+        "e30d6ec8-d362-4a15-a64e-883375600e05",
+        "c4600bc8-e9bd-4fee-acdb-ceb0cb9defa2",
+        "d4ae2560-d0e2-40fd-918b-a5eb7dde35b9"
+      ],
+      "required_pool_ranks": {
+        "5b95c00f-3019-483e-b0a7-b9ea4a096615": 5,
+        "970549b5-5a0e-4a5d-b9ac-2468f922666f": 6,
+        "c4600bc8-e9bd-4fee-acdb-ceb0cb9defa2": 2,
+        "cf65648b-1322-4d3f-8743-b3cf2da99e7c": 4,
+        "d4ae2560-d0e2-40fd-918b-a5eb7dde35b9": 1,
+        "e30d6ec8-d362-4a15-a64e-883375600e05": 3
+      },
+      "retrieval_query": "calibration threshold value",
+      "scenario_id": "numeric_payload_cognition",
+      "shared_pool_item_count": 18
+    },
+    {
+      "adaptive_policy": {
+        "association_effort": "MODERATE",
+        "association_limit": 750,
+        "candidate_limit": 600,
+        "decay": 0.88,
+        "focus_mode": "UNANCHORED",
+        "max_hops": 3,
+        "minimum_score": 0.15,
+        "scope": "CONTEXTUAL",
+        "use_focus_anchors": false
+      },
+      "answer": "alpha | beta | gamma | delta | epsilon | zeta",
+      "answer_exact": true,
+      "answer_value_complete": true,
+      "elapsed_ms": 13698.973,
+      "error": null,
+      "evidence_complete": true,
+      "expected_answer": "alpha | beta | gamma | delta | epsilon | zeta",
+      "failure_layer": "success",
+      "format_only_failure": false,
+      "packet_event_ids": [
+        "75620a22-e3ac-4bc9-9d58-ac70b797a859",
+        "e1d4fdce-4c46-4755-a5fc-a6e59b03103f",
+        "84da96e3-f8f7-4677-8b2a-e0a488f4dbc8",
+        "88a0af2d-1543-4027-9386-6bb5e8462484",
+        "894ba133-d17e-4802-b61a-9fd8700cfb68",
+        "b79267a3-eca7-4ccc-9d67-483edc01c288"
+      ],
+      "packet_item_count": 6,
+      "purpose": "Verify that irrelevant lexical novelty cannot displace six nonredundant high-ranked facts.",
+      "question": "Which six deployment approval gate phase labels were approved? Return exactly the six labels in recorded order separated by ' | '.",
+      "required_available_to_composer": true,
+      "required_event_ids": [
+        "b79267a3-eca7-4ccc-9d67-483edc01c288",
+        "894ba133-d17e-4802-b61a-9fd8700cfb68",
+        "88a0af2d-1543-4027-9386-6bb5e8462484",
+        "84da96e3-f8f7-4677-8b2a-e0a488f4dbc8",
+        "e1d4fdce-4c46-4755-a5fc-a6e59b03103f",
+        "75620a22-e3ac-4bc9-9d58-ac70b797a859"
+      ],
+      "required_pool_ranks": {
+        "75620a22-e3ac-4bc9-9d58-ac70b797a859": 1,
+        "84da96e3-f8f7-4677-8b2a-e0a488f4dbc8": 3,
+        "88a0af2d-1543-4027-9386-6bb5e8462484": 4,
+        "894ba133-d17e-4802-b61a-9fd8700cfb68": 5,
+        "b79267a3-eca7-4ccc-9d67-483edc01c288": 6,
+        "e1d4fdce-4c46-4755-a5fc-a6e59b03103f": 2
+      },
+      "retrieval_query": "deployment approval gate phase",
+      "scenario_id": "random_token_novelty_cognition",
+      "shared_pool_item_count": 18
+    },
+    {
+      "adaptive_policy": {
+        "association_effort": "MODERATE",
+        "association_limit": 750,
+        "candidate_limit": 600,
+        "decay": 0.88,
+        "focus_mode": "UNANCHORED",
+        "max_hops": 3,
+        "minimum_score": 0.15,
+        "scope": "CONTEXTUAL",
+        "use_focus_anchors": false
+      },
+      "answer": "A1 | B2 | C3 | D4 | E5 | F6",
+      "answer_exact": true,
+      "answer_value_complete": true,
+      "elapsed_ms": 15546.72,
+      "error": null,
+      "evidence_complete": true,
+      "expected_answer": "A1 | B2 | C3 | D4 | E5 | F6",
+      "failure_layer": "success",
+      "format_only_failure": false,
+      "packet_event_ids": [
+        "8d455867-d568-4990-a464-d8067f0a5d24",
+        "1a7dd1a3-32c0-41e6-9347-143b823701b0",
+        "5aeae3be-c0f0-46d7-88b3-17ffbb9ed865",
+        "f7dac35f-bb51-4261-8d84-719714ef236e",
+        "386b70f8-49a6-4ba7-94df-05159f0af2b0",
+        "a3320a16-06d1-4a90-ba55-47cc7930e037"
+      ],
+      "packet_item_count": 6,
+      "purpose": "Verify that stale retained history cannot consume a slot when all six current relevance-core facts are independently informative.",
+      "question": "What are the six current verified component registry items? Return exactly the six item labels in recorded order separated by ' | '.",
+      "required_available_to_composer": true,
+      "required_event_ids": [
+        "a3320a16-06d1-4a90-ba55-47cc7930e037",
+        "386b70f8-49a6-4ba7-94df-05159f0af2b0",
+        "f7dac35f-bb51-4261-8d84-719714ef236e",
+        "5aeae3be-c0f0-46d7-88b3-17ffbb9ed865",
+        "1a7dd1a3-32c0-41e6-9347-143b823701b0",
+        "8d455867-d568-4990-a464-d8067f0a5d24"
+      ],
+      "required_pool_ranks": {
+        "1a7dd1a3-32c0-41e6-9347-143b823701b0": 2,
+        "386b70f8-49a6-4ba7-94df-05159f0af2b0": 5,
+        "5aeae3be-c0f0-46d7-88b3-17ffbb9ed865": 3,
+        "8d455867-d568-4990-a464-d8067f0a5d24": 1,
+        "a3320a16-06d1-4a90-ba55-47cc7930e037": 6,
+        "f7dac35f-bb51-4261-8d84-719714ef236e": 4
+      },
+      "retrieval_query": "current verified component registry item",
+      "scenario_id": "stale_retained_cognition",
+      "shared_pool_item_count": 18
+    },
+    {
+      "adaptive_policy": {
+        "association_effort": "DEEP",
+        "association_limit": 1200,
+        "candidate_limit": 175,
+        "decay": 0.92,
+        "focus_mode": "SINGLE_ANCHOR",
+        "max_hops": 5,
+        "minimum_score": 0.15,
+        "scope": "NARROW",
+        "use_focus_anchors": true
+      },
+      "answer": "duplicate-11",
+      "answer_exact": false,
+      "answer_value_complete": false,
+      "elapsed_ms": 15016.588,
+      "error": null,
+      "evidence_complete": true,
+      "expected_answer": "ZETA-ORCHID-41",
+      "failure_layer": "reasoning",
+      "format_only_failure": false,
+      "packet_event_ids": [
+        "a1791a82-1628-4868-b3e2-f9f514839415",
+        "052e9e6a-4ab9-4816-884e-bfa896fbd5b4",
+        "02e0089c-89b1-4c7d-96bf-75ffc28f125b",
+        "a1f819a4-6403-4345-ab2c-d9a08e16087b",
+        "ff5d2d43-a18f-490f-a151-5a3c90d0c5e7",
+        "8b8c939b-07dd-4249-96f5-bcec6ee140d5"
+      ],
+      "packet_item_count": 6,
+      "purpose": "Exercise the complete path: zero-overlap evidence must first reach the shared pool through adaptive association traversal and then survive bounded composition.",
+      "question": "What opaque token was associated with the deployment rollback decision? Return exactly the token and nothing else.",
+      "required_available_to_composer": true,
+      "required_event_ids": [
+        "a1791a82-1628-4868-b3e2-f9f514839415"
+      ],
+      "required_pool_ranks": {
+        "a1791a82-1628-4868-b3e2-f9f514839415": 1
+      },
+      "retrieval_query": "deployment rollback decision",
+      "scenario_id": "association_bridge_cognition",
+      "shared_pool_item_count": 13
+    },
+    {
+      "adaptive_policy": {
+        "association_effort": "MODERATE",
+        "association_limit": 750,
+        "candidate_limit": 600,
+        "decay": 0.88,
+        "focus_mode": "UNANCHORED",
+        "max_hops": 3,
+        "minimum_score": 0.15,
+        "scope": "CONTEXTUAL",
+        "use_focus_anchors": false
+      },
+      "answer": "INSUFFICIENT",
+      "answer_exact": true,
+      "answer_value_complete": true,
+      "elapsed_ms": 4748.627,
+      "error": null,
+      "evidence_complete": true,
+      "expected_answer": "INSUFFICIENT",
+      "failure_layer": "success",
+      "format_only_failure": false,
+      "packet_event_ids": [],
+      "packet_item_count": 0,
+      "purpose": "Verify that composition improvements do not turn absent evidence into a fabricated answer.",
+      "question": "What is the synthetic Nimbus benchmark marker? If the supplied persisted evidence does not establish one, return exactly INSUFFICIENT and nothing else.",
+      "required_available_to_composer": true,
+      "required_event_ids": [],
+      "required_pool_ranks": {},
+      "retrieval_query": "Nimbus benchmark marker",
+      "scenario_id": "unsupported_query_abstention",
+      "shared_pool_item_count": 0
+    }
+  ],
+  "control_model": "qwen3:4b-instruct-2507-q4_K_M",
+  "database": "jit_agent_test",
+  "distractor_count": 12,
+  "evaluation_boundary": "Evidence completeness, required-value correctness, exact instruction-format correctness, model-runtime failure, and latency are scored independently.",
+  "final_packet_limit": 6,
+  "frozen_architecture": "MEM-ADAPT-006 adaptive retrieval plus relevance-constrained Evidence Composer v2; only the disposable response model varies between MEM-ADAPT-007 runs.",
+  "generated_at": "2026-08-29T04:22:06.674078+00:00",
+  "mode": "quick",
+  "model": "ministral-3:8b-instruct-2512-q4_K_M",
+  "post_run_resource_observation": {
+    "cpu_utilization_percent": 48,
+    "host_memory_available_mib": 3876,
+    "host_memory_total_mib": 16118,
+    "load_1m": null,
+    "model": "ministral-3:8b-instruct-2512-q4_K_M",
+    "probe_ok": true,
+    "reported_name": "ministral-3:8b-instruct-2512-q4_K_M",
+    "reported_size_bytes": 5953898412,
+    "reported_size_vram_bytes": 0,
+    "reported_system_memory_mib": 5678,
+    "residency_label": "warm-resident",
+    "resident": true
+  },
+  "resource_preflight": {
+    "calibration_status": "experimental-unverified",
+    "cold_memory_budget_mib": 7168,
+    "cpu_pressure_percent": 0,
+    "host_memory_available_mib": 10249,
+    "host_memory_total_mib": 16118,
+    "llm_concurrency_limit": 1,
+    "model": "ministral-3:8b-instruct-2512-q4_K_M",
+    "policy_version": "v0.7-native-calibration-v1:MEM-ADAPT-007",
+    "probe_ok": true,
+    "reported_size_bytes": null,
+    "reported_size_vram_bytes": null,
+    "required_incremental_memory_mib": 7168,
+    "residency_label": "cold-nonresident",
+    "resident": false,
+    "safe_cpu_units": 6,
+    "safe_memory_for_new_work_mib": 8205
+  },
+  "schema_version": 1,
+  "shared_pool_limit": 32,
+  "stateless_llm_contract": "Every answer is one fresh OllamaClient.respond invocation. The benchmark runs one model target per process and never carries model context between cases.",
+  "summary": {
+    "answer_exact": 5,
+    "answer_value_complete": 5,
+    "cases": 8,
+    "composition_failures": 0,
+    "evidence_complete": 8,
+    "format_only_failures": 0,
+    "mean_llm_elapsed_ms": 17340.736,
+    "model_runtime_failures": 1,
+    "reasoning_failures": 2,
+    "retrieval_or_retention_failures": 0
+  }
+}

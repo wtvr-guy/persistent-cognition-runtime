@@ -1,0 +1,884 @@
+{
+  "answer_head_to_head": {
+    "v1_vs_top_k": {
+      "both": 2,
+      "left_only": 1,
+      "neither": 5,
+      "right_only": 0
+    },
+    "v2_vs_top_k": {
+      "both": 2,
+      "left_only": 2,
+      "neither": 4,
+      "right_only": 0
+    },
+    "v2_vs_v1": {
+      "both": 3,
+      "left_only": 1,
+      "neither": 4,
+      "right_only": 0
+    }
+  },
+  "benchmark_id": "MEM-ADAPT-006",
+  "cases": [
+    {
+      "adaptive_policy": {
+        "association_effort": "MODERATE",
+        "association_limit": 750,
+        "candidate_limit": 600,
+        "decay": 0.88,
+        "focus_mode": "UNANCHORED",
+        "max_hops": 3,
+        "minimum_score": 0.15,
+        "scope": "CONTEXTUAL",
+        "use_focus_anchors": false
+      },
+      "expected_answer": "COPPER-LANTERN-47",
+      "llm_call_order": [
+        "top_k",
+        "coverage_v1",
+        "relevance_coverage_v2"
+      ],
+      "policies": {
+        "coverage_v1": {
+          "answer": "vault phrase recorded routine duplicate-11",
+          "answer_correct": false,
+          "elapsed_ms": 6146.68,
+          "error": null,
+          "evidence_complete": true,
+          "failure_layer": "reasoning",
+          "packet_event_ids": [
+            "a8a2a65c-a77c-41fa-b41e-635eb56d844e",
+            "e07548e5-3229-40eb-b713-96ba0143ead1",
+            "ba2c538e-4624-44b8-899e-98e2fbe15e1e",
+            "098255d8-0aa8-4d79-a340-c5ef21f0f1ba",
+            "3ee398b8-8bff-4618-847f-18c2e3a52937",
+            "0638e35d-c9b5-4773-a63d-0acb0552fa8f"
+          ],
+          "packet_item_count": 6
+        },
+        "relevance_coverage_v2": {
+          "answer": "vault phrase recorded routine duplicate-11",
+          "answer_correct": false,
+          "elapsed_ms": 1905.026,
+          "error": null,
+          "evidence_complete": true,
+          "failure_layer": "reasoning",
+          "packet_event_ids": [
+            "a8a2a65c-a77c-41fa-b41e-635eb56d844e",
+            "e07548e5-3229-40eb-b713-96ba0143ead1",
+            "ba2c538e-4624-44b8-899e-98e2fbe15e1e",
+            "098255d8-0aa8-4d79-a340-c5ef21f0f1ba",
+            "3ee398b8-8bff-4618-847f-18c2e3a52937",
+            "0638e35d-c9b5-4773-a63d-0acb0552fa8f"
+          ],
+          "packet_item_count": 6
+        },
+        "top_k": {
+          "answer": "vault phrase recorded routine duplicate-11",
+          "answer_correct": false,
+          "elapsed_ms": 22994.365,
+          "error": null,
+          "evidence_complete": false,
+          "failure_layer": "composition",
+          "packet_event_ids": [
+            "a8a2a65c-a77c-41fa-b41e-635eb56d844e",
+            "ba2c538e-4624-44b8-899e-98e2fbe15e1e",
+            "098255d8-0aa8-4d79-a340-c5ef21f0f1ba",
+            "3ee398b8-8bff-4618-847f-18c2e3a52937",
+            "0638e35d-c9b5-4773-a63d-0acb0552fa8f",
+            "e1b68bcf-567d-4b7f-9236-b988c034a6fb"
+          ],
+          "packet_item_count": 6
+        }
+      },
+      "purpose": "Test whether a stateless model can answer from a uniquely informative old fact that remains in the shared retrieval pool below repetitive newer evidence.",
+      "question": "In the archive recall benchmark, what vault phrase was recorded? Return exactly the phrase and nothing else.",
+      "required_available_to_composers": true,
+      "required_event_ids": [
+        "e07548e5-3229-40eb-b713-96ba0143ead1"
+      ],
+      "required_pool_ranks": {
+        "e07548e5-3229-40eb-b713-96ba0143ead1": 13
+      },
+      "retained_event_ids": [],
+      "retrieval_query": "archive recall benchmark vault phrase recorded",
+      "scenario_id": "duplicate_pressure_old_fact",
+      "shared_pool_event_ids": [
+        "a8a2a65c-a77c-41fa-b41e-635eb56d844e",
+        "ba2c538e-4624-44b8-899e-98e2fbe15e1e",
+        "098255d8-0aa8-4d79-a340-c5ef21f0f1ba",
+        "3ee398b8-8bff-4618-847f-18c2e3a52937",
+        "0638e35d-c9b5-4773-a63d-0acb0552fa8f",
+        "e1b68bcf-567d-4b7f-9236-b988c034a6fb",
+        "8bbf3f97-2938-4aa3-94c2-59e3a1448c43",
+        "8b9aa269-b8ca-42de-b9ea-0765a1e9e437",
+        "b0eefb72-a102-44bd-a205-2ddcc1f1e951",
+        "2e870a3f-f8ad-4cc7-9d4e-eec9a6d079e5",
+        "aa5ccfbb-6cc4-459a-93d4-3dca3ed9916c",
+        "22c53c63-fa8b-4fb9-a8cc-002c5cf4a43f",
+        "e07548e5-3229-40eb-b713-96ba0143ead1"
+      ],
+      "shared_pool_item_count": 13
+    },
+    {
+      "adaptive_policy": {
+        "association_effort": "DEEP",
+        "association_limit": 1200,
+        "candidate_limit": 600,
+        "decay": 0.92,
+        "focus_mode": "UNANCHORED",
+        "max_hops": 5,
+        "minimum_score": 0.15,
+        "scope": "CONTEXTUAL",
+        "use_focus_anchors": false
+      },
+      "expected_answer": "ORBIT-OLD-17 | ORBIT-NEW-29",
+      "llm_call_order": [
+        "coverage_v1",
+        "relevance_coverage_v2",
+        "top_k"
+      ],
+      "policies": {
+        "coverage_v1": {
+          "answer": "ORBIT-OLD-17 | ORBIT-NEW-29",
+          "answer_correct": true,
+          "elapsed_ms": 7770.426,
+          "error": null,
+          "evidence_complete": true,
+          "failure_layer": "success",
+          "packet_event_ids": [
+            "e3acc15e-5237-44f7-8e86-cbb0aa6940ef",
+            "9beb6f7a-88c3-4f53-b523-efb34b0cdae2",
+            "21278503-d7e1-4417-acff-48aa15cd7882",
+            "8e1a9244-4d36-413d-ab07-1debfdf77b27",
+            "9173ef7c-944d-4eb7-8543-baa626e682ed",
+            "64a2c403-304d-462c-8624-ff7563c16e48"
+          ],
+          "packet_item_count": 6
+        },
+        "relevance_coverage_v2": {
+          "answer": "ORBIT-OLD-17 | ORBIT-NEW-29",
+          "answer_correct": true,
+          "elapsed_ms": 2391.32,
+          "error": null,
+          "evidence_complete": true,
+          "failure_layer": "success",
+          "packet_event_ids": [
+            "e3acc15e-5237-44f7-8e86-cbb0aa6940ef",
+            "9beb6f7a-88c3-4f53-b523-efb34b0cdae2",
+            "21278503-d7e1-4417-acff-48aa15cd7882",
+            "8e1a9244-4d36-413d-ab07-1debfdf77b27",
+            "9173ef7c-944d-4eb7-8543-baa626e682ed",
+            "64a2c403-304d-462c-8624-ff7563c16e48"
+          ],
+          "packet_item_count": 6
+        },
+        "top_k": {
+          "answer": "duplicate-6 | duplicate-11",
+          "answer_correct": false,
+          "elapsed_ms": 7210.121,
+          "error": null,
+          "evidence_complete": false,
+          "failure_layer": "composition",
+          "packet_event_ids": [
+            "e3acc15e-5237-44f7-8e86-cbb0aa6940ef",
+            "8e1a9244-4d36-413d-ab07-1debfdf77b27",
+            "9173ef7c-944d-4eb7-8543-baa626e682ed",
+            "64a2c403-304d-462c-8624-ff7563c16e48",
+            "cf492f5b-ab74-4ffa-8099-1e90885a63e2",
+            "ffe71bad-4bce-41a4-a48e-c2d9187e4654"
+          ],
+          "packet_item_count": 6
+        }
+      },
+      "purpose": "Require cognition to preserve and distinguish an older claim from its correction, rather than answering from whichever statement happens to survive composition.",
+      "question": "For the Atlas benchmark code, what were the earlier original value and the later corrected value? Return exactly '<original> | <corrected>' and nothing else.",
+      "required_available_to_composers": true,
+      "required_event_ids": [
+        "21278503-d7e1-4417-acff-48aa15cd7882",
+        "9beb6f7a-88c3-4f53-b523-efb34b0cdae2"
+      ],
+      "required_pool_ranks": {
+        "21278503-d7e1-4417-acff-48aa15cd7882": 14,
+        "9beb6f7a-88c3-4f53-b523-efb34b0cdae2": 13
+      },
+      "retained_event_ids": [],
+      "retrieval_query": "Atlas benchmark code earlier original later corrected value",
+      "scenario_id": "correction_pair_reasoning",
+      "shared_pool_event_ids": [
+        "e3acc15e-5237-44f7-8e86-cbb0aa6940ef",
+        "8e1a9244-4d36-413d-ab07-1debfdf77b27",
+        "9173ef7c-944d-4eb7-8543-baa626e682ed",
+        "64a2c403-304d-462c-8624-ff7563c16e48",
+        "cf492f5b-ab74-4ffa-8099-1e90885a63e2",
+        "ffe71bad-4bce-41a4-a48e-c2d9187e4654",
+        "28a14c71-f320-4eac-8a4e-f0912a5e97e4",
+        "ea95afce-84cc-48e2-a0cc-c0d90cf92343",
+        "5d2d3fda-1799-4a5e-9cd6-9c0ccc91fcca",
+        "767d073a-d366-4495-ab6f-b9a22739625c",
+        "1c38c0f9-388d-4a85-b206-16639c3dda79",
+        "fa88a7e3-111a-4f88-9854-66927ef366d7",
+        "9beb6f7a-88c3-4f53-b523-efb34b0cdae2",
+        "21278503-d7e1-4417-acff-48aa15cd7882"
+      ],
+      "shared_pool_item_count": 14
+    },
+    {
+      "adaptive_policy": {
+        "association_effort": "MODERATE",
+        "association_limit": 750,
+        "candidate_limit": 600,
+        "decay": 0.88,
+        "focus_mode": "UNANCHORED",
+        "max_hops": 3,
+        "minimum_score": 0.15,
+        "scope": "CONTEXTUAL",
+        "use_focus_anchors": false
+      },
+      "expected_answer": "71 | 2048 | 18",
+      "llm_call_order": [
+        "relevance_coverage_v2",
+        "top_k",
+        "coverage_v1"
+      ],
+      "policies": {
+        "coverage_v1": {
+          "answer": "0 | 0 | 18",
+          "answer_correct": false,
+          "elapsed_ms": 6404.643,
+          "error": null,
+          "evidence_complete": false,
+          "failure_layer": "composition",
+          "packet_event_ids": [
+            "b234fcb6-2f8b-4ec0-9561-d44fc42f7bc6",
+            "db43906f-94f3-447b-b0c3-e0345bdad110",
+            "85bebe64-b928-4b3c-8b20-099501dd1614",
+            "185c7243-cffc-41ac-abc7-1eee2338fe6f",
+            "1de40649-d345-49ca-ba13-201e25e34ead",
+            "97f1a2ab-0ce5-4157-8bb2-114f712d153c"
+          ],
+          "packet_item_count": 6
+        },
+        "relevance_coverage_v2": {
+          "answer": "71 | 2048 | 18",
+          "answer_correct": true,
+          "elapsed_ms": 8346.697,
+          "error": null,
+          "evidence_complete": true,
+          "failure_layer": "success",
+          "packet_event_ids": [
+            "b234fcb6-2f8b-4ec0-9561-d44fc42f7bc6",
+            "db43906f-94f3-447b-b0c3-e0345bdad110",
+            "c3ca64bc-10fe-4c1c-87ba-a200b8fe0fc7",
+            "8c44ce1d-ada2-4968-8466-e13981cde21e",
+            "85bebe64-b928-4b3c-8b20-099501dd1614",
+            "185c7243-cffc-41ac-abc7-1eee2338fe6f"
+          ],
+          "packet_item_count": 6
+        },
+        "top_k": {
+          "answer": "0 | 0 | 0",
+          "answer_correct": false,
+          "elapsed_ms": 6356.52,
+          "error": null,
+          "evidence_complete": false,
+          "failure_layer": "composition",
+          "packet_event_ids": [
+            "b234fcb6-2f8b-4ec0-9561-d44fc42f7bc6",
+            "85bebe64-b928-4b3c-8b20-099501dd1614",
+            "185c7243-cffc-41ac-abc7-1eee2338fe6f",
+            "1de40649-d345-49ca-ba13-201e25e34ead",
+            "97f1a2ab-0ce5-4157-8bb2-114f712d153c",
+            "18b3fa2a-8831-494a-81f2-e7d66b19cbac"
+          ],
+          "packet_item_count": 6
+        }
+      },
+      "purpose": "Require a six-item context to preserve three complementary lower-ranked facts and require the model to synthesize them in the requested order.",
+      "question": "For Orion planning, what are the thermal ceiling, memory reserve, and scheduler margin? Return exactly '<thermal> | <memory> | <margin>' using only the recorded numeric values.",
+      "required_available_to_composers": true,
+      "required_event_ids": [
+        "8c44ce1d-ada2-4968-8466-e13981cde21e",
+        "c3ca64bc-10fe-4c1c-87ba-a200b8fe0fc7",
+        "db43906f-94f3-447b-b0c3-e0345bdad110"
+      ],
+      "required_pool_ranks": {
+        "8c44ce1d-ada2-4968-8466-e13981cde21e": 15,
+        "c3ca64bc-10fe-4c1c-87ba-a200b8fe0fc7": 14,
+        "db43906f-94f3-447b-b0c3-e0345bdad110": 13
+      },
+      "retained_event_ids": [],
+      "retrieval_query": "Orion planning thermal ceiling memory reserve scheduler margin",
+      "scenario_id": "distributed_clues_reasoning",
+      "shared_pool_event_ids": [
+        "b234fcb6-2f8b-4ec0-9561-d44fc42f7bc6",
+        "85bebe64-b928-4b3c-8b20-099501dd1614",
+        "185c7243-cffc-41ac-abc7-1eee2338fe6f",
+        "1de40649-d345-49ca-ba13-201e25e34ead",
+        "97f1a2ab-0ce5-4157-8bb2-114f712d153c",
+        "18b3fa2a-8831-494a-81f2-e7d66b19cbac",
+        "bb2c6d04-8526-4c48-bd08-e0e78059594d",
+        "55fa450a-533b-49ee-9bdd-442445de6ebf",
+        "a4b6be7b-1d6c-42db-92a1-2c707b2d6212",
+        "2073198e-b27e-495b-ba3a-8979968b429f",
+        "fd9b93dd-a857-4b9a-a90b-bfa803a6a44f",
+        "012256d5-eb22-4548-94be-5cfba5df0e4b",
+        "db43906f-94f3-447b-b0c3-e0345bdad110",
+        "c3ca64bc-10fe-4c1c-87ba-a200b8fe0fc7",
+        "8c44ce1d-ada2-4968-8466-e13981cde21e"
+      ],
+      "shared_pool_item_count": 15
+    },
+    {
+      "adaptive_policy": {
+        "association_effort": "MODERATE",
+        "association_limit": 750,
+        "candidate_limit": 600,
+        "decay": 0.88,
+        "focus_mode": "UNANCHORED",
+        "max_hops": 3,
+        "minimum_score": 0.15,
+        "scope": "CONTEXTUAL",
+        "use_focus_anchors": false
+      },
+      "expected_answer": "10 | 20 | 30 | 40 | 50 | 60",
+      "llm_call_order": [
+        "top_k",
+        "coverage_v1",
+        "relevance_coverage_v2"
+      ],
+      "policies": {
+        "coverage_v1": {
+          "answer": "<20> | <30> | <40> | <50> | <60> | <v1>",
+          "answer_correct": false,
+          "elapsed_ms": 7364.131,
+          "error": null,
+          "evidence_complete": false,
+          "failure_layer": "composition",
+          "packet_event_ids": [
+            "41c07c02-7b2b-4680-b123-420e0c86bdd2",
+            "c90f6993-b921-4a4f-bab7-9f87533ddb5f",
+            "b72d7c13-50e9-4120-89ee-1b87b8d5ecb1",
+            "50e15470-00bf-45d7-8c33-5ca26cbdba37",
+            "0ebdd869-1497-4d9e-9986-5f865345a2c7",
+            "e2b10829-b732-473f-a169-2594131a4b06"
+          ],
+          "packet_item_count": 6
+        },
+        "relevance_coverage_v2": {
+          "answer": "<v1> | <v2> | <v3> | <v4> | <v5> | <v6>",
+          "answer_correct": false,
+          "elapsed_ms": 7087.531,
+          "error": null,
+          "evidence_complete": true,
+          "failure_layer": "reasoning",
+          "packet_event_ids": [
+            "41c07c02-7b2b-4680-b123-420e0c86bdd2",
+            "b72d7c13-50e9-4120-89ee-1b87b8d5ecb1",
+            "50e15470-00bf-45d7-8c33-5ca26cbdba37",
+            "0ebdd869-1497-4d9e-9986-5f865345a2c7",
+            "e2b10829-b732-473f-a169-2594131a4b06",
+            "137e8255-5401-4ac1-b1ba-a9015f4d6c88"
+          ],
+          "packet_item_count": 6
+        },
+        "top_k": {
+          "answer": "<v1> | <v2> | <v3> | <v4> | <v5> | <v6>",
+          "answer_correct": false,
+          "elapsed_ms": 8690.767,
+          "error": null,
+          "evidence_complete": true,
+          "failure_layer": "reasoning",
+          "packet_event_ids": [
+            "41c07c02-7b2b-4680-b123-420e0c86bdd2",
+            "b72d7c13-50e9-4120-89ee-1b87b8d5ecb1",
+            "50e15470-00bf-45d7-8c33-5ca26cbdba37",
+            "0ebdd869-1497-4d9e-9986-5f865345a2c7",
+            "e2b10829-b732-473f-a169-2594131a4b06",
+            "137e8255-5401-4ac1-b1ba-a9015f4d6c88"
+          ],
+          "packet_item_count": 6
+        }
+      },
+      "purpose": "Attack novelty-first composition with six highly relevant facts whose payload is numeric.",
+      "question": "What are the six calibration threshold values in recorded order? Return exactly '<v1> | <v2> | <v3> | <v4> | <v5> | <v6>'.",
+      "required_available_to_composers": true,
+      "required_event_ids": [
+        "137e8255-5401-4ac1-b1ba-a9015f4d6c88",
+        "e2b10829-b732-473f-a169-2594131a4b06",
+        "0ebdd869-1497-4d9e-9986-5f865345a2c7",
+        "50e15470-00bf-45d7-8c33-5ca26cbdba37",
+        "b72d7c13-50e9-4120-89ee-1b87b8d5ecb1",
+        "41c07c02-7b2b-4680-b123-420e0c86bdd2"
+      ],
+      "required_pool_ranks": {
+        "0ebdd869-1497-4d9e-9986-5f865345a2c7": 4,
+        "137e8255-5401-4ac1-b1ba-a9015f4d6c88": 6,
+        "41c07c02-7b2b-4680-b123-420e0c86bdd2": 1,
+        "50e15470-00bf-45d7-8c33-5ca26cbdba37": 3,
+        "b72d7c13-50e9-4120-89ee-1b87b8d5ecb1": 2,
+        "e2b10829-b732-473f-a169-2594131a4b06": 5
+      },
+      "retained_event_ids": [],
+      "retrieval_query": "calibration threshold value",
+      "scenario_id": "numeric_payload_cognition",
+      "shared_pool_event_ids": [
+        "41c07c02-7b2b-4680-b123-420e0c86bdd2",
+        "b72d7c13-50e9-4120-89ee-1b87b8d5ecb1",
+        "50e15470-00bf-45d7-8c33-5ca26cbdba37",
+        "0ebdd869-1497-4d9e-9986-5f865345a2c7",
+        "e2b10829-b732-473f-a169-2594131a4b06",
+        "137e8255-5401-4ac1-b1ba-a9015f4d6c88",
+        "c90f6993-b921-4a4f-bab7-9f87533ddb5f",
+        "32f859bf-9734-41f6-896f-24c4e49eadfb",
+        "6726a940-0f55-4788-bd57-05db42d407c6",
+        "27aabec1-c92a-4581-a5ea-54eaa9239124",
+        "efe59397-a9ad-4e61-933b-c2355f53f383",
+        "5078757f-9099-4cac-9c04-47c5e3bf9f87",
+        "827b9bb8-600e-4c19-be41-55b52f47949b",
+        "5ecd455b-1ddc-4ba8-aaea-2b14b790afd6",
+        "a5ea8dc1-1dfa-4646-b63a-260d435989f3",
+        "6c02b4f7-d1ca-4a3c-97c7-d779a05b4e75",
+        "fd12e36c-b8eb-45c1-bfda-892050c03ef5",
+        "21ba8334-40f7-4dfd-be49-2b087b984efe"
+      ],
+      "shared_pool_item_count": 18
+    },
+    {
+      "adaptive_policy": {
+        "association_effort": "MODERATE",
+        "association_limit": 750,
+        "candidate_limit": 600,
+        "decay": 0.88,
+        "focus_mode": "UNANCHORED",
+        "max_hops": 3,
+        "minimum_score": 0.15,
+        "scope": "CONTEXTUAL",
+        "use_focus_anchors": false
+      },
+      "expected_answer": "alpha | beta | gamma | delta | epsilon | zeta",
+      "llm_call_order": [
+        "coverage_v1",
+        "relevance_coverage_v2",
+        "top_k"
+      ],
+      "policies": {
+        "coverage_v1": {
+          "answer": "beta | gamma | delta | epsilon | zeta |",
+          "answer_correct": false,
+          "elapsed_ms": 7352.106,
+          "error": null,
+          "evidence_complete": false,
+          "failure_layer": "composition",
+          "packet_event_ids": [
+            "6d2ceaba-aeb7-4394-b65f-6b01f3f535e6",
+            "91597b62-c2bc-45e2-94fe-9e7fac99b0d0",
+            "f4b5e21c-e3e1-4f77-b599-02943d334674",
+            "64903a91-191b-4d02-bbf0-aa75fd67e911",
+            "1796c5cc-2afc-4658-a883-6de6aebd59e5",
+            "27941a7b-2d23-4222-b20a-58adfcc1f53f"
+          ],
+          "packet_item_count": 6
+        },
+        "relevance_coverage_v2": {
+          "answer": "deployment approval gate phase alpha approved | deployment approval gate phase beta approved | deployment approval gate phase gamma approved | deployment approval gate phase delta approved | deployment approval gate phase epsilon approved | deployment approval gate phase zeta approved",
+          "answer_correct": false,
+          "elapsed_ms": 8619.933,
+          "error": null,
+          "evidence_complete": true,
+          "failure_layer": "reasoning",
+          "packet_event_ids": [
+            "6d2ceaba-aeb7-4394-b65f-6b01f3f535e6",
+            "f4b5e21c-e3e1-4f77-b599-02943d334674",
+            "64903a91-191b-4d02-bbf0-aa75fd67e911",
+            "1796c5cc-2afc-4658-a883-6de6aebd59e5",
+            "27941a7b-2d23-4222-b20a-58adfcc1f53f",
+            "fc74ad21-37d7-4d80-9637-dfe313382891"
+          ],
+          "packet_item_count": 6
+        },
+        "top_k": {
+          "answer": "deployment approval gate phase alpha approved | deployment approval gate phase beta approved | deployment approval gate phase gamma approved | deployment approval gate phase delta approved | deployment approval gate phase epsilon approved | deployment approval gate phase zeta approved",
+          "answer_correct": false,
+          "elapsed_ms": 5128.233,
+          "error": null,
+          "evidence_complete": true,
+          "failure_layer": "reasoning",
+          "packet_event_ids": [
+            "6d2ceaba-aeb7-4394-b65f-6b01f3f535e6",
+            "f4b5e21c-e3e1-4f77-b599-02943d334674",
+            "64903a91-191b-4d02-bbf0-aa75fd67e911",
+            "1796c5cc-2afc-4658-a883-6de6aebd59e5",
+            "27941a7b-2d23-4222-b20a-58adfcc1f53f",
+            "fc74ad21-37d7-4d80-9637-dfe313382891"
+          ],
+          "packet_item_count": 6
+        }
+      },
+      "purpose": "Verify that irrelevant lexical novelty cannot displace six nonredundant high-ranked facts.",
+      "question": "Which six deployment approval gate phase labels were approved? Return exactly the six labels in recorded order separated by ' | '.",
+      "required_available_to_composers": true,
+      "required_event_ids": [
+        "fc74ad21-37d7-4d80-9637-dfe313382891",
+        "27941a7b-2d23-4222-b20a-58adfcc1f53f",
+        "1796c5cc-2afc-4658-a883-6de6aebd59e5",
+        "64903a91-191b-4d02-bbf0-aa75fd67e911",
+        "f4b5e21c-e3e1-4f77-b599-02943d334674",
+        "6d2ceaba-aeb7-4394-b65f-6b01f3f535e6"
+      ],
+      "required_pool_ranks": {
+        "1796c5cc-2afc-4658-a883-6de6aebd59e5": 4,
+        "27941a7b-2d23-4222-b20a-58adfcc1f53f": 5,
+        "64903a91-191b-4d02-bbf0-aa75fd67e911": 3,
+        "6d2ceaba-aeb7-4394-b65f-6b01f3f535e6": 1,
+        "f4b5e21c-e3e1-4f77-b599-02943d334674": 2,
+        "fc74ad21-37d7-4d80-9637-dfe313382891": 6
+      },
+      "retained_event_ids": [],
+      "retrieval_query": "deployment approval gate phase",
+      "scenario_id": "random_token_novelty_cognition",
+      "shared_pool_event_ids": [
+        "6d2ceaba-aeb7-4394-b65f-6b01f3f535e6",
+        "f4b5e21c-e3e1-4f77-b599-02943d334674",
+        "64903a91-191b-4d02-bbf0-aa75fd67e911",
+        "1796c5cc-2afc-4658-a883-6de6aebd59e5",
+        "27941a7b-2d23-4222-b20a-58adfcc1f53f",
+        "fc74ad21-37d7-4d80-9637-dfe313382891",
+        "91597b62-c2bc-45e2-94fe-9e7fac99b0d0",
+        "12a11a86-091c-4a31-8257-c858740a38b1",
+        "ae9e0c82-edf8-4455-bba4-c1e7e9de1049",
+        "d3e6b918-42f9-44e0-8a8f-48920e8635f3",
+        "617ae686-2469-45fd-b43e-a49b5a85a607",
+        "a9329927-3266-49fe-b986-79c0610b323e",
+        "adaedb37-b428-480a-86d2-fd35e8d7ec3f",
+        "2a9606af-cc80-43ca-97c7-f2f875bfa8bf",
+        "8efee14f-4688-455b-9188-38733bd1aa8e",
+        "fa11eff8-4716-439d-9210-2988014a660e",
+        "50fe4e7b-c90b-4acb-a480-c5127e025ddc",
+        "892e96ee-29c8-4622-af49-850b62e21477"
+      ],
+      "shared_pool_item_count": 18
+    },
+    {
+      "adaptive_policy": {
+        "association_effort": "MODERATE",
+        "association_limit": 750,
+        "candidate_limit": 600,
+        "decay": 0.88,
+        "focus_mode": "UNANCHORED",
+        "max_hops": 3,
+        "minimum_score": 0.15,
+        "scope": "CONTEXTUAL",
+        "use_focus_anchors": false
+      },
+      "expected_answer": "A1 | B2 | C3 | D4 | E5 | F6",
+      "llm_call_order": [
+        "relevance_coverage_v2",
+        "top_k",
+        "coverage_v1"
+      ],
+      "policies": {
+        "coverage_v1": {
+          "answer": "item C3 | item D4 | item E5 | item F6 | filler-11 | STALE-SHADOW-13",
+          "answer_correct": false,
+          "elapsed_ms": 8211.072,
+          "error": null,
+          "evidence_complete": false,
+          "failure_layer": "composition",
+          "packet_event_ids": [
+            "2c85aec4-a485-48f5-a124-c54e70a2df68",
+            "34d153bb-347b-4c83-b85a-dba96d691d0f",
+            "2cb66bf9-84ca-42ea-b03c-41513a0b7eb5",
+            "b536b4d1-45fd-4037-b5dc-355f00010387",
+            "836645e4-1f28-400d-b08b-f76828468742",
+            "a32ac8ba-1745-4192-8c19-4266acfc9dfc"
+          ],
+          "packet_item_count": 6
+        },
+        "relevance_coverage_v2": {
+          "answer": "current verified component registry item A1 | current verified component registry item B2 | current verified component registry item C3 | current verified component registry item D4 | current verified component registry item E5 | current verified component registry item F6",
+          "answer_correct": false,
+          "elapsed_ms": 10568.356,
+          "error": null,
+          "evidence_complete": true,
+          "failure_layer": "reasoning",
+          "packet_event_ids": [
+            "2c85aec4-a485-48f5-a124-c54e70a2df68",
+            "b536b4d1-45fd-4037-b5dc-355f00010387",
+            "836645e4-1f28-400d-b08b-f76828468742",
+            "a32ac8ba-1745-4192-8c19-4266acfc9dfc",
+            "52d77483-0b93-43a8-94b8-827079fa1519",
+            "3276c3c4-bf4a-4bae-87f8-31713e24a7e1"
+          ],
+          "packet_item_count": 6
+        },
+        "top_k": {
+          "answer": "current verified component registry item A1 | current verified component registry item B2 | current verified component registry item C3 | current verified component registry item D4 | current verified component registry item E5 | current verified component registry item F6",
+          "answer_correct": false,
+          "elapsed_ms": 5669.277,
+          "error": null,
+          "evidence_complete": true,
+          "failure_layer": "reasoning",
+          "packet_event_ids": [
+            "2c85aec4-a485-48f5-a124-c54e70a2df68",
+            "b536b4d1-45fd-4037-b5dc-355f00010387",
+            "836645e4-1f28-400d-b08b-f76828468742",
+            "a32ac8ba-1745-4192-8c19-4266acfc9dfc",
+            "52d77483-0b93-43a8-94b8-827079fa1519",
+            "3276c3c4-bf4a-4bae-87f8-31713e24a7e1"
+          ],
+          "packet_item_count": 6
+        }
+      },
+      "purpose": "Verify that stale retained history cannot consume a slot when all six current relevance-core facts are independently informative.",
+      "question": "What are the six current verified component registry items? Return exactly the six item labels in recorded order separated by ' | '.",
+      "required_available_to_composers": true,
+      "required_event_ids": [
+        "3276c3c4-bf4a-4bae-87f8-31713e24a7e1",
+        "52d77483-0b93-43a8-94b8-827079fa1519",
+        "a32ac8ba-1745-4192-8c19-4266acfc9dfc",
+        "836645e4-1f28-400d-b08b-f76828468742",
+        "b536b4d1-45fd-4037-b5dc-355f00010387",
+        "2c85aec4-a485-48f5-a124-c54e70a2df68"
+      ],
+      "required_pool_ranks": {
+        "2c85aec4-a485-48f5-a124-c54e70a2df68": 1,
+        "3276c3c4-bf4a-4bae-87f8-31713e24a7e1": 6,
+        "52d77483-0b93-43a8-94b8-827079fa1519": 5,
+        "836645e4-1f28-400d-b08b-f76828468742": 3,
+        "a32ac8ba-1745-4192-8c19-4266acfc9dfc": 4,
+        "b536b4d1-45fd-4037-b5dc-355f00010387": 2
+      },
+      "retained_event_ids": [
+        "34d153bb-347b-4c83-b85a-dba96d691d0f"
+      ],
+      "retrieval_query": "current verified component registry item",
+      "scenario_id": "stale_retained_cognition",
+      "shared_pool_event_ids": [
+        "2c85aec4-a485-48f5-a124-c54e70a2df68",
+        "b536b4d1-45fd-4037-b5dc-355f00010387",
+        "836645e4-1f28-400d-b08b-f76828468742",
+        "a32ac8ba-1745-4192-8c19-4266acfc9dfc",
+        "52d77483-0b93-43a8-94b8-827079fa1519",
+        "3276c3c4-bf4a-4bae-87f8-31713e24a7e1",
+        "2cb66bf9-84ca-42ea-b03c-41513a0b7eb5",
+        "60539075-14b7-400b-8bd6-e11d3fe75f58",
+        "c2f9042b-ad76-4ff6-8dc1-87a6d796c2ba",
+        "2b2435e5-6ea3-4dbc-bd7e-4c2ae2125a09",
+        "471e4aab-5f58-4b41-a727-a353a781b68f",
+        "195fc2c0-8aa5-47cc-a1cf-a674ae2c8c0e",
+        "a1851174-b3e8-443f-a5e0-d13aa3ce1c2e",
+        "9964d671-4d33-4bdf-b92e-269eb0645d2b",
+        "28a805fd-c7d0-4aad-aff1-c95fb3e7f93b",
+        "64104d94-6538-423f-bc90-3c8e8a5abe50",
+        "ed586e63-5f70-4363-92b9-d6af051473ef",
+        "82a6fe25-0355-4e8a-8add-a9f371125fe3"
+      ],
+      "shared_pool_item_count": 18
+    },
+    {
+      "adaptive_policy": {
+        "association_effort": "DEEP",
+        "association_limit": 1200,
+        "candidate_limit": 175,
+        "decay": 0.92,
+        "focus_mode": "SINGLE_ANCHOR",
+        "max_hops": 5,
+        "minimum_score": 0.15,
+        "scope": "NARROW",
+        "use_focus_anchors": true
+      },
+      "expected_answer": "ZETA-ORCHID-41",
+      "llm_call_order": [
+        "top_k",
+        "coverage_v1",
+        "relevance_coverage_v2"
+      ],
+      "policies": {
+        "coverage_v1": {
+          "answer": "ZETA-ORCHID-41",
+          "answer_correct": true,
+          "elapsed_ms": 1377.81,
+          "error": null,
+          "evidence_complete": true,
+          "failure_layer": "success",
+          "packet_event_ids": [
+            "7ef8daf8-9a26-4b6c-baa7-89c8b1098d98",
+            "c2c7eb95-47c1-40f8-85a3-c1a141364dd7",
+            "59d9119b-850f-433b-a736-f4e9f497c0ec",
+            "7c66babf-d0c2-4575-b9c0-8b60e16c8365",
+            "25687441-3107-4f13-9bc9-8f7f93b87600",
+            "bcc1b57c-1ac5-4237-80de-fa7ab9edb20b"
+          ],
+          "packet_item_count": 6
+        },
+        "relevance_coverage_v2": {
+          "answer": "ZETA-ORCHID-41",
+          "answer_correct": true,
+          "elapsed_ms": 1389.851,
+          "error": null,
+          "evidence_complete": true,
+          "failure_layer": "success",
+          "packet_event_ids": [
+            "7ef8daf8-9a26-4b6c-baa7-89c8b1098d98",
+            "c2c7eb95-47c1-40f8-85a3-c1a141364dd7",
+            "59d9119b-850f-433b-a736-f4e9f497c0ec",
+            "7c66babf-d0c2-4575-b9c0-8b60e16c8365",
+            "25687441-3107-4f13-9bc9-8f7f93b87600",
+            "bcc1b57c-1ac5-4237-80de-fa7ab9edb20b"
+          ],
+          "packet_item_count": 6
+        },
+        "top_k": {
+          "answer": "ZETA-ORCHID-41",
+          "answer_correct": true,
+          "elapsed_ms": 6806.841,
+          "error": null,
+          "evidence_complete": true,
+          "failure_layer": "success",
+          "packet_event_ids": [
+            "7ef8daf8-9a26-4b6c-baa7-89c8b1098d98",
+            "c2c7eb95-47c1-40f8-85a3-c1a141364dd7",
+            "59d9119b-850f-433b-a736-f4e9f497c0ec",
+            "7c66babf-d0c2-4575-b9c0-8b60e16c8365",
+            "25687441-3107-4f13-9bc9-8f7f93b87600",
+            "bcc1b57c-1ac5-4237-80de-fa7ab9edb20b"
+          ],
+          "packet_item_count": 6
+        }
+      },
+      "purpose": "Exercise the complete path: zero-overlap evidence must first reach the shared pool through adaptive association traversal and then survive bounded composition.",
+      "question": "What opaque token was associated with the deployment rollback decision? Return exactly the token and nothing else.",
+      "required_available_to_composers": true,
+      "required_event_ids": [
+        "7ef8daf8-9a26-4b6c-baa7-89c8b1098d98"
+      ],
+      "required_pool_ranks": {
+        "7ef8daf8-9a26-4b6c-baa7-89c8b1098d98": 1
+      },
+      "retained_event_ids": [],
+      "retrieval_query": "deployment rollback decision",
+      "scenario_id": "association_bridge_cognition",
+      "shared_pool_event_ids": [
+        "7ef8daf8-9a26-4b6c-baa7-89c8b1098d98",
+        "c2c7eb95-47c1-40f8-85a3-c1a141364dd7",
+        "59d9119b-850f-433b-a736-f4e9f497c0ec",
+        "7c66babf-d0c2-4575-b9c0-8b60e16c8365",
+        "25687441-3107-4f13-9bc9-8f7f93b87600",
+        "bcc1b57c-1ac5-4237-80de-fa7ab9edb20b",
+        "b725728a-19ac-4a93-9cef-0852e8d57ae6",
+        "6d8651ea-5cad-4d72-885c-787a7878ed95",
+        "1db4a5ee-1846-4c01-8ab5-1e582080bdec",
+        "09e1d705-405e-4f73-a73c-dfb6e51ac6c8",
+        "3789fbee-d822-45fc-9b22-c596666fb38f",
+        "d08d89b9-1414-408b-b1f9-aeba24c6afea",
+        "838c0960-150d-495c-9411-7ca99bc53ac5"
+      ],
+      "shared_pool_item_count": 13
+    },
+    {
+      "adaptive_policy": {
+        "association_effort": "MODERATE",
+        "association_limit": 750,
+        "candidate_limit": 600,
+        "decay": 0.88,
+        "focus_mode": "UNANCHORED",
+        "max_hops": 3,
+        "minimum_score": 0.15,
+        "scope": "CONTEXTUAL",
+        "use_focus_anchors": false
+      },
+      "expected_answer": "INSUFFICIENT",
+      "llm_call_order": [
+        "coverage_v1",
+        "relevance_coverage_v2",
+        "top_k"
+      ],
+      "policies": {
+        "coverage_v1": {
+          "answer": "INSUFFICIENT",
+          "answer_correct": true,
+          "elapsed_ms": 2401.057,
+          "error": null,
+          "evidence_complete": true,
+          "failure_layer": "success",
+          "packet_event_ids": [],
+          "packet_item_count": 0
+        },
+        "relevance_coverage_v2": {
+          "answer": "INSUFFICIENT",
+          "answer_correct": true,
+          "elapsed_ms": 1129.252,
+          "error": null,
+          "evidence_complete": true,
+          "failure_layer": "success",
+          "packet_event_ids": [],
+          "packet_item_count": 0
+        },
+        "top_k": {
+          "answer": "INSUFFICIENT",
+          "answer_correct": true,
+          "elapsed_ms": 1118.436,
+          "error": null,
+          "evidence_complete": true,
+          "failure_layer": "success",
+          "packet_event_ids": [],
+          "packet_item_count": 0
+        }
+      },
+      "purpose": "Verify that composition improvements do not turn absent evidence into a fabricated answer.",
+      "question": "What is the synthetic Nimbus benchmark marker? If the supplied persisted evidence does not establish one, return exactly INSUFFICIENT and nothing else.",
+      "required_available_to_composers": true,
+      "required_event_ids": [],
+      "required_pool_ranks": {},
+      "retained_event_ids": [],
+      "retrieval_query": "Nimbus benchmark marker",
+      "scenario_id": "unsupported_query_abstention",
+      "shared_pool_event_ids": [],
+      "shared_pool_item_count": 0
+    }
+  ],
+  "database": "jit_agent_test",
+  "distractor_count": 12,
+  "evaluation_boundary": "Each user question is recorded as the current canonical percept. A separate concise, deterministic retrieval cue isolates composition-to-cognition from known query-dilution behavior in direct evidence admission. Adaptive retrieval runs once per scenario; top-k, Composer v1, and Composer v2 receive the identical shared candidate population and six-item packet budget. Retrieval availability, composition completeness, and answer correctness are scored separately.",
+  "final_packet_limit": 6,
+  "generated_at": "2026-08-29T03:39:52.410584+00:00",
+  "mode": "quick",
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "schema_version": 1,
+  "shared_pool_limit": 32,
+  "stateless_llm_contract": "Every policy answer is a fresh OllamaClient.respond invocation with no inherited transcript or model context. Calls are sequential; only model residency may persist.",
+  "summary": {
+    "coverage_v1": {
+      "answer_correct": 3,
+      "cases": 8,
+      "composition_failures": 4,
+      "evidence_complete": 4,
+      "mean_llm_elapsed_ms": 5878.491,
+      "model_runtime_failures": 0,
+      "reasoning_failures": 1,
+      "retrieval_or_retention_failures": 0
+    },
+    "relevance_coverage_v2": {
+      "answer_correct": 4,
+      "cases": 8,
+      "composition_failures": 0,
+      "evidence_complete": 8,
+      "mean_llm_elapsed_ms": 5179.746,
+      "model_runtime_failures": 0,
+      "reasoning_failures": 4,
+      "retrieval_or_retention_failures": 0
+    },
+    "top_k": {
+      "answer_correct": 2,
+      "cases": 8,
+      "composition_failures": 3,
+      "evidence_complete": 5,
+      "mean_llm_elapsed_ms": 7996.82,
+      "model_runtime_failures": 0,
+      "reasoning_failures": 3,
+      "retrieval_or_retention_failures": 0
+    }
+  }
+}

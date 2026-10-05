@@ -1,0 +1,60 @@
+{
+  "benchmark_version": "synthetic-life-v1",
+  "persona": {
+    "name": "Jordan Vale",
+    "description": "Fictional persona. Oracle data is evaluator-only and must never be supplied to the memory kernel.",
+    "oracle": {
+      "current_city": "Spokane, WA",
+      "current_employer": "Northstar Labs",
+      "current_coffee": "black coffee",
+      "current_vehicle": "2021 Toyota Corolla",
+      "likes_mushrooms": true
+    }
+  },
+  "events": [
+    {"event_id":"e001","global_seq":1,"conversation_id":"c01","conversation_seq":1,"event_type":"USER_PROMPT","source":"jordan","created_at":"2025-02-03T08:10:00+00:00","text":"I usually get a latte in the morning.","payload":{"entities":["Jordan Vale","latte"]}},
+    {"event_id":"e002","global_seq":2,"conversation_id":"c01","conversation_seq":2,"event_type":"USER_PROMPT","source":"jordan","created_at":"2025-02-03T08:12:00+00:00","text":"I'm still working at Acme Design downtown.","payload":{"entities":["Jordan Vale","Acme Design"]}},
+    {"event_id":"e003","global_seq":3,"conversation_id":"c02","conversation_seq":1,"event_type":"USER_PROMPT","source":"jordan","created_at":"2025-02-11T18:00:00+00:00","text":"My cousin Sarah Moreno's birthday is next Friday.","payload":{"entities":["Sarah Moreno"]}},
+    {"event_id":"e004","global_seq":4,"conversation_id":"c03","conversation_seq":1,"event_type":"USER_PROMPT","source":"jordan","created_at":"2025-02-14T16:00:00+00:00","text":"Sarah Kim from work is helping me with the Atlas presentation.","payload":{"entities":["Sarah Kim","Atlas"]}},
+    {"event_id":"e005","global_seq":5,"conversation_id":"c04","conversation_seq":1,"event_type":"USER_PROMPT","source":"jordan","created_at":"2025-02-20T20:00:00+00:00","text":"Thai food is still my favorite cuisine. I loved dinner at Khao House.","payload":{"entities":["Khao House","Thai food"]}},
+    {"event_id":"e006","global_seq":6,"conversation_id":"c05","conversation_seq":1,"event_type":"USER_PROMPT","source":"jordan","created_at":"2025-03-02T14:00:00+00:00","text":"I moved from Portland to Spokane last summer and I'm staying in Spokane.","payload":{"entities":["Portland","Spokane"]}},
+    {"event_id":"e007","global_seq":7,"conversation_id":"c06","conversation_seq":1,"event_type":"USER_PROMPT","source":"jordan","created_at":"2025-03-10T12:00:00+00:00","text":"My old landlord still owes me the security deposit from the Portland apartment.","payload":{"entities":["Portland apartment","security deposit"]}},
+    {"event_id":"e008","global_seq":8,"conversation_id":"c07","conversation_seq":1,"event_type":"USER_PROMPT","source":"jordan","created_at":"2025-03-22T12:00:00+00:00","text":"The landlord finally returned the full security deposit today.","payload":{"entities":["security deposit"]}},
+    {"event_id":"e009","global_seq":9,"conversation_id":"c08","conversation_seq":1,"event_type":"USER_PROMPT","source":"jordan","created_at":"2025-03-28T17:00:00+00:00","text":"I'm thinking about buying a Subaru Outback this spring.","payload":{"entities":["Subaru Outback"]}},
+    {"event_id":"e010","global_seq":10,"conversation_id":"c09","conversation_seq":1,"event_type":"USER_PROMPT","source":"jordan","created_at":"2025-05-03T17:00:00+00:00","text":"I decided against the Subaru. It costs more than I want to spend.","payload":{"entities":["Subaru"]}},
+    {"event_id":"e011","global_seq":11,"conversation_id":"c10","conversation_seq":1,"event_type":"USER_PROMPT","source":"jordan","created_at":"2025-07-12T18:00:00+00:00","text":"I bought a used 2021 Toyota Corolla today.","payload":{"entities":["2021 Toyota Corolla"]}},
+    {"event_id":"e012","global_seq":12,"conversation_id":"c11","conversation_seq":1,"event_type":"SYSTEM_EVENT","source":"sarah_kim","created_at":"2025-04-01T19:00:00+00:00","text":"Sarah Kim said Jordan hates mushrooms.","payload":{"entities":["Sarah Kim","Jordan Vale","mushrooms"]}},
+    {"event_id":"e013","global_seq":13,"conversation_id":"c11","conversation_seq":2,"event_type":"USER_PROMPT","source":"jordan","created_at":"2025-04-01T19:02:00+00:00","text":"I actually like mushrooms. Sarah just thinks I don't.","payload":{"entities":["Sarah Kim","mushrooms"]}},
+    {"event_id":"e014","global_seq":14,"conversation_id":"c12","conversation_seq":1,"event_type":"USER_PROMPT","source":"jordan","created_at":"2025-04-22T08:00:00+00:00","text":"I stopped putting milk in my coffee. I've been drinking it black lately.","payload":{"entities":["coffee"]}},
+    {"event_id":"e015","global_seq":15,"conversation_id":"c13","conversation_seq":1,"event_type":"SYSTEM_EVENT","source":"purchase_log","created_at":"2025-06-01T08:03:00+00:00","text":"Jordan ordered a large black coffee.","payload":{"entities":["Jordan Vale","black coffee"]}},
+    {"event_id":"e016","global_seq":16,"conversation_id":"c14","conversation_seq":1,"event_type":"USER_PROMPT","source":"jordan","created_at":"2025-06-07T09:00:00+00:00","text":"The serial number on my old laptop is DL-7KQ-4912-Z.","payload":{"entities":["old laptop","DL-7KQ-4912-Z"]}},
+    {"event_id":"e017","global_seq":17,"conversation_id":"c15","conversation_seq":1,"event_type":"USER_PROMPT","source":"jordan","created_at":"2025-06-10T10:00:00+00:00","text":"My dentist appointment is scheduled for June 18 at 2 PM.","payload":{"entities":["dentist appointment"]}},
+    {"event_id":"e018","global_seq":18,"conversation_id":"c16","conversation_seq":1,"event_type":"SYSTEM_EVENT","source":"calendar","created_at":"2025-06-18T22:30:00+00:00","text":"Jordan completed the dentist appointment this afternoon.","payload":{"entities":["Jordan Vale","dentist appointment"]}},
+    {"event_id":"e019","global_seq":19,"conversation_id":"c17","conversation_seq":1,"event_type":"SYSTEM_EVENT","source":"observation","created_at":"2025-07-01T15:14:22+00:00","text":"Jordan carried the blue notebook into the office and placed it on the office shelf.","payload":{"entities":["Jordan Vale","blue notebook","office shelf"]}},
+    {"event_id":"e020","global_seq":20,"conversation_id":"c17","conversation_seq":2,"event_type":"USER_PROMPT","source":"jordan","created_at":"2025-07-01T15:16:00+00:00","text":"Sarah and I talked in the office about Wednesday's delivery.","payload":{"entities":["Sarah Kim","office","Wednesday delivery"]}},
+    {"event_id":"e021","global_seq":21,"conversation_id":"c18","conversation_seq":1,"event_type":"SYSTEM_EVENT","source":"calendar","created_at":"2025-07-05T12:00:00+00:00","text":"Jordan spent Saturday morning doing routine grocery shopping.","payload":{"entities":["Jordan Vale"]}},
+    {"event_id":"e022","global_seq":22,"conversation_id":"c19","conversation_seq":1,"event_type":"USER_PROMPT","source":"jordan","created_at":"2025-07-08T18:00:00+00:00","text":"I left Acme Design and started working at Northstar Labs this month.","payload":{"entities":["Acme Design","Northstar Labs"]}},
+    {"event_id":"e023","global_seq":23,"conversation_id":"c20","conversation_seq":1,"event_type":"USER_PROMPT","source":"jordan","created_at":"2025-11-10T17:00:00+00:00","text":"My cousin Sarah Moreno is coming over for Thanksgiving.","payload":{"entities":["Sarah Moreno","Thanksgiving"]}},
+    {"event_id":"e024","global_seq":24,"conversation_id":"c21","conversation_seq":1,"event_type":"USER_PROMPT","source":"jordan","created_at":"2025-11-15T17:00:00+00:00","text":"I cancelled the Evergreen Gym membership today.","payload":{"entities":["Evergreen Gym"]}}
+  ],
+  "questions": [
+    {"id":"q01","query":"What kind of coffee does Jordan drink now?","entities":["Jordan Vale","coffee"],"relevant_event_ids":["e014","e015"],"required_event_ids":["e014"]},
+    {"id":"q02","query":"What did Jordan usually drink before switching coffee habits?","entities":["Jordan Vale"],"relevant_event_ids":["e001","e014"],"required_event_ids":["e001"]},
+    {"id":"q03","query":"Where does Jordan work now?","entities":["Jordan Vale"],"relevant_event_ids":["e022"],"required_event_ids":["e022"]},
+    {"id":"q04","query":"Where did Jordan work before Northstar Labs?","entities":["Northstar Labs"],"relevant_event_ids":["e002","e022"],"required_event_ids":["e002","e022"]},
+    {"id":"q05","query":"Which Sarah is Jordan's cousin?","entities":["Sarah Moreno"],"relevant_event_ids":["e003","e023"],"required_event_ids":["e003"]},
+    {"id":"q06","query":"Which Sarah helped with the Atlas presentation at work?","entities":["Atlas"],"relevant_event_ids":["e004"],"required_event_ids":["e004"]},
+    {"id":"q07","query":"Did Jordan recover the money from the old apartment?","entities":["Jordan Vale"],"relevant_event_ids":["e007","e008"],"required_event_ids":["e008"]},
+    {"id":"q08","query":"What car was Jordan considering buying in March?","entities":["Jordan Vale"],"reference_time":"2025-03-31T12:00:00+00:00","relevant_event_ids":["e009"],"required_event_ids":["e009"]},
+    {"id":"q09","query":"What vehicle does Jordan own now?","entities":["Jordan Vale"],"relevant_event_ids":["e011"],"required_event_ids":["e011"]},
+    {"id":"q10","query":"Does Jordan actually like mushrooms?","entities":["Jordan Vale","mushrooms"],"relevant_event_ids":["e012","e013"],"required_event_ids":["e013"]},
+    {"id":"q11","query":"Who claimed Jordan hated mushrooms?","entities":["mushrooms"],"relevant_event_ids":["e012","e013"],"required_event_ids":["e012"]},
+    {"id":"q12","query":"Where was the blue notebook placed?","entities":["blue notebook"],"relevant_event_ids":["e019"],"required_event_ids":["e019"]},
+    {"id":"q13","query":"What is the serial number on Jordan's old laptop?","entities":["old laptop"],"relevant_event_ids":["e016"],"required_event_ids":["e016"]},
+    {"id":"q14","query":"Did Jordan actually go to the dentist appointment?","entities":["dentist appointment"],"relevant_event_ids":["e017","e018"],"required_event_ids":["e018"]},
+    {"id":"q15","query":"Where did Jordan move from before living in Spokane?","entities":["Spokane"],"relevant_event_ids":["e006"],"required_event_ids":["e006"]},
+    {"id":"q16","query":"What is Jordan's blood type?","relevant_event_ids":[],"required_event_ids":[],"expect_no_evidence":true},
+    {"id":"q17","query":"Is Jordan still a member of Evergreen Gym?","entities":["Evergreen Gym"],"relevant_event_ids":["e024"],"required_event_ids":["e024"]},
+    {"id":"q18","query":"Which Sarah is coming for Thanksgiving?","entities":["Thanksgiving"],"relevant_event_ids":["e023"],"required_event_ids":["e023"]}
+  ]
+}

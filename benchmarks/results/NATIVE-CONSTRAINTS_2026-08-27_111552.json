@@ -1,0 +1,414 @@
+{
+  "captured_at": "2026-08-27T18:18:56.572164+00:00",
+  "completion_failures": [
+    "CAP-LOOP-001 real-Ollama acceptance did not execute and pass"
+  ],
+  "requested_measurements_complete": false,
+  "results": {
+    "CAP-LOOP-001": {
+      "acceptance_executed": false,
+      "acceptance_skipped": false,
+      "admission_diagnostics": null,
+      "benchmark_id": "CAP-LOOP-001",
+      "decision": "A passing four-turn real-Ollama continuity run demonstrates that the production round guard is non-binding for this frozen native workload. It does not establish the empirical tail of capability-round demand; representative successful, adversarial, and deliberately nonconvergent local-model tasks are still required before changing or verifying MAX_CAPABILITY_ROUNDS.",
+      "elapsed_seconds": 153.328,
+      "result": "NO_NATIVE_EVIDENCE",
+      "returncode": 1,
+      "round_limit_failure_observed": false,
+      "stderr_tail": "",
+      "stdout_tail": "lity_catalog\": [{\"capability_id\": \"cross_reference\", \"description\": \"Investigate relationships among two or more currently available internal memory candidates, including shared, conflicting, causal, or bridging evidence.\", \"kind\": \"WORKFLOW\"}, {\"capability_id\": \"deeper_research\", \"description\": \"Investigate the current question further using additional persisted internal evidence around one or more currently available memory candidates.\", \"kind\": \"WORKFLOW\"}], \"capability_results\": [], \"completed_results\": [], \"decision\": {\"capability_indices\": [], \"next_action\": \"RESPOND\"}, \"execution_plan\": {\"catalog_capability_ids\": [\"cross_reference\", \"deeper_research\"], \"items\": [], \"registry_version\": \"v0.7-capability-registry-v8\", \"requested_catalog_indices\": []}, \"round_index\": 0}, \"round_index\": 0}\nE           seq=20 type=INTERACTION_RESPONSE source=attention_interaction correlation=a68d458b-a18b-4e9b-b519-35c085a627a5 payload={\"text\": \"BlueHarbor-60CEA0 | Docker Compose\"}\nE           seq=21 type=INTERACTION_WORKING_STATE source=interaction_working_state correlation=a68d458b-a18b-4e9b-b519-35c085a627a5 payload={\"activation_key\": \"response\", \"state\": {\"active_event_ids\": [\"cad3f542-9966-5c0c-a759-73b65d035b68\", \"02eed278-bcb9-5532-ac17-94d331881222\", \"74d9f889-cdc2-5ffe-ba88-ea0175e1711b\", \"2714dc3b-b127-574c-9913-a3fdae78428d\", \"50118fd4-c4a1-54bf-9abd-3b2c8c7e8cb6\", \"a023eb15-11ad-5318-8950-371ef006d607\", \"7840c584-4976-5570-a6f9-f09d2177e09b\", \"61f6aacd-3732-56d2-aa68-0624d6aabd43\"], \"conversation_ids\": [\"2cbbd7b3-edc5-4b00-8315-bc83123fa727\"], \"revision\": 6, \"state_id\": \"f5b5c5b0-fe74-553b-a61c-d445f7201bb5\", \"version\": \"v0.7-working-state-v2\"}}\nE           seq=22 type=USER_PROMPT source=user correlation=4c629641-16b4-45bf-99e2-6163abbde78f payload={\"text\": \"Name that ruled-out approach and its underlying technical reason. Return exactly '<approach> | <reason>' and use the reason wording from my established rule.\"}\nE           seq=23 type=MEMORY_REQUEST source=attention-aperture:v0.7-attention-aperture-v2/task:9b814519-6eca-55e1-b73b-8cdeb7bf3338 correlation=4c629641-16b4-45bf-99e2-6163abbde78f payload={\"memory_request_id\": \"6c5d17e2-9aff-5fa4-889b-45404c431d8b\", \"need\": {\"active_event_ids\": [\"cad3f542-9966-5c0c-a759-73b65d035b68\", \"02eed278-bcb9-5532-ac17-94d331881222\", \"74d9f889-cdc2-5ffe-ba88-ea0175e1711b\", \"2714dc3b-b127-574c-9913-a3fdae78428d\", \"50118fd4-c4a1-54bf-9abd-3b2c8c7e8cb6\", \"a023eb15-11ad-5318-8950-371ef006d607\", \"7840c584-4976-5570-a6f9-f09d2177e09b\", \"61f6aacd-3732-56d2-aa68-0624d6aabd43\"], \"conversation_id\": null, \"entities\": [], \"focus_event_ids\": [], \"include_persisted_history\": true, \"limit\": 6, \"query_text\": \"Name that ruled-out approach and its underlying technical reason. Return exactly '<approach> | <reason>' and use the reason wording from my established rule.\", \"reference_time\": null, \"source_types\": [\"USER_PROMPT\", \"INTERACTION_RESPONSE\", \"AGENT_RESPONSE\", \"AGENT_RESULT\", \"TOOL_RESULT\", \"SYSTEM_EVENT\"], \"supplemental_query_texts\": []}, \"origin\": \"INTERNAL_MEMORY\", \"retrieval_role\": \"ATTENTION_ACTIVATION\"}\nE           seq=24 type=MEMORY_PACKET source=jit_memory correlation=4c629641-16b4-45bf-99e2-6163abbde78f payload={\"packet\": {\"items\": [{\"content\": \"BlueHarbor-60CEA0 | Docker Compose\", \"conversation_id\": \"2cbbd7b3-edc5-4b00-8315-bc83123fa727\", \"conversation_seq\": 20, \"created_at\": \"2026-08-27T11:18:23.531534-07:00\", \"event_type\": \"INTERACTION_RESPONSE\", \"global_seq\": 39, \"provenance_event_ids\": [], \"retrieval_reasons\": [\"ACTIVE_WORKING_STATE\"], \"score\": 1.0, \"source\": \"attention_interaction\", \"source_event_id\": \"cad3f542-9966-5c0c-a759-73b65d035b68\"}, {\"content\": \"What nickname are we using for this plan, and which approach did you just rule out? Return exactly '<nickname> | <approach>' and nothing else.\", \"conversation_id\": \"2cbbd7b3-edc5-4b00-8315-bc83123fa727\", \"conversation_seq\": 15, \"created_at\": \"2026-08-27T11:17:53.564837-07:00\", \"event_type\": \"USER_PROMPT\", \"global_seq\": 34, \"provenance_event_ids\": [], \"retrieval_reasons\": [\"ACTIVE_WORKING_STATE\"], \"score\": 1.0, \"source\": \"user\", \"source_event_id\": \"02eed278-bcb9-5532-ac17-94d331881222\"}, {\"content\": \"Docker Compose | VX-A7C29829\", \"conversation_id\": \"2cbbd7b3-edc5-4b00-8315-bc83123fa727\", \"conversation_seq\": 13, \"created_at\": \"2026-08-27T11:17:50.464977-07:00\", \"event_type\": \"INTERACTION_RESPONSE\", \"global_seq\": 32, \"provenance_event_ids\": [], \"retrieval_reasons\": [\"ACTIVE_WORKING_STATE\"], \"score\": 1.0, \"source\": \"attention_interaction\", \"source_event_id\": \"74d9f889-cdc2-5ffe-ba88-ea0175e1711b\"}, {\"content\": \"Which approach conflicts with my established Kestrel rule, and what constraint profile did I give that rule? Return exactly '<approach> | <profile>' and nothing else.\", \"conversation_id\": \"2cbbd7b3-edc5-4b00-8315-bc83123fa727\", \"conversation_seq\": 8, \"created_at\": \"2026-08-27T11:17:23.838554-07:00\", \"event_type\": \"USER_PROMPT\", \"global_seq\": 27, \"provenance_event_ids\": [], \"retrieval_reasons\": [\"ACTIVE_WORKING_STATE\"], \"score\": 1.0, \"source\": \"user\", \"source_event_id\": \"2714dc3b-b127-574c-9913-a3fdae78428d\"}, {\"content\": \"PostgreSQL directly on Windows\", \"conversation_id\": \"2cbbd7b3-edc5-4b00-8315-bc83123fa727\", \"conversation_seq\": 6, \"created_at\": \"2026-08-27T11:17:20.763818-07:00\", \"event_type\": \"INTERACTION_RESPONSE\", \"global_seq\": 25, \"provenance_event_ids\": [], \"retrieval_reasons\": [\"ACTIVE_WORKING_STATE\"], \"score\": 1.0, \"source\": \"attention_interaction\", \"source_event_id\": \"50118fd4-c4a1-54bf-9abd-3b2c8c7e8cb6\"}, {\"content\": \"I'm revisiting Project Kestrel. For this conversation, call the plan BlueHarbor-60CEA0. I'm choosing between Docker Compose and PostgreSQL directly on Windows. Based on my established constraints, choose the compatible approach. Return exactly one of these labels and nothing else: Docker Compose | PostgreSQL directly on Windows.\", \"conversation_id\": \"2cbbd7b3-edc5-4b00-8315-bc83123fa727\", \"conversation_seq\": 1, \"created_at\": \"2026-08-27T11:16:57.469154-07:00\", \"event_type\": \"USER_PROMPT\", \"global_seq\": 20, \"provenance_event_ids\": [], \"retrieval_reasons\": [\"ACTIVE_WORKING_STATE\"], \"score\": 1.0, \"source\": \"user\", \"source_event_id\": \"a023eb15-11ad-5318-8950-371ef006d607\"}], \"memory_request_id\": \"6c5d17e2-9aff-5fa4-889b-45404c431d8b\", \"need\": {\"active_event_ids\": [\"cad3f542-9966-5c0c-a759-73b65d035b68\", \"02eed278-bcb9-5532-ac17-94d331881222\", \"74d9f889-cdc2-5ffe-ba88-ea0175e1711b\", \"2714dc3b-b127-574c-9913-a3fdae78428d\", \"50118fd4-c4a1-54bf-9abd-3b2c8c7e8cb6\", \"a023eb15-11ad-5318-8950-371ef006d607\", \"7840c584-4976-5570-a6f9-f09d2177e09b\", \"61f6aacd-3732-56d2-aa68-0624d6aabd43\"], \"conversation_id\": null, \"entities\": [], \"focus_event_ids\": [], \"include_persisted_history\": true, \"limit\": 6, \"query_text\": \"Name that ruled-out approach and its underlying technical reason. Return exactly '<approach> | <reason>' and use the reason wording from my established rule.\", \"reference_time\": null, \"source_types\": [\"USER_PROMPT\", \"INTERACTION_RESPONSE\", \"AGENT_RESPONSE\", \"AGENT_RESULT\", \"TOOL_RESULT\", \"SYSTEM_EVENT\"], \"supplemental_query_texts\": []}, \"origin\": \"INTERNAL_MEMORY\", \"retrieval_trace\": {\"activation_kernel\": {\"kernel\": \"recall_from_postgres\", \"kernel_trace\": {\"candidates_considered\": 3, \"cue_tokens\": [\"name\", \"ruled-out\", \"approach\", \"underly\", \"technical\", \"reason\", \"return\", \"exactly\", \"approach\", \"reason\", \"use\", \"reason\", \"word\", \"establish\", \"rule\"], \"items\": [{\"event_id\": \"2714dc3b-b127-574c-9913-a3fdae78428d\", \"global_seq\": 27, \"reasons\": [\"LEXICAL_CUE\"], \"score\": {\"conversation\": 0.0, \"entity\": 0.0, \"lexical\": 0.4166666666666667, \"temporal\": 0.0, \"total\": 0.325}, \"selected\": true}, {\"event_id\": \"02eed278-bcb9-5532-ac17-94d331881222\", \"global_seq\": 34, \"reasons\": [\"LEXICAL_CUE\"], \"score\": {\"conversation\": 0.0, \"entity\": 0.0, \"lexical\": 0.3333333333333333, \"temporal\": 0.0, \"total\": 0.26}, \"selected\": true}, {\"event_id\": \"a023eb15-11ad-5318-8950-371ef006d607\", \"global_seq\": 20, \"reasons\": [\"LEXICAL_CUE\"], \"score\": {\"conversation\": 0.0, \"entity\": 0.0, \"lexical\": 0.3333333333333333, \"temporal\": 0.0, \"total\": 0.26}, \"selected\": true}], \"normalized_entities\": [], \"policy_version\": \"deterministic-cues-v1\"}, \"retrieval_role\": \"ATTENTION_ACTIVATION\"}, \"association_hops\": 0, \"candidate_limit\": 750, \"depth\": \"BROAD_SHALLOW\", \"query_strategy\": \"working_state_plus_baseline_activation\", \"retrieval_role\": \"ATTENTION_ACTIVATION\", \"working_state_event_ids\": [\"cad3f542-9966-5c0c-a759-73b65d035b68\", \"02eed278-bcb9-5532-ac17-94d331881222\", \"74d9f889-cdc2-5ffe-ba88-ea0175e1711b\", \"2714dc3b-b127-574c-9913-a3fdae78428d\", \"50118fd4-c4a1-54bf-9abd-3b2c8c7e8cb6\", \"a023eb15-11ad-5318-8950-371ef006d607\"]}, \"supported\": true}, \"requesting_component\": \"attention-aperture:v0.7-attention-aperture-v2/task:9b814519-6eca-55e1-b73b-8cdeb7bf3338\"}\nE           seq=25 type=INTERACTION_WORKING_STATE source=interaction_working_state correlation=4c629641-16b4-45bf-99e2-6163abbde78f payload={\"activation_key\": \"aperture\", \"state\": {\"active_event_ids\": [\"cad3f542-9966-5c0c-a759-73b65d035b68\", \"02eed278-bcb9-5532-ac17-94d331881222\", \"74d9f889-cdc2-5ffe-ba88-ea0175e1711b\", \"2714dc3b-b127-574c-9913-a3fdae78428d\", \"50118fd4-c4a1-54bf-9abd-3b2c8c7e8cb6\", \"a023eb15-11ad-5318-8950-371ef006d607\", \"06d6517e-d69a-5931-9e29-24b595703dcc\", \"7840c584-4976-5570-a6f9-f09d2177e09b\", \"61f6aacd-3732-56d2-aa68-0624d6aabd43\"], \"conversation_ids\": [\"2cbbd7b3-edc5-4b00-8315-bc83123fa727\"], \"revision\": 7, \"state_id\": \"f5b5c5b0-fe74-553b-a61c-d445f7201bb5\", \"version\": \"v0.7-working-state-v2\"}}\nE           seq=26 type=SYSTEM_EVENT source=attention_interaction correlation=4c629641-16b4-45bf-99e2-6163abbde78f payload={\"kind\": \"CAPABILITY_DECISION_ROUND\", \"memory_request_id\": \"6c5d17e2-9aff-5fa4-889b-45404c431d8b\", \"round\": {\"capability_catalog\": [{\"capability_id\": \"cross_reference\", \"description\": \"Investigate relationships among two or more currently available internal memory candidates, including shared, conflicting, causal, or bridging evidence.\", \"kind\": \"WORKFLOW\"}, {\"capability_id\": \"deeper_research\", \"description\": \"Investigate the current question further using additional persisted internal evidence around one or more currently available memory candidates.\", \"kind\": \"WORKFLOW\"}], \"capability_results\": [], \"completed_results\": [], \"decision\": {\"capability_indices\": [], \"next_action\": \"RESPOND\"}, \"execution_plan\": {\"catalog_capability_ids\": [\"cross_reference\", \"deeper_research\"], \"items\": [], \"registry_version\": \"v0.7-capability-registry-v8\", \"requested_catalog_indices\": []}, \"round_index\": 0}, \"round_index\": 0}\nE           seq=27 type=INTERACTION_RESPONSE source=attention_interaction correlation=4c629641-16b4-45bf-99e2-6163abbde78f payload={\"text\": \"Docker Compose | VX-A7C29829\"}\nE           seq=28 type=INTERACTION_WORKING_STATE source=interaction_working_state correlation=4c629641-16b4-45bf-99e2-6163abbde78f payload={\"activation_key\": \"response\", \"state\": {\"active_event_ids\": [\"fb0488ff-e268-5109-b55f-567d2669a1ef\", \"06d6517e-d69a-5931-9e29-24b595703dcc\", \"cad3f542-9966-5c0c-a759-73b65d035b68\", \"02eed278-bcb9-5532-ac17-94d331881222\", \"74d9f889-cdc2-5ffe-ba88-ea0175e1711b\", \"2714dc3b-b127-574c-9913-a3fdae78428d\", \"50118fd4-c4a1-54bf-9abd-3b2c8c7e8cb6\", \"a023eb15-11ad-5318-8950-371ef006d607\", \"7840c584-4976-5570-a6f9-f09d2177e09b\", \"61f6aacd-3732-56d2-aa68-0624d6aabd43\"], \"conversation_ids\": [\"2cbbd7b3-edc5-4b00-8315-bc83123fa727\"], \"revision\": 8, \"state_id\": \"f5b5c5b0-fe74-553b-a61c-d445f7201bb5\", \"version\": \"v0.7-working-state-v2\"}}\nE       assert 'Docker Compose | VX-A7C29829' == 'Docker Compo...n is disabled'\nE         \nE         - Docker Compose | virtualization is disabled\nE         + Docker Compose | VX-A7C29829\n\ntests\\test_acceptance_conversation_continuity.py:195: AssertionError\n=========================== short test summary info ===========================\nFAILED tests/test_acceptance_conversation_continuity.py::test_stateless_four_turn_continuity_survives_sessions_and_distractors\n1 failed in 152.71s (0:02:32)\n"
+    },
+    "LLM-NATIVE-001": {
+      "base_url": "http://localhost:11434",
+      "benchmark_id": "LLM-NATIVE-001",
+      "decision": "This pilot identifies truncation/latency behavior for a controlled structured call. Repeat cold/warm/contention and production-schema scenarios before verifying HTTP, token, or retry bounds.",
+      "model": "qwen3:4b-instruct-2507-q4_K_M",
+      "observations": [
+        {
+          "content_length": 37,
+          "done_reason": "length",
+          "elapsed_seconds": 4.187,
+          "eval_count": 16,
+          "http_or_parse_error": null,
+          "literal_preserved": false,
+          "num_predict": 16,
+          "prompt_eval_count": 59
+        },
+        {
+          "content_length": 42,
+          "done_reason": "stop",
+          "elapsed_seconds": 1.735,
+          "eval_count": 21,
+          "http_or_parse_error": null,
+          "literal_preserved": true,
+          "num_predict": 24,
+          "prompt_eval_count": 59
+        },
+        {
+          "content_length": 42,
+          "done_reason": "stop",
+          "elapsed_seconds": 1.765,
+          "eval_count": 21,
+          "http_or_parse_error": null,
+          "literal_preserved": true,
+          "num_predict": 32,
+          "prompt_eval_count": 59
+        },
+        {
+          "content_length": 42,
+          "done_reason": "stop",
+          "elapsed_seconds": 1.719,
+          "eval_count": 21,
+          "http_or_parse_error": null,
+          "literal_preserved": true,
+          "num_predict": 48,
+          "prompt_eval_count": 59
+        },
+        {
+          "content_length": 42,
+          "done_reason": "stop",
+          "elapsed_seconds": 1.719,
+          "eval_count": 21,
+          "http_or_parse_error": null,
+          "literal_preserved": true,
+          "num_predict": 64,
+          "prompt_eval_count": 59
+        },
+        {
+          "content_length": 42,
+          "done_reason": "stop",
+          "elapsed_seconds": 1.734,
+          "eval_count": 21,
+          "http_or_parse_error": null,
+          "literal_preserved": true,
+          "num_predict": 128,
+          "prompt_eval_count": 59
+        },
+        {
+          "content_length": 42,
+          "done_reason": "stop",
+          "elapsed_seconds": 1.75,
+          "eval_count": 21,
+          "http_or_parse_error": null,
+          "literal_preserved": true,
+          "num_predict": 256,
+          "prompt_eval_count": 59
+        },
+        {
+          "content_length": 42,
+          "done_reason": "stop",
+          "elapsed_seconds": 1.766,
+          "eval_count": 21,
+          "http_or_parse_error": null,
+          "literal_preserved": true,
+          "num_predict": 512,
+          "prompt_eval_count": 59
+        }
+      ],
+      "result": "PILOT_NATIVE_MEASUREMENT",
+      "token_caps": [
+        16,
+        24,
+        32,
+        48,
+        64,
+        128,
+        256,
+        512
+      ]
+    },
+    "OLLAMA-RUNTIME-001": {
+      "benchmark_id": "OLLAMA-RUNTIME-001",
+      "decision": "The running-model observation determines the interaction's incremental RAM requirement before scheduler admission. A verified resident configured model uses ordinary worker overhead; a nonresident or failed probe uses the full cold-load budget. Worker claims recheck this state before every process launch.",
+      "incremental_process_memory_mib": 512,
+      "policy_under_measurement": {
+        "cpu_system_headroom_percent": 10,
+        "default_llm_process_memory_mib": 3072,
+        "default_process_cpu_units": 1,
+        "default_process_memory_mib": 512,
+        "llm_concurrency_limit": 1,
+        "max_cpu_pressure_percent": 85,
+        "memory_system_headroom_min_mib": 1024,
+        "memory_system_headroom_percent": 10,
+        "observation_max_age_seconds": 5,
+        "policy_version": "v0.7-native-calibration-v1",
+        "uncertainty_headroom_percent": 5
+      },
+      "result": "PILOT_NATIVE_MEASUREMENT",
+      "reusable_system_memory_credit_mib": 2560,
+      "runtime_state": {
+        "error": null,
+        "expires_at": "2026-08-27T11:21:20.9226025-07:00",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "probe_ok": true,
+        "reported_name": "qwen3:4b-instruct-2507-q4_K_M",
+        "resident": true,
+        "size_bytes": 3184001022,
+        "size_vram_bytes": 0
+      }
+    },
+    "RES-NATIVE-001": {
+      "benchmark_id": "RES-NATIVE-001",
+      "capture_completed_at": "2026-08-27T18:15:54.564298+00:00",
+      "capture_started_at": "2026-08-27T18:15:52.493797+00:00",
+      "cpu_utilization_percent": {
+        "max": 13.0,
+        "median": 0.0,
+        "min": 0.0
+      },
+      "decision": "Pilot observations establish actual target-host pressure ranges. Repeat under the idle, CPU-pressure, memory-pressure, cold-model, and warm-model scenarios before changing or verifying admission margins.",
+      "logical_cpu_counts": [
+        8
+      ],
+      "memory_available_mib": {
+        "max": 7477.0,
+        "median": 7476.5,
+        "min": 7468.0
+      },
+      "memory_total_mib": [
+        16118
+      ],
+      "platforms": [
+        "Windows"
+      ],
+      "policy_under_measurement": {
+        "cpu_system_headroom_percent": 10,
+        "default_llm_process_memory_mib": 3072,
+        "default_process_cpu_units": 1,
+        "default_process_memory_mib": 512,
+        "llm_concurrency_limit": 1,
+        "max_cpu_pressure_percent": 85,
+        "memory_system_headroom_min_mib": 1024,
+        "memory_system_headroom_percent": 10,
+        "observation_max_age_seconds": 5,
+        "policy_version": "v0.7-native-calibration-v1",
+        "uncertainty_headroom_percent": 5
+      },
+      "raw_samples": [
+        {
+          "cpu_utilization_percent": 4,
+          "load_1m": null,
+          "logical_cpu_count": 8,
+          "memory_available_mib": 7468,
+          "memory_total_mib": 16118,
+          "platform": "Windows"
+        },
+        {
+          "cpu_utilization_percent": 0,
+          "load_1m": null,
+          "logical_cpu_count": 8,
+          "memory_available_mib": 7468,
+          "memory_total_mib": 16118,
+          "platform": "Windows"
+        },
+        {
+          "cpu_utilization_percent": 0,
+          "load_1m": null,
+          "logical_cpu_count": 8,
+          "memory_available_mib": 7468,
+          "memory_total_mib": 16118,
+          "platform": "Windows"
+        },
+        {
+          "cpu_utilization_percent": 0,
+          "load_1m": null,
+          "logical_cpu_count": 8,
+          "memory_available_mib": 7474,
+          "memory_total_mib": 16118,
+          "platform": "Windows"
+        },
+        {
+          "cpu_utilization_percent": 0,
+          "load_1m": null,
+          "logical_cpu_count": 8,
+          "memory_available_mib": 7474,
+          "memory_total_mib": 16118,
+          "platform": "Windows"
+        },
+        {
+          "cpu_utilization_percent": 3,
+          "load_1m": null,
+          "logical_cpu_count": 8,
+          "memory_available_mib": 7469,
+          "memory_total_mib": 16118,
+          "platform": "Windows"
+        },
+        {
+          "cpu_utilization_percent": 3,
+          "load_1m": null,
+          "logical_cpu_count": 8,
+          "memory_available_mib": 7470,
+          "memory_total_mib": 16118,
+          "platform": "Windows"
+        },
+        {
+          "cpu_utilization_percent": 0,
+          "load_1m": null,
+          "logical_cpu_count": 8,
+          "memory_available_mib": 7470,
+          "memory_total_mib": 16118,
+          "platform": "Windows"
+        },
+        {
+          "cpu_utilization_percent": 0,
+          "load_1m": null,
+          "logical_cpu_count": 8,
+          "memory_available_mib": 7476,
+          "memory_total_mib": 16118,
+          "platform": "Windows"
+        },
+        {
+          "cpu_utilization_percent": 0,
+          "load_1m": null,
+          "logical_cpu_count": 8,
+          "memory_available_mib": 7477,
+          "memory_total_mib": 16118,
+          "platform": "Windows"
+        },
+        {
+          "cpu_utilization_percent": 0,
+          "load_1m": null,
+          "logical_cpu_count": 8,
+          "memory_available_mib": 7477,
+          "memory_total_mib": 16118,
+          "platform": "Windows"
+        },
+        {
+          "cpu_utilization_percent": 2,
+          "load_1m": null,
+          "logical_cpu_count": 8,
+          "memory_available_mib": 7477,
+          "memory_total_mib": 16118,
+          "platform": "Windows"
+        },
+        {
+          "cpu_utilization_percent": 0,
+          "load_1m": null,
+          "logical_cpu_count": 8,
+          "memory_available_mib": 7477,
+          "memory_total_mib": 16118,
+          "platform": "Windows"
+        },
+        {
+          "cpu_utilization_percent": 4,
+          "load_1m": null,
+          "logical_cpu_count": 8,
+          "memory_available_mib": 7477,
+          "memory_total_mib": 16118,
+          "platform": "Windows"
+        },
+        {
+          "cpu_utilization_percent": 0,
+          "load_1m": null,
+          "logical_cpu_count": 8,
+          "memory_available_mib": 7477,
+          "memory_total_mib": 16118,
+          "platform": "Windows"
+        },
+        {
+          "cpu_utilization_percent": 2,
+          "load_1m": null,
+          "logical_cpu_count": 8,
+          "memory_available_mib": 7476,
+          "memory_total_mib": 16118,
+          "platform": "Windows"
+        },
+        {
+          "cpu_utilization_percent": 0,
+          "load_1m": null,
+          "logical_cpu_count": 8,
+          "memory_available_mib": 7477,
+          "memory_total_mib": 16118,
+          "platform": "Windows"
+        },
+        {
+          "cpu_utilization_percent": 0,
+          "load_1m": null,
+          "logical_cpu_count": 8,
+          "memory_available_mib": 7477,
+          "memory_total_mib": 16118,
+          "platform": "Windows"
+        },
+        {
+          "cpu_utilization_percent": 0,
+          "load_1m": null,
+          "logical_cpu_count": 8,
+          "memory_available_mib": 7477,
+          "memory_total_mib": 16118,
+          "platform": "Windows"
+        },
+        {
+          "cpu_utilization_percent": 13,
+          "load_1m": null,
+          "logical_cpu_count": 8,
+          "memory_available_mib": 7477,
+          "memory_total_mib": 16118,
+          "platform": "Windows"
+        }
+      ],
+      "result": "PILOT_NATIVE_MEASUREMENT",
+      "sample_count": 20
+    },
+    "RES-PRE-CAP-001": {
+      "benchmark_id": "RES-PRE-CAP-001",
+      "capture_completed_at": "2026-08-27T18:16:23.246388+00:00",
+      "capture_started_at": "2026-08-27T18:16:23.144923+00:00",
+      "cpu_utilization_percent": {
+        "max": 2.0,
+        "median": 2.0,
+        "min": 2.0
+      },
+      "decision": "This single immediate sample is ordered after Ollama calibration and directly before CAP-LOOP-001. Compare it with RES-NATIVE-001 and OLLAMA-RUNTIME-001 to distinguish physical free RAM from reusable resident-model memory.",
+      "logical_cpu_counts": [
+        8
+      ],
+      "memory_available_mib": {
+        "max": 7356.0,
+        "median": 7356.0,
+        "min": 7356.0
+      },
+      "memory_total_mib": [
+        16118
+      ],
+      "platforms": [
+        "Windows"
+      ],
+      "policy_under_measurement": {
+        "cpu_system_headroom_percent": 10,
+        "default_llm_process_memory_mib": 3072,
+        "default_process_cpu_units": 1,
+        "default_process_memory_mib": 512,
+        "llm_concurrency_limit": 1,
+        "max_cpu_pressure_percent": 85,
+        "memory_system_headroom_min_mib": 1024,
+        "memory_system_headroom_percent": 10,
+        "observation_max_age_seconds": 5,
+        "policy_version": "v0.7-native-calibration-v1",
+        "uncertainty_headroom_percent": 5
+      },
+      "raw_samples": [
+        {
+          "cpu_utilization_percent": 2,
+          "load_1m": null,
+          "logical_cpu_count": 8,
+          "memory_available_mib": 7356,
+          "memory_total_mib": 16118,
+          "platform": "Windows"
+        }
+      ],
+      "result": "PILOT_NATIVE_MEASUREMENT",
+      "sample_count": 1
+    },
+    "WORKER-NATIVE-001": {
+      "benchmark_id": "WORKER-NATIVE-001",
+      "decision": "One frozen runtime-block duration is a pilot only. Lease/timeout/retry verification requires repeated normal, slow, killed, spawn-failure, and resource-denial trials.",
+      "elapsed_seconds": 9.75,
+      "result": "PILOT_NATIVE_MEASUREMENT",
+      "returncode": 0,
+      "stderr_tail": "",
+      "stdout_tail": ".........................                                                [100%]\n25 passed in 9.13s\n"
+    }
+  },
+  "runner": "benchmarks/native_constraint_calibration.py",
+  "schema_version": 1
+}

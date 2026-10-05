@@ -1,0 +1,33 @@
+{
+  "benchmark_version": "synthetic-life-v1",
+  "persona": {
+    "name": "Avery Chen",
+    "description": "Held-out fictional persona for v0.4 association-derivation evaluation. No answer-specific associations are supplied.",
+    "oracle": {
+      "current_city": "Tacoma, WA",
+      "current_beverage": "espresso",
+      "current_vehicle": "2022 Ford Escape",
+      "deposit_recovered": true
+    }
+  },
+  "events": [
+    {"event_id":"a001","global_seq":1,"conversation_id":"ac01","conversation_seq":1,"event_type":"USER_PROMPT","source":"avery","created_at":"2026-01-04T08:10:00+00:00","text":"I usually get a cappuccino on work mornings.","payload":{"entities":["Avery Chen","cappuccino"]}},
+    {"event_id":"a002","global_seq":2,"conversation_id":"ac02","conversation_seq":1,"event_type":"USER_PROMPT","source":"avery","created_at":"2026-01-18T12:00:00+00:00","text":"My old landlord still owes me the pet deposit from the apartment.","payload":{"entities":["pet deposit","old apartment"]}},
+    {"event_id":"a003","global_seq":3,"conversation_id":"ac03","conversation_seq":1,"event_type":"USER_PROMPT","source":"avery","created_at":"2026-02-02T12:00:00+00:00","text":"The full pet deposit was refunded today.","payload":{"entities":["pet deposit"]}},
+    {"event_id":"a004","global_seq":4,"conversation_id":"ac04","conversation_seq":1,"event_type":"USER_PROMPT","source":"avery","created_at":"2026-02-15T17:00:00+00:00","text":"I am considering a Honda Civic for my next car.","payload":{"entities":["Honda Civic"]}},
+    {"event_id":"a005","global_seq":5,"conversation_id":"ac05","conversation_seq":1,"event_type":"USER_PROMPT","source":"avery","created_at":"2026-03-01T17:00:00+00:00","text":"I decided against the Civic because it felt too small.","payload":{"entities":["Honda Civic"]}},
+    {"event_id":"a006","global_seq":6,"conversation_id":"ac06","conversation_seq":1,"event_type":"USER_PROMPT","source":"avery","created_at":"2026-03-20T17:00:00+00:00","text":"I bought a used 2022 Ford Escape today.","payload":{"entities":["2022 Ford Escape"]}},
+    {"event_id":"a007","global_seq":7,"conversation_id":"ac07","conversation_seq":1,"event_type":"USER_PROMPT","source":"avery","created_at":"2026-04-09T08:00:00+00:00","text":"I stopped ordering cappuccinos and drink espresso now.","payload":{"entities":["cappuccino","espresso"]}},
+    {"event_id":"a008","global_seq":8,"conversation_id":"ac08","conversation_seq":1,"event_type":"USER_PROMPT","source":"avery","created_at":"2026-04-15T18:00:00+00:00","text":"I moved from Seattle to Tacoma last year and still live in Tacoma.","payload":{"entities":["Seattle","Tacoma"]}},
+    {"event_id":"a009","global_seq":9,"conversation_id":"ac09","conversation_seq":1,"event_type":"USER_PROMPT","source":"avery","created_at":"2026-05-03T14:00:00+00:00","text":"My coworker Priya Nair is reviewing the Orion proposal with me.","payload":{"entities":["Priya Nair","Orion"]}},
+    {"event_id":"a010","global_seq":10,"conversation_id":"ac10","conversation_seq":1,"event_type":"SYSTEM_EVENT","source":"purchase_log","created_at":"2026-05-06T08:03:00+00:00","text":"Avery ordered a double espresso.","payload":{"entities":["Avery Chen","espresso"]}}
+  ],
+  "questions": [
+    {"id":"aq01","query":"What does Avery drink now?","entities":["Avery Chen"],"relevant_event_ids":["a007","a010"],"required_event_ids":["a007"]},
+    {"id":"aq02","query":"What did Avery drink before changing beverage habits?","entities":["Avery Chen"],"relevant_event_ids":["a001","a007"],"required_event_ids":["a001"]},
+    {"id":"aq03","query":"Did Avery recover what the old landlord owed?","entities":["Avery Chen"],"relevant_event_ids":["a002","a003"],"required_event_ids":["a003"]},
+    {"id":"aq04","query":"What vehicle does Avery own now?","entities":["Avery Chen"],"relevant_event_ids":["a006"],"required_event_ids":["a006"]},
+    {"id":"aq05","query":"Who is helping Avery with the Orion proposal?","entities":["Orion"],"relevant_event_ids":["a009"],"required_event_ids":["a009"]},
+    {"id":"aq06","query":"What is Avery's blood type?","relevant_event_ids":[],"required_event_ids":[],"expect_no_evidence":true}
+  ]
+}

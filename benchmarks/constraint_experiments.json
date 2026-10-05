@@ -1,0 +1,824 @@
+{
+  "schema_version": 1,
+  "decision_rule": {
+    "method": "hard-constraints_then_pareto_then_lexicographic",
+    "boundary_rule": "If a selected value is on an explored boundary, expand that boundary and rerun before accepting it.",
+    "tie_break": "Prefer lower runtime/resource/complexity cost only after quality metrics are indistinguishable under the available evidence."
+  },
+  "experiments": {
+    "SELF-ROOT-NAVIGATION-001": {
+      "title": "Learned self descriptions as canonical source navigation",
+      "environment": "deterministic_ci_then_target_windows_host_with_ollama",
+      "parameters": [
+        "SELF_ROOT_CANDIDATE_LIMIT"
+      ],
+      "scenario_families": [
+        "candidate_hypothesis_source_recovery",
+        "learned_topic_tags",
+        "compound_query_cues",
+        "observed_message_style",
+        "opposing_evidence",
+        "source_policy_before_truncation",
+        "future_link_boundary",
+        "rejected_hypothesis",
+        "saturated_packet",
+        "unknown_topic"
+      ],
+      "hard_invariants": [
+        "only original canonical text enters the returned packet",
+        "navigation never promotes candidate beliefs",
+        "source policy and history cutoff apply to roots and navigation records",
+        "supporting and opposing roots remain distinguishable",
+        "bounded candidates, packet and one-hop local expansion",
+        "no fixture IDs or expected answers in runtime"
+      ],
+      "quality_order": [
+        "hard_invariant_pass_rate",
+        "required_canonical_root_coverage",
+        "irrelevant_context_rate",
+        "native_sufficiency_accuracy",
+        "model_calls",
+        "latency",
+        "indexed_query_cost"
+      ],
+      "search": "Freeze failed native d971214 run and its exact 56b0469 learning snapshot. Compare source delivery on pf-q005/pf-q006/pf-q007 with the prior route, retaining Composer and admission contracts. Replay tests are not model acceptance. Assess full public and holdout plus noise/scale cases before calibration. Eight candidates is provisional; expand any winning tuning boundary. A separate response-format wording change must not be credited with source-recovery improvement. See docs/experiments/SELF_ROOT_NAVIGATION_001.md."
+    },
+    "PERCEPTION-SALIENCE-001": {
+      "title": "Perception buffer and advisory salience calibration",
+      "environment": "deterministic_ci_then_target_windows_host_with_ollama",
+      "parameters": [
+        "segment_char_limit",
+        "max_segments",
+        "advisory_label_limit",
+        "salience_score_cutoffs",
+        "uppercase_ratio_cutoff",
+        "response_related_score_floors"
+      ],
+      "scenario_families": [
+        "long_input_head_middle_tail",
+        "structured_metrics",
+        "multilingual_paraphrases",
+        "negation_and_quoted_threats",
+        "benign_integrity_terms",
+        "adversarial_advisory_labels",
+        "direct_user_response_requirement"
+      ],
+      "hard_invariants": [
+        "canonical evidence remains unchanged",
+        "salience cannot authorize effects or suppress user responses",
+        "salience remains quarantined derived evidence",
+        "all specialists remain stateless and bounded"
+      ],
+      "quality_order": [
+        "hard_invariant_pass_rate",
+        "worst_family_false_escalation_rate",
+        "missed_relevant_signal_rate",
+        "retained_context_coverage",
+        "input_bytes",
+        "latency"
+      ],
+      "search": "Freeze human-labeled scenarios before any threshold changes. Compare against no-salience baseline and sweep each mechanism separately. Expand boundary winners and retain only improvements on held-out scenarios. Native measurements are required for latency and model behavior. No calibration result is claimed by this registration."
+    },
+    "MEM-SCORE-001": {
+      "title": "Memory cue scoring and direct-evidence admission",
+      "environment": "deterministic_ci",
+      "parameters": [
+        "lexical_weight",
+        "entity_weight",
+        "temporal_weight",
+        "conversation_weight",
+        "phrase_bonus",
+        "temporal_scale_days",
+        "minimum_score",
+        "minimum_direct_support_coverage"
+      ],
+      "scenario_families": [
+        "exact_fact",
+        "lexical_paraphrase",
+        "sparse_cue",
+        "entity_only_anchor",
+        "temporal_deictic",
+        "cross_conversation",
+        "polarity",
+        "confusable_entity",
+        "contradiction_and_supersession",
+        "previous_state",
+        "causal_source",
+        "high_overlap_distractor",
+        "unknown_fact_abstention"
+      ],
+      "hard_invariants": [
+        "unknown evidence must never be fabricated",
+        "canonical event provenance remains intact",
+        "guarded associations never activate without their required cue semantics"
+      ],
+      "quality_order": [
+        "worst_scenario_success_rate",
+        "unknown_abstention_rate",
+        "required_evidence_recall",
+        "mean_reciprocal_rank"
+      ],
+      "search": "Coarse full-domain sweep followed by refinement of the non-dominated region; weights are jointly searched on the unit simplex. Boundary winners force expansion/refinement.",
+      "holdout": "Generated adversarial life histories and frozen corpora not used to choose the exploratory winner."
+    },
+    "MEM-BREADTH-001": {
+      "title": "Memory packet, candidate, active-state, and context breadth",
+      "environment": "deterministic_ci",
+      "parameters": [
+        "attention_aperture_limit",
+        "memory_packet_limit",
+        "candidate_limit",
+        "attention_candidate_limit",
+        "adaptive_recall_item_limit",
+        "active_event_limit",
+        "adaptive_focus_bound",
+        "response_memory_item_limit",
+        "candidate_route_recency_budget"
+      ],
+      "scenario_families": [
+        "single_fact",
+        "multi_fact_answer",
+        "interleaved_topics",
+        "many_similar_entities",
+        "working_state_plus_history",
+        "adaptive_recall_composition",
+        "long_history",
+        "candidate_starvation",
+        "distractor_scale"
+      ],
+      "hard_invariants": [
+        "required evidence is not truncated in any passing scenario",
+        "unknown-fact abstention does not regress",
+        "candidate generation stays deterministic"
+      ],
+      "quality_order": [
+        "worst_scenario_required_evidence_recall",
+        "question_success_rate",
+        "unknown_abstention_rate",
+        "mean_reciprocal_rank",
+        "candidate_work",
+        "returned_context_items"
+      ],
+      "search": "Geometric expansion below/above current integer bounds plus local refinement. Continue expanding while quality improves or the winner is at an explored boundary."
+    },
+    "MEM-GRAPH-001": {
+      "title": "Associative traversal depth, decay, and graph breadth",
+      "environment": "deterministic_ci",
+      "parameters": [
+        "association_limit_by_adaptive_stage",
+        "max_hops_by_adaptive_stage",
+        "association_decay_by_adaptive_stage"
+      ],
+      "scenario_families": [
+        "one_hop",
+        "multi_hop",
+        "high_fanout",
+        "cycles",
+        "guarded_previous_state",
+        "guarded_causal",
+        "multiple_selected_anchors",
+        "disconnected_distractors",
+        "deep_irrelevant_chain",
+        "large_graph"
+      ],
+      "hard_invariants": [
+        "required cue terms on guarded edges are respected",
+        "association routing never rewrites canonical evidence",
+        "unknown-fact abstention does not regress"
+      ],
+      "quality_order": [
+        "worst_scenario_required_evidence_recall",
+        "question_success_rate",
+        "unknown_abstention_rate",
+        "association_edges_loaded",
+        "association_hops_executed",
+        "latency"
+      ],
+      "search": "Joint integer/continuous sweep because hop depth, decay, and graph breadth interact. Refine decay around non-dominated candidates and expand graph limits when boundary-selected."
+    },
+    "CAP-DISCOVERY-001": {
+      "title": "Deterministic capability discovery scoring and result breadth",
+      "environment": "deterministic_ci",
+      "parameters": [
+        "capability_id_phrase_weight",
+        "routing_phrase_weight",
+        "routing_phrase_length_bonus",
+        "unordered_term_weight",
+        "unordered_term_length_bonus",
+        "supplemental_query_bound",
+        "discovery_result_limit"
+      ],
+      "scenario_families": [
+        "exact_capability_id",
+        "exact_routing_phrase",
+        "unordered_multiword_terms",
+        "ambiguous_capabilities",
+        "irrelevant_overlap",
+        "canonical_query_hit",
+        "supplemental_only_hit",
+        "multiple_relevant_capabilities",
+        "no_relevant_capability",
+        "large_registry"
+      ],
+      "hard_invariants": [
+        "discovery remains deterministic",
+        "excluded capabilities never appear",
+        "kind filtering is exact",
+        "no zero-score capability is returned"
+      ],
+      "quality_order": [
+        "worst_scenario_relevant_capability_recall",
+        "top_rank_accuracy",
+        "false_positive_count",
+        "supplemental_fallback_success",
+        "returned_matches"
+      ],
+      "search": "Joint discrete/continuous sweep over scoring coefficients and breadth. Preserve ordering only when supported by relevance or prefer the simpler zero-parameter rule if quality is equivalent."
+    },
+    "PIPELINE-NATIVE-001": {
+      "title": "Stateless v2 percept-to-response acceptance",
+      "environment": "target_windows_host_with_postgres_and_ollama",
+      "parameters": [
+        "composer_retry_caps",
+        "adaptive_recall_stage_bound",
+        "final_response_token_cap"
+      ],
+      "scenario_families": [
+        "explicit_prompt_without_work",
+        "non_user_percept_without_response",
+        "external_work_bypass",
+        "memory_sufficient",
+        "adaptive_recall_progress",
+        "adaptive_recall_exhaustion",
+        "restart_continuity",
+        "exact_output",
+        "source_authority",
+        "prompt_injection"
+      ],
+      "hard_invariants": [
+        "every explicit user prompt receives a response",
+        "pre-cognitive selection cannot suppress a user response",
+        "Composer consumes memory but never work results",
+        "work results bypass Composer and reach the final responder",
+        "retrieval stages are deterministic and are never capabilities",
+        "all model calls are stateless fresh-worker calls"
+      ],
+      "quality_order": [
+        "hard_invariant_pass_rate",
+        "task_completion_rate",
+        "required_evidence_recall",
+        "exact_output_rate",
+        "unnecessary_llm_calls",
+        "latency"
+      ],
+      "search": "Run deterministic contract and adversarial probes in CI, then run the complete marked Ollama suite on the intended native Windows/PostgreSQL/Ollama stack. Any hard-invariant failure blocks closure."
+    },
+    "SCHED-SERVICE-001": {
+      "title": "Attention service guarantees and priority representation",
+      "environment": "deterministic_ci",
+      "parameters": [
+        "service_class_max_wait_cycles",
+        "service_class_guaranteed_priority",
+        "attention_work_priority_range",
+        "capability_execution_priorities"
+      ],
+      "scenario_families": [
+        "idle_to_burst",
+        "steady_mixed_load",
+        "interactive_burst",
+        "background_saturation",
+        "dependency_blocking",
+        "preemptible_long_task",
+        "checkpoint_only_long_task",
+        "atomic_long_task",
+        "overload",
+        "restart_and_resume"
+      ],
+      "hard_invariants": [
+        "deterministic ordering for identical state",
+        "dependencies are never bypassed",
+        "atomic interruption semantics are preserved",
+        "no eligible service class starves indefinitely under a feasible workload"
+      ],
+      "quality_order": [
+        "worst_class_starvation_count",
+        "interactive_queue_delay",
+        "user_work_queue_delay",
+        "background_progress",
+        "throughput",
+        "preemption_count"
+      ],
+      "search": "Discrete workload simulation across service-guarantee vectors. Use Pareto frontier rather than a weighted latency score."
+    },
+    "RES-NATIVE-001": {
+      "title": "Native host resource admission and process-estimate calibration",
+      "environment": "target_windows_host",
+      "parameters": [
+        "observation_max_age_seconds",
+        "cpu_system_headroom_percent",
+        "max_cpu_pressure_percent",
+        "memory_system_headroom_percent",
+        "memory_system_headroom_min_mib",
+        "uncertainty_headroom_percent",
+        "llm_concurrency_limit",
+        "default_process_cpu_units",
+        "default_process_memory_mib",
+        "default_llm_process_memory_mib",
+        "host_probe_sample_interval_seconds",
+        "interaction_process_estimate"
+      ],
+      "scenario_families": [
+        "idle_host",
+        "cpu_background_pressure",
+        "memory_background_pressure",
+        "mixed_pressure",
+        "cold_model",
+        "warm_model",
+        "postgres_activity",
+        "worker_startup",
+        "concurrent_non_llm_workers",
+        "probe_failure",
+        "rapid_pressure_change"
+      ],
+      "hard_invariants": [
+        "no benchmark candidate may crash or exhaust the host",
+        "probe failure remains fail-closed",
+        "committed reservations are never invalidated",
+        "system headroom remains positive under admitted load"
+      ],
+      "quality_order": [
+        "safety_violation_count",
+        "false_admission_count",
+        "false_denial_count",
+        "interactive_latency",
+        "throughput",
+        "unused_safe_capacity"
+      ],
+      "search": "Collect real peak/pressure distributions first; derive candidate margins from observed distributions, then replay/load-test them. Do not infer these values from GitHub CI."
+    },
+    "OLLAMA-RUNTIME-001": {
+      "title": "Ollama residency observation and warm/cold admission calibration",
+      "environment": "target_windows_host_with_ollama",
+      "parameters": [
+        "ollama_runtime_probe_timeout_seconds",
+        "resident_model_memory_credit",
+        "warm_incremental_process_memory",
+        "cold_incremental_process_memory"
+      ],
+      "scenario_families": [
+        "resident_configured_model",
+        "nonresident_configured_model",
+        "different_model_resident",
+        "probe_failure",
+        "warm_to_cold_transition",
+        "cold_to_warm_transition"
+      ],
+      "hard_invariants": [
+        "probe failure remains fail-closed",
+        "only the configured model can satisfy residency",
+        "warm credit never exceeds the cold-load reservation difference",
+        "claim-time residency changes cannot weaken admission safety"
+      ],
+      "quality_order": [
+        "false_admission_count",
+        "false_denial_count",
+        "probe_latency",
+        "unused_safe_capacity"
+      ],
+      "search": "Measure /api/ps latency and resident-memory observations on the target host, then exercise warm/cold transition cases. Keep the probe timeout above observed healthy tails while preserving prompt failure on an unavailable runtime."
+    },
+    "WORKER-NATIVE-001": {
+      "title": "Worker leases, launch retries, retry delay, and process timeouts",
+      "environment": "target_windows_host_and_fault_injection",
+      "parameters": [
+        "default_worker_lease_seconds",
+        "max_worker_lease_seconds",
+        "claim_retry_attempts",
+        "claim_retry_delay_seconds",
+        "percept_worker_lease_seconds",
+        "percept_worker_timeout_seconds",
+        "post_kill_wait_seconds"
+      ],
+      "scenario_families": [
+        "normal_fast_worker",
+        "slow_valid_worker",
+        "hung_worker",
+        "worker_killed_mid_step",
+        "process_spawn_failure",
+        "temporary_resource_denial",
+        "persistent_resource_denial",
+        "database_delay",
+        "host_restart_recovery"
+      ],
+      "hard_invariants": [
+        "at-most-once effects remain protected",
+        "no live valid worker is falsely replaced in a passing safety candidate",
+        "hung/abandoned work is eventually recoverable"
+      ],
+      "quality_order": [
+        "duplicate_effect_count",
+        "false_abandonment_count",
+        "recovery_latency",
+        "resource_denial_recovery_rate",
+        "needless_wait_time"
+      ],
+      "search": "Fault-injection distributions plus native duration samples. Lease and timeout candidates are derived from observed tails; retry schedules are tested against measured resource-pressure durations."
+    },
+    "LLM-NATIVE-001": {
+      "title": "Local-model HTTP timeout, output caps, schema retries, and evidence budget",
+      "environment": "target_windows_host_with_supported_ollama_models",
+      "parameters": [
+        "ollama_http_timeout_seconds",
+        "text_max_tokens",
+        "structured_output_token_caps",
+        "structured_output_retry_attempts",
+        "verbatim_literal_bound",
+        "max_model_evidence_item_bytes",
+        "max_model_evidence_total_bytes"
+      ],
+      "scenario_families": [
+        "cold_start",
+        "warm_start",
+        "short_prompt",
+        "largest_supported_context_payload",
+        "oversized_single_memory_item",
+        "aggregate_memory_pressure",
+        "work_result_payload_pressure",
+        "multibyte_utf8_evidence",
+        "simple_schema",
+        "work_selection_schema",
+        "malformed_first_output",
+        "host_contention",
+        "long_literal_answer",
+        "long_user_facing_answer"
+      ],
+      "hard_invariants": [
+        "valid required output is not truncated",
+        "invalid structured output never crosses the schema boundary",
+        "timeout failure remains explicit",
+        "canonical evidence is never truncated or rewritten to satisfy an LLM budget",
+        "model-facing evidence remains finite as canonical history grows",
+        "oversized evidence fails closed before model inference unless a separately validated bounded derived representation exists"
+      ],
+      "quality_order": [
+        "valid_output_rate",
+        "worst_scenario_valid_output_rate",
+        "required_evidence_coverage",
+        "oversize_fail_closed_rate",
+        "truncation_count",
+        "timeout_count",
+        "inference_calls",
+        "prompt_evidence_bytes",
+        "latency"
+      ],
+      "search": "Pilot samples estimate latency, output-length, useful-evidence-size, and supported-context distributions on the configured model. Sweep per-item and aggregate evidence byte caps jointly with output constraints. Reject any candidate that admits unbounded payloads or silently truncates canonical evidence."
+    },
+    "ID-COLLISION-001": {
+      "title": "Truncated deterministic identifier collision risk",
+      "environment": "mathematical_plus_deterministic_ci",
+      "parameters": [
+        "association_id_digest_prefix_length"
+      ],
+      "scenario_families": [
+        "birthday_bound",
+        "generated_scale_collision_check"
+      ],
+      "hard_invariants": [
+        "collision probability at supported scale stays below the documented risk budget"
+      ],
+      "quality_order": [
+        "collision_risk",
+        "identifier_length"
+      ],
+      "search": "Calculate the birthday bound over supported object counts, then verify generated large corpora. This is a risk proof, not a retrieval-quality benchmark."
+    },
+    "PERSON-FIDELITY-001": {
+      "title": "Public longitudinal person-fidelity baseline",
+      "environment": "fixture_validation_in_ci_then_target_windows_postgresql_ollama_and_human_review",
+      "parameters": [],
+      "scenario_families": [
+        "autobiographical_meaning",
+        "relational_judgment",
+        "temporal_belief_change",
+        "self_report_behavior_contradiction",
+        "context_dependent_preference",
+        "novel_decision",
+        "characteristic_expression",
+        "identity_integrity",
+        "legitimate_unknown"
+      ],
+      "hard_invariants": [
+        "human oracle never enters canonical memory or model context",
+        "each probe starts from the same life record without prior probe history",
+        "every model stage remains a fresh stateless worker",
+        "required canonical evidence refs reach the response realization",
+        "unknown personal facts are not fabricated from unrelated life evidence",
+        "structural provenance and human semantic verdicts remain separate",
+        "every native event stage and model invocation artifact remains permanently retained and content-addressed",
+        "raw preserved output remains training-ineligible until explicit review labels its role",
+        "no result is interpreted as identity maturity consciousness or personal continuity"
+      ],
+      "quality_order": [
+        "hard_invariant_pass_rate",
+        "worst_dimension_human_fidelity",
+        "identity_integrity_human_fidelity",
+        "legitimate_unknown_human_fidelity",
+        "per_dimension_human_fidelity",
+        "structural_evidence_recall",
+        "latency"
+      ],
+      "search": "The v1 fixture characterizes the null architecture and selects no parameters. Freeze its native responses before proposing a person-model intervention. Compare one mechanism at a time on the unchanged public fixture and a prospectively frozen holdout person; report insufficient discrimination rather than accepting complexity that does not repair a measured failure."
+    },
+    "SITUATION-PIPELINE-001": {
+      "title": "Isolated predictive situation and guarded non-user mechanisms",
+      "environment": "pure_policy_and_postgresql_ci_then_target_windows_ollama",
+      "parameters": [
+        "situation_window",
+        "head_page_size",
+        "context_and_media_bounds",
+        "prediction_error_bins",
+        "heartbeat_suspicion_seconds",
+        "worker_lifetimes",
+        "triage_output_tokens"
+      ],
+      "scenario_families": [
+        "four_inputs_one_situation",
+        "overlapping_entities_across_conversations",
+        "late_and_expired_evidence",
+        "normalized_error_and_uncertainty",
+        "quoted_and_multilingual_threat_words",
+        "matched_action_feedback_convergence",
+        "restart_at_each_handoff",
+        "scheduled_consolidation_with_counterevidence",
+        "media_checksum_quarantine",
+        "resource_denial_under_high_salience"
+      ],
+      "hard_invariants": [
+        "canonical bytes never rewritten",
+        "one responsibility per model stage",
+        "source scope never broadened",
+        "every explicit user prompt receives a response",
+        "all execution retains resource admission",
+        "deterministic retries never duplicate actions",
+        "no unbounded feedback loop"
+      ],
+      "quality_order": [
+        "hard_invariant_pass_rate",
+        "scenario_decision_accuracy",
+        "duplicate_action_count",
+        "input_context_bytes",
+        "database_rows_read",
+        "native_latency_and_memory"
+      ],
+      "search": "Preserve the original lexical baseline and separately ablate situation grouping, prediction comparisons, triage, reflexes, and consolidation. Freeze labels and held-out inputs before tuning one parameter family at a time. Current tests establish invariants, not optimal values or neurobiological fidelity. Expand boundary winners before accepting tuned defaults."
+    },
+    "SELF-MEMORY-001": {
+      "title": "Self-memory activation, consolidation, and person-model calibration",
+      "environment": "deterministic_ci_then_target_windows_postgresql_ollama_and_human_review",
+      "parameters": [
+        "self_context_item_limit",
+        "core_self_fallback_limit",
+        "self_context_tag_limit",
+        "self_statement_length_limit",
+        "generalized_support_root_minimum",
+        "slow_schema_context_minimum",
+        "reflection_evidence_batch_limit",
+        "self_proposals_per_batch",
+        "review_evidence_limit",
+        "review_focus_root_limit",
+        "proposal_output_token_cap",
+        "review_output_token_cap"
+      ],
+      "scenario_families": [
+        "avowed_self_vs_observed_behavior",
+        "aspiration_vs_current_identity",
+        "stable_preference_with_outlier",
+        "gradual_change",
+        "abrupt_explicit_correction",
+        "context_conditioned_trait",
+        "relationship_specific_behavior",
+        "value_tradeoff_across_contexts",
+        "shared_root_derivation",
+        "counterevidence_promotion",
+        "narrative_correspondence_vs_coherence",
+        "self_model_source_authority",
+        "held_out_novel_decision",
+        "irrelevant_core_schema_contamination",
+        "model_output_self_reinforcement_attack",
+        "longitudinal_schema_growth"
+      ],
+      "hard_invariants": [
+        "canonical autobiographical evidence is never rewritten or replaced",
+        "derived representations never multiply independent evidence roots",
+        "model-authored output cannot independently establish user identity",
+        "avowed aspirational and normative self claims retain USER_PROMPT authority",
+        "establishment requires counterevidence review",
+        "source-restricted and exact-source responses never substitute self schemas for canonical evidence",
+        "self context cannot authorize external work",
+        "identity maturity cannot be self-certified by a transient model or derived schema",
+        "all proposal and review model calls remain separate stateless guarded workers",
+        "online context stays bounded independently of lifetime history"
+      ],
+      "quality_order": [
+        "hard_invariant_pass_rate",
+        "held_out_person_prediction_accuracy",
+        "worst_dimension_person_fidelity",
+        "unsupported_schema_rate",
+        "counterevidence_detection_rate",
+        "current_vs_historical_identity_accuracy",
+        "source_authority_accuracy",
+        "irrelevant_self_context_rate",
+        "model_calls_per_consolidation",
+        "latency_and_memory"
+      ],
+      "search": "Freeze deterministic and native person-fidelity cases before tuning. Sweep one bound or promotion threshold family at a time against the episodic-only and semantic-only baselines. High-centrality schemas receive stronger counterevidence tests, not relaxed proof requirements. Any boundary winner must be expanded before acceptance; report insufficient discrimination rather than treating the current defaults as optimized."
+    },
+    "COMPOSER-REQUIREMENTS-001": {
+      "title": "Current-only fixed requirements before personal-evidence matching",
+      "environment": "deterministic_ci_then_target_windows_host_with_ollama",
+      "parameters": [
+        "MAX_COVERAGE_REQUIREMENTS",
+        "MAX_COVERAGE_NEED_CHARS"
+      ],
+      "scenario_families": [
+        "retrieved_topic_contaminates_requirements",
+        "answer_as_missing_memory",
+        "joint_evidence_explains_change",
+        "analogous_observed_message",
+        "fixed_requirements_across_recall",
+        "unknown_fact",
+        "invalid_plan",
+        "invalid_or_missing_coverage_slot",
+        "durable_stage_recovery"
+      ],
+      "hard_invariants": [
+        "requirement planning receives only the current request",
+        "planning and coverage have separate guarded worker roles",
+        "every committed requirement appears exactly once in coverage",
+        "all selected sources exist in the admitted catalog",
+        "missing support cannot authorize history admission",
+        "no fixture IDs or expected answers in runtime",
+        "bounded calls and unchanged source policy, retrieval, and response prompt"
+      ],
+      "quality_order": [
+        "hard_invariant_pass_rate",
+        "faithful_answer_rate",
+        "false_insufficiency_rate",
+        "premature_sufficiency_rate",
+        "requirement_relevance",
+        "invalid_output_rate",
+        "model_calls",
+        "latency"
+      ],
+      "search": "Freeze the aab8127 bundle: 7/10 structural, with all required roots retrieved for pf-q003/pf-q007 but false insufficiency, and two wasted recalls for pf-q009. Compare current-only fixed requirements against this joint planning/matching baseline with identical frozen learning, beginning with those three probes. Keep bounds unchanged initially; separately measure added planning latency and any saved recall. Then run all SELF_MODEL probes and the full suite/holdout. See docs/experiments/COMPOSER_REQUIREMENTS_001.md."
+    },
+    "COMPOSER-COVERAGE-001": {
+      "title": "Explicit personal-evidence coverage before Composer sufficiency",
+      "environment": "deterministic_ci_then_target_windows_host_with_ollama",
+      "parameters": [
+        "MAX_COVERAGE_REQUIREMENTS",
+        "MAX_COVERAGE_NEED_CHARS"
+      ],
+      "scenario_families": [
+        "partial_personal_priorities",
+        "preference_vs_adjacent_value",
+        "hypothetical_scenario_vs_personal_history",
+        "observed_communication_style",
+        "one_sided_change",
+        "self_report_vs_observation",
+        "unknown_fact",
+        "invalid_source_selection",
+        "routing_only_self_context"
+      ],
+      "hard_invariants": [
+        "a missing requirement cannot produce sufficient=true",
+        "every selected source exists in the admitted catalog",
+        "preserve source authority and evidence quarantine",
+        "no fixture IDs or expected answers in runtime",
+        "no extra model role or unbounded calls"
+      ],
+      "quality_order": [
+        "hard_invariant_pass_rate",
+        "required_evidence_coverage",
+        "premature_sufficiency_rate",
+        "retrieval_query_relevance",
+        "invalid_output_rate",
+        "model_input_bytes",
+        "latency"
+      ],
+      "search": "Provisional bounds, not calibrated. Compare the boolean-contract parent 2bf7c60 with explicit coverage on frozen SELF-MEMORY-001 pf-q005/pf-q006/pf-q007 using the identical frozen learning snapshot, then full public and holdout. Assess both missing-slot honesty and source relevance; Python can enforce only structural coverage. Freeze additional paraphrase and long-query families before tuning. Expand any winning search boundary. See docs/experiments/COMPOSER_COVERAGE_001.md."
+    },
+    "CANONICAL-NEIGHBORHOOD-001": {
+      "title": "Canonical local context before Composer sufficiency",
+      "environment": "deterministic_ci_then_target_windows_host_with_ollama",
+      "parameters": [
+        "CANONICAL_NEIGHBOR_SEQUENCE_WINDOW"
+      ],
+      "scenario_families": [
+        "retrieved_followup_missing_root",
+        "interleaved_internal_events",
+        "interleaved_topics",
+        "cross_conversation_recall",
+        "source_policy_exclusion",
+        "future_history_boundary",
+        "saturated_packet",
+        "no_recursive_expansion"
+      ],
+      "hard_invariants": [
+        "preserve canonical bytes and original seed order",
+        "honor source policy and cutoff at both endpoints",
+        "bound index range and packet size",
+        "no fixture IDs or expected answers in runtime",
+        "retain route provenance"
+      ],
+      "quality_order": [
+        "hard_invariant_pass_rate",
+        "required_evidence_coverage",
+        "irrelevant_context_rate",
+        "model_input_bytes",
+        "latency"
+      ],
+      "search": "Provisional window 32, not calibrated. Compare parent 07f4f49 with this mechanism on frozen SELF-MEMORY-001 pf-q001/pf-q002, then full public and holdout. Sweep windows and noise only after freezing those cases; expand a winning search boundary. See docs/experiments/CANONICAL_NEIGHBORHOOD_001.md."
+    },
+    "HOST-ENVIRONMENT-001": {
+      "title": "Local host inventory and continuous security posture bounds",
+      "environment": "deterministic_ci_then_native_windows_laptop",
+      "parameters": [
+        "provider resource/readings bounds",
+        "discovery bytes and timeouts",
+        "poll interval",
+        "CPU sample interval",
+        "diagnostic length",
+        "monitor stop grace"
+      ],
+      "scenario_families": [
+        "reordering and replay",
+        "real unplug/replug",
+        "partial and permission-denied enumeration",
+        "collector timeout",
+        "crash between durable writes",
+        "no-op polling",
+        "large virtual device topology",
+        "consent revocation",
+        "Firewall rule collision and effective policy",
+        "Phone Link without phone sensor access"
+      ],
+      "hard_invariants": [
+        "No external application request without exact purpose/destination consent",
+        "Failures do not establish resource absence or disabled protection",
+        "No model grants authority or emits commands",
+        "Recovery is idempotent and old scans cannot replace newer state",
+        "Foreign device reports cannot increase local schedulable CPU/RAM",
+        "Firewall changes touch only exact owned rules and runtime paths",
+        "Incomplete policy installation is never reported as traffic enforcement"
+      ],
+      "quality_order": [
+        "hard_invariant_pass_rate",
+        "supported_device_coverage",
+        "change_detection_delay",
+        "scan_latency",
+        "monitor_CPU_RAM_disk_cost"
+      ],
+      "search": "Measure startup and polling on target Dell and native hosted Windows. Vary enumeration size, timeout and interval independently. Measure slow/denied drivers and offline operation; expand any winning boundary before selecting. CI establishes contracts, not laptop coverage or attack resistance. Defaults remain provisional."
+    },
+    "LOCAL-APP-001": {
+      "title": "Local control app, provider isolation and persistent file operations",
+      "environment": "deterministic_api_browser_ci_then_native_windows_and_opt_in_model_accounts",
+      "parameters": [
+        "request and text bounds",
+        "listing/search/copy entry bounds",
+        "chunk size",
+        "job/model timeouts",
+        "generation override ranges",
+        "resource and evidence settings"
+      ],
+      "scenario_families": [
+        "wrong Host/Origin and unauthenticated access",
+        "revoked cloud consent",
+        "unsupported parameters and bounded evidence",
+        "lost update and restart",
+        "path escape, link and protected-record mutation",
+        "chunk offset and destination collision",
+        "cancelled model/copy jobs",
+        "desktop and mobile UI"
+      ],
+      "hard_invariants": [
+        "no external request without exact current consent",
+        "no credentials in persisted settings or artifacts",
+        "no canonical rewrite through Files",
+        "no silent file overwrite",
+        "settings pinned per job",
+        "finite bounded model inputs",
+        "control sampling unaffected by final-response overrides"
+      ],
+      "quality_order": [
+        "hard_invariant_pass_rate",
+        "successful workflow completion",
+        "clarity of failure recovery",
+        "response latency",
+        "host resource cost"
+      ],
+      "search": "Sweep chunk/preview/listing limits and deadlines against large local folders, slow disks, model sizes, context lengths and native Windows. Report truncated search coverage and interrupted copies explicitly. Expand any winning boundary before calibration. Defaults remain provisional."
+    }
+  }
+}

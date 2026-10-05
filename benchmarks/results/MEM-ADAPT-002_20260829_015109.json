@@ -1,0 +1,904 @@
+{
+  "benchmark_id": "MEM-ADAPT-002",
+  "cases": [
+    {
+      "aperture_already_sufficient": false,
+      "comparison_eligible": true,
+      "evaluation": "required_evidence_complete",
+      "notes": "Success means evidence completeness only; retrieval is not asked to decide which claim is authoritative.",
+      "observations": [
+        {
+          "association_decay": null,
+          "association_effort": null,
+          "association_hops": 0,
+          "association_limit": null,
+          "association_trace_edges": 0,
+          "candidate_limit": 750,
+          "elapsed_ms": 7.166,
+          "focus_mode": null,
+          "method": "attention_aperture",
+          "required_event_ids": [
+            "d4c219cd-654f-4940-8972-a0db42124283",
+            "7b9b173a-be26-4ad8-b11c-107286f7d8eb"
+          ],
+          "returned_event_ids": [
+            "1ea53365-2f19-43ad-83f7-5605f01ab7dd",
+            "509e6626-c45d-421c-b92f-2487d3c23b33",
+            "43bb07df-0e05-4330-ba27-a793d478ed4d",
+            "c8fb5453-79e9-40e9-9c3c-04d8fdac4cd1",
+            "3a57daad-fe83-4527-a0c1-77ed4f4851c6",
+            "dee0bb59-e956-4d26-96e0-19b6d20e1a38",
+            "45bbc63b-e946-414b-b593-6bf91da4d53a"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": null,
+          "association_hops": 3,
+          "association_limit": 600,
+          "association_trace_edges": 0,
+          "candidate_limit": 350,
+          "elapsed_ms": 8.838,
+          "focus_mode": null,
+          "method": "frozen:DEEPER_RESEARCH",
+          "required_event_ids": [
+            "d4c219cd-654f-4940-8972-a0db42124283",
+            "7b9b173a-be26-4ad8-b11c-107286f7d8eb"
+          ],
+          "returned_event_ids": [
+            "509e6626-c45d-421c-b92f-2487d3c23b33",
+            "43bb07df-0e05-4330-ba27-a793d478ed4d",
+            "c8fb5453-79e9-40e9-9c3c-04d8fdac4cd1",
+            "3a57daad-fe83-4527-a0c1-77ed4f4851c6",
+            "dee0bb59-e956-4d26-96e0-19b6d20e1a38",
+            "45bbc63b-e946-414b-b593-6bf91da4d53a",
+            "a5a4476c-a896-43af-bad7-5cf32ab76ac8",
+            "c7485112-b370-427b-af73-cefad76011c5",
+            "7b9b173a-be26-4ad8-b11c-107286f7d8eb",
+            "d4c219cd-654f-4940-8972-a0db42124283"
+          ],
+          "scope": null,
+          "success": true
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": null,
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 0,
+          "candidate_limit": 150,
+          "elapsed_ms": 6.583,
+          "focus_mode": null,
+          "method": "frozen:FOCUSED_RECALL",
+          "required_event_ids": [
+            "d4c219cd-654f-4940-8972-a0db42124283",
+            "7b9b173a-be26-4ad8-b11c-107286f7d8eb"
+          ],
+          "returned_event_ids": [
+            "509e6626-c45d-421c-b92f-2487d3c23b33",
+            "43bb07df-0e05-4330-ba27-a793d478ed4d",
+            "c8fb5453-79e9-40e9-9c3c-04d8fdac4cd1",
+            "3a57daad-fe83-4527-a0c1-77ed4f4851c6",
+            "dee0bb59-e956-4d26-96e0-19b6d20e1a38",
+            "45bbc63b-e946-414b-b593-6bf91da4d53a",
+            "a5a4476c-a896-43af-bad7-5cf32ab76ac8",
+            "c7485112-b370-427b-af73-cefad76011c5",
+            "7b9b173a-be26-4ad8-b11c-107286f7d8eb",
+            "d4c219cd-654f-4940-8972-a0db42124283"
+          ],
+          "scope": null,
+          "success": true
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": "AssociationEffort.DEEP",
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 0,
+          "candidate_limit": 600,
+          "elapsed_ms": 7.013,
+          "focus_mode": "FocusMode.SINGLE_ANCHOR",
+          "method": "adaptive",
+          "required_event_ids": [
+            "d4c219cd-654f-4940-8972-a0db42124283",
+            "7b9b173a-be26-4ad8-b11c-107286f7d8eb"
+          ],
+          "returned_event_ids": [
+            "509e6626-c45d-421c-b92f-2487d3c23b33",
+            "43bb07df-0e05-4330-ba27-a793d478ed4d",
+            "c8fb5453-79e9-40e9-9c3c-04d8fdac4cd1",
+            "3a57daad-fe83-4527-a0c1-77ed4f4851c6",
+            "dee0bb59-e956-4d26-96e0-19b6d20e1a38",
+            "45bbc63b-e946-414b-b593-6bf91da4d53a",
+            "a5a4476c-a896-43af-bad7-5cf32ab76ac8",
+            "c7485112-b370-427b-af73-cefad76011c5",
+            "7b9b173a-be26-4ad8-b11c-107286f7d8eb",
+            "d4c219cd-654f-4940-8972-a0db42124283"
+          ],
+          "scope": "ScopeProfile.CONTEXTUAL",
+          "success": true
+        }
+      ],
+      "purpose": "Retrieve both an older claim and its later correction so downstream cognition can reason about supersession instead of seeing only the newest statement.",
+      "scenario_id": "correction_pair_complete_evidence"
+    },
+    {
+      "aperture_already_sufficient": false,
+      "comparison_eligible": true,
+      "evaluation": "required_evidence_complete",
+      "observations": [
+        {
+          "association_decay": null,
+          "association_effort": null,
+          "association_hops": 0,
+          "association_limit": null,
+          "association_trace_edges": 0,
+          "candidate_limit": 750,
+          "elapsed_ms": 4.62,
+          "focus_mode": null,
+          "method": "attention_aperture",
+          "required_event_ids": [
+            "08de8f1d-3e26-40df-a7d1-52bedbc99fa6"
+          ],
+          "returned_event_ids": [
+            "65530eaa-6ec6-40f3-a443-bbd798e9fd8d"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": null,
+          "association_hops": 3,
+          "association_limit": 600,
+          "association_trace_edges": 1,
+          "candidate_limit": 350,
+          "elapsed_ms": 5.752,
+          "focus_mode": null,
+          "method": "frozen:DEEPER_RESEARCH",
+          "required_event_ids": [
+            "08de8f1d-3e26-40df-a7d1-52bedbc99fa6"
+          ],
+          "returned_event_ids": [
+            "08de8f1d-3e26-40df-a7d1-52bedbc99fa6"
+          ],
+          "scope": null,
+          "success": true
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": null,
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 1,
+          "candidate_limit": 150,
+          "elapsed_ms": 5.529,
+          "focus_mode": null,
+          "method": "frozen:FOCUSED_RECALL",
+          "required_event_ids": [
+            "08de8f1d-3e26-40df-a7d1-52bedbc99fa6"
+          ],
+          "returned_event_ids": [
+            "08de8f1d-3e26-40df-a7d1-52bedbc99fa6"
+          ],
+          "scope": null,
+          "success": true
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": "AssociationEffort.DEEP",
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 1,
+          "candidate_limit": 175,
+          "elapsed_ms": 5.485,
+          "focus_mode": "FocusMode.SINGLE_ANCHOR",
+          "method": "adaptive",
+          "required_event_ids": [
+            "08de8f1d-3e26-40df-a7d1-52bedbc99fa6"
+          ],
+          "returned_event_ids": [
+            "08de8f1d-3e26-40df-a7d1-52bedbc99fa6"
+          ],
+          "scope": "ScopeProfile.NARROW",
+          "success": true
+        }
+      ],
+      "purpose": "Recover canonical evidence with zero lexical overlap by following a selected contextual anchor while preserving the current percept as semantic cue.",
+      "scenario_id": "zero_overlap_anchor_bridge"
+    },
+    {
+      "aperture_already_sufficient": false,
+      "comparison_eligible": true,
+      "evaluation": "required_evidence_complete",
+      "observations": [
+        {
+          "association_decay": null,
+          "association_effort": null,
+          "association_hops": 0,
+          "association_limit": null,
+          "association_trace_edges": 0,
+          "candidate_limit": 750,
+          "elapsed_ms": 4.016,
+          "focus_mode": null,
+          "method": "attention_aperture",
+          "required_event_ids": [
+            "0b189393-bf03-4164-a4a0-a697895bca79",
+            "badaddb4-22d5-43a0-b74e-3ffbfb016d13"
+          ],
+          "returned_event_ids": [
+            "813247a0-889b-4a90-846c-a3e96e3e67a4"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": null,
+          "association_hops": 3,
+          "association_limit": 600,
+          "association_trace_edges": 4,
+          "candidate_limit": 350,
+          "elapsed_ms": 7.706,
+          "focus_mode": null,
+          "method": "frozen:DEEPER_RESEARCH",
+          "required_event_ids": [
+            "0b189393-bf03-4164-a4a0-a697895bca79",
+            "badaddb4-22d5-43a0-b74e-3ffbfb016d13"
+          ],
+          "returned_event_ids": [
+            "7311f1c2-9f26-48ae-ad5c-161d08a84f61",
+            "0b189393-bf03-4164-a4a0-a697895bca79",
+            "d30dbda5-7354-47bf-8e7b-3259a5c31fbc",
+            "54957b7f-84cd-492f-b798-f5473f4bee6d"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": null,
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 6,
+          "candidate_limit": 150,
+          "elapsed_ms": 9.134,
+          "focus_mode": null,
+          "method": "frozen:FOCUSED_RECALL",
+          "required_event_ids": [
+            "0b189393-bf03-4164-a4a0-a697895bca79",
+            "badaddb4-22d5-43a0-b74e-3ffbfb016d13"
+          ],
+          "returned_event_ids": [
+            "7311f1c2-9f26-48ae-ad5c-161d08a84f61",
+            "0b189393-bf03-4164-a4a0-a697895bca79",
+            "d30dbda5-7354-47bf-8e7b-3259a5c31fbc",
+            "54957b7f-84cd-492f-b798-f5473f4bee6d",
+            "b33dbae1-8b06-4a5e-a870-de5d246bdb23",
+            "badaddb4-22d5-43a0-b74e-3ffbfb016d13"
+          ],
+          "scope": null,
+          "success": true
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": "AssociationEffort.DEEP",
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 6,
+          "candidate_limit": 600,
+          "elapsed_ms": 7.937,
+          "focus_mode": "FocusMode.SINGLE_ANCHOR",
+          "method": "adaptive",
+          "required_event_ids": [
+            "0b189393-bf03-4164-a4a0-a697895bca79",
+            "badaddb4-22d5-43a0-b74e-3ffbfb016d13"
+          ],
+          "returned_event_ids": [
+            "7311f1c2-9f26-48ae-ad5c-161d08a84f61",
+            "0b189393-bf03-4164-a4a0-a697895bca79",
+            "d30dbda5-7354-47bf-8e7b-3259a5c31fbc",
+            "54957b7f-84cd-492f-b798-f5473f4bee6d",
+            "b33dbae1-8b06-4a5e-a870-de5d246bdb23",
+            "badaddb4-22d5-43a0-b74e-3ffbfb016d13"
+          ],
+          "scope": "ScopeProfile.CONTEXTUAL",
+          "success": true
+        }
+      ],
+      "purpose": "Expose both an attractive one-hop claim and deeper counterevidence instead of allowing the shorter associative route to monopolize the evidence packet.",
+      "scenario_id": "false_short_path_true_deep_counterevidence"
+    },
+    {
+      "aperture_already_sufficient": false,
+      "comparison_eligible": true,
+      "evaluation": "required_evidence_complete",
+      "observations": [
+        {
+          "association_decay": null,
+          "association_effort": null,
+          "association_hops": 0,
+          "association_limit": null,
+          "association_trace_edges": 0,
+          "candidate_limit": 750,
+          "elapsed_ms": 4.507,
+          "focus_mode": null,
+          "method": "attention_aperture",
+          "required_event_ids": [
+            "50313d0b-fc49-42de-a7ae-788a27224ab1"
+          ],
+          "returned_event_ids": [
+            "7c4e8dd8-b744-43c8-b7d8-cfff89a7ae1e",
+            "465cffc9-7c54-4f4f-a998-3fde7ddb519a"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": null,
+          "association_hops": 3,
+          "association_limit": 600,
+          "association_trace_edges": 6,
+          "candidate_limit": 350,
+          "elapsed_ms": 11.267,
+          "focus_mode": null,
+          "method": "frozen:DEEPER_RESEARCH",
+          "required_event_ids": [
+            "50313d0b-fc49-42de-a7ae-788a27224ab1"
+          ],
+          "returned_event_ids": [
+            "24e6c58d-7968-4764-9368-11ff090fee37",
+            "e6ca7410-59c6-4fee-96e3-a9b275a79e23",
+            "ac91283d-236e-4a1c-a168-b53216bb45ad",
+            "b9dcaf39-1fd2-41f6-8854-7700d299b3b9",
+            "3a17e3cb-2711-4270-8de9-7a539714ab52",
+            "75b49a8b-532f-48e2-b87d-0110096f6c11"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.9,
+          "association_effort": null,
+          "association_hops": 4,
+          "association_limit": 900,
+          "association_trace_edges": 8,
+          "candidate_limit": 250,
+          "elapsed_ms": 7.951,
+          "focus_mode": null,
+          "method": "frozen:CROSS_REFERENCE",
+          "required_event_ids": [
+            "50313d0b-fc49-42de-a7ae-788a27224ab1"
+          ],
+          "returned_event_ids": [
+            "24e6c58d-7968-4764-9368-11ff090fee37",
+            "e6ca7410-59c6-4fee-96e3-a9b275a79e23",
+            "ac91283d-236e-4a1c-a168-b53216bb45ad",
+            "b9dcaf39-1fd2-41f6-8854-7700d299b3b9",
+            "3a17e3cb-2711-4270-8de9-7a539714ab52",
+            "75b49a8b-532f-48e2-b87d-0110096f6c11",
+            "13bb1bd8-8a6b-401f-bda2-e058cad56a4a",
+            "e0fde7ab-ab22-4c2e-afdc-52f6206264a3"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": "AssociationEffort.DEEP",
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 9,
+          "candidate_limit": 350,
+          "elapsed_ms": 9.251,
+          "focus_mode": "FocusMode.MULTI_ANCHOR",
+          "method": "adaptive",
+          "required_event_ids": [
+            "50313d0b-fc49-42de-a7ae-788a27224ab1"
+          ],
+          "returned_event_ids": [
+            "24e6c58d-7968-4764-9368-11ff090fee37",
+            "e6ca7410-59c6-4fee-96e3-a9b275a79e23",
+            "ac91283d-236e-4a1c-a168-b53216bb45ad",
+            "b9dcaf39-1fd2-41f6-8854-7700d299b3b9",
+            "3a17e3cb-2711-4270-8de9-7a539714ab52",
+            "75b49a8b-532f-48e2-b87d-0110096f6c11",
+            "13bb1bd8-8a6b-401f-bda2-e058cad56a4a",
+            "e0fde7ab-ab22-4c2e-afdc-52f6206264a3",
+            "50313d0b-fc49-42de-a7ae-788a27224ab1"
+          ],
+          "scope": "ScopeProfile.BALANCED",
+          "success": true
+        }
+      ],
+      "purpose": "Test whether anchor cardinality and traversal depth can vary independently when a relationship requires multiple foci and a five-hop opaque route.",
+      "scenario_id": "multi_anchor_five_hop_relationship"
+    },
+    {
+      "aperture_already_sufficient": true,
+      "comparison_eligible": true,
+      "evaluation": "required_evidence_complete",
+      "observations": [
+        {
+          "association_decay": null,
+          "association_effort": null,
+          "association_hops": 0,
+          "association_limit": null,
+          "association_trace_edges": 0,
+          "candidate_limit": 750,
+          "elapsed_ms": 20.233,
+          "focus_mode": null,
+          "method": "attention_aperture",
+          "required_event_ids": [
+            "c2f91928-2945-4059-a6ea-968a455ced17"
+          ],
+          "returned_event_ids": [
+            "8c8edfc9-6d0b-41c0-9b88-9c97efb54256",
+            "c2f91928-2945-4059-a6ea-968a455ced17"
+          ],
+          "scope": null,
+          "success": true
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": null,
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 1200,
+          "candidate_limit": 150,
+          "elapsed_ms": 133.233,
+          "focus_mode": null,
+          "method": "frozen:FOCUSED_RECALL",
+          "required_event_ids": [
+            "c2f91928-2945-4059-a6ea-968a455ced17"
+          ],
+          "returned_event_ids": [
+            "db5cd35a-9075-43ca-8526-710e62ff01f1",
+            "062b2375-6db4-49c0-a4f9-95d8ed7d4dab",
+            "994c34c6-07b7-4567-b6fc-053503ed82e4",
+            "a8697734-9945-42db-906c-f18f0a6bff26",
+            "6bcbed28-6dc4-4e6b-8e5e-be47b084e1ea",
+            "6949d85b-8706-4d0a-baa9-c4dbed74b990",
+            "71420897-1310-4c0d-ae3a-460b70858aec",
+            "12ccfafb-d0a3-4cb0-961b-44c0598e6e89",
+            "ce1259a1-5edb-434b-ad54-06155cc0f5b6",
+            "4013a8a0-db5c-49e8-9156-3f17b7b834d5"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": "AssociationEffort.DEEP",
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 1200,
+          "candidate_limit": 175,
+          "elapsed_ms": 113.883,
+          "focus_mode": "FocusMode.SINGLE_ANCHOR",
+          "method": "adaptive:round-1",
+          "required_event_ids": [
+            "c2f91928-2945-4059-a6ea-968a455ced17"
+          ],
+          "returned_event_ids": [
+            "db5cd35a-9075-43ca-8526-710e62ff01f1",
+            "062b2375-6db4-49c0-a4f9-95d8ed7d4dab",
+            "994c34c6-07b7-4567-b6fc-053503ed82e4",
+            "a8697734-9945-42db-906c-f18f0a6bff26",
+            "6bcbed28-6dc4-4e6b-8e5e-be47b084e1ea",
+            "6949d85b-8706-4d0a-baa9-c4dbed74b990",
+            "71420897-1310-4c0d-ae3a-460b70858aec",
+            "12ccfafb-d0a3-4cb0-961b-44c0598e6e89",
+            "ce1259a1-5edb-434b-ad54-06155cc0f5b6",
+            "4013a8a0-db5c-49e8-9156-3f17b7b834d5"
+          ],
+          "scope": "ScopeProfile.NARROW",
+          "success": false
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": "AssociationEffort.DEEP",
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 1200,
+          "candidate_limit": 175,
+          "elapsed_ms": 125.899,
+          "focus_mode": "FocusMode.SINGLE_ANCHOR",
+          "method": "adaptive:round-2",
+          "required_event_ids": [
+            "c2f91928-2945-4059-a6ea-968a455ced17"
+          ],
+          "returned_event_ids": [
+            "db5cd35a-9075-43ca-8526-710e62ff01f1",
+            "062b2375-6db4-49c0-a4f9-95d8ed7d4dab",
+            "994c34c6-07b7-4567-b6fc-053503ed82e4",
+            "a8697734-9945-42db-906c-f18f0a6bff26",
+            "6bcbed28-6dc4-4e6b-8e5e-be47b084e1ea",
+            "6949d85b-8706-4d0a-baa9-c4dbed74b990",
+            "71420897-1310-4c0d-ae3a-460b70858aec",
+            "12ccfafb-d0a3-4cb0-961b-44c0598e6e89",
+            "ce1259a1-5edb-434b-ad54-06155cc0f5b6",
+            "4013a8a0-db5c-49e8-9156-3f17b7b834d5"
+          ],
+          "scope": "ScopeProfile.NARROW",
+          "success": false
+        },
+        {
+          "association_decay": 0.85,
+          "association_effort": "AssociationEffort.SHALLOW",
+          "association_hops": 2,
+          "association_limit": 300,
+          "association_trace_edges": 1,
+          "candidate_limit": 600,
+          "elapsed_ms": 22.296,
+          "focus_mode": "FocusMode.REORIENT",
+          "method": "adaptive:round-3",
+          "required_event_ids": [
+            "c2f91928-2945-4059-a6ea-968a455ced17"
+          ],
+          "returned_event_ids": [
+            "c2f91928-2945-4059-a6ea-968a455ced17"
+          ],
+          "scope": "ScopeProfile.CONTEXTUAL",
+          "success": true
+        }
+      ],
+      "purpose": "Test whether repeated non-improving focus on a plausible obsolete explanation is abandoned so cue-reachable correction evidence can enter.",
+      "scenario_id": "obsolete_single_anchor_requires_reorientation"
+    },
+    {
+      "aperture_already_sufficient": true,
+      "comparison_eligible": true,
+      "evaluation": "required_evidence_complete",
+      "observations": [
+        {
+          "association_decay": null,
+          "association_effort": null,
+          "association_hops": 0,
+          "association_limit": null,
+          "association_trace_edges": 0,
+          "candidate_limit": 750,
+          "elapsed_ms": 20.825,
+          "focus_mode": null,
+          "method": "attention_aperture",
+          "required_event_ids": [
+            "36fb35ff-9646-4d35-8399-dd23f7a6c346"
+          ],
+          "returned_event_ids": [
+            "b0e06245-65a2-4e71-993f-7920b16388de",
+            "c94b99e1-1e44-4a02-9047-b85bcde3dda4",
+            "36fb35ff-9646-4d35-8399-dd23f7a6c346"
+          ],
+          "scope": null,
+          "success": true
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": null,
+          "association_hops": 3,
+          "association_limit": 600,
+          "association_trace_edges": 600,
+          "candidate_limit": 350,
+          "elapsed_ms": 156.799,
+          "focus_mode": null,
+          "method": "frozen:DEEPER_RESEARCH",
+          "required_event_ids": [
+            "36fb35ff-9646-4d35-8399-dd23f7a6c346"
+          ],
+          "returned_event_ids": [
+            "357af5f7-666e-448c-bfdf-530055654b8e",
+            "790afdf8-ed08-492f-b3f0-75fee726b352",
+            "49b3d25f-1ee9-4a0b-bcd6-d60f9ab141d7",
+            "84b428d9-dcbc-4b48-9fbc-eabe28eabe9c",
+            "3c6c62e1-8684-41b2-b164-d572a74bd3fc",
+            "58eb5378-08b9-46cb-8269-252b6fa76e45",
+            "629b158a-8c71-4d29-b6e7-e8b288736c4b",
+            "eeccc30d-c7a7-43de-9388-042ba2335632",
+            "d1e4f5a8-822f-4790-9fc9-d68fbee47a04",
+            "2e2c1730-515c-4c4e-8209-bb605a6cb33b"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.9,
+          "association_effort": null,
+          "association_hops": 4,
+          "association_limit": 900,
+          "association_trace_edges": 900,
+          "candidate_limit": 250,
+          "elapsed_ms": 97.014,
+          "focus_mode": null,
+          "method": "frozen:CROSS_REFERENCE",
+          "required_event_ids": [
+            "36fb35ff-9646-4d35-8399-dd23f7a6c346"
+          ],
+          "returned_event_ids": [
+            "41d45145-f9e7-4819-9cec-bc60bcfb60a0",
+            "66931f07-d0db-481a-8896-93c3dffb542e",
+            "ca5a1b5d-c884-42ec-b7fa-ecfb9d7f32e0",
+            "e1227359-ded5-42b5-97b5-e42fdf48152b",
+            "eeb8fc37-7639-43d5-a9b6-3ab52abf2a5e",
+            "f5ee84e7-fad2-4540-923d-7706346a5eea",
+            "6e6e87c4-91aa-410f-beeb-67a73b7c4c86",
+            "13cf4c98-74d3-4781-879c-1aadc684cd80",
+            "36bcd221-eaf6-4e97-8a58-645771be666c",
+            "a1a64ab2-1340-4be2-8ade-09b8d1f28429"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": "AssociationEffort.DEEP",
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 1200,
+          "candidate_limit": 600,
+          "elapsed_ms": 117.228,
+          "focus_mode": "FocusMode.MULTI_ANCHOR",
+          "method": "adaptive:round-1",
+          "required_event_ids": [
+            "36fb35ff-9646-4d35-8399-dd23f7a6c346"
+          ],
+          "returned_event_ids": [
+            "92609f85-e270-41fe-9bab-476c005d6cca",
+            "8fe2b62b-0ebc-48c0-b3f6-9c5bb42a3597",
+            "8900758a-43ed-4241-84b0-a74cb668e37f",
+            "e648db00-8a92-4e1d-bc86-4ce11453c9f7",
+            "2e3566f5-a4bb-453f-918a-430940c7db33",
+            "ece0e992-7a68-4cbb-9f62-2299d41e34c1",
+            "9faf2e6a-bd26-41e4-8aed-d7b17f577917",
+            "a2ca6030-ee29-4a72-a08b-2c2e9594238f",
+            "97ba9b3f-1947-4fdc-b348-2ad7b45768eb",
+            "a47a0a7a-cffc-4393-b67b-c47bd643334d"
+          ],
+          "scope": "ScopeProfile.CONTEXTUAL",
+          "success": false
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": "AssociationEffort.DEEP",
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 1200,
+          "candidate_limit": 600,
+          "elapsed_ms": 130.449,
+          "focus_mode": "FocusMode.MULTI_ANCHOR",
+          "method": "adaptive:round-2",
+          "required_event_ids": [
+            "36fb35ff-9646-4d35-8399-dd23f7a6c346"
+          ],
+          "returned_event_ids": [
+            "92609f85-e270-41fe-9bab-476c005d6cca",
+            "8fe2b62b-0ebc-48c0-b3f6-9c5bb42a3597",
+            "8900758a-43ed-4241-84b0-a74cb668e37f",
+            "e648db00-8a92-4e1d-bc86-4ce11453c9f7",
+            "2e3566f5-a4bb-453f-918a-430940c7db33",
+            "ece0e992-7a68-4cbb-9f62-2299d41e34c1",
+            "9faf2e6a-bd26-41e4-8aed-d7b17f577917",
+            "a2ca6030-ee29-4a72-a08b-2c2e9594238f",
+            "97ba9b3f-1947-4fdc-b348-2ad7b45768eb",
+            "a47a0a7a-cffc-4393-b67b-c47bd643334d"
+          ],
+          "scope": "ScopeProfile.CONTEXTUAL",
+          "success": false
+        },
+        {
+          "association_decay": 0.85,
+          "association_effort": "AssociationEffort.SHALLOW",
+          "association_hops": 2,
+          "association_limit": 300,
+          "association_trace_edges": 300,
+          "candidate_limit": 600,
+          "elapsed_ms": 52.024,
+          "focus_mode": "FocusMode.REORIENT",
+          "method": "adaptive:round-3",
+          "required_event_ids": [
+            "36fb35ff-9646-4d35-8399-dd23f7a6c346"
+          ],
+          "returned_event_ids": [
+            "314ef020-2800-4f9f-a8c3-feaa63eeb959",
+            "26405027-133a-4b93-b89b-535f75dfbb4f",
+            "8609c24d-ee31-48cf-9f97-cfc3d7d955e7",
+            "8fc3058e-be2b-4d21-a681-cdf3c571ac6e",
+            "8bd1f643-91f4-46a6-928d-8355ba649a86",
+            "fcf2609d-8c71-4bc6-a321-5710598e9e03",
+            "ee335b11-e775-4b99-812a-ded3f1411979",
+            "3cc1b6d1-251f-4380-86d0-9aa80a7f13d9",
+            "d80aa406-5e80-41fa-b19a-bf24ef0350ff",
+            "70284e9b-5375-4d53-82c7-12708f9c5bac"
+          ],
+          "scope": "ScopeProfile.CONTEXTUAL",
+          "success": false
+        }
+      ],
+      "purpose": "Test whether a bad multi-anchor cluster can be escaped after bounded non-improving exploitation instead of becoming an attentional attractor.",
+      "scenario_id": "mutually_reinforcing_anchor_cluster_requires_reorientation"
+    },
+    {
+      "aperture_already_sufficient": false,
+      "comparison_eligible": true,
+      "evaluation": "required_evidence_complete",
+      "notes": "Hostile exact-looking distractors: 12",
+      "observations": [
+        {
+          "association_decay": null,
+          "association_effort": null,
+          "association_hops": 0,
+          "association_limit": null,
+          "association_trace_edges": 0,
+          "candidate_limit": 750,
+          "elapsed_ms": 6.206,
+          "focus_mode": null,
+          "method": "attention_aperture",
+          "required_event_ids": [
+            "f7597da2-3a0f-4b7d-a542-2f37401f5188",
+            "fc055ee9-f04c-42e4-b4b4-6aa61c388831",
+            "ea9bb4a7-4fce-4f4d-ad0d-4624bfd2872f"
+          ],
+          "returned_event_ids": [
+            "d2670f06-daa2-4282-8bfd-fb4961a3206d",
+            "15b39e2c-afc7-4434-b6bc-38e929169264",
+            "50b0ad7e-57b0-4006-9dc7-f26007bd8f0c",
+            "f9044118-65ab-4ce6-8991-922e1d206394",
+            "269b164e-0ce0-401a-a454-45cb6f23b7db",
+            "6a3c8cba-7056-44f7-a5d4-682ef4942bdc",
+            "beb78460-98d8-427b-8fec-d3a3447822fe",
+            "0cd8a116-af8b-46af-ae2c-259b377771c1"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": null,
+          "association_hops": 3,
+          "association_limit": 600,
+          "association_trace_edges": 0,
+          "candidate_limit": 350,
+          "elapsed_ms": 11.753,
+          "focus_mode": null,
+          "method": "frozen:DEEPER_RESEARCH",
+          "required_event_ids": [
+            "f7597da2-3a0f-4b7d-a542-2f37401f5188",
+            "fc055ee9-f04c-42e4-b4b4-6aa61c388831",
+            "ea9bb4a7-4fce-4f4d-ad0d-4624bfd2872f"
+          ],
+          "returned_event_ids": [
+            "50b0ad7e-57b0-4006-9dc7-f26007bd8f0c",
+            "f9044118-65ab-4ce6-8991-922e1d206394",
+            "269b164e-0ce0-401a-a454-45cb6f23b7db",
+            "6a3c8cba-7056-44f7-a5d4-682ef4942bdc",
+            "beb78460-98d8-427b-8fec-d3a3447822fe",
+            "0cd8a116-af8b-46af-ae2c-259b377771c1",
+            "d44ce4ae-c322-4c99-920c-3e45f3115a00",
+            "788ea451-2921-4a5c-9dca-cacf979abba1",
+            "1159c573-c015-41df-926c-68b3dc490691",
+            "0223e444-81c6-4dd3-8864-14febd093e92"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.9,
+          "association_effort": null,
+          "association_hops": 4,
+          "association_limit": 900,
+          "association_trace_edges": 0,
+          "candidate_limit": 250,
+          "elapsed_ms": 7.406,
+          "focus_mode": null,
+          "method": "frozen:CROSS_REFERENCE",
+          "required_event_ids": [
+            "f7597da2-3a0f-4b7d-a542-2f37401f5188",
+            "fc055ee9-f04c-42e4-b4b4-6aa61c388831",
+            "ea9bb4a7-4fce-4f4d-ad0d-4624bfd2872f"
+          ],
+          "returned_event_ids": [
+            "50b0ad7e-57b0-4006-9dc7-f26007bd8f0c",
+            "f9044118-65ab-4ce6-8991-922e1d206394",
+            "269b164e-0ce0-401a-a454-45cb6f23b7db",
+            "6a3c8cba-7056-44f7-a5d4-682ef4942bdc",
+            "beb78460-98d8-427b-8fec-d3a3447822fe",
+            "0cd8a116-af8b-46af-ae2c-259b377771c1",
+            "d44ce4ae-c322-4c99-920c-3e45f3115a00",
+            "788ea451-2921-4a5c-9dca-cacf979abba1",
+            "1159c573-c015-41df-926c-68b3dc490691",
+            "0223e444-81c6-4dd3-8864-14febd093e92"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": "AssociationEffort.MODERATE",
+          "association_hops": 3,
+          "association_limit": 750,
+          "association_trace_edges": 0,
+          "candidate_limit": 350,
+          "elapsed_ms": 7.72,
+          "focus_mode": "FocusMode.MULTI_ANCHOR",
+          "method": "adaptive",
+          "required_event_ids": [
+            "f7597da2-3a0f-4b7d-a542-2f37401f5188",
+            "fc055ee9-f04c-42e4-b4b4-6aa61c388831",
+            "ea9bb4a7-4fce-4f4d-ad0d-4624bfd2872f"
+          ],
+          "returned_event_ids": [
+            "50b0ad7e-57b0-4006-9dc7-f26007bd8f0c",
+            "f9044118-65ab-4ce6-8991-922e1d206394",
+            "269b164e-0ce0-401a-a454-45cb6f23b7db",
+            "6a3c8cba-7056-44f7-a5d4-682ef4942bdc",
+            "beb78460-98d8-427b-8fec-d3a3447822fe",
+            "0cd8a116-af8b-46af-ae2c-259b377771c1",
+            "d44ce4ae-c322-4c99-920c-3e45f3115a00",
+            "788ea451-2921-4a5c-9dca-cacf979abba1",
+            "1159c573-c015-41df-926c-68b3dc490691",
+            "0223e444-81c6-4dd3-8864-14febd093e92"
+          ],
+          "scope": "ScopeProfile.BALANCED",
+          "success": false
+        }
+      ],
+      "purpose": "Require several individually weaker memories while exact-looking distractors compete, probing whether top-k selection discards distributed evidence.",
+      "scenario_id": "multiple_weak_clues_under_packet_pressure"
+    },
+    {
+      "aperture_already_sufficient": false,
+      "comparison_eligible": false,
+      "evaluation": "no_historical_evidence_returned",
+      "notes": "This is a shared safety behavior check, not a frozen-vs-adaptive win. Automatic WorkingState activation is intentionally excluded.",
+      "observations": [
+        {
+          "association_decay": 0.85,
+          "association_effort": null,
+          "association_hops": 2,
+          "association_limit": 250,
+          "association_trace_edges": 0,
+          "candidate_limit": 500,
+          "elapsed_ms": 6.791,
+          "focus_mode": null,
+          "method": "frozen:STANDARD",
+          "required_event_ids": [],
+          "returned_event_ids": [],
+          "scope": null,
+          "success": true
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": "AssociationEffort.MODERATE",
+          "association_hops": 3,
+          "association_limit": 750,
+          "association_trace_edges": 0,
+          "candidate_limit": 600,
+          "elapsed_ms": 4.051,
+          "focus_mode": "FocusMode.UNANCHORED",
+          "method": "adaptive",
+          "required_event_ids": [],
+          "returned_event_ids": [],
+          "scope": "ScopeProfile.CONTEXTUAL",
+          "success": true
+        }
+      ],
+      "purpose": "Verify that widening attention does not manufacture historical support when the canonical ledger contains no evidence for the cue.",
+      "scenario_id": "unsupported_query_abstention"
+    }
+  ],
+  "database": "jit_agent_test",
+  "evaluation_boundary": "This benchmark evaluates whether complete canonical evidence needed by a downstream stateless worker is surfaced. It does not award retrieval credit for interpreting corrections, causality, truth, or contradiction.",
+  "generated_at": "2026-08-29T01:51:09.994286+00:00",
+  "head_to_head": {
+    "adaptive_only": 1,
+    "aperture_already_sufficient": 2,
+    "both": 3,
+    "excluded_common_behavior": 1,
+    "frozen_only": 0,
+    "neither": 1
+  },
+  "mode": "quick",
+  "schema_version": 1
+}

@@ -1,0 +1,37 @@
+{
+  "benchmark_version": "memory-kernel-v0.5-robustness-v1",
+  "persona": {
+    "name": "Morgan Reyes",
+    "description": "Adversarial synthetic persona for the v0.5 robustness baseline. The corpus stresses repeated state changes, misleading lexical overlap, ownership/disposal lifecycle state, and unknown-fact abstention.",
+    "oracle": {
+      "current_beverage": "espresso",
+      "current_vehicle": null,
+      "ford_escape_owned": false,
+      "unit_14_deposit_recovered": true,
+      "vehicle_insurer": null,
+      "blood_type": null
+    }
+  },
+  "events": [
+    {"event_id":"m001","global_seq":1,"conversation_id":"mr01","conversation_seq":1,"event_type":"USER_PROMPT","source":"morgan","created_at":"2026-01-03T08:00:00+00:00","text":"I drink jasmine tea every morning.","payload":{"entities":["Morgan Reyes","jasmine tea"]}},
+    {"event_id":"m002","global_seq":2,"conversation_id":"mr02","conversation_seq":1,"event_type":"USER_PROMPT","source":"morgan","created_at":"2026-01-07T12:00:00+00:00","text":"Northgate Storage still owes me the key deposit from unit 14.","payload":{"entities":["Morgan Reyes","Northgate Storage","key deposit","unit 14"]}},
+    {"event_id":"m003","global_seq":3,"conversation_id":"mr03","conversation_seq":1,"event_type":"USER_PROMPT","source":"morgan","created_at":"2026-01-12T08:00:00+00:00","text":"I started drinking black coffee instead of jasmine tea.","payload":{"entities":["Morgan Reyes","black coffee","jasmine tea"]}},
+    {"event_id":"m004","global_seq":4,"conversation_id":"mr04","conversation_seq":1,"event_type":"USER_PROMPT","source":"morgan","created_at":"2026-01-20T12:00:00+00:00","text":"I paid a refundable key deposit for unit 27 at Northgate Storage.","payload":{"entities":["Morgan Reyes","Northgate Storage","key deposit","unit 27"]}},
+    {"event_id":"m005","global_seq":5,"conversation_id":"mr05","conversation_seq":1,"event_type":"USER_PROMPT","source":"morgan","created_at":"2026-01-25T12:00:00+00:00","text":"Northgate Storage refunded the key deposit for unit 14 today.","payload":{"entities":["Morgan Reyes","Northgate Storage","key deposit","unit 14"]}},
+    {"event_id":"m006","global_seq":6,"conversation_id":"mr06","conversation_seq":1,"event_type":"USER_PROMPT","source":"morgan","created_at":"2026-02-02T08:00:00+00:00","text":"I switched from black coffee to green tea.","payload":{"entities":["Morgan Reyes","black coffee","green tea"]}},
+    {"event_id":"m007","global_seq":7,"conversation_id":"mr07","conversation_seq":1,"event_type":"USER_PROMPT","source":"morgan","created_at":"2026-02-09T17:00:00+00:00","text":"I am considering a Subaru Crosstrek for my next car.","payload":{"entities":["Morgan Reyes","Subaru Crosstrek"]}},
+    {"event_id":"m008","global_seq":8,"conversation_id":"mr08","conversation_seq":1,"event_type":"USER_PROMPT","source":"morgan","created_at":"2026-02-16T17:00:00+00:00","text":"I bought a used 2018 Ford Escape today.","payload":{"entities":["Morgan Reyes","2018 Ford Escape"]}},
+    {"event_id":"m009","global_seq":9,"conversation_id":"mr09","conversation_seq":1,"event_type":"USER_PROMPT","source":"morgan","created_at":"2026-03-01T17:00:00+00:00","text":"I sold the Ford Escape to a neighbor last week.","payload":{"entities":["Morgan Reyes","Ford Escape"]}},
+    {"event_id":"m010","global_seq":10,"conversation_id":"mr10","conversation_seq":1,"event_type":"USER_PROMPT","source":"morgan","created_at":"2026-03-18T17:00:00+00:00","text":"My neighbor Elena adopted a rescue greyhound named Pixel.","payload":{"entities":["Morgan Reyes","Elena","Pixel"]}},
+    {"event_id":"m011","global_seq":11,"conversation_id":"mr11","conversation_seq":1,"event_type":"USER_PROMPT","source":"morgan","created_at":"2026-04-03T08:00:00+00:00","text":"I stopped drinking green tea and now drink espresso.","payload":{"entities":["Morgan Reyes","green tea","espresso"]}}
+  ],
+  "questions": [
+    {"id":"mq01","category":"repeated_state_change","query":"What did Morgan drink immediately before switching to green tea?","entities":["Morgan Reyes"],"relevant_event_ids":["m003","m006"],"required_event_ids":["m003"]},
+    {"id":"mq02","category":"repeated_state_change","query":"What did Morgan drink immediately before switching to espresso?","entities":["Morgan Reyes"],"relevant_event_ids":["m006","m011"],"required_event_ids":["m006"]},
+    {"id":"mq03","category":"interleaved_obligation","query":"Did Morgan recover the key deposit for unit 14?","entities":["Morgan Reyes","Northgate Storage","unit 14"],"relevant_event_ids":["m002","m005"],"required_event_ids":["m005"]},
+    {"id":"mq04","category":"ownership_disposal","query":"Does Morgan own a vehicle now?","entities":["Morgan Reyes"],"relevant_event_ids":["m008","m009"],"required_event_ids":["m009"]},
+    {"id":"mq05","category":"ownership_disposal","query":"Does Morgan still own the Ford Escape?","entities":["Morgan Reyes","Ford Escape"],"relevant_event_ids":["m008","m009"],"required_event_ids":["m009"]},
+    {"id":"mq06","category":"false_association_unknown","query":"Who insures Morgan's vehicle?","entities":["Morgan Reyes"],"relevant_event_ids":[],"required_event_ids":[],"expect_no_evidence":true},
+    {"id":"mq07","category":"open_world_unknown","query":"What is Morgan's blood type?","entities":["Morgan Reyes"],"relevant_event_ids":[],"required_event_ids":[],"expect_no_evidence":true}
+  ]
+}

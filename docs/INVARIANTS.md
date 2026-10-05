@@ -1,6 +1,7 @@
 # Engineering invariants
 
-These are requirements for the proposed standalone runtime.
+These are requirements for the extracted runtime. See the engineering Constitution
+and current stage registry for the inherited contracts.
 
 1. Canonical events are append-only; interpretations and corrections retain their evidence.
 2. Every meaningful result is attributable to explicit inputs, sources, schema versions, and policy versions.

@@ -1,38 +1,87 @@
 # Persistent Cognition Runtime
 
-**Persistent memory. Disposable reasoning. Durable execution.**
+**Persistent memory. Stateless inference. Durable execution.**
 
-Persistent Cognition Runtime explores a local-first cognitive architecture in which continuity belongs to durable system state. Language models perform bounded semantic tasks through fresh specialist invocations; the runtime owns memory, scheduling, control authority, and recovery.
+The runnable cognitive engine extracted from [Prometheist](https://github.com/wtvr-guy/prometheist), including the v2 worker architecture and subsequent engine improvements through [106bb22](https://github.com/wtvr-guy/prometheist/commit/106bb22be4ad60f2455ece8bc8c4e2806225d0fe).
 
-The practical goal is useful, continuous AI on modest hardware without requiring an ever-growing conversation context or a permanently loaded large model.
+Exact history lives outside the model. Fresh specialist workers receive bounded evidence just in time; deterministic software owns scheduling, resources, execution authority, and recovery. The goal is useful continuous cognition on modest local hardware.
 
-## Status
+## Included
 
-This repository is an architecture and research scaffold derived from the engineering work in [Prometheist](https://github.com/wtvr-guy/prometheist). It does not yet contain an extracted, independently runnable implementation. The source project contains the evolving implementation; its tests and experimental results must be assessed at their recorded revision.
+- Append-only PostgreSQL events and compact independent event/percept artifact journals.
+- JIT lexical, entity, temporal, and associative retrieval, canonical source links, and bounded neighborhood expansion.
+- v2 specialist workers and the later fixed deterministic retrieval stage that superseded the Composer control loop.
+- Semantic and learned-memory representations with provenance, corrections, counterevidence, and canonical-source navigation.
+- Bounded working state, generic percept intake, situation formation, expectations, consolidation, and action receipts.
+- Deterministic attention, resource admission, leases, checkpoints, retries, and restart recovery.
+- Stateless Ollama transport, optional explicit remote-provider routing, governed model parameters, and sequential local-model residency.
+- Terminal and headless job interfaces, SQL schema, synthetic retrieval fixtures, and regression tests.
 
-This repository focuses on the underlying engineering architecture. Its documents describe design requirements and proposed evaluation, not a claim that every requirement has already been implemented or independently verified.
+Android, device nodes, tunnel/sync services, sensor discovery, OS administration, desktop/web UI, private imprint deployment, and application philosophy are excluded.
 
-## Core design
+## Install
 
-- **Canonical history:** append-only events preserve original evidence and causal provenance.
-- **Rebuildable memory:** indexes, associations, and generalized knowledge are derived projections.
-- **Just-in-time context:** narrow memory requests produce bounded evidence packets.
-- **Stateless specialists:** each LLM worker has one semantic responsibility and explicit typed inputs and outputs.
-- **Deterministic control:** the runtime owns identifiers, scheduling eligibility, resource admission, and execution authority.
-- **Durable work:** tasks, checkpoints, capability results, and dispositions survive worker failure.
-- **Resource-aware execution:** admit work against measured CPU, RAM, and model requirements.
-- **Independent artifacts:** meaningful boundaries remain inspectable and reconstructable outside the operational database.
+Requirements: Python 3.14+, uv, PostgreSQL, and Ollama for local model-backed chat. Docker is not required.
 
-A fixed context budget does not guarantee constant retrieval cost, perfect recall, or intelligence equal to a larger model. Those properties require separate measurements.
+```sh
+git clone https://github.com/wtvr-guy/persistent-cognition-runtime.git
+cd persistent-cognition-runtime
+uv sync --frozen
+```
 
-## Documentation
+Create a PostgreSQL role and separate `pcr` and `pcr_test` databases. Copy `.env.example` to `.env`, set your own connection credentials, and apply the schema:
 
-- [Architecture](docs/ARCHITECTURE.md)
-- [Invariants](docs/INVARIANTS.md)
-- [Evaluation and roadmap](docs/ROADMAP.md)
-- [Prior work and research approach](docs/PRIOR_ART.md)
-- [Contribution guidance](CONTRIBUTING.md)
+```sh
+psql "postgresql://USER:PASSWORD@localhost:5432/pcr" -f schema.sql
+ollama pull qwen3:4b-instruct-2507-q4_K_M
+uv run pcr
+```
 
-## License
+Ollama must be running. Full Windows and Linux/macOS instructions are in [SETUP.md](docs/SETUP.md).
 
-[PolyForm Noncommercial License 1.0.0](LICENSE), identical to the source project's license and project-specific notices. Commercial use requires a separate license from the licensor.
+Two separate invocations can use the same persistent memory:
+
+```sh
+uv run pcr --once "My Project Kestrel budget is 400 dollars."
+uv run pcr --once "What budget did I set for Project Kestrel?"
+```
+
+This exercises fresh command processes, with historical evidence reconstructed by the engine. Model answer quality still depends on the selected model and retrieved evidence.
+
+## Inspect and recover
+
+```sh
+uv run pcr inspect --latest
+uv run pcr verify --latest
+uv run pcr audit --latest
+uv run pcr recover --latest
+uv run pcr restore-events
+```
+
+Inspection and verification do not require a live model. Recovery requires the relevant database and any model work that remains incomplete. `pcr-percept` exposes generic intake and bounded scheduler ticks without collecting device sensors.
+
+## Validate
+
+Set `TEST_DATABASE_URL` in your shell to a disposable database whose name includes `test` or `benchmark`. Tests clear that database.
+
+```sh
+uv run ruff check .
+uv run python scripts/verify_source_baseline.py
+uv run python scripts/audit_registries.py
+uv run python scripts/audit_constraints.py --fail-unregistered
+uv run pytest -q -ra
+```
+
+See [TESTING.md](docs/TESTING.md) for PostgreSQL CI, live-model acceptance, and interpretation of skipped tests. [EXTRACTION.md](docs/EXTRACTION.md) records what was copied, adapted, and verified.
+
+## Compatibility
+
+The installed distribution is `persistent-cognition-runtime`. The source package remains `prometheist`; existing configuration names, durable IDs, model prompts, and protocol labels are retained to avoid unnecessary changes to engine behavior. Some terminal labels still show the original project name. Use a separate virtual environment, database and artifact directory from your Prometheist application.
+
+This is a copy with explicit provenance, not a GitHub fork carrying the source application's full history. [SOURCE_BASELINE.json](SOURCE_BASELINE.json) distinguishes byte-identical source files from the small extraction adaptations.
+
+## Documentation and license
+
+[Architecture](docs/ARCHITECTURE.md) · [Setup](docs/SETUP.md) · [Testing](docs/TESTING.md) · [Model routing](docs/MODEL_ROUTING.md) · [Engineering constitution](CONSTITUTION.md)
+
+[PolyForm Noncommercial License 1.0.0](LICENSE), copied exactly from Prometheist, including its project-specific commercial-licensing notice.

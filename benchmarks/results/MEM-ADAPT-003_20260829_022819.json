@@ -1,0 +1,667 @@
+{
+  "benchmark_id": "MEM-ADAPT-003",
+  "candidate_pool_limit": 64,
+  "cases": [
+    {
+      "candidate_pool_size": 41,
+      "coverage_aware": {
+        "decisions": [
+          {
+            "novel_conversation": true,
+            "novel_event_type": true,
+            "novel_provenance": 0,
+            "novel_retrieval_reasons": 1,
+            "novel_source": true,
+            "novel_tokens": 4,
+            "original_rank": 0,
+            "retained": false,
+            "source_event_id": "e9cd0a4f-ee52-41f5-8557-e4fd602c5004",
+            "token_novelty": "1"
+          },
+          {
+            "novel_conversation": false,
+            "novel_event_type": false,
+            "novel_provenance": 0,
+            "novel_retrieval_reasons": 0,
+            "novel_source": false,
+            "novel_tokens": 5,
+            "original_rank": 40,
+            "retained": false,
+            "source_event_id": "04ea6257-7c8e-41bf-b6ef-41aeef146c16",
+            "token_novelty": "5/8"
+          },
+          {
+            "novel_conversation": false,
+            "novel_event_type": false,
+            "novel_provenance": 0,
+            "novel_retrieval_reasons": 0,
+            "novel_source": false,
+            "novel_tokens": 0,
+            "original_rank": 1,
+            "retained": false,
+            "source_event_id": "378f2c0a-8029-4171-83b8-c712d77b047c",
+            "token_novelty": "0"
+          },
+          {
+            "novel_conversation": false,
+            "novel_event_type": false,
+            "novel_provenance": 0,
+            "novel_retrieval_reasons": 0,
+            "novel_source": false,
+            "novel_tokens": 0,
+            "original_rank": 2,
+            "retained": false,
+            "source_event_id": "1792fb14-3e64-45ab-b113-266b37d7a684",
+            "token_novelty": "0"
+          },
+          {
+            "novel_conversation": false,
+            "novel_event_type": false,
+            "novel_provenance": 0,
+            "novel_retrieval_reasons": 0,
+            "novel_source": false,
+            "novel_tokens": 0,
+            "original_rank": 3,
+            "retained": false,
+            "source_event_id": "14e7978d-281b-4cd8-a8f6-fe736d8b5394",
+            "token_novelty": "0"
+          },
+          {
+            "novel_conversation": false,
+            "novel_event_type": false,
+            "novel_provenance": 0,
+            "novel_retrieval_reasons": 0,
+            "novel_source": false,
+            "novel_tokens": 0,
+            "original_rank": 4,
+            "retained": false,
+            "source_event_id": "d541687c-5249-4c20-b0b9-9ad9655aa4f6",
+            "token_novelty": "0"
+          }
+        ],
+        "event_ids": [
+          "e9cd0a4f-ee52-41f5-8557-e4fd602c5004",
+          "04ea6257-7c8e-41bf-b6ef-41aeef146c16",
+          "378f2c0a-8029-4171-83b8-c712d77b047c",
+          "1792fb14-3e64-45ab-b113-266b37d7a684",
+          "14e7978d-281b-4cd8-a8f6-fe736d8b5394",
+          "d541687c-5249-4c20-b0b9-9ad9655aa4f6"
+        ],
+        "success": true
+      },
+      "current_top_k": {
+        "event_ids": [
+          "e9cd0a4f-ee52-41f5-8557-e4fd602c5004",
+          "378f2c0a-8029-4171-83b8-c712d77b047c",
+          "1792fb14-3e64-45ab-b113-266b37d7a684",
+          "14e7978d-281b-4cd8-a8f6-fe736d8b5394",
+          "d541687c-5249-4c20-b0b9-9ad9655aa4f6",
+          "473e6383-26e8-42d0-af97-62cdc7178060"
+        ],
+        "success": false
+      },
+      "distractors": 40,
+      "purpose": "Old tied evidence must survive a bounded packet despite newer near-duplicates.",
+      "required_pool_ranks": {
+        "04ea6257-7c8e-41bf-b6ef-41aeef146c16": 41
+      },
+      "scenario_id": "equal_term_old_memory"
+    },
+    {
+      "candidate_pool_size": 26,
+      "coverage_aware": {
+        "decisions": [
+          {
+            "novel_conversation": true,
+            "novel_event_type": true,
+            "novel_provenance": 0,
+            "novel_retrieval_reasons": 1,
+            "novel_source": true,
+            "novel_tokens": 5,
+            "original_rank": 0,
+            "retained": false,
+            "source_event_id": "fecb7411-e303-4df4-943f-d64426903a92",
+            "token_novelty": "1"
+          },
+          {
+            "novel_conversation": false,
+            "novel_event_type": false,
+            "novel_provenance": 0,
+            "novel_retrieval_reasons": 0,
+            "novel_source": false,
+            "novel_tokens": 8,
+            "original_rank": 24,
+            "retained": false,
+            "source_event_id": "4c8e7d06-ae88-434f-9a0f-8bb05ecfa2c8",
+            "token_novelty": "8/11"
+          },
+          {
+            "novel_conversation": false,
+            "novel_event_type": false,
+            "novel_provenance": 0,
+            "novel_retrieval_reasons": 0,
+            "novel_source": false,
+            "novel_tokens": 4,
+            "original_rank": 25,
+            "retained": false,
+            "source_event_id": "bcf8b250-5570-42a5-882f-cf78007c806e",
+            "token_novelty": "2/5"
+          },
+          {
+            "novel_conversation": false,
+            "novel_event_type": false,
+            "novel_provenance": 0,
+            "novel_retrieval_reasons": 0,
+            "novel_source": false,
+            "novel_tokens": 0,
+            "original_rank": 1,
+            "retained": false,
+            "source_event_id": "df31c91b-73ea-4d46-a173-56de4a938371",
+            "token_novelty": "0"
+          },
+          {
+            "novel_conversation": false,
+            "novel_event_type": false,
+            "novel_provenance": 0,
+            "novel_retrieval_reasons": 0,
+            "novel_source": false,
+            "novel_tokens": 0,
+            "original_rank": 2,
+            "retained": false,
+            "source_event_id": "990818fa-4489-49ab-9675-173b0a5929ad",
+            "token_novelty": "0"
+          },
+          {
+            "novel_conversation": false,
+            "novel_event_type": false,
+            "novel_provenance": 0,
+            "novel_retrieval_reasons": 0,
+            "novel_source": false,
+            "novel_tokens": 0,
+            "original_rank": 3,
+            "retained": false,
+            "source_event_id": "bf33d5d9-4daf-4987-ab6f-67b839160518",
+            "token_novelty": "0"
+          }
+        ],
+        "event_ids": [
+          "fecb7411-e303-4df4-943f-d64426903a92",
+          "4c8e7d06-ae88-434f-9a0f-8bb05ecfa2c8",
+          "bcf8b250-5570-42a5-882f-cf78007c806e",
+          "df31c91b-73ea-4d46-a173-56de4a938371",
+          "990818fa-4489-49ab-9675-173b0a5929ad",
+          "bf33d5d9-4daf-4987-ab6f-67b839160518"
+        ],
+        "success": true
+      },
+      "current_top_k": {
+        "event_ids": [
+          "fecb7411-e303-4df4-943f-d64426903a92",
+          "df31c91b-73ea-4d46-a173-56de4a938371",
+          "990818fa-4489-49ab-9675-173b0a5929ad",
+          "bf33d5d9-4daf-4987-ab6f-67b839160518",
+          "658187a8-99bc-4029-84f3-8702f7747c04",
+          "5f75f9af-1bb4-4589-bde4-74c549a54f83"
+        ],
+        "success": false
+      },
+      "distractors": 24,
+      "purpose": "Preserve both an older claim and its later correction for downstream supersession reasoning.",
+      "required_pool_ranks": {
+        "4c8e7d06-ae88-434f-9a0f-8bb05ecfa2c8": 25,
+        "bcf8b250-5570-42a5-882f-cf78007c806e": 26
+      },
+      "scenario_id": "correction_pair_under_duplicate_pressure"
+    },
+    {
+      "candidate_pool_size": 39,
+      "coverage_aware": {
+        "decisions": [
+          {
+            "novel_conversation": true,
+            "novel_event_type": true,
+            "novel_provenance": 0,
+            "novel_retrieval_reasons": 1,
+            "novel_source": true,
+            "novel_tokens": 5,
+            "original_rank": 0,
+            "retained": false,
+            "source_event_id": "36811d13-1adb-4634-8f98-2c36166e4eff",
+            "token_novelty": "1"
+          },
+          {
+            "novel_conversation": false,
+            "novel_event_type": false,
+            "novel_provenance": 0,
+            "novel_retrieval_reasons": 0,
+            "novel_source": false,
+            "novel_tokens": 5,
+            "original_rank": 36,
+            "retained": false,
+            "source_event_id": "49317e82-498c-482f-9385-6f194dc74d29",
+            "token_novelty": "5/7"
+          },
+          {
+            "novel_conversation": false,
+            "novel_event_type": false,
+            "novel_provenance": 0,
+            "novel_retrieval_reasons": 0,
+            "novel_source": false,
+            "novel_tokens": 4,
+            "original_rank": 37,
+            "retained": false,
+            "source_event_id": "34322d0d-aecc-4275-ba93-7adcb9d933f8",
+            "token_novelty": "4/7"
+          },
+          {
+            "novel_conversation": false,
+            "novel_event_type": false,
+            "novel_provenance": 0,
+            "novel_retrieval_reasons": 0,
+            "novel_source": false,
+            "novel_tokens": 4,
+            "original_rank": 38,
+            "retained": false,
+            "source_event_id": "2f27e58a-35ee-46b3-9598-bef96082631a",
+            "token_novelty": "4/7"
+          },
+          {
+            "novel_conversation": false,
+            "novel_event_type": false,
+            "novel_provenance": 0,
+            "novel_retrieval_reasons": 0,
+            "novel_source": false,
+            "novel_tokens": 0,
+            "original_rank": 1,
+            "retained": false,
+            "source_event_id": "4be4722a-c14e-4ea5-b71a-8d76c4b5653d",
+            "token_novelty": "0"
+          },
+          {
+            "novel_conversation": false,
+            "novel_event_type": false,
+            "novel_provenance": 0,
+            "novel_retrieval_reasons": 0,
+            "novel_source": false,
+            "novel_tokens": 0,
+            "original_rank": 2,
+            "retained": false,
+            "source_event_id": "01840a20-17c1-4e70-aa9a-6bb9a8ac3a20",
+            "token_novelty": "0"
+          }
+        ],
+        "event_ids": [
+          "36811d13-1adb-4634-8f98-2c36166e4eff",
+          "49317e82-498c-482f-9385-6f194dc74d29",
+          "34322d0d-aecc-4275-ba93-7adcb9d933f8",
+          "2f27e58a-35ee-46b3-9598-bef96082631a",
+          "4be4722a-c14e-4ea5-b71a-8d76c4b5653d",
+          "01840a20-17c1-4e70-aa9a-6bb9a8ac3a20"
+        ],
+        "success": true
+      },
+      "current_top_k": {
+        "event_ids": [
+          "36811d13-1adb-4634-8f98-2c36166e4eff",
+          "4be4722a-c14e-4ea5-b71a-8d76c4b5653d",
+          "01840a20-17c1-4e70-aa9a-6bb9a8ac3a20",
+          "b8820f70-cee9-4e7b-8960-2e79201e1a38",
+          "da9c099f-c2ac-45e0-9e0e-2470d93b8086",
+          "78786fc4-1b1d-4c50-aff0-d58bec9f2b2f"
+        ],
+        "success": false
+      },
+      "distractors": 36,
+      "purpose": "Several complementary older memories must survive newer repetitive distractors after all pass the same retrieval cue.",
+      "required_pool_ranks": {
+        "2f27e58a-35ee-46b3-9598-bef96082631a": 39,
+        "34322d0d-aecc-4275-ba93-7adcb9d933f8": 38,
+        "49317e82-498c-482f-9385-6f194dc74d29": 37
+      },
+      "scenario_id": "distributed_weak_clues"
+    },
+    {
+      "candidate_pool_size": 51,
+      "coverage_aware": {
+        "decisions": [
+          {
+            "novel_conversation": true,
+            "novel_event_type": true,
+            "novel_provenance": 0,
+            "novel_retrieval_reasons": 1,
+            "novel_source": true,
+            "novel_tokens": 4,
+            "original_rank": 0,
+            "retained": false,
+            "source_event_id": "3c090ac9-7654-4d09-9213-34a4535007fb",
+            "token_novelty": "1"
+          },
+          {
+            "novel_conversation": false,
+            "novel_event_type": false,
+            "novel_provenance": 0,
+            "novel_retrieval_reasons": 0,
+            "novel_source": false,
+            "novel_tokens": 9,
+            "original_rank": 50,
+            "retained": false,
+            "source_event_id": "2e734d4d-6645-446f-927d-b5bee286fdb4",
+            "token_novelty": "9/11"
+          },
+          {
+            "novel_conversation": false,
+            "novel_event_type": false,
+            "novel_provenance": 0,
+            "novel_retrieval_reasons": 0,
+            "novel_source": false,
+            "novel_tokens": 0,
+            "original_rank": 1,
+            "retained": false,
+            "source_event_id": "45d41fe4-b347-47a2-b89f-5afd17e19258",
+            "token_novelty": "0"
+          },
+          {
+            "novel_conversation": false,
+            "novel_event_type": false,
+            "novel_provenance": 0,
+            "novel_retrieval_reasons": 0,
+            "novel_source": false,
+            "novel_tokens": 0,
+            "original_rank": 2,
+            "retained": false,
+            "source_event_id": "cff5ad5d-edb2-4b24-a35b-6c3245e53c3b",
+            "token_novelty": "0"
+          },
+          {
+            "novel_conversation": false,
+            "novel_event_type": false,
+            "novel_provenance": 0,
+            "novel_retrieval_reasons": 0,
+            "novel_source": false,
+            "novel_tokens": 0,
+            "original_rank": 3,
+            "retained": false,
+            "source_event_id": "09b04086-64a4-4f89-b283-40f841378730",
+            "token_novelty": "0"
+          },
+          {
+            "novel_conversation": false,
+            "novel_event_type": false,
+            "novel_provenance": 0,
+            "novel_retrieval_reasons": 0,
+            "novel_source": false,
+            "novel_tokens": 0,
+            "original_rank": 4,
+            "retained": false,
+            "source_event_id": "dfb1cc36-f478-4a53-a8f8-3fb8869d4242",
+            "token_novelty": "0"
+          }
+        ],
+        "event_ids": [
+          "3c090ac9-7654-4d09-9213-34a4535007fb",
+          "2e734d4d-6645-446f-927d-b5bee286fdb4",
+          "45d41fe4-b347-47a2-b89f-5afd17e19258",
+          "cff5ad5d-edb2-4b24-a35b-6c3245e53c3b",
+          "09b04086-64a4-4f89-b283-40f841378730",
+          "dfb1cc36-f478-4a53-a8f8-3fb8869d4242"
+        ],
+        "success": true
+      },
+      "current_top_k": {
+        "event_ids": [
+          "3c090ac9-7654-4d09-9213-34a4535007fb",
+          "45d41fe4-b347-47a2-b89f-5afd17e19258",
+          "cff5ad5d-edb2-4b24-a35b-6c3245e53c3b",
+          "09b04086-64a4-4f89-b283-40f841378730",
+          "dfb1cc36-f478-4a53-a8f8-3fb8869d4242",
+          "2f372afc-a58b-4fdf-aec7-8876eeb310ca"
+        ],
+        "success": false
+      },
+      "distractors": 50,
+      "purpose": "Repeated near-duplicate updates should not crowd out one information-dense older event.",
+      "required_pool_ranks": {
+        "2e734d4d-6645-446f-927d-b5bee286fdb4": 51
+      },
+      "scenario_id": "near_duplicate_flood"
+    },
+    {
+      "candidate_pool_size": 27,
+      "coverage_aware": {
+        "decisions": [
+          {
+            "novel_conversation": true,
+            "novel_event_type": true,
+            "novel_provenance": 0,
+            "novel_retrieval_reasons": 1,
+            "novel_source": true,
+            "novel_tokens": 6,
+            "original_rank": 0,
+            "retained": false,
+            "source_event_id": "4bd6c66f-1440-461a-afb1-fa5e8625a905",
+            "token_novelty": "1"
+          },
+          {
+            "novel_conversation": false,
+            "novel_event_type": false,
+            "novel_provenance": 0,
+            "novel_retrieval_reasons": 0,
+            "novel_source": false,
+            "novel_tokens": 5,
+            "original_rank": 26,
+            "retained": false,
+            "source_event_id": "c476aa8b-2382-4841-a8ca-e9b91173fd6e",
+            "token_novelty": "5/7"
+          },
+          {
+            "novel_conversation": false,
+            "novel_event_type": false,
+            "novel_provenance": 0,
+            "novel_retrieval_reasons": 0,
+            "novel_source": false,
+            "novel_tokens": 4,
+            "original_rank": 13,
+            "retained": false,
+            "source_event_id": "ec2ea6f3-4cca-4f46-97a5-900fc2c6f092",
+            "token_novelty": "2/3"
+          },
+          {
+            "novel_conversation": false,
+            "novel_event_type": false,
+            "novel_provenance": 0,
+            "novel_retrieval_reasons": 0,
+            "novel_source": false,
+            "novel_tokens": 2,
+            "original_rank": 1,
+            "retained": false,
+            "source_event_id": "34f971f5-c1eb-446a-ad3e-0018d7d29899",
+            "token_novelty": "1/2"
+          },
+          {
+            "novel_conversation": false,
+            "novel_event_type": false,
+            "novel_provenance": 0,
+            "novel_retrieval_reasons": 0,
+            "novel_source": false,
+            "novel_tokens": 1,
+            "original_rank": 14,
+            "retained": false,
+            "source_event_id": "bb5285b0-3f3f-4f9d-b889-5b77b96cef65",
+            "token_novelty": "1/4"
+          },
+          {
+            "novel_conversation": false,
+            "novel_event_type": false,
+            "novel_provenance": 0,
+            "novel_retrieval_reasons": 0,
+            "novel_source": false,
+            "novel_tokens": 0,
+            "original_rank": 2,
+            "retained": false,
+            "source_event_id": "b2739beb-2945-4791-ba61-3c868c4afe34",
+            "token_novelty": "0"
+          }
+        ],
+        "event_ids": [
+          "4bd6c66f-1440-461a-afb1-fa5e8625a905",
+          "c476aa8b-2382-4841-a8ca-e9b91173fd6e",
+          "ec2ea6f3-4cca-4f46-97a5-900fc2c6f092",
+          "34f971f5-c1eb-446a-ad3e-0018d7d29899",
+          "bb5285b0-3f3f-4f9d-b889-5b77b96cef65",
+          "b2739beb-2945-4791-ba61-3c868c4afe34"
+        ],
+        "success": true
+      },
+      "current_top_k": {
+        "event_ids": [
+          "4bd6c66f-1440-461a-afb1-fa5e8625a905",
+          "34f971f5-c1eb-446a-ad3e-0018d7d29899",
+          "b2739beb-2945-4791-ba61-3c868c4afe34",
+          "263e5630-844f-469f-8243-a792f0cadbfc",
+          "ef06c66d-73ed-4076-ada8-1631f3f5183f",
+          "aa1a7a12-756b-4098-bdc8-a2971c98d954"
+        ],
+        "success": false
+      },
+      "distractors": 24,
+      "purpose": "A bounded packet should preserve distinct evidence from early, middle, and late project history.",
+      "required_pool_ranks": {
+        "4bd6c66f-1440-461a-afb1-fa5e8625a905": 1,
+        "c476aa8b-2382-4841-a8ca-e9b91173fd6e": 27,
+        "ec2ea6f3-4cca-4f46-97a5-900fc2c6f092": 14
+      },
+      "scenario_id": "temporally_distributed_evidence"
+    },
+    {
+      "candidate_pool_size": 40,
+      "coverage_aware": {
+        "decisions": [
+          {
+            "novel_conversation": true,
+            "novel_event_type": true,
+            "novel_provenance": 0,
+            "novel_retrieval_reasons": 1,
+            "novel_source": true,
+            "novel_tokens": 3,
+            "original_rank": 0,
+            "retained": false,
+            "source_event_id": "953e2908-27e1-4054-ba87-646fbe167f32",
+            "token_novelty": "1"
+          },
+          {
+            "novel_conversation": false,
+            "novel_event_type": false,
+            "novel_provenance": 0,
+            "novel_retrieval_reasons": 0,
+            "novel_source": false,
+            "novel_tokens": 6,
+            "original_rank": 40,
+            "retained": true,
+            "source_event_id": "b322b88d-e275-412d-887d-cfa0b7d4ab04",
+            "token_novelty": "1"
+          },
+          {
+            "novel_conversation": false,
+            "novel_event_type": false,
+            "novel_provenance": 0,
+            "novel_retrieval_reasons": 0,
+            "novel_source": false,
+            "novel_tokens": 0,
+            "original_rank": 1,
+            "retained": false,
+            "source_event_id": "676974aa-157d-4a0d-94dd-737c18c8f14d",
+            "token_novelty": "0"
+          },
+          {
+            "novel_conversation": false,
+            "novel_event_type": false,
+            "novel_provenance": 0,
+            "novel_retrieval_reasons": 0,
+            "novel_source": false,
+            "novel_tokens": 0,
+            "original_rank": 2,
+            "retained": false,
+            "source_event_id": "9d47032b-cd07-428d-8c2a-8d50ac3cd7e2",
+            "token_novelty": "0"
+          },
+          {
+            "novel_conversation": false,
+            "novel_event_type": false,
+            "novel_provenance": 0,
+            "novel_retrieval_reasons": 0,
+            "novel_source": false,
+            "novel_tokens": 0,
+            "original_rank": 3,
+            "retained": false,
+            "source_event_id": "306776cf-8ecd-415a-ad37-870cefdabc63",
+            "token_novelty": "0"
+          },
+          {
+            "novel_conversation": false,
+            "novel_event_type": false,
+            "novel_provenance": 0,
+            "novel_retrieval_reasons": 0,
+            "novel_source": false,
+            "novel_tokens": 0,
+            "original_rank": 4,
+            "retained": false,
+            "source_event_id": "b5846ede-60d3-4011-8058-d2ecfe3632a2",
+            "token_novelty": "0"
+          }
+        ],
+        "event_ids": [
+          "953e2908-27e1-4054-ba87-646fbe167f32",
+          "b322b88d-e275-412d-887d-cfa0b7d4ab04",
+          "676974aa-157d-4a0d-94dd-737c18c8f14d",
+          "9d47032b-cd07-428d-8c2a-8d50ac3cd7e2",
+          "306776cf-8ecd-415a-ad37-870cefdabc63",
+          "b5846ede-60d3-4011-8058-d2ecfe3632a2"
+        ],
+        "success": true
+      },
+      "current_top_k": {
+        "event_ids": [
+          "953e2908-27e1-4054-ba87-646fbe167f32",
+          "676974aa-157d-4a0d-94dd-737c18c8f14d",
+          "9d47032b-cd07-428d-8c2a-8d50ac3cd7e2",
+          "306776cf-8ecd-415a-ad37-870cefdabc63",
+          "b5846ede-60d3-4011-8058-d2ecfe3632a2",
+          "3758c075-12e2-486b-a182-07da2d41c012"
+        ],
+        "success": false
+      },
+      "distractors": 40,
+      "purpose": "A later attention shift must not silently erase uniquely useful evidence surfaced in an earlier pass.",
+      "required_pool_ranks": {
+        "b322b88d-e275-412d-887d-cfa0b7d4ab04": null
+      },
+      "scenario_id": "retained_evidence_across_attention_shift"
+    },
+    {
+      "candidate_pool_size": 0,
+      "coverage_aware": {
+        "decisions": [],
+        "event_ids": [],
+        "success": true
+      },
+      "current_top_k": {
+        "event_ids": [],
+        "success": true
+      },
+      "purpose": "Composition must not manufacture evidence when retrieval returns no historical support.",
+      "scenario_id": "unsupported_query_abstention"
+    }
+  ],
+  "database": "jit_agent_test",
+  "evaluation_boundary": "Adaptive retrieval is frozen. Current top-k and coverage-aware composition receive the identical ordered candidate pool and final packet budget.",
+  "final_packet_limit": 6,
+  "generated_at": "2026-08-29T02:28:19.263026+00:00",
+  "head_to_head": {
+    "both": 1,
+    "coverage_aware_only": 6,
+    "neither": 0,
+    "top_k_only": 0
+  },
+  "mode": "stress",
+  "schema_version": 1
+}

@@ -1,0 +1,45 @@
+[project]
+name = "persistent-cognition-runtime"
+# Internal package/release metadata is intentionally independent of Prometheist's
+# architectural milestone labels (v0.5, v0.6, ...). See README.md#versioning.
+version = "0.8.0"
+description = "Local-first persistent cognitive architecture with stateless workers and JIT memory"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "cryptography>=50.0.1",
+    "httpx>=0.28.1",
+    "psutil>=7.2.2",
+    "psycopg[binary]>=3.3.4",
+    "pydantic>=2.13.4",
+    "python-dotenv>=1.2.3",
+]
+
+[project.scripts]
+pcr = "prometheist:main"
+pcr-percept = "prometheist.percept_cli:main"
+
+[build-system]
+requires = ["uv_build>=0.12.5,<0.13.0"]
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-name = "prometheist"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+    "ruff==0.16.4",
+]
+
+[tool.ruff]
+target-version = "py314"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F"]
+
+[tool.pytest.ini_options]
+markers = [
+    "ollama: requires the explicitly requested local Ollama acceptance stack",
+]

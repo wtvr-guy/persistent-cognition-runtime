@@ -1,0 +1,45 @@
+{
+  "benchmark_id": "MEM-SCORE-001",
+  "revision": "cc678cb42bce9d4a383c8dfea3d556d87c8251b6",
+  "executed_by": "GitHub Actions run 308",
+  "environment": "ubuntu-24.04 deterministic CI",
+  "result": "INSUFFICIENT_DISCRIMINATION",
+  "baseline": {
+    "policy": {
+      "lexical_weight": 0.78,
+      "entity_weight": 0.14,
+      "temporal_weight": 0.05,
+      "conversation_weight": 0.03,
+      "phrase_bonus": 0.15,
+      "temporal_scale_days": 30.0,
+      "minimum_score": 0.15,
+      "minimum_direct_support_coverage": 0.60
+    },
+    "jordan_vale": "18/18 questions; 18/18 required evidence; 1/1 unknown abstained; MRR 1.0",
+    "avery_chen": "6/6 questions; 5/5 required evidence; 1/1 unknown abstained; MRR 1.0",
+    "morgan_reyes_holdout": "7/7 questions; 5/5 required evidence; 2/2 unknown abstained; MRR 1.0"
+  },
+  "sweep": {
+    "stage_a": {
+      "parameters": "minimum_score x minimum_direct_support_coverage",
+      "domain": "0.00 through 1.00 inclusive at 0.05 resolution",
+      "equivalent_optima": 63
+    },
+    "stage_b": {
+      "parameters": "four scoring weights on complete 0.10 simplex x phrase_bonus x temporal_scale_days",
+      "phrase_bonus_values": [0.0, 0.05, 0.10, 0.15, 0.25, 0.50, 1.0],
+      "temporal_scale_days": [1.0, 7.0, 30.0, 90.0, 365.0],
+      "equivalent_optima": 4130
+    },
+    "stage_c": {
+      "parameters": "minimum_score x minimum_direct_support_coverage around selected scoring family",
+      "equivalent_optima": 21
+    }
+  },
+  "decision": {
+    "retune_production": false,
+    "retain_current_values": "PROVISIONAL",
+    "reason": "The existing frozen regression corpora establish that the baseline works but cannot distinguish it from thousands of materially different policies. Selecting any tied candidate would be arbitrary. The benchmark must add discriminating adversarial cue-tradeoff and false-positive scenarios before an exact optimum can be claimed.",
+    "next_experiment": "MEM-SCORE-001B"
+  }
+}

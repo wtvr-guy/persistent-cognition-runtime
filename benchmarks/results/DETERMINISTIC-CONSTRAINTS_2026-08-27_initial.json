@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "captured_from": {
+    "workflow_run": 33047808727,
+    "workflow_run_number": 329,
+    "head_sha": "ebdb687f27046acc1816f4e270c9d93835c59485",
+    "environment": "GitHub Actions Ubuntu 24.04 / Python 3.12 / PostgreSQL 16",
+    "runner": "benchmarks/run_deterministic_constraints.py"
+  },
+  "results": {
+    "MEM-BREADTH-001": {
+      "result": "INSUFFICIENT_DISCRIMINATION",
+      "frozen_corpora": [
+        "jordan_vale_v1.json",
+        "avery_chen_v1.json",
+        "morgan_reyes_v05_robustness.json"
+      ],
+      "explored_packet_limits": [1, 24],
+      "current_packet_limit": 5,
+      "current_quality": {
+        "questions": 31,
+        "successes": 31,
+        "required_events": 28,
+        "required_found": 28,
+        "unknown_questions": 4,
+        "unknown_abstained": 4,
+        "reciprocal_rank_sum": 27.0,
+        "failures": []
+      },
+      "quality_equivalent_limits": [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24],
+      "minimum_quality_equivalent_limit": 3,
+      "current_is_quality_equivalent": true,
+      "unresolved_parameters": [
+        "postgres_candidate_limits",
+        "attention_activation_candidate_limit",
+        "active_working_state_limit",
+        "capability_result_limits",
+        "final_composed_context_limit"
+      ],
+      "decision": "The current packet limit is correct on the frozen corpus but is not uniquely justified; the corpus also does not discriminate the other production breadth layers."
+    },
+    "MEM-GRAPH-001": {
+      "result": "INSUFFICIENT_DISCRIMINATION",
+      "frozen_corpora": [
+        "jordan_vale_v1.json",
+        "avery_chen_v1.json",
+        "morgan_reyes_v05_robustness.json"
+      ],
+      "max_hops_explored": [1, 24],
+      "decay_values": [0.25, 0.5, 0.75, 0.85, 0.9, 1.0],
+      "baseline": {
+        "max_hops": 2,
+        "decay": 0.85,
+        "questions": 31,
+        "successes": 31,
+        "required_events": 28,
+        "required_found": 28,
+        "unknown_questions": 4,
+        "unknown_abstained": 4,
+        "reciprocal_rank_sum": 27.0,
+        "association_hops_recorded": 15,
+        "failures": []
+      },
+      "baseline_is_quality_equivalent": true,
+      "equivalent_optima": 120,
+      "lowest_work_equivalent": {
+        "max_hops": 1,
+        "decay": 0.5,
+        "questions": 31,
+        "successes": 31,
+        "required_events": 28,
+        "required_found": 28,
+        "unknown_questions": 4,
+        "unknown_abstained": 4,
+        "reciprocal_rank_sum": 27.0,
+        "association_hops_recorded": 15,
+        "failures": []
+      },
+      "unresolved_parameters": [
+        "postgres_association_loader_limit",
+        "profile_specific_graph_budgets"
+      ],
+      "decision": "The current graph policy is correct on the frozen graph but 120 explored policies are quality-equivalent, so exact hop, decay, and breadth values are not empirically identified."
+    },
+    "CAP-DISCOVERY-001": {
+      "result": "INSUFFICIENT_DISCRIMINATION",
+      "production_oracles_passed": true,
+      "coefficient_sets_tested": [
+        [8.0, 3.0, 0.25, 1.5, 0.15],
+        [4.0, 1.5, 0.125, 0.75, 0.075],
+        [16.0, 6.0, 0.5, 3.0, 0.3],
+        [8.0, 2.0, 0.0, 2.0, 0.0],
+        [4.0, 4.0, 0.5, 1.0, 0.1]
+      ],
+      "coefficient_sets_preserving_oracle_order": 5,
+      "production_cases": [
+        {"query": "weather lookup", "expected_first": "weather_lookup", "ranked": ["weather_lookup", "general_lookup"]},
+        {"query": "please compare records", "expected_first": "record_reconcile", "ranked": ["record_reconcile"]},
+        {"query": "reconcile these records", "expected_first": "record_reconcile", "ranked": ["record_reconcile"]},
+        {"query": "project lookup", "expected_first": "project_lookup", "ranked": ["project_lookup", "general_lookup"]}
+      ],
+      "decision": "All five materially different coefficient vectors preserve every current routing oracle; the exact production coefficients are therefore not empirically identified."
+    },
+    "SCHED-SERVICE-001": {
+      "result": "INSUFFICIENT_DISCRIMINATION",
+      "current_wait_cycles": {
+        "INTERACTIVE": 1,
+        "USER_WORK": 4,
+        "SUPPORT": 8,
+        "MAINTENANCE": 32,
+        "BACKGROUND": 128
+      },
+      "scaled_candidates_preserving_service_order": ["quarter", "half", "current", "double", "quadruple"],
+      "decision": "Without an empirical arrival distribution and queue-delay SLA, substantially different wait vectors satisfy the same deterministic service-order invariant."
+    }
+  },
+  "verification_after_benchmark": {
+    "ollama_acceptance_tests_collected": 5,
+    "pytest_passed": 233,
+    "pytest_skipped": 5
+  }
+}

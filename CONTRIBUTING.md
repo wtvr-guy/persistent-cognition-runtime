@@ -1,11 +1,11 @@
 # Contributing
 
-This repository currently contains architecture documentation, not a runnable runtime.
+Preserve the [engineering constitution](CONSTITUTION.md): append-only canonical evidence, stateless specialist calls, bounded active context, deterministic control authority, and durable worker boundaries.
 
-Proposals should identify a concrete failure or limitation, the smallest mechanism that could address it, affected invariants, and a reproducible evaluation. Distinguish intended behavior from implementation and measured results.
+Propose changes against a concrete failure or measured limitation. Freeze a baseline, change one mechanism, and rerun the same evaluation. Preserve negative results.
 
-For extraction work, pin the source commit, preserve license and attribution, document dependencies, and include setup and recovery instructions. Do not copy personal datasets, credentials, local configuration, or unrelated application content.
+Run source-parity verification, Ruff, registry and constraint audits, deterministic calibration, and the PostgreSQL regression suite. Model- and hardware-sensitive changes also need the corresponding live acceptance checks. Record skipped checks accurately.
 
-Treat model outputs as typed proposals or evidence-bearing semantic results. Keep deterministic authority in the runtime. Persist meaningful changes and enough causal evidence to audit and recover them.
+The extraction manifest detects modifications to imported code. Later intentional changes must update the provenance record with their rationale rather than quietly claiming continued byte-for-byte equivalence.
 
-All repository material is distributed under the license in LICENSE.
+Use synthetic test fixtures. Keep runtime memory and credentials local. This repository's scope is memory, inference, execution, and their supporting tools. All material is distributed under [LICENSE](LICENSE).

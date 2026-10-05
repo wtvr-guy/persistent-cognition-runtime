@@ -1,0 +1,5189 @@
+{
+  "benchmark_id": "MEM-ADAPT-001",
+  "cases": [
+    {
+      "aperture_already_sufficient": false,
+      "observations": [
+        {
+          "association_decay": null,
+          "association_effort": null,
+          "association_hops": 0,
+          "association_limit": null,
+          "association_trace_edges": 0,
+          "candidate_limit": 750,
+          "elapsed_ms": 6.898,
+          "focus_mode": null,
+          "method": "attention_aperture",
+          "required_event_ids": [
+            "7820ffce-54e2-4ded-9a41-ef1fd081c96f"
+          ],
+          "returned_event_ids": [
+            "59f3ba68-17a9-46da-91f7-f523956a967e",
+            "ff1a830e-e530-4c6f-af4d-05386305cb78",
+            "2557a957-7594-4205-b540-a38552a71bd7",
+            "32462be0-256c-4857-9846-fe7e084ceb39",
+            "236b5233-550d-4c7c-81a2-b40ad73e0db8",
+            "84b763bd-c037-4517-aba1-0ee708aa183e",
+            "b431aec7-1f20-4ff5-a9e2-3e36ff1eceb0"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": null,
+          "association_hops": 3,
+          "association_limit": 600,
+          "association_trace_edges": 0,
+          "candidate_limit": 350,
+          "elapsed_ms": 8.459,
+          "focus_mode": null,
+          "method": "frozen:DEEPER_RESEARCH",
+          "required_event_ids": [
+            "7820ffce-54e2-4ded-9a41-ef1fd081c96f"
+          ],
+          "returned_event_ids": [
+            "ff1a830e-e530-4c6f-af4d-05386305cb78",
+            "2557a957-7594-4205-b540-a38552a71bd7",
+            "32462be0-256c-4857-9846-fe7e084ceb39",
+            "236b5233-550d-4c7c-81a2-b40ad73e0db8",
+            "84b763bd-c037-4517-aba1-0ee708aa183e",
+            "b431aec7-1f20-4ff5-a9e2-3e36ff1eceb0",
+            "7820ffce-54e2-4ded-9a41-ef1fd081c96f"
+          ],
+          "scope": null,
+          "success": true
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": "AssociationEffort.MODERATE",
+          "association_hops": 3,
+          "association_limit": 750,
+          "association_trace_edges": 0,
+          "candidate_limit": 600,
+          "elapsed_ms": 5.996,
+          "focus_mode": "FocusMode.SINGLE_ANCHOR",
+          "method": "adaptive",
+          "required_event_ids": [
+            "7820ffce-54e2-4ded-9a41-ef1fd081c96f"
+          ],
+          "returned_event_ids": [
+            "ff1a830e-e530-4c6f-af4d-05386305cb78",
+            "2557a957-7594-4205-b540-a38552a71bd7",
+            "32462be0-256c-4857-9846-fe7e084ceb39",
+            "236b5233-550d-4c7c-81a2-b40ad73e0db8",
+            "84b763bd-c037-4517-aba1-0ee708aa183e",
+            "b431aec7-1f20-4ff5-a9e2-3e36ff1eceb0",
+            "7820ffce-54e2-4ded-9a41-ef1fd081c96f"
+          ],
+          "scope": "ScopeProfile.CONTEXTUAL",
+          "success": true
+        }
+      ],
+      "purpose": "Required evidence is candidate-visible but just outside the surfaced aperture packet.",
+      "scenario_id": "aperture_packet_truncation"
+    },
+    {
+      "aperture_already_sufficient": false,
+      "observations": [
+        {
+          "association_decay": null,
+          "association_effort": null,
+          "association_hops": 0,
+          "association_limit": null,
+          "association_trace_edges": 0,
+          "candidate_limit": 750,
+          "elapsed_ms": 13.013,
+          "focus_mode": null,
+          "method": "attention_aperture",
+          "required_event_ids": [
+            "e87409be-5c21-47ed-bee5-6ae309b4389d"
+          ],
+          "returned_event_ids": [
+            "77c8d0ab-e374-497b-8c2e-ef6d22456ba7",
+            "276e0900-c44a-4154-b50d-86a758dce0e5",
+            "95e9752c-b12a-435c-b279-12d6b1adee2a",
+            "aa7e00fb-091e-4b46-a35b-c536b63e1e87",
+            "6d7d5972-b65c-4ca8-ab16-a216e87802c3",
+            "b0791fec-5e45-45b3-bb78-e6f1a0dfd173",
+            "646db491-f936-4aa8-acaa-fe0aacab9aaf"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.85,
+          "association_effort": null,
+          "association_hops": 2,
+          "association_limit": 250,
+          "association_trace_edges": 0,
+          "candidate_limit": 500,
+          "elapsed_ms": 19.323,
+          "focus_mode": null,
+          "method": "frozen:STANDARD",
+          "required_event_ids": [
+            "e87409be-5c21-47ed-bee5-6ae309b4389d"
+          ],
+          "returned_event_ids": [
+            "276e0900-c44a-4154-b50d-86a758dce0e5",
+            "95e9752c-b12a-435c-b279-12d6b1adee2a",
+            "aa7e00fb-091e-4b46-a35b-c536b63e1e87",
+            "6d7d5972-b65c-4ca8-ab16-a216e87802c3",
+            "b0791fec-5e45-45b3-bb78-e6f1a0dfd173",
+            "646db491-f936-4aa8-acaa-fe0aacab9aaf",
+            "211b72ce-f482-402c-b483-40fc1dfedd41",
+            "20c9a6aa-8288-4546-8526-fad64c4a8d52",
+            "666fc2ed-a1c8-4b12-8c23-ebad045467a0",
+            "9bdfbfd5-824b-4cbb-a79c-1b34e35e350c"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": null,
+          "association_hops": 3,
+          "association_limit": 600,
+          "association_trace_edges": 0,
+          "candidate_limit": 350,
+          "elapsed_ms": 16.498,
+          "focus_mode": null,
+          "method": "frozen:DEEPER_RESEARCH",
+          "required_event_ids": [
+            "e87409be-5c21-47ed-bee5-6ae309b4389d"
+          ],
+          "returned_event_ids": [
+            "276e0900-c44a-4154-b50d-86a758dce0e5",
+            "95e9752c-b12a-435c-b279-12d6b1adee2a",
+            "aa7e00fb-091e-4b46-a35b-c536b63e1e87",
+            "6d7d5972-b65c-4ca8-ab16-a216e87802c3",
+            "b0791fec-5e45-45b3-bb78-e6f1a0dfd173",
+            "646db491-f936-4aa8-acaa-fe0aacab9aaf",
+            "211b72ce-f482-402c-b483-40fc1dfedd41",
+            "20c9a6aa-8288-4546-8526-fad64c4a8d52",
+            "666fc2ed-a1c8-4b12-8c23-ebad045467a0",
+            "9bdfbfd5-824b-4cbb-a79c-1b34e35e350c"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": null,
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 0,
+          "candidate_limit": 150,
+          "elapsed_ms": 15.823,
+          "focus_mode": null,
+          "method": "frozen:FOCUSED_RECALL",
+          "required_event_ids": [
+            "e87409be-5c21-47ed-bee5-6ae309b4389d"
+          ],
+          "returned_event_ids": [
+            "276e0900-c44a-4154-b50d-86a758dce0e5",
+            "95e9752c-b12a-435c-b279-12d6b1adee2a",
+            "aa7e00fb-091e-4b46-a35b-c536b63e1e87",
+            "6d7d5972-b65c-4ca8-ab16-a216e87802c3",
+            "b0791fec-5e45-45b3-bb78-e6f1a0dfd173",
+            "646db491-f936-4aa8-acaa-fe0aacab9aaf",
+            "211b72ce-f482-402c-b483-40fc1dfedd41",
+            "20c9a6aa-8288-4546-8526-fad64c4a8d52",
+            "666fc2ed-a1c8-4b12-8c23-ebad045467a0",
+            "9bdfbfd5-824b-4cbb-a79c-1b34e35e350c"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": "AssociationEffort.MODERATE",
+          "association_hops": 3,
+          "association_limit": 750,
+          "association_trace_edges": 0,
+          "candidate_limit": 600,
+          "elapsed_ms": 16.094,
+          "focus_mode": "FocusMode.SINGLE_ANCHOR",
+          "method": "adaptive",
+          "required_event_ids": [
+            "e87409be-5c21-47ed-bee5-6ae309b4389d"
+          ],
+          "returned_event_ids": [
+            "276e0900-c44a-4154-b50d-86a758dce0e5",
+            "95e9752c-b12a-435c-b279-12d6b1adee2a",
+            "aa7e00fb-091e-4b46-a35b-c536b63e1e87",
+            "6d7d5972-b65c-4ca8-ab16-a216e87802c3",
+            "b0791fec-5e45-45b3-bb78-e6f1a0dfd173",
+            "646db491-f936-4aa8-acaa-fe0aacab9aaf",
+            "211b72ce-f482-402c-b483-40fc1dfedd41",
+            "20c9a6aa-8288-4546-8526-fad64c4a8d52",
+            "666fc2ed-a1c8-4b12-8c23-ebad045467a0",
+            "9bdfbfd5-824b-4cbb-a79c-1b34e35e350c"
+          ],
+          "scope": "ScopeProfile.CONTEXTUAL",
+          "success": false
+        }
+      ],
+      "purpose": "An old exact-phrase target competes with newer equal-term candidates until bounded candidate routing starves it.",
+      "scenario_id": "direct_candidate_ceiling",
+      "stress_unit": "newer-equal-term-distractors",
+      "stress_value": 120
+    },
+    {
+      "aperture_already_sufficient": false,
+      "observations": [
+        {
+          "association_decay": null,
+          "association_effort": null,
+          "association_hops": 0,
+          "association_limit": null,
+          "association_trace_edges": 0,
+          "candidate_limit": 750,
+          "elapsed_ms": 14.825,
+          "focus_mode": null,
+          "method": "attention_aperture",
+          "required_event_ids": [
+            "a9d8ad16-afd6-4a99-a4dd-d28ce1de27ef"
+          ],
+          "returned_event_ids": [
+            "54bea1fd-ad2d-4077-bc07-d5918458724a",
+            "dcd3bc41-f97f-4170-8aab-1d930bc67c14",
+            "018f2999-c59b-4a2f-bb57-bea5dc226052",
+            "f643e249-d20e-418e-a94f-05791dd4c727",
+            "fe19a4fa-d148-4e9f-9e35-b06f8ef52fe4",
+            "764e5efe-1afc-4ab1-a27f-f52422cb5ba4",
+            "eea033ab-4d89-4572-b4cf-52a2c807f682"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.85,
+          "association_effort": null,
+          "association_hops": 2,
+          "association_limit": 250,
+          "association_trace_edges": 0,
+          "candidate_limit": 500,
+          "elapsed_ms": 20.363,
+          "focus_mode": null,
+          "method": "frozen:STANDARD",
+          "required_event_ids": [
+            "a9d8ad16-afd6-4a99-a4dd-d28ce1de27ef"
+          ],
+          "returned_event_ids": [
+            "dcd3bc41-f97f-4170-8aab-1d930bc67c14",
+            "018f2999-c59b-4a2f-bb57-bea5dc226052",
+            "f643e249-d20e-418e-a94f-05791dd4c727",
+            "fe19a4fa-d148-4e9f-9e35-b06f8ef52fe4",
+            "764e5efe-1afc-4ab1-a27f-f52422cb5ba4",
+            "eea033ab-4d89-4572-b4cf-52a2c807f682",
+            "80173870-007b-4494-8a17-0586f64e6946",
+            "a6840a20-07db-4665-ad3b-258a13ace63f",
+            "2cfec6c8-d42d-4386-9658-09f257cd7d2b",
+            "5027e72d-5448-44ac-8bcf-b4cc0df672cd"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": null,
+          "association_hops": 3,
+          "association_limit": 600,
+          "association_trace_edges": 0,
+          "candidate_limit": 350,
+          "elapsed_ms": 17.323,
+          "focus_mode": null,
+          "method": "frozen:DEEPER_RESEARCH",
+          "required_event_ids": [
+            "a9d8ad16-afd6-4a99-a4dd-d28ce1de27ef"
+          ],
+          "returned_event_ids": [
+            "dcd3bc41-f97f-4170-8aab-1d930bc67c14",
+            "018f2999-c59b-4a2f-bb57-bea5dc226052",
+            "f643e249-d20e-418e-a94f-05791dd4c727",
+            "fe19a4fa-d148-4e9f-9e35-b06f8ef52fe4",
+            "764e5efe-1afc-4ab1-a27f-f52422cb5ba4",
+            "eea033ab-4d89-4572-b4cf-52a2c807f682",
+            "80173870-007b-4494-8a17-0586f64e6946",
+            "a6840a20-07db-4665-ad3b-258a13ace63f",
+            "2cfec6c8-d42d-4386-9658-09f257cd7d2b",
+            "5027e72d-5448-44ac-8bcf-b4cc0df672cd"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": null,
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 0,
+          "candidate_limit": 150,
+          "elapsed_ms": 17.033,
+          "focus_mode": null,
+          "method": "frozen:FOCUSED_RECALL",
+          "required_event_ids": [
+            "a9d8ad16-afd6-4a99-a4dd-d28ce1de27ef"
+          ],
+          "returned_event_ids": [
+            "dcd3bc41-f97f-4170-8aab-1d930bc67c14",
+            "018f2999-c59b-4a2f-bb57-bea5dc226052",
+            "f643e249-d20e-418e-a94f-05791dd4c727",
+            "fe19a4fa-d148-4e9f-9e35-b06f8ef52fe4",
+            "764e5efe-1afc-4ab1-a27f-f52422cb5ba4",
+            "eea033ab-4d89-4572-b4cf-52a2c807f682",
+            "80173870-007b-4494-8a17-0586f64e6946",
+            "a6840a20-07db-4665-ad3b-258a13ace63f",
+            "2cfec6c8-d42d-4386-9658-09f257cd7d2b",
+            "5027e72d-5448-44ac-8bcf-b4cc0df672cd"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": "AssociationEffort.MODERATE",
+          "association_hops": 3,
+          "association_limit": 750,
+          "association_trace_edges": 0,
+          "candidate_limit": 600,
+          "elapsed_ms": 18.454,
+          "focus_mode": "FocusMode.SINGLE_ANCHOR",
+          "method": "adaptive",
+          "required_event_ids": [
+            "a9d8ad16-afd6-4a99-a4dd-d28ce1de27ef"
+          ],
+          "returned_event_ids": [
+            "dcd3bc41-f97f-4170-8aab-1d930bc67c14",
+            "018f2999-c59b-4a2f-bb57-bea5dc226052",
+            "f643e249-d20e-418e-a94f-05791dd4c727",
+            "fe19a4fa-d148-4e9f-9e35-b06f8ef52fe4",
+            "764e5efe-1afc-4ab1-a27f-f52422cb5ba4",
+            "eea033ab-4d89-4572-b4cf-52a2c807f682",
+            "80173870-007b-4494-8a17-0586f64e6946",
+            "a6840a20-07db-4665-ad3b-258a13ace63f",
+            "2cfec6c8-d42d-4386-9658-09f257cd7d2b",
+            "5027e72d-5448-44ac-8bcf-b4cc0df672cd"
+          ],
+          "scope": "ScopeProfile.CONTEXTUAL",
+          "success": false
+        }
+      ],
+      "purpose": "An old exact-phrase target competes with newer equal-term candidates until bounded candidate routing starves it.",
+      "scenario_id": "direct_candidate_ceiling",
+      "stress_unit": "newer-equal-term-distractors",
+      "stress_value": 140
+    },
+    {
+      "aperture_already_sufficient": false,
+      "observations": [
+        {
+          "association_decay": null,
+          "association_effort": null,
+          "association_hops": 0,
+          "association_limit": null,
+          "association_trace_edges": 0,
+          "candidate_limit": 750,
+          "elapsed_ms": 16.811,
+          "focus_mode": null,
+          "method": "attention_aperture",
+          "required_event_ids": [
+            "99feee05-fc83-40f8-ba47-0dfc5ba4cc13"
+          ],
+          "returned_event_ids": [
+            "7bc460e0-bcd8-4b44-8a1e-9243a8fed59e",
+            "03a44cd4-9df6-4cc5-b58a-9dd3a021c111",
+            "3ae23fd8-0f52-4055-8a5b-facd992e6d9e",
+            "b1ca415f-203a-4c27-90c1-b20c208a8d6d",
+            "c6ac3c4e-d928-461e-9702-9e15edbb2530",
+            "23cf4a73-5a36-454b-9c42-8abf06abcc26",
+            "4a42e053-93e8-467c-9fe9-0f1a6f36ffcd"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.85,
+          "association_effort": null,
+          "association_hops": 2,
+          "association_limit": 250,
+          "association_trace_edges": 0,
+          "candidate_limit": 500,
+          "elapsed_ms": 23.072,
+          "focus_mode": null,
+          "method": "frozen:STANDARD",
+          "required_event_ids": [
+            "99feee05-fc83-40f8-ba47-0dfc5ba4cc13"
+          ],
+          "returned_event_ids": [
+            "03a44cd4-9df6-4cc5-b58a-9dd3a021c111",
+            "3ae23fd8-0f52-4055-8a5b-facd992e6d9e",
+            "b1ca415f-203a-4c27-90c1-b20c208a8d6d",
+            "c6ac3c4e-d928-461e-9702-9e15edbb2530",
+            "23cf4a73-5a36-454b-9c42-8abf06abcc26",
+            "4a42e053-93e8-467c-9fe9-0f1a6f36ffcd",
+            "18aebfe2-7043-4e6c-bbef-98f703115542",
+            "799e5396-2842-4049-9969-37d4bb3f7210",
+            "59ac0365-fe6c-49ba-8b1c-2aa6d40ab5e9",
+            "0e147c91-f4d2-4b34-ba78-1c6a1a38e005"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": null,
+          "association_hops": 3,
+          "association_limit": 600,
+          "association_trace_edges": 0,
+          "candidate_limit": 350,
+          "elapsed_ms": 27.875,
+          "focus_mode": null,
+          "method": "frozen:DEEPER_RESEARCH",
+          "required_event_ids": [
+            "99feee05-fc83-40f8-ba47-0dfc5ba4cc13"
+          ],
+          "returned_event_ids": [
+            "03a44cd4-9df6-4cc5-b58a-9dd3a021c111",
+            "3ae23fd8-0f52-4055-8a5b-facd992e6d9e",
+            "b1ca415f-203a-4c27-90c1-b20c208a8d6d",
+            "c6ac3c4e-d928-461e-9702-9e15edbb2530",
+            "23cf4a73-5a36-454b-9c42-8abf06abcc26",
+            "4a42e053-93e8-467c-9fe9-0f1a6f36ffcd",
+            "18aebfe2-7043-4e6c-bbef-98f703115542",
+            "799e5396-2842-4049-9969-37d4bb3f7210",
+            "59ac0365-fe6c-49ba-8b1c-2aa6d40ab5e9",
+            "0e147c91-f4d2-4b34-ba78-1c6a1a38e005"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": null,
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 0,
+          "candidate_limit": 150,
+          "elapsed_ms": 17.374,
+          "focus_mode": null,
+          "method": "frozen:FOCUSED_RECALL",
+          "required_event_ids": [
+            "99feee05-fc83-40f8-ba47-0dfc5ba4cc13"
+          ],
+          "returned_event_ids": [
+            "03a44cd4-9df6-4cc5-b58a-9dd3a021c111",
+            "3ae23fd8-0f52-4055-8a5b-facd992e6d9e",
+            "b1ca415f-203a-4c27-90c1-b20c208a8d6d",
+            "c6ac3c4e-d928-461e-9702-9e15edbb2530",
+            "23cf4a73-5a36-454b-9c42-8abf06abcc26",
+            "4a42e053-93e8-467c-9fe9-0f1a6f36ffcd",
+            "18aebfe2-7043-4e6c-bbef-98f703115542",
+            "799e5396-2842-4049-9969-37d4bb3f7210",
+            "59ac0365-fe6c-49ba-8b1c-2aa6d40ab5e9",
+            "0e147c91-f4d2-4b34-ba78-1c6a1a38e005"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": "AssociationEffort.MODERATE",
+          "association_hops": 3,
+          "association_limit": 750,
+          "association_trace_edges": 0,
+          "candidate_limit": 600,
+          "elapsed_ms": 17.958,
+          "focus_mode": "FocusMode.SINGLE_ANCHOR",
+          "method": "adaptive",
+          "required_event_ids": [
+            "99feee05-fc83-40f8-ba47-0dfc5ba4cc13"
+          ],
+          "returned_event_ids": [
+            "03a44cd4-9df6-4cc5-b58a-9dd3a021c111",
+            "3ae23fd8-0f52-4055-8a5b-facd992e6d9e",
+            "b1ca415f-203a-4c27-90c1-b20c208a8d6d",
+            "c6ac3c4e-d928-461e-9702-9e15edbb2530",
+            "23cf4a73-5a36-454b-9c42-8abf06abcc26",
+            "4a42e053-93e8-467c-9fe9-0f1a6f36ffcd",
+            "18aebfe2-7043-4e6c-bbef-98f703115542",
+            "799e5396-2842-4049-9969-37d4bb3f7210",
+            "59ac0365-fe6c-49ba-8b1c-2aa6d40ab5e9",
+            "0e147c91-f4d2-4b34-ba78-1c6a1a38e005"
+          ],
+          "scope": "ScopeProfile.CONTEXTUAL",
+          "success": false
+        }
+      ],
+      "purpose": "An old exact-phrase target competes with newer equal-term candidates until bounded candidate routing starves it.",
+      "scenario_id": "direct_candidate_ceiling",
+      "stress_unit": "newer-equal-term-distractors",
+      "stress_value": 160
+    },
+    {
+      "aperture_already_sufficient": false,
+      "observations": [
+        {
+          "association_decay": null,
+          "association_effort": null,
+          "association_hops": 0,
+          "association_limit": null,
+          "association_trace_edges": 0,
+          "candidate_limit": 750,
+          "elapsed_ms": 22.513,
+          "focus_mode": null,
+          "method": "attention_aperture",
+          "required_event_ids": [
+            "3578db40-9911-46c7-83c7-dcae87b6b53e"
+          ],
+          "returned_event_ids": [
+            "f30272bc-2248-4806-863b-6813b4453a9f",
+            "22a911a1-ea3b-4619-b9f5-71d15354d5bf",
+            "d0efac20-fbf0-4b9a-a75f-9c13c4e6cfa6",
+            "e8705b6c-3ee4-4ead-b2c0-29ab527f8e2b",
+            "876c52d1-c59e-4901-a045-f03ab7e66820",
+            "34a314b3-966c-4799-8dd9-8d8b35b6d965",
+            "d667bd27-9510-45ee-89c2-7f75840ae048"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.85,
+          "association_effort": null,
+          "association_hops": 2,
+          "association_limit": 250,
+          "association_trace_edges": 0,
+          "candidate_limit": 500,
+          "elapsed_ms": 29.164,
+          "focus_mode": null,
+          "method": "frozen:STANDARD",
+          "required_event_ids": [
+            "3578db40-9911-46c7-83c7-dcae87b6b53e"
+          ],
+          "returned_event_ids": [
+            "22a911a1-ea3b-4619-b9f5-71d15354d5bf",
+            "d0efac20-fbf0-4b9a-a75f-9c13c4e6cfa6",
+            "e8705b6c-3ee4-4ead-b2c0-29ab527f8e2b",
+            "876c52d1-c59e-4901-a045-f03ab7e66820",
+            "34a314b3-966c-4799-8dd9-8d8b35b6d965",
+            "d667bd27-9510-45ee-89c2-7f75840ae048",
+            "439a84b0-0f3f-4252-953b-1e370887120e",
+            "7de4a5a0-2be4-4f2e-a1e3-fd3727be2bf7",
+            "31b21d82-4edc-4fdf-94fc-05bb500034cf",
+            "1dedf448-d832-4a5f-8b40-6309992383aa"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": null,
+          "association_hops": 3,
+          "association_limit": 600,
+          "association_trace_edges": 0,
+          "candidate_limit": 350,
+          "elapsed_ms": 24.694,
+          "focus_mode": null,
+          "method": "frozen:DEEPER_RESEARCH",
+          "required_event_ids": [
+            "3578db40-9911-46c7-83c7-dcae87b6b53e"
+          ],
+          "returned_event_ids": [
+            "22a911a1-ea3b-4619-b9f5-71d15354d5bf",
+            "d0efac20-fbf0-4b9a-a75f-9c13c4e6cfa6",
+            "e8705b6c-3ee4-4ead-b2c0-29ab527f8e2b",
+            "876c52d1-c59e-4901-a045-f03ab7e66820",
+            "34a314b3-966c-4799-8dd9-8d8b35b6d965",
+            "d667bd27-9510-45ee-89c2-7f75840ae048",
+            "439a84b0-0f3f-4252-953b-1e370887120e",
+            "7de4a5a0-2be4-4f2e-a1e3-fd3727be2bf7",
+            "31b21d82-4edc-4fdf-94fc-05bb500034cf",
+            "1dedf448-d832-4a5f-8b40-6309992383aa"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": null,
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 0,
+          "candidate_limit": 150,
+          "elapsed_ms": 18.353,
+          "focus_mode": null,
+          "method": "frozen:FOCUSED_RECALL",
+          "required_event_ids": [
+            "3578db40-9911-46c7-83c7-dcae87b6b53e"
+          ],
+          "returned_event_ids": [
+            "22a911a1-ea3b-4619-b9f5-71d15354d5bf",
+            "d0efac20-fbf0-4b9a-a75f-9c13c4e6cfa6",
+            "e8705b6c-3ee4-4ead-b2c0-29ab527f8e2b",
+            "876c52d1-c59e-4901-a045-f03ab7e66820",
+            "34a314b3-966c-4799-8dd9-8d8b35b6d965",
+            "d667bd27-9510-45ee-89c2-7f75840ae048",
+            "439a84b0-0f3f-4252-953b-1e370887120e",
+            "7de4a5a0-2be4-4f2e-a1e3-fd3727be2bf7",
+            "31b21d82-4edc-4fdf-94fc-05bb500034cf",
+            "1dedf448-d832-4a5f-8b40-6309992383aa"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": "AssociationEffort.MODERATE",
+          "association_hops": 3,
+          "association_limit": 750,
+          "association_trace_edges": 0,
+          "candidate_limit": 600,
+          "elapsed_ms": 26.452,
+          "focus_mode": "FocusMode.SINGLE_ANCHOR",
+          "method": "adaptive",
+          "required_event_ids": [
+            "3578db40-9911-46c7-83c7-dcae87b6b53e"
+          ],
+          "returned_event_ids": [
+            "22a911a1-ea3b-4619-b9f5-71d15354d5bf",
+            "d0efac20-fbf0-4b9a-a75f-9c13c4e6cfa6",
+            "e8705b6c-3ee4-4ead-b2c0-29ab527f8e2b",
+            "876c52d1-c59e-4901-a045-f03ab7e66820",
+            "34a314b3-966c-4799-8dd9-8d8b35b6d965",
+            "d667bd27-9510-45ee-89c2-7f75840ae048",
+            "439a84b0-0f3f-4252-953b-1e370887120e",
+            "7de4a5a0-2be4-4f2e-a1e3-fd3727be2bf7",
+            "31b21d82-4edc-4fdf-94fc-05bb500034cf",
+            "1dedf448-d832-4a5f-8b40-6309992383aa"
+          ],
+          "scope": "ScopeProfile.CONTEXTUAL",
+          "success": false
+        }
+      ],
+      "purpose": "An old exact-phrase target competes with newer equal-term candidates until bounded candidate routing starves it.",
+      "scenario_id": "direct_candidate_ceiling",
+      "stress_unit": "newer-equal-term-distractors",
+      "stress_value": 240
+    },
+    {
+      "aperture_already_sufficient": false,
+      "observations": [
+        {
+          "association_decay": null,
+          "association_effort": null,
+          "association_hops": 0,
+          "association_limit": null,
+          "association_trace_edges": 0,
+          "candidate_limit": 750,
+          "elapsed_ms": 24.039,
+          "focus_mode": null,
+          "method": "attention_aperture",
+          "required_event_ids": [
+            "ac136fd8-b6b2-4521-bd07-cb9b6c6d7692"
+          ],
+          "returned_event_ids": [
+            "7f79e215-e6e0-41c9-847a-8518ed3bd0b7",
+            "ff84d57e-29ec-4b64-883b-edaeec3c9a9d",
+            "64c111b4-3b20-4923-b48c-fa133b5b2ed7",
+            "c379085d-1d97-4486-9d6b-bfe17599fbc3",
+            "d2e381af-395b-4051-9ba4-fbab1a369e2a",
+            "d558f3b7-98f7-446f-8b3a-9f1796c61da3",
+            "cfef2bf4-4acf-47b0-9e6b-c9d5d9ce7246"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.85,
+          "association_effort": null,
+          "association_hops": 2,
+          "association_limit": 250,
+          "association_trace_edges": 0,
+          "candidate_limit": 500,
+          "elapsed_ms": 32.895,
+          "focus_mode": null,
+          "method": "frozen:STANDARD",
+          "required_event_ids": [
+            "ac136fd8-b6b2-4521-bd07-cb9b6c6d7692"
+          ],
+          "returned_event_ids": [
+            "ff84d57e-29ec-4b64-883b-edaeec3c9a9d",
+            "64c111b4-3b20-4923-b48c-fa133b5b2ed7",
+            "c379085d-1d97-4486-9d6b-bfe17599fbc3",
+            "d2e381af-395b-4051-9ba4-fbab1a369e2a",
+            "d558f3b7-98f7-446f-8b3a-9f1796c61da3",
+            "cfef2bf4-4acf-47b0-9e6b-c9d5d9ce7246",
+            "459d225c-3b63-4d41-b2d5-3af68d3a0b81",
+            "9d4c885c-7540-423a-b03c-b160b90cd5c9",
+            "0eb92e8a-4852-4ecc-9b95-5307e8c2dc5f",
+            "b64a1fd0-d8f4-4aa0-9b26-265a4c12ad7d"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": null,
+          "association_hops": 3,
+          "association_limit": 600,
+          "association_trace_edges": 0,
+          "candidate_limit": 350,
+          "elapsed_ms": 28.16,
+          "focus_mode": null,
+          "method": "frozen:DEEPER_RESEARCH",
+          "required_event_ids": [
+            "ac136fd8-b6b2-4521-bd07-cb9b6c6d7692"
+          ],
+          "returned_event_ids": [
+            "ff84d57e-29ec-4b64-883b-edaeec3c9a9d",
+            "64c111b4-3b20-4923-b48c-fa133b5b2ed7",
+            "c379085d-1d97-4486-9d6b-bfe17599fbc3",
+            "d2e381af-395b-4051-9ba4-fbab1a369e2a",
+            "d558f3b7-98f7-446f-8b3a-9f1796c61da3",
+            "cfef2bf4-4acf-47b0-9e6b-c9d5d9ce7246",
+            "459d225c-3b63-4d41-b2d5-3af68d3a0b81",
+            "9d4c885c-7540-423a-b03c-b160b90cd5c9",
+            "0eb92e8a-4852-4ecc-9b95-5307e8c2dc5f",
+            "b64a1fd0-d8f4-4aa0-9b26-265a4c12ad7d"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": null,
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 0,
+          "candidate_limit": 150,
+          "elapsed_ms": 19.193,
+          "focus_mode": null,
+          "method": "frozen:FOCUSED_RECALL",
+          "required_event_ids": [
+            "ac136fd8-b6b2-4521-bd07-cb9b6c6d7692"
+          ],
+          "returned_event_ids": [
+            "ff84d57e-29ec-4b64-883b-edaeec3c9a9d",
+            "64c111b4-3b20-4923-b48c-fa133b5b2ed7",
+            "c379085d-1d97-4486-9d6b-bfe17599fbc3",
+            "d2e381af-395b-4051-9ba4-fbab1a369e2a",
+            "d558f3b7-98f7-446f-8b3a-9f1796c61da3",
+            "cfef2bf4-4acf-47b0-9e6b-c9d5d9ce7246",
+            "459d225c-3b63-4d41-b2d5-3af68d3a0b81",
+            "9d4c885c-7540-423a-b03c-b160b90cd5c9",
+            "0eb92e8a-4852-4ecc-9b95-5307e8c2dc5f",
+            "b64a1fd0-d8f4-4aa0-9b26-265a4c12ad7d"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": "AssociationEffort.MODERATE",
+          "association_hops": 3,
+          "association_limit": 750,
+          "association_trace_edges": 0,
+          "candidate_limit": 600,
+          "elapsed_ms": 30.209,
+          "focus_mode": "FocusMode.SINGLE_ANCHOR",
+          "method": "adaptive",
+          "required_event_ids": [
+            "ac136fd8-b6b2-4521-bd07-cb9b6c6d7692"
+          ],
+          "returned_event_ids": [
+            "ff84d57e-29ec-4b64-883b-edaeec3c9a9d",
+            "64c111b4-3b20-4923-b48c-fa133b5b2ed7",
+            "c379085d-1d97-4486-9d6b-bfe17599fbc3",
+            "d2e381af-395b-4051-9ba4-fbab1a369e2a",
+            "d558f3b7-98f7-446f-8b3a-9f1796c61da3",
+            "cfef2bf4-4acf-47b0-9e6b-c9d5d9ce7246",
+            "459d225c-3b63-4d41-b2d5-3af68d3a0b81",
+            "9d4c885c-7540-423a-b03c-b160b90cd5c9",
+            "0eb92e8a-4852-4ecc-9b95-5307e8c2dc5f",
+            "b64a1fd0-d8f4-4aa0-9b26-265a4c12ad7d"
+          ],
+          "scope": "ScopeProfile.CONTEXTUAL",
+          "success": false
+        }
+      ],
+      "purpose": "An old exact-phrase target competes with newer equal-term candidates until bounded candidate routing starves it.",
+      "scenario_id": "direct_candidate_ceiling",
+      "stress_unit": "newer-equal-term-distractors",
+      "stress_value": 280
+    },
+    {
+      "aperture_already_sufficient": false,
+      "observations": [
+        {
+          "association_decay": null,
+          "association_effort": null,
+          "association_hops": 0,
+          "association_limit": null,
+          "association_trace_edges": 0,
+          "candidate_limit": 750,
+          "elapsed_ms": 25.527,
+          "focus_mode": null,
+          "method": "attention_aperture",
+          "required_event_ids": [
+            "5a831ba3-5fff-48db-bfca-c5c2289b48c7"
+          ],
+          "returned_event_ids": [
+            "0a2e8ff9-41f5-4054-b888-e5772002f52c",
+            "8ae4ef6f-31df-4f1a-b5a8-ec5213ab700b",
+            "fa0925f6-0f2a-475a-bce6-9b2872a33195",
+            "ad7219ea-7261-4d78-92fc-f3843579a142",
+            "75595c0b-e96c-4d19-a3ad-1d11618592f5",
+            "ff67c2a9-7f23-429b-af8c-74de1de3dde4",
+            "0331bdf2-68f5-4cdc-883d-30c2f97ff223"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.85,
+          "association_effort": null,
+          "association_hops": 2,
+          "association_limit": 250,
+          "association_trace_edges": 0,
+          "candidate_limit": 500,
+          "elapsed_ms": 36.934,
+          "focus_mode": null,
+          "method": "frozen:STANDARD",
+          "required_event_ids": [
+            "5a831ba3-5fff-48db-bfca-c5c2289b48c7"
+          ],
+          "returned_event_ids": [
+            "8ae4ef6f-31df-4f1a-b5a8-ec5213ab700b",
+            "fa0925f6-0f2a-475a-bce6-9b2872a33195",
+            "ad7219ea-7261-4d78-92fc-f3843579a142",
+            "75595c0b-e96c-4d19-a3ad-1d11618592f5",
+            "ff67c2a9-7f23-429b-af8c-74de1de3dde4",
+            "0331bdf2-68f5-4cdc-883d-30c2f97ff223",
+            "7f51d708-c373-477f-ae94-cc421b12f94f",
+            "54009e1d-9b32-4aa1-83ec-48406161ef64",
+            "dba95d6e-82d6-46c1-9e04-d75012b08bed",
+            "8c1d9619-24f2-4109-8ea9-aa1881c9fdbc"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": null,
+          "association_hops": 3,
+          "association_limit": 600,
+          "association_trace_edges": 0,
+          "candidate_limit": 350,
+          "elapsed_ms": 30.705,
+          "focus_mode": null,
+          "method": "frozen:DEEPER_RESEARCH",
+          "required_event_ids": [
+            "5a831ba3-5fff-48db-bfca-c5c2289b48c7"
+          ],
+          "returned_event_ids": [
+            "8ae4ef6f-31df-4f1a-b5a8-ec5213ab700b",
+            "fa0925f6-0f2a-475a-bce6-9b2872a33195",
+            "ad7219ea-7261-4d78-92fc-f3843579a142",
+            "75595c0b-e96c-4d19-a3ad-1d11618592f5",
+            "ff67c2a9-7f23-429b-af8c-74de1de3dde4",
+            "0331bdf2-68f5-4cdc-883d-30c2f97ff223",
+            "7f51d708-c373-477f-ae94-cc421b12f94f",
+            "54009e1d-9b32-4aa1-83ec-48406161ef64",
+            "dba95d6e-82d6-46c1-9e04-d75012b08bed",
+            "8c1d9619-24f2-4109-8ea9-aa1881c9fdbc"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": null,
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 0,
+          "candidate_limit": 150,
+          "elapsed_ms": 18.633,
+          "focus_mode": null,
+          "method": "frozen:FOCUSED_RECALL",
+          "required_event_ids": [
+            "5a831ba3-5fff-48db-bfca-c5c2289b48c7"
+          ],
+          "returned_event_ids": [
+            "8ae4ef6f-31df-4f1a-b5a8-ec5213ab700b",
+            "fa0925f6-0f2a-475a-bce6-9b2872a33195",
+            "ad7219ea-7261-4d78-92fc-f3843579a142",
+            "75595c0b-e96c-4d19-a3ad-1d11618592f5",
+            "ff67c2a9-7f23-429b-af8c-74de1de3dde4",
+            "0331bdf2-68f5-4cdc-883d-30c2f97ff223",
+            "7f51d708-c373-477f-ae94-cc421b12f94f",
+            "54009e1d-9b32-4aa1-83ec-48406161ef64",
+            "dba95d6e-82d6-46c1-9e04-d75012b08bed",
+            "8c1d9619-24f2-4109-8ea9-aa1881c9fdbc"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": "AssociationEffort.MODERATE",
+          "association_hops": 3,
+          "association_limit": 750,
+          "association_trace_edges": 0,
+          "candidate_limit": 600,
+          "elapsed_ms": 31.192,
+          "focus_mode": "FocusMode.SINGLE_ANCHOR",
+          "method": "adaptive",
+          "required_event_ids": [
+            "5a831ba3-5fff-48db-bfca-c5c2289b48c7"
+          ],
+          "returned_event_ids": [
+            "8ae4ef6f-31df-4f1a-b5a8-ec5213ab700b",
+            "fa0925f6-0f2a-475a-bce6-9b2872a33195",
+            "ad7219ea-7261-4d78-92fc-f3843579a142",
+            "75595c0b-e96c-4d19-a3ad-1d11618592f5",
+            "ff67c2a9-7f23-429b-af8c-74de1de3dde4",
+            "0331bdf2-68f5-4cdc-883d-30c2f97ff223",
+            "7f51d708-c373-477f-ae94-cc421b12f94f",
+            "54009e1d-9b32-4aa1-83ec-48406161ef64",
+            "dba95d6e-82d6-46c1-9e04-d75012b08bed",
+            "8c1d9619-24f2-4109-8ea9-aa1881c9fdbc"
+          ],
+          "scope": "ScopeProfile.CONTEXTUAL",
+          "success": false
+        }
+      ],
+      "purpose": "An old exact-phrase target competes with newer equal-term candidates until bounded candidate routing starves it.",
+      "scenario_id": "direct_candidate_ceiling",
+      "stress_unit": "newer-equal-term-distractors",
+      "stress_value": 320
+    },
+    {
+      "aperture_already_sufficient": false,
+      "observations": [
+        {
+          "association_decay": null,
+          "association_effort": null,
+          "association_hops": 0,
+          "association_limit": null,
+          "association_trace_edges": 0,
+          "candidate_limit": 750,
+          "elapsed_ms": 29.847,
+          "focus_mode": null,
+          "method": "attention_aperture",
+          "required_event_ids": [
+            "62e8f00e-bf66-406c-aa20-5e223f540249"
+          ],
+          "returned_event_ids": [
+            "09cae1e6-5ac8-43ae-97aa-9f0463ff9789",
+            "b9430a4d-f5be-4f1e-9437-89903d17fc52",
+            "f81830ac-da4c-4ef5-9178-c9f38c2675e2",
+            "3fa772e5-a36d-4fe9-a704-0f429d25eb9c",
+            "0534344a-73a5-4acf-9962-5762e8f62119",
+            "b0302063-c485-4c6b-ae60-f8c60122444b",
+            "69c6664b-8855-4a74-b56c-fd7f2711cf91"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.85,
+          "association_effort": null,
+          "association_hops": 2,
+          "association_limit": 250,
+          "association_trace_edges": 0,
+          "candidate_limit": 500,
+          "elapsed_ms": 49.633,
+          "focus_mode": null,
+          "method": "frozen:STANDARD",
+          "required_event_ids": [
+            "62e8f00e-bf66-406c-aa20-5e223f540249"
+          ],
+          "returned_event_ids": [
+            "b9430a4d-f5be-4f1e-9437-89903d17fc52",
+            "f81830ac-da4c-4ef5-9178-c9f38c2675e2",
+            "3fa772e5-a36d-4fe9-a704-0f429d25eb9c",
+            "0534344a-73a5-4acf-9962-5762e8f62119",
+            "b0302063-c485-4c6b-ae60-f8c60122444b",
+            "69c6664b-8855-4a74-b56c-fd7f2711cf91",
+            "07d28d8b-4a81-4721-98db-86067247cebc",
+            "1125db1b-09de-4649-aa20-a7cbb7efa2d3",
+            "b4688f7b-a75b-430d-b3fa-074554a418f7",
+            "2851c04e-9684-497f-aa96-ac7b3fac1b0d"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": null,
+          "association_hops": 3,
+          "association_limit": 600,
+          "association_trace_edges": 0,
+          "candidate_limit": 350,
+          "elapsed_ms": 34.014,
+          "focus_mode": null,
+          "method": "frozen:DEEPER_RESEARCH",
+          "required_event_ids": [
+            "62e8f00e-bf66-406c-aa20-5e223f540249"
+          ],
+          "returned_event_ids": [
+            "b9430a4d-f5be-4f1e-9437-89903d17fc52",
+            "f81830ac-da4c-4ef5-9178-c9f38c2675e2",
+            "3fa772e5-a36d-4fe9-a704-0f429d25eb9c",
+            "0534344a-73a5-4acf-9962-5762e8f62119",
+            "b0302063-c485-4c6b-ae60-f8c60122444b",
+            "69c6664b-8855-4a74-b56c-fd7f2711cf91",
+            "07d28d8b-4a81-4721-98db-86067247cebc",
+            "1125db1b-09de-4649-aa20-a7cbb7efa2d3",
+            "b4688f7b-a75b-430d-b3fa-074554a418f7",
+            "2851c04e-9684-497f-aa96-ac7b3fac1b0d"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": null,
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 0,
+          "candidate_limit": 150,
+          "elapsed_ms": 20.778,
+          "focus_mode": null,
+          "method": "frozen:FOCUSED_RECALL",
+          "required_event_ids": [
+            "62e8f00e-bf66-406c-aa20-5e223f540249"
+          ],
+          "returned_event_ids": [
+            "b9430a4d-f5be-4f1e-9437-89903d17fc52",
+            "f81830ac-da4c-4ef5-9178-c9f38c2675e2",
+            "3fa772e5-a36d-4fe9-a704-0f429d25eb9c",
+            "0534344a-73a5-4acf-9962-5762e8f62119",
+            "b0302063-c485-4c6b-ae60-f8c60122444b",
+            "69c6664b-8855-4a74-b56c-fd7f2711cf91",
+            "07d28d8b-4a81-4721-98db-86067247cebc",
+            "1125db1b-09de-4649-aa20-a7cbb7efa2d3",
+            "b4688f7b-a75b-430d-b3fa-074554a418f7",
+            "2851c04e-9684-497f-aa96-ac7b3fac1b0d"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": "AssociationEffort.MODERATE",
+          "association_hops": 3,
+          "association_limit": 750,
+          "association_trace_edges": 0,
+          "candidate_limit": 600,
+          "elapsed_ms": 36.534,
+          "focus_mode": "FocusMode.SINGLE_ANCHOR",
+          "method": "adaptive",
+          "required_event_ids": [
+            "62e8f00e-bf66-406c-aa20-5e223f540249"
+          ],
+          "returned_event_ids": [
+            "b9430a4d-f5be-4f1e-9437-89903d17fc52",
+            "f81830ac-da4c-4ef5-9178-c9f38c2675e2",
+            "3fa772e5-a36d-4fe9-a704-0f429d25eb9c",
+            "0534344a-73a5-4acf-9962-5762e8f62119",
+            "b0302063-c485-4c6b-ae60-f8c60122444b",
+            "69c6664b-8855-4a74-b56c-fd7f2711cf91",
+            "07d28d8b-4a81-4721-98db-86067247cebc",
+            "1125db1b-09de-4649-aa20-a7cbb7efa2d3",
+            "b4688f7b-a75b-430d-b3fa-074554a418f7",
+            "2851c04e-9684-497f-aa96-ac7b3fac1b0d"
+          ],
+          "scope": "ScopeProfile.CONTEXTUAL",
+          "success": false
+        }
+      ],
+      "purpose": "An old exact-phrase target competes with newer equal-term candidates until bounded candidate routing starves it.",
+      "scenario_id": "direct_candidate_ceiling",
+      "stress_unit": "newer-equal-term-distractors",
+      "stress_value": 360
+    },
+    {
+      "aperture_already_sufficient": false,
+      "observations": [
+        {
+          "association_decay": null,
+          "association_effort": null,
+          "association_hops": 0,
+          "association_limit": null,
+          "association_trace_edges": 0,
+          "candidate_limit": 750,
+          "elapsed_ms": 33.515,
+          "focus_mode": null,
+          "method": "attention_aperture",
+          "required_event_ids": [
+            "9ea8d063-aa1a-411f-bbc7-209af9387095"
+          ],
+          "returned_event_ids": [
+            "26b55f18-b913-4c10-b15f-bef78ae6313a",
+            "adc2857a-98ef-4bf7-bbcf-cbbc9019467a",
+            "556f6de9-6aa3-4e97-91d1-9786e18c112d",
+            "155a0407-097c-4574-9a89-929439a66056",
+            "7ae80acf-2391-4db1-999e-8c595b3a39bc",
+            "a431d021-c6cb-4717-80b8-f6baf9c186e1",
+            "e87331c1-9469-460e-818c-ad10d409a226"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.85,
+          "association_effort": null,
+          "association_hops": 2,
+          "association_limit": 250,
+          "association_trace_edges": 0,
+          "candidate_limit": 500,
+          "elapsed_ms": 49.066,
+          "focus_mode": null,
+          "method": "frozen:STANDARD",
+          "required_event_ids": [
+            "9ea8d063-aa1a-411f-bbc7-209af9387095"
+          ],
+          "returned_event_ids": [
+            "adc2857a-98ef-4bf7-bbcf-cbbc9019467a",
+            "556f6de9-6aa3-4e97-91d1-9786e18c112d",
+            "155a0407-097c-4574-9a89-929439a66056",
+            "7ae80acf-2391-4db1-999e-8c595b3a39bc",
+            "a431d021-c6cb-4717-80b8-f6baf9c186e1",
+            "e87331c1-9469-460e-818c-ad10d409a226",
+            "0b2100c3-7ba1-44b1-adfe-49b9dc578b12",
+            "6f20dc53-77cb-4d18-997c-3d15ea138a03",
+            "de07b935-007f-493d-bca0-fe5bd19e115d",
+            "b8690e7f-92ad-4815-8464-90a4501f315b"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": null,
+          "association_hops": 3,
+          "association_limit": 600,
+          "association_trace_edges": 0,
+          "candidate_limit": 350,
+          "elapsed_ms": 35.664,
+          "focus_mode": null,
+          "method": "frozen:DEEPER_RESEARCH",
+          "required_event_ids": [
+            "9ea8d063-aa1a-411f-bbc7-209af9387095"
+          ],
+          "returned_event_ids": [
+            "adc2857a-98ef-4bf7-bbcf-cbbc9019467a",
+            "556f6de9-6aa3-4e97-91d1-9786e18c112d",
+            "155a0407-097c-4574-9a89-929439a66056",
+            "7ae80acf-2391-4db1-999e-8c595b3a39bc",
+            "a431d021-c6cb-4717-80b8-f6baf9c186e1",
+            "e87331c1-9469-460e-818c-ad10d409a226",
+            "0b2100c3-7ba1-44b1-adfe-49b9dc578b12",
+            "6f20dc53-77cb-4d18-997c-3d15ea138a03",
+            "de07b935-007f-493d-bca0-fe5bd19e115d",
+            "b8690e7f-92ad-4815-8464-90a4501f315b"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": null,
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 0,
+          "candidate_limit": 150,
+          "elapsed_ms": 21.132,
+          "focus_mode": null,
+          "method": "frozen:FOCUSED_RECALL",
+          "required_event_ids": [
+            "9ea8d063-aa1a-411f-bbc7-209af9387095"
+          ],
+          "returned_event_ids": [
+            "adc2857a-98ef-4bf7-bbcf-cbbc9019467a",
+            "556f6de9-6aa3-4e97-91d1-9786e18c112d",
+            "155a0407-097c-4574-9a89-929439a66056",
+            "7ae80acf-2391-4db1-999e-8c595b3a39bc",
+            "a431d021-c6cb-4717-80b8-f6baf9c186e1",
+            "e87331c1-9469-460e-818c-ad10d409a226",
+            "0b2100c3-7ba1-44b1-adfe-49b9dc578b12",
+            "6f20dc53-77cb-4d18-997c-3d15ea138a03",
+            "de07b935-007f-493d-bca0-fe5bd19e115d",
+            "b8690e7f-92ad-4815-8464-90a4501f315b"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": "AssociationEffort.MODERATE",
+          "association_hops": 3,
+          "association_limit": 750,
+          "association_trace_edges": 0,
+          "candidate_limit": 600,
+          "elapsed_ms": 44.776,
+          "focus_mode": "FocusMode.SINGLE_ANCHOR",
+          "method": "adaptive",
+          "required_event_ids": [
+            "9ea8d063-aa1a-411f-bbc7-209af9387095"
+          ],
+          "returned_event_ids": [
+            "adc2857a-98ef-4bf7-bbcf-cbbc9019467a",
+            "556f6de9-6aa3-4e97-91d1-9786e18c112d",
+            "155a0407-097c-4574-9a89-929439a66056",
+            "7ae80acf-2391-4db1-999e-8c595b3a39bc",
+            "a431d021-c6cb-4717-80b8-f6baf9c186e1",
+            "e87331c1-9469-460e-818c-ad10d409a226",
+            "0b2100c3-7ba1-44b1-adfe-49b9dc578b12",
+            "6f20dc53-77cb-4d18-997c-3d15ea138a03",
+            "de07b935-007f-493d-bca0-fe5bd19e115d",
+            "b8690e7f-92ad-4815-8464-90a4501f315b"
+          ],
+          "scope": "ScopeProfile.CONTEXTUAL",
+          "success": false
+        }
+      ],
+      "purpose": "An old exact-phrase target competes with newer equal-term candidates until bounded candidate routing starves it.",
+      "scenario_id": "direct_candidate_ceiling",
+      "stress_unit": "newer-equal-term-distractors",
+      "stress_value": 440
+    },
+    {
+      "aperture_already_sufficient": false,
+      "observations": [
+        {
+          "association_decay": null,
+          "association_effort": null,
+          "association_hops": 0,
+          "association_limit": null,
+          "association_trace_edges": 0,
+          "candidate_limit": 750,
+          "elapsed_ms": 34.027,
+          "focus_mode": null,
+          "method": "attention_aperture",
+          "required_event_ids": [
+            "1c1ad65c-293b-40aa-a7e6-345ca0836808"
+          ],
+          "returned_event_ids": [
+            "bf646574-feff-4ca3-a4fe-ba15795ca183",
+            "c96fd942-bdbe-439c-9dc7-21ed34d9bd83",
+            "4140fc0b-dbd6-4d82-880a-1b61aa1028e3",
+            "458606fd-b067-4211-8ea5-1a3928668e01",
+            "4ec134b5-22ef-4765-b5d8-540ff20ef3b4",
+            "071b7eb8-154f-4e1a-b39d-1fee036b5807",
+            "f6cd5bcf-26ba-4b47-9c80-5f7907b996d1"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.85,
+          "association_effort": null,
+          "association_hops": 2,
+          "association_limit": 250,
+          "association_trace_edges": 0,
+          "candidate_limit": 500,
+          "elapsed_ms": 51.96,
+          "focus_mode": null,
+          "method": "frozen:STANDARD",
+          "required_event_ids": [
+            "1c1ad65c-293b-40aa-a7e6-345ca0836808"
+          ],
+          "returned_event_ids": [
+            "c96fd942-bdbe-439c-9dc7-21ed34d9bd83",
+            "4140fc0b-dbd6-4d82-880a-1b61aa1028e3",
+            "458606fd-b067-4211-8ea5-1a3928668e01",
+            "4ec134b5-22ef-4765-b5d8-540ff20ef3b4",
+            "071b7eb8-154f-4e1a-b39d-1fee036b5807",
+            "f6cd5bcf-26ba-4b47-9c80-5f7907b996d1",
+            "dd1f7b56-8b37-4473-a5b1-27b47fab7e0c",
+            "ad7cf97b-8f38-4221-a3e6-f89d5089aebe",
+            "d881453e-90ec-49c0-8bd7-ccbf928029ab",
+            "4f6d66b0-19f3-4059-959b-7da91451a895"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": null,
+          "association_hops": 3,
+          "association_limit": 600,
+          "association_trace_edges": 0,
+          "candidate_limit": 350,
+          "elapsed_ms": 47.249,
+          "focus_mode": null,
+          "method": "frozen:DEEPER_RESEARCH",
+          "required_event_ids": [
+            "1c1ad65c-293b-40aa-a7e6-345ca0836808"
+          ],
+          "returned_event_ids": [
+            "c96fd942-bdbe-439c-9dc7-21ed34d9bd83",
+            "4140fc0b-dbd6-4d82-880a-1b61aa1028e3",
+            "458606fd-b067-4211-8ea5-1a3928668e01",
+            "4ec134b5-22ef-4765-b5d8-540ff20ef3b4",
+            "071b7eb8-154f-4e1a-b39d-1fee036b5807",
+            "f6cd5bcf-26ba-4b47-9c80-5f7907b996d1",
+            "dd1f7b56-8b37-4473-a5b1-27b47fab7e0c",
+            "ad7cf97b-8f38-4221-a3e6-f89d5089aebe",
+            "d881453e-90ec-49c0-8bd7-ccbf928029ab",
+            "4f6d66b0-19f3-4059-959b-7da91451a895"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": null,
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 0,
+          "candidate_limit": 150,
+          "elapsed_ms": 34.775,
+          "focus_mode": null,
+          "method": "frozen:FOCUSED_RECALL",
+          "required_event_ids": [
+            "1c1ad65c-293b-40aa-a7e6-345ca0836808"
+          ],
+          "returned_event_ids": [
+            "c96fd942-bdbe-439c-9dc7-21ed34d9bd83",
+            "4140fc0b-dbd6-4d82-880a-1b61aa1028e3",
+            "458606fd-b067-4211-8ea5-1a3928668e01",
+            "4ec134b5-22ef-4765-b5d8-540ff20ef3b4",
+            "071b7eb8-154f-4e1a-b39d-1fee036b5807",
+            "f6cd5bcf-26ba-4b47-9c80-5f7907b996d1",
+            "dd1f7b56-8b37-4473-a5b1-27b47fab7e0c",
+            "ad7cf97b-8f38-4221-a3e6-f89d5089aebe",
+            "d881453e-90ec-49c0-8bd7-ccbf928029ab",
+            "4f6d66b0-19f3-4059-959b-7da91451a895"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": "AssociationEffort.MODERATE",
+          "association_hops": 3,
+          "association_limit": 750,
+          "association_trace_edges": 0,
+          "candidate_limit": 600,
+          "elapsed_ms": 43.378,
+          "focus_mode": "FocusMode.SINGLE_ANCHOR",
+          "method": "adaptive",
+          "required_event_ids": [
+            "1c1ad65c-293b-40aa-a7e6-345ca0836808"
+          ],
+          "returned_event_ids": [
+            "c96fd942-bdbe-439c-9dc7-21ed34d9bd83",
+            "4140fc0b-dbd6-4d82-880a-1b61aa1028e3",
+            "458606fd-b067-4211-8ea5-1a3928668e01",
+            "4ec134b5-22ef-4765-b5d8-540ff20ef3b4",
+            "071b7eb8-154f-4e1a-b39d-1fee036b5807",
+            "f6cd5bcf-26ba-4b47-9c80-5f7907b996d1",
+            "dd1f7b56-8b37-4473-a5b1-27b47fab7e0c",
+            "ad7cf97b-8f38-4221-a3e6-f89d5089aebe",
+            "d881453e-90ec-49c0-8bd7-ccbf928029ab",
+            "4f6d66b0-19f3-4059-959b-7da91451a895"
+          ],
+          "scope": "ScopeProfile.CONTEXTUAL",
+          "success": false
+        }
+      ],
+      "purpose": "An old exact-phrase target competes with newer equal-term candidates until bounded candidate routing starves it.",
+      "scenario_id": "direct_candidate_ceiling",
+      "stress_unit": "newer-equal-term-distractors",
+      "stress_value": 460
+    },
+    {
+      "aperture_already_sufficient": false,
+      "observations": [
+        {
+          "association_decay": null,
+          "association_effort": null,
+          "association_hops": 0,
+          "association_limit": null,
+          "association_trace_edges": 0,
+          "candidate_limit": 750,
+          "elapsed_ms": 38.863,
+          "focus_mode": null,
+          "method": "attention_aperture",
+          "required_event_ids": [
+            "e6727d1a-cb4d-4cb4-9c17-85fe6e4bbcee"
+          ],
+          "returned_event_ids": [
+            "97758734-3698-4f0e-976a-4f4b42ed84c4",
+            "02c7198c-f953-4762-b721-58f70663a9aa",
+            "55f1d633-4d9f-4a70-82e6-756663607d76",
+            "0240df1a-4b34-47f3-9657-33a71aa6d97a",
+            "1611904c-9110-4ba5-8bab-f6efbaced528",
+            "ea42653b-6e6d-42fe-8145-a523cbec9362",
+            "0c4c1dc7-1565-481b-9373-cce109d5ea77"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.85,
+          "association_effort": null,
+          "association_hops": 2,
+          "association_limit": 250,
+          "association_trace_edges": 0,
+          "candidate_limit": 500,
+          "elapsed_ms": 53.427,
+          "focus_mode": null,
+          "method": "frozen:STANDARD",
+          "required_event_ids": [
+            "e6727d1a-cb4d-4cb4-9c17-85fe6e4bbcee"
+          ],
+          "returned_event_ids": [
+            "02c7198c-f953-4762-b721-58f70663a9aa",
+            "55f1d633-4d9f-4a70-82e6-756663607d76",
+            "0240df1a-4b34-47f3-9657-33a71aa6d97a",
+            "1611904c-9110-4ba5-8bab-f6efbaced528",
+            "ea42653b-6e6d-42fe-8145-a523cbec9362",
+            "0c4c1dc7-1565-481b-9373-cce109d5ea77",
+            "1baf3016-ca09-405b-9659-47ed788de165",
+            "381a1c61-08e3-41dc-baab-3892c592f3c0",
+            "b8f2b08a-aab9-4be8-bcf9-13f64bd14dc1",
+            "9aefb91a-eaf2-4020-9941-eabe5dcc45ac"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": null,
+          "association_hops": 3,
+          "association_limit": 600,
+          "association_trace_edges": 0,
+          "candidate_limit": 350,
+          "elapsed_ms": 38.304,
+          "focus_mode": null,
+          "method": "frozen:DEEPER_RESEARCH",
+          "required_event_ids": [
+            "e6727d1a-cb4d-4cb4-9c17-85fe6e4bbcee"
+          ],
+          "returned_event_ids": [
+            "02c7198c-f953-4762-b721-58f70663a9aa",
+            "55f1d633-4d9f-4a70-82e6-756663607d76",
+            "0240df1a-4b34-47f3-9657-33a71aa6d97a",
+            "1611904c-9110-4ba5-8bab-f6efbaced528",
+            "ea42653b-6e6d-42fe-8145-a523cbec9362",
+            "0c4c1dc7-1565-481b-9373-cce109d5ea77",
+            "1baf3016-ca09-405b-9659-47ed788de165",
+            "381a1c61-08e3-41dc-baab-3892c592f3c0",
+            "b8f2b08a-aab9-4be8-bcf9-13f64bd14dc1",
+            "9aefb91a-eaf2-4020-9941-eabe5dcc45ac"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": null,
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 0,
+          "candidate_limit": 150,
+          "elapsed_ms": 23.515,
+          "focus_mode": null,
+          "method": "frozen:FOCUSED_RECALL",
+          "required_event_ids": [
+            "e6727d1a-cb4d-4cb4-9c17-85fe6e4bbcee"
+          ],
+          "returned_event_ids": [
+            "02c7198c-f953-4762-b721-58f70663a9aa",
+            "55f1d633-4d9f-4a70-82e6-756663607d76",
+            "0240df1a-4b34-47f3-9657-33a71aa6d97a",
+            "1611904c-9110-4ba5-8bab-f6efbaced528",
+            "ea42653b-6e6d-42fe-8145-a523cbec9362",
+            "0c4c1dc7-1565-481b-9373-cce109d5ea77",
+            "1baf3016-ca09-405b-9659-47ed788de165",
+            "381a1c61-08e3-41dc-baab-3892c592f3c0",
+            "b8f2b08a-aab9-4be8-bcf9-13f64bd14dc1",
+            "9aefb91a-eaf2-4020-9941-eabe5dcc45ac"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": "AssociationEffort.MODERATE",
+          "association_hops": 3,
+          "association_limit": 750,
+          "association_trace_edges": 0,
+          "candidate_limit": 600,
+          "elapsed_ms": 48.954,
+          "focus_mode": "FocusMode.SINGLE_ANCHOR",
+          "method": "adaptive",
+          "required_event_ids": [
+            "e6727d1a-cb4d-4cb4-9c17-85fe6e4bbcee"
+          ],
+          "returned_event_ids": [
+            "02c7198c-f953-4762-b721-58f70663a9aa",
+            "55f1d633-4d9f-4a70-82e6-756663607d76",
+            "0240df1a-4b34-47f3-9657-33a71aa6d97a",
+            "1611904c-9110-4ba5-8bab-f6efbaced528",
+            "ea42653b-6e6d-42fe-8145-a523cbec9362",
+            "0c4c1dc7-1565-481b-9373-cce109d5ea77",
+            "1baf3016-ca09-405b-9659-47ed788de165",
+            "381a1c61-08e3-41dc-baab-3892c592f3c0",
+            "b8f2b08a-aab9-4be8-bcf9-13f64bd14dc1",
+            "9aefb91a-eaf2-4020-9941-eabe5dcc45ac"
+          ],
+          "scope": "ScopeProfile.CONTEXTUAL",
+          "success": false
+        }
+      ],
+      "purpose": "An old exact-phrase target competes with newer equal-term candidates until bounded candidate routing starves it.",
+      "scenario_id": "direct_candidate_ceiling",
+      "stress_unit": "newer-equal-term-distractors",
+      "stress_value": 520
+    },
+    {
+      "aperture_already_sufficient": false,
+      "observations": [
+        {
+          "association_decay": null,
+          "association_effort": null,
+          "association_hops": 0,
+          "association_limit": null,
+          "association_trace_edges": 0,
+          "candidate_limit": 750,
+          "elapsed_ms": 41.087,
+          "focus_mode": null,
+          "method": "attention_aperture",
+          "required_event_ids": [
+            "fbc564de-abb0-44e0-9d28-8c30b194723f"
+          ],
+          "returned_event_ids": [
+            "2427ad0d-c705-40a8-8534-ebd1130b75ad",
+            "b3cc7246-c805-4ed4-a1cb-5f410c840cb1",
+            "db5db3c1-70e3-4c10-8c14-e8137d7784c8",
+            "24ac46a9-12e2-41a1-97cc-5c8f67bfa37e",
+            "b9555651-78a9-44bd-80b9-addc93ee6f4d",
+            "9940a600-3d99-4a96-8e58-b6e8fc038d07",
+            "ad12d95c-9d70-44cf-a583-13da09851eb6"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.85,
+          "association_effort": null,
+          "association_hops": 2,
+          "association_limit": 250,
+          "association_trace_edges": 0,
+          "candidate_limit": 500,
+          "elapsed_ms": 54.334,
+          "focus_mode": null,
+          "method": "frozen:STANDARD",
+          "required_event_ids": [
+            "fbc564de-abb0-44e0-9d28-8c30b194723f"
+          ],
+          "returned_event_ids": [
+            "b3cc7246-c805-4ed4-a1cb-5f410c840cb1",
+            "db5db3c1-70e3-4c10-8c14-e8137d7784c8",
+            "24ac46a9-12e2-41a1-97cc-5c8f67bfa37e",
+            "b9555651-78a9-44bd-80b9-addc93ee6f4d",
+            "9940a600-3d99-4a96-8e58-b6e8fc038d07",
+            "ad12d95c-9d70-44cf-a583-13da09851eb6",
+            "0fb88c60-c823-459c-b234-06a4e6485fb7",
+            "3dad023f-1e07-4f8b-8c55-80f7e440ab33",
+            "073d7c9f-9121-437f-9983-13c93bf8875b",
+            "a10af342-e68f-4e8f-8d3b-df879bc58083"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": null,
+          "association_hops": 3,
+          "association_limit": 600,
+          "association_trace_edges": 0,
+          "candidate_limit": 350,
+          "elapsed_ms": 36.149,
+          "focus_mode": null,
+          "method": "frozen:DEEPER_RESEARCH",
+          "required_event_ids": [
+            "fbc564de-abb0-44e0-9d28-8c30b194723f"
+          ],
+          "returned_event_ids": [
+            "b3cc7246-c805-4ed4-a1cb-5f410c840cb1",
+            "db5db3c1-70e3-4c10-8c14-e8137d7784c8",
+            "24ac46a9-12e2-41a1-97cc-5c8f67bfa37e",
+            "b9555651-78a9-44bd-80b9-addc93ee6f4d",
+            "9940a600-3d99-4a96-8e58-b6e8fc038d07",
+            "ad12d95c-9d70-44cf-a583-13da09851eb6",
+            "0fb88c60-c823-459c-b234-06a4e6485fb7",
+            "3dad023f-1e07-4f8b-8c55-80f7e440ab33",
+            "073d7c9f-9121-437f-9983-13c93bf8875b",
+            "a10af342-e68f-4e8f-8d3b-df879bc58083"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": null,
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 0,
+          "candidate_limit": 150,
+          "elapsed_ms": 31.298,
+          "focus_mode": null,
+          "method": "frozen:FOCUSED_RECALL",
+          "required_event_ids": [
+            "fbc564de-abb0-44e0-9d28-8c30b194723f"
+          ],
+          "returned_event_ids": [
+            "b3cc7246-c805-4ed4-a1cb-5f410c840cb1",
+            "db5db3c1-70e3-4c10-8c14-e8137d7784c8",
+            "24ac46a9-12e2-41a1-97cc-5c8f67bfa37e",
+            "b9555651-78a9-44bd-80b9-addc93ee6f4d",
+            "9940a600-3d99-4a96-8e58-b6e8fc038d07",
+            "ad12d95c-9d70-44cf-a583-13da09851eb6",
+            "0fb88c60-c823-459c-b234-06a4e6485fb7",
+            "3dad023f-1e07-4f8b-8c55-80f7e440ab33",
+            "073d7c9f-9121-437f-9983-13c93bf8875b",
+            "a10af342-e68f-4e8f-8d3b-df879bc58083"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": "AssociationEffort.MODERATE",
+          "association_hops": 3,
+          "association_limit": 750,
+          "association_trace_edges": 0,
+          "candidate_limit": 600,
+          "elapsed_ms": 51.642,
+          "focus_mode": "FocusMode.SINGLE_ANCHOR",
+          "method": "adaptive",
+          "required_event_ids": [
+            "fbc564de-abb0-44e0-9d28-8c30b194723f"
+          ],
+          "returned_event_ids": [
+            "b3cc7246-c805-4ed4-a1cb-5f410c840cb1",
+            "db5db3c1-70e3-4c10-8c14-e8137d7784c8",
+            "24ac46a9-12e2-41a1-97cc-5c8f67bfa37e",
+            "b9555651-78a9-44bd-80b9-addc93ee6f4d",
+            "9940a600-3d99-4a96-8e58-b6e8fc038d07",
+            "ad12d95c-9d70-44cf-a583-13da09851eb6",
+            "0fb88c60-c823-459c-b234-06a4e6485fb7",
+            "3dad023f-1e07-4f8b-8c55-80f7e440ab33",
+            "073d7c9f-9121-437f-9983-13c93bf8875b",
+            "a10af342-e68f-4e8f-8d3b-df879bc58083"
+          ],
+          "scope": "ScopeProfile.CONTEXTUAL",
+          "success": false
+        }
+      ],
+      "purpose": "An old exact-phrase target competes with newer equal-term candidates until bounded candidate routing starves it.",
+      "scenario_id": "direct_candidate_ceiling",
+      "stress_unit": "newer-equal-term-distractors",
+      "stress_value": 560
+    },
+    {
+      "aperture_already_sufficient": false,
+      "observations": [
+        {
+          "association_decay": null,
+          "association_effort": null,
+          "association_hops": 0,
+          "association_limit": null,
+          "association_trace_edges": 0,
+          "candidate_limit": 750,
+          "elapsed_ms": 43.566,
+          "focus_mode": null,
+          "method": "attention_aperture",
+          "required_event_ids": [
+            "f41f1169-7305-4985-b83d-0712490fa0a0"
+          ],
+          "returned_event_ids": [
+            "9c1aa2b0-99c8-4370-99a0-549c8eea088a",
+            "a6f413b8-5f4b-4748-bd97-d51fd0d9dc9b",
+            "c2411652-7cc2-498c-9576-d05e5e5a9f69",
+            "edaa10f8-a7e6-4362-a1c4-15da61a9e376",
+            "61bf56a4-eac4-4ae8-b239-cb40fb9598d9",
+            "a6c6c104-e558-4f0e-9ce5-935b3c595cd9",
+            "b3e94010-4304-4894-a8eb-6d35eda9fb3d"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.85,
+          "association_effort": null,
+          "association_hops": 2,
+          "association_limit": 250,
+          "association_trace_edges": 0,
+          "candidate_limit": 500,
+          "elapsed_ms": 54.944,
+          "focus_mode": null,
+          "method": "frozen:STANDARD",
+          "required_event_ids": [
+            "f41f1169-7305-4985-b83d-0712490fa0a0"
+          ],
+          "returned_event_ids": [
+            "a6f413b8-5f4b-4748-bd97-d51fd0d9dc9b",
+            "c2411652-7cc2-498c-9576-d05e5e5a9f69",
+            "edaa10f8-a7e6-4362-a1c4-15da61a9e376",
+            "61bf56a4-eac4-4ae8-b239-cb40fb9598d9",
+            "a6c6c104-e558-4f0e-9ce5-935b3c595cd9",
+            "b3e94010-4304-4894-a8eb-6d35eda9fb3d",
+            "0357bb08-014a-45ae-93c7-ce123709e29b",
+            "d2c4577b-3360-4a97-9a66-6a09060f3d6c",
+            "1e839d85-c119-46f1-8c25-a6109c87173b",
+            "18d0eeab-56bb-48d5-b0b5-dd2f785c06f1"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": null,
+          "association_hops": 3,
+          "association_limit": 600,
+          "association_trace_edges": 0,
+          "candidate_limit": 350,
+          "elapsed_ms": 41.504,
+          "focus_mode": null,
+          "method": "frozen:DEEPER_RESEARCH",
+          "required_event_ids": [
+            "f41f1169-7305-4985-b83d-0712490fa0a0"
+          ],
+          "returned_event_ids": [
+            "a6f413b8-5f4b-4748-bd97-d51fd0d9dc9b",
+            "c2411652-7cc2-498c-9576-d05e5e5a9f69",
+            "edaa10f8-a7e6-4362-a1c4-15da61a9e376",
+            "61bf56a4-eac4-4ae8-b239-cb40fb9598d9",
+            "a6c6c104-e558-4f0e-9ce5-935b3c595cd9",
+            "b3e94010-4304-4894-a8eb-6d35eda9fb3d",
+            "0357bb08-014a-45ae-93c7-ce123709e29b",
+            "d2c4577b-3360-4a97-9a66-6a09060f3d6c",
+            "1e839d85-c119-46f1-8c25-a6109c87173b",
+            "18d0eeab-56bb-48d5-b0b5-dd2f785c06f1"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": null,
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 0,
+          "candidate_limit": 150,
+          "elapsed_ms": 24.25,
+          "focus_mode": null,
+          "method": "frozen:FOCUSED_RECALL",
+          "required_event_ids": [
+            "f41f1169-7305-4985-b83d-0712490fa0a0"
+          ],
+          "returned_event_ids": [
+            "a6f413b8-5f4b-4748-bd97-d51fd0d9dc9b",
+            "c2411652-7cc2-498c-9576-d05e5e5a9f69",
+            "edaa10f8-a7e6-4362-a1c4-15da61a9e376",
+            "61bf56a4-eac4-4ae8-b239-cb40fb9598d9",
+            "a6c6c104-e558-4f0e-9ce5-935b3c595cd9",
+            "b3e94010-4304-4894-a8eb-6d35eda9fb3d",
+            "0357bb08-014a-45ae-93c7-ce123709e29b",
+            "d2c4577b-3360-4a97-9a66-6a09060f3d6c",
+            "1e839d85-c119-46f1-8c25-a6109c87173b",
+            "18d0eeab-56bb-48d5-b0b5-dd2f785c06f1"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": "AssociationEffort.MODERATE",
+          "association_hops": 3,
+          "association_limit": 750,
+          "association_trace_edges": 0,
+          "candidate_limit": 600,
+          "elapsed_ms": 56.47,
+          "focus_mode": "FocusMode.SINGLE_ANCHOR",
+          "method": "adaptive",
+          "required_event_ids": [
+            "f41f1169-7305-4985-b83d-0712490fa0a0"
+          ],
+          "returned_event_ids": [
+            "a6f413b8-5f4b-4748-bd97-d51fd0d9dc9b",
+            "c2411652-7cc2-498c-9576-d05e5e5a9f69",
+            "edaa10f8-a7e6-4362-a1c4-15da61a9e376",
+            "61bf56a4-eac4-4ae8-b239-cb40fb9598d9",
+            "a6c6c104-e558-4f0e-9ce5-935b3c595cd9",
+            "b3e94010-4304-4894-a8eb-6d35eda9fb3d",
+            "0357bb08-014a-45ae-93c7-ce123709e29b",
+            "d2c4577b-3360-4a97-9a66-6a09060f3d6c",
+            "1e839d85-c119-46f1-8c25-a6109c87173b",
+            "18d0eeab-56bb-48d5-b0b5-dd2f785c06f1"
+          ],
+          "scope": "ScopeProfile.CONTEXTUAL",
+          "success": false
+        }
+      ],
+      "purpose": "An old exact-phrase target competes with newer equal-term candidates until bounded candidate routing starves it.",
+      "scenario_id": "direct_candidate_ceiling",
+      "stress_unit": "newer-equal-term-distractors",
+      "stress_value": 620
+    },
+    {
+      "aperture_already_sufficient": false,
+      "observations": [
+        {
+          "association_decay": null,
+          "association_effort": null,
+          "association_hops": 0,
+          "association_limit": null,
+          "association_trace_edges": 0,
+          "candidate_limit": 750,
+          "elapsed_ms": 45.896,
+          "focus_mode": null,
+          "method": "attention_aperture",
+          "required_event_ids": [
+            "6f132dc9-4d89-401f-9158-382570aec73b"
+          ],
+          "returned_event_ids": [
+            "49f0000f-6a2a-4137-8eef-4811d7f3705a",
+            "aa31f953-9755-4782-8f03-1dc03c703ef1",
+            "deb22092-ba19-4c33-be58-d17faf36e586",
+            "89b5ba6a-3ee1-413f-b110-0f7aba3202c6",
+            "02dd7ddb-d49c-42a3-8f6a-b79ead60c360",
+            "84b99a9b-33fe-474d-8f5e-1189fba5ddb2",
+            "6edf6c44-5bb5-49c3-ac4f-688e5195e2a6"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.85,
+          "association_effort": null,
+          "association_hops": 2,
+          "association_limit": 250,
+          "association_trace_edges": 0,
+          "candidate_limit": 500,
+          "elapsed_ms": 65.726,
+          "focus_mode": null,
+          "method": "frozen:STANDARD",
+          "required_event_ids": [
+            "6f132dc9-4d89-401f-9158-382570aec73b"
+          ],
+          "returned_event_ids": [
+            "aa31f953-9755-4782-8f03-1dc03c703ef1",
+            "deb22092-ba19-4c33-be58-d17faf36e586",
+            "89b5ba6a-3ee1-413f-b110-0f7aba3202c6",
+            "02dd7ddb-d49c-42a3-8f6a-b79ead60c360",
+            "84b99a9b-33fe-474d-8f5e-1189fba5ddb2",
+            "6edf6c44-5bb5-49c3-ac4f-688e5195e2a6",
+            "4d4a2edc-0f87-4f45-bc82-c82a9a7722c7",
+            "d2083f00-b71a-435b-bdfa-09f2a24e02ea",
+            "c8304abb-9411-434c-83ab-ef0b7b00f102",
+            "8c823b57-c955-46f5-99d0-303574b2d376"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": null,
+          "association_hops": 3,
+          "association_limit": 600,
+          "association_trace_edges": 0,
+          "candidate_limit": 350,
+          "elapsed_ms": 39.689,
+          "focus_mode": null,
+          "method": "frozen:DEEPER_RESEARCH",
+          "required_event_ids": [
+            "6f132dc9-4d89-401f-9158-382570aec73b"
+          ],
+          "returned_event_ids": [
+            "aa31f953-9755-4782-8f03-1dc03c703ef1",
+            "deb22092-ba19-4c33-be58-d17faf36e586",
+            "89b5ba6a-3ee1-413f-b110-0f7aba3202c6",
+            "02dd7ddb-d49c-42a3-8f6a-b79ead60c360",
+            "84b99a9b-33fe-474d-8f5e-1189fba5ddb2",
+            "6edf6c44-5bb5-49c3-ac4f-688e5195e2a6",
+            "4d4a2edc-0f87-4f45-bc82-c82a9a7722c7",
+            "d2083f00-b71a-435b-bdfa-09f2a24e02ea",
+            "c8304abb-9411-434c-83ab-ef0b7b00f102",
+            "8c823b57-c955-46f5-99d0-303574b2d376"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": null,
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 0,
+          "candidate_limit": 150,
+          "elapsed_ms": 24.838,
+          "focus_mode": null,
+          "method": "frozen:FOCUSED_RECALL",
+          "required_event_ids": [
+            "6f132dc9-4d89-401f-9158-382570aec73b"
+          ],
+          "returned_event_ids": [
+            "aa31f953-9755-4782-8f03-1dc03c703ef1",
+            "deb22092-ba19-4c33-be58-d17faf36e586",
+            "89b5ba6a-3ee1-413f-b110-0f7aba3202c6",
+            "02dd7ddb-d49c-42a3-8f6a-b79ead60c360",
+            "84b99a9b-33fe-474d-8f5e-1189fba5ddb2",
+            "6edf6c44-5bb5-49c3-ac4f-688e5195e2a6",
+            "4d4a2edc-0f87-4f45-bc82-c82a9a7722c7",
+            "d2083f00-b71a-435b-bdfa-09f2a24e02ea",
+            "c8304abb-9411-434c-83ab-ef0b7b00f102",
+            "8c823b57-c955-46f5-99d0-303574b2d376"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": "AssociationEffort.MODERATE",
+          "association_hops": 3,
+          "association_limit": 750,
+          "association_trace_edges": 0,
+          "candidate_limit": 600,
+          "elapsed_ms": 55.739,
+          "focus_mode": "FocusMode.SINGLE_ANCHOR",
+          "method": "adaptive",
+          "required_event_ids": [
+            "6f132dc9-4d89-401f-9158-382570aec73b"
+          ],
+          "returned_event_ids": [
+            "aa31f953-9755-4782-8f03-1dc03c703ef1",
+            "deb22092-ba19-4c33-be58-d17faf36e586",
+            "89b5ba6a-3ee1-413f-b110-0f7aba3202c6",
+            "02dd7ddb-d49c-42a3-8f6a-b79ead60c360",
+            "84b99a9b-33fe-474d-8f5e-1189fba5ddb2",
+            "6edf6c44-5bb5-49c3-ac4f-688e5195e2a6",
+            "4d4a2edc-0f87-4f45-bc82-c82a9a7722c7",
+            "d2083f00-b71a-435b-bdfa-09f2a24e02ea",
+            "c8304abb-9411-434c-83ab-ef0b7b00f102",
+            "8c823b57-c955-46f5-99d0-303574b2d376"
+          ],
+          "scope": "ScopeProfile.CONTEXTUAL",
+          "success": false
+        }
+      ],
+      "purpose": "An old exact-phrase target competes with newer equal-term candidates until bounded candidate routing starves it.",
+      "scenario_id": "direct_candidate_ceiling",
+      "stress_unit": "newer-equal-term-distractors",
+      "stress_value": 660
+    },
+    {
+      "aperture_already_sufficient": false,
+      "observations": [
+        {
+          "association_decay": null,
+          "association_effort": null,
+          "association_hops": 0,
+          "association_limit": null,
+          "association_trace_edges": 0,
+          "candidate_limit": 750,
+          "elapsed_ms": 48.363,
+          "focus_mode": null,
+          "method": "attention_aperture",
+          "required_event_ids": [
+            "5afd8015-07ad-4d99-9d75-8c7e368568ff"
+          ],
+          "returned_event_ids": [
+            "46e13b4a-2f4b-4e6d-986e-d110105cc340",
+            "72b664e4-de12-49ed-a072-4fbd587dda8a",
+            "0283d1be-43cf-4fc8-b26b-baec9011e0f0",
+            "25040e8b-e55c-4cbd-a853-c2efad3f13ee",
+            "63983b46-d892-4115-a832-cc67ee48e908",
+            "567e8d60-6dae-4b21-8c46-81c973c7b554",
+            "ea23e4cd-4ac5-4e45-a5be-4464ee5320b9"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.85,
+          "association_effort": null,
+          "association_hops": 2,
+          "association_limit": 250,
+          "association_trace_edges": 0,
+          "candidate_limit": 500,
+          "elapsed_ms": 58.635,
+          "focus_mode": null,
+          "method": "frozen:STANDARD",
+          "required_event_ids": [
+            "5afd8015-07ad-4d99-9d75-8c7e368568ff"
+          ],
+          "returned_event_ids": [
+            "72b664e4-de12-49ed-a072-4fbd587dda8a",
+            "0283d1be-43cf-4fc8-b26b-baec9011e0f0",
+            "25040e8b-e55c-4cbd-a853-c2efad3f13ee",
+            "63983b46-d892-4115-a832-cc67ee48e908",
+            "567e8d60-6dae-4b21-8c46-81c973c7b554",
+            "ea23e4cd-4ac5-4e45-a5be-4464ee5320b9",
+            "fd83c58d-db1c-476a-b2e9-bdffe32b3f99",
+            "aa17d7c4-8628-4fad-b64c-f2257f5031b0",
+            "7d53867c-2db6-4d43-9966-d2b321ef4e22",
+            "a9e35630-cd85-450b-9f1d-2e82d6b9e811"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": null,
+          "association_hops": 3,
+          "association_limit": 600,
+          "association_trace_edges": 0,
+          "candidate_limit": 350,
+          "elapsed_ms": 39.072,
+          "focus_mode": null,
+          "method": "frozen:DEEPER_RESEARCH",
+          "required_event_ids": [
+            "5afd8015-07ad-4d99-9d75-8c7e368568ff"
+          ],
+          "returned_event_ids": [
+            "72b664e4-de12-49ed-a072-4fbd587dda8a",
+            "0283d1be-43cf-4fc8-b26b-baec9011e0f0",
+            "25040e8b-e55c-4cbd-a853-c2efad3f13ee",
+            "63983b46-d892-4115-a832-cc67ee48e908",
+            "567e8d60-6dae-4b21-8c46-81c973c7b554",
+            "ea23e4cd-4ac5-4e45-a5be-4464ee5320b9",
+            "fd83c58d-db1c-476a-b2e9-bdffe32b3f99",
+            "aa17d7c4-8628-4fad-b64c-f2257f5031b0",
+            "7d53867c-2db6-4d43-9966-d2b321ef4e22",
+            "a9e35630-cd85-450b-9f1d-2e82d6b9e811"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": null,
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 0,
+          "candidate_limit": 150,
+          "elapsed_ms": 26.84,
+          "focus_mode": null,
+          "method": "frozen:FOCUSED_RECALL",
+          "required_event_ids": [
+            "5afd8015-07ad-4d99-9d75-8c7e368568ff"
+          ],
+          "returned_event_ids": [
+            "72b664e4-de12-49ed-a072-4fbd587dda8a",
+            "0283d1be-43cf-4fc8-b26b-baec9011e0f0",
+            "25040e8b-e55c-4cbd-a853-c2efad3f13ee",
+            "63983b46-d892-4115-a832-cc67ee48e908",
+            "567e8d60-6dae-4b21-8c46-81c973c7b554",
+            "ea23e4cd-4ac5-4e45-a5be-4464ee5320b9",
+            "fd83c58d-db1c-476a-b2e9-bdffe32b3f99",
+            "aa17d7c4-8628-4fad-b64c-f2257f5031b0",
+            "7d53867c-2db6-4d43-9966-d2b321ef4e22",
+            "a9e35630-cd85-450b-9f1d-2e82d6b9e811"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": "AssociationEffort.MODERATE",
+          "association_hops": 3,
+          "association_limit": 750,
+          "association_trace_edges": 0,
+          "candidate_limit": 600,
+          "elapsed_ms": 55.675,
+          "focus_mode": "FocusMode.SINGLE_ANCHOR",
+          "method": "adaptive",
+          "required_event_ids": [
+            "5afd8015-07ad-4d99-9d75-8c7e368568ff"
+          ],
+          "returned_event_ids": [
+            "72b664e4-de12-49ed-a072-4fbd587dda8a",
+            "0283d1be-43cf-4fc8-b26b-baec9011e0f0",
+            "25040e8b-e55c-4cbd-a853-c2efad3f13ee",
+            "63983b46-d892-4115-a832-cc67ee48e908",
+            "567e8d60-6dae-4b21-8c46-81c973c7b554",
+            "ea23e4cd-4ac5-4e45-a5be-4464ee5320b9",
+            "fd83c58d-db1c-476a-b2e9-bdffe32b3f99",
+            "aa17d7c4-8628-4fad-b64c-f2257f5031b0",
+            "7d53867c-2db6-4d43-9966-d2b321ef4e22",
+            "a9e35630-cd85-450b-9f1d-2e82d6b9e811"
+          ],
+          "scope": "ScopeProfile.CONTEXTUAL",
+          "success": false
+        }
+      ],
+      "purpose": "An old exact-phrase target competes with newer equal-term candidates until bounded candidate routing starves it.",
+      "scenario_id": "direct_candidate_ceiling",
+      "stress_unit": "newer-equal-term-distractors",
+      "stress_value": 700
+    },
+    {
+      "anchor_count": 1,
+      "aperture_already_sufficient": false,
+      "observations": [
+        {
+          "association_decay": null,
+          "association_effort": null,
+          "association_hops": 0,
+          "association_limit": null,
+          "association_trace_edges": 0,
+          "candidate_limit": 750,
+          "elapsed_ms": 4.323,
+          "focus_mode": null,
+          "method": "attention_aperture",
+          "required_event_ids": [
+            "894ea773-2c56-4eb7-ae35-4178ef28fd79"
+          ],
+          "returned_event_ids": [
+            "b2b3f3e6-75e5-4dc2-a90a-0908a0499198"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": null,
+          "association_hops": 3,
+          "association_limit": 600,
+          "association_trace_edges": 1,
+          "candidate_limit": 350,
+          "elapsed_ms": 4.026,
+          "focus_mode": null,
+          "method": "frozen:DEEPER_RESEARCH",
+          "required_event_ids": [
+            "894ea773-2c56-4eb7-ae35-4178ef28fd79"
+          ],
+          "returned_event_ids": [
+            "894ea773-2c56-4eb7-ae35-4178ef28fd79"
+          ],
+          "scope": null,
+          "success": true
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": null,
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 1,
+          "candidate_limit": 150,
+          "elapsed_ms": 3.782,
+          "focus_mode": null,
+          "method": "frozen:FOCUSED_RECALL",
+          "required_event_ids": [
+            "894ea773-2c56-4eb7-ae35-4178ef28fd79"
+          ],
+          "returned_event_ids": [
+            "894ea773-2c56-4eb7-ae35-4178ef28fd79"
+          ],
+          "scope": null,
+          "success": true
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": "AssociationEffort.DEEP",
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 1,
+          "candidate_limit": 175,
+          "elapsed_ms": 4.45,
+          "focus_mode": "FocusMode.SINGLE_ANCHOR",
+          "method": "adaptive",
+          "required_event_ids": [
+            "894ea773-2c56-4eb7-ae35-4178ef28fd79"
+          ],
+          "returned_event_ids": [
+            "894ea773-2c56-4eb7-ae35-4178ef28fd79"
+          ],
+          "scope": "ScopeProfile.NARROW",
+          "success": true
+        }
+      ],
+      "purpose": "Required evidence is reachable only through an exact-length opaque association chain.",
+      "scenario_id": "single_anchor_depth",
+      "stress_unit": "association-hops",
+      "stress_value": 1
+    },
+    {
+      "anchor_count": 2,
+      "aperture_already_sufficient": false,
+      "observations": [
+        {
+          "association_decay": null,
+          "association_effort": null,
+          "association_hops": 0,
+          "association_limit": null,
+          "association_trace_edges": 0,
+          "candidate_limit": 750,
+          "elapsed_ms": 4.073,
+          "focus_mode": null,
+          "method": "attention_aperture",
+          "required_event_ids": [
+            "7d026270-b2ac-4249-a424-d93ca19cace4"
+          ],
+          "returned_event_ids": [
+            "51ec54d7-ef88-4c2e-9eed-d41620a67f1f",
+            "fbf843e9-978e-4028-bb9e-eaf70af7b434"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": null,
+          "association_hops": 3,
+          "association_limit": 600,
+          "association_trace_edges": 2,
+          "candidate_limit": 350,
+          "elapsed_ms": 5.767,
+          "focus_mode": null,
+          "method": "frozen:DEEPER_RESEARCH",
+          "required_event_ids": [
+            "7d026270-b2ac-4249-a424-d93ca19cace4"
+          ],
+          "returned_event_ids": [
+            "7d026270-b2ac-4249-a424-d93ca19cace4"
+          ],
+          "scope": null,
+          "success": true
+        },
+        {
+          "association_decay": 0.9,
+          "association_effort": null,
+          "association_hops": 4,
+          "association_limit": 900,
+          "association_trace_edges": 1,
+          "candidate_limit": 250,
+          "elapsed_ms": 3.646,
+          "focus_mode": null,
+          "method": "frozen:CROSS_REFERENCE",
+          "required_event_ids": [
+            "7d026270-b2ac-4249-a424-d93ca19cace4"
+          ],
+          "returned_event_ids": [
+            "7d026270-b2ac-4249-a424-d93ca19cace4"
+          ],
+          "scope": null,
+          "success": true
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": "AssociationEffort.DEEP",
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 1,
+          "candidate_limit": 350,
+          "elapsed_ms": 4.735,
+          "focus_mode": "FocusMode.MULTI_ANCHOR",
+          "method": "adaptive",
+          "required_event_ids": [
+            "7d026270-b2ac-4249-a424-d93ca19cace4"
+          ],
+          "returned_event_ids": [
+            "7d026270-b2ac-4249-a424-d93ca19cace4"
+          ],
+          "scope": "ScopeProfile.BALANCED",
+          "success": true
+        }
+      ],
+      "purpose": "Required evidence is reachable only through an exact-length opaque association chain.",
+      "scenario_id": "multi_anchor_depth",
+      "stress_unit": "association-hops",
+      "stress_value": 1
+    },
+    {
+      "anchor_count": 1,
+      "aperture_already_sufficient": false,
+      "observations": [
+        {
+          "association_decay": null,
+          "association_effort": null,
+          "association_hops": 0,
+          "association_limit": null,
+          "association_trace_edges": 0,
+          "candidate_limit": 750,
+          "elapsed_ms": 5.504,
+          "focus_mode": null,
+          "method": "attention_aperture",
+          "required_event_ids": [
+            "9e768720-2e68-4caa-938f-51baa6023218"
+          ],
+          "returned_event_ids": [
+            "77867d55-01e5-48a6-9596-bc42eb2fbb37"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": null,
+          "association_hops": 3,
+          "association_limit": 600,
+          "association_trace_edges": 2,
+          "candidate_limit": 350,
+          "elapsed_ms": 5.146,
+          "focus_mode": null,
+          "method": "frozen:DEEPER_RESEARCH",
+          "required_event_ids": [
+            "9e768720-2e68-4caa-938f-51baa6023218"
+          ],
+          "returned_event_ids": [
+            "4ce63f5e-4753-4889-96bf-cee081c92d1e",
+            "9e768720-2e68-4caa-938f-51baa6023218"
+          ],
+          "scope": null,
+          "success": true
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": null,
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 2,
+          "candidate_limit": 150,
+          "elapsed_ms": 4.583,
+          "focus_mode": null,
+          "method": "frozen:FOCUSED_RECALL",
+          "required_event_ids": [
+            "9e768720-2e68-4caa-938f-51baa6023218"
+          ],
+          "returned_event_ids": [
+            "4ce63f5e-4753-4889-96bf-cee081c92d1e",
+            "9e768720-2e68-4caa-938f-51baa6023218"
+          ],
+          "scope": null,
+          "success": true
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": "AssociationEffort.DEEP",
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 2,
+          "candidate_limit": 175,
+          "elapsed_ms": 3.835,
+          "focus_mode": "FocusMode.SINGLE_ANCHOR",
+          "method": "adaptive",
+          "required_event_ids": [
+            "9e768720-2e68-4caa-938f-51baa6023218"
+          ],
+          "returned_event_ids": [
+            "4ce63f5e-4753-4889-96bf-cee081c92d1e",
+            "9e768720-2e68-4caa-938f-51baa6023218"
+          ],
+          "scope": "ScopeProfile.NARROW",
+          "success": true
+        }
+      ],
+      "purpose": "Required evidence is reachable only through an exact-length opaque association chain.",
+      "scenario_id": "single_anchor_depth",
+      "stress_unit": "association-hops",
+      "stress_value": 2
+    },
+    {
+      "anchor_count": 2,
+      "aperture_already_sufficient": false,
+      "observations": [
+        {
+          "association_decay": null,
+          "association_effort": null,
+          "association_hops": 0,
+          "association_limit": null,
+          "association_trace_edges": 0,
+          "candidate_limit": 750,
+          "elapsed_ms": 5.338,
+          "focus_mode": null,
+          "method": "attention_aperture",
+          "required_event_ids": [
+            "95741b7d-cfea-4612-a65f-24ba8c9a23fe"
+          ],
+          "returned_event_ids": [
+            "b9c897a5-e131-4368-99dc-89e74b397465",
+            "46be02e9-971d-45a0-8fd6-3caa460f305d"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": null,
+          "association_hops": 3,
+          "association_limit": 600,
+          "association_trace_edges": 4,
+          "candidate_limit": 350,
+          "elapsed_ms": 9.948,
+          "focus_mode": null,
+          "method": "frozen:DEEPER_RESEARCH",
+          "required_event_ids": [
+            "95741b7d-cfea-4612-a65f-24ba8c9a23fe"
+          ],
+          "returned_event_ids": [
+            "9611ee91-f2af-47db-a1c5-28582cbbf975",
+            "95741b7d-cfea-4612-a65f-24ba8c9a23fe",
+            "eded6a1e-f223-4125-9139-dd7668586869"
+          ],
+          "scope": null,
+          "success": true
+        },
+        {
+          "association_decay": 0.9,
+          "association_effort": null,
+          "association_hops": 4,
+          "association_limit": 900,
+          "association_trace_edges": 3,
+          "candidate_limit": 250,
+          "elapsed_ms": 6.587,
+          "focus_mode": null,
+          "method": "frozen:CROSS_REFERENCE",
+          "required_event_ids": [
+            "95741b7d-cfea-4612-a65f-24ba8c9a23fe"
+          ],
+          "returned_event_ids": [
+            "eded6a1e-f223-4125-9139-dd7668586869",
+            "9611ee91-f2af-47db-a1c5-28582cbbf975",
+            "95741b7d-cfea-4612-a65f-24ba8c9a23fe"
+          ],
+          "scope": null,
+          "success": true
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": "AssociationEffort.DEEP",
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 3,
+          "candidate_limit": 350,
+          "elapsed_ms": 6.811,
+          "focus_mode": "FocusMode.MULTI_ANCHOR",
+          "method": "adaptive",
+          "required_event_ids": [
+            "95741b7d-cfea-4612-a65f-24ba8c9a23fe"
+          ],
+          "returned_event_ids": [
+            "eded6a1e-f223-4125-9139-dd7668586869",
+            "9611ee91-f2af-47db-a1c5-28582cbbf975",
+            "95741b7d-cfea-4612-a65f-24ba8c9a23fe"
+          ],
+          "scope": "ScopeProfile.BALANCED",
+          "success": true
+        }
+      ],
+      "purpose": "Required evidence is reachable only through an exact-length opaque association chain.",
+      "scenario_id": "multi_anchor_depth",
+      "stress_unit": "association-hops",
+      "stress_value": 2
+    },
+    {
+      "anchor_count": 1,
+      "aperture_already_sufficient": false,
+      "observations": [
+        {
+          "association_decay": null,
+          "association_effort": null,
+          "association_hops": 0,
+          "association_limit": null,
+          "association_trace_edges": 0,
+          "candidate_limit": 750,
+          "elapsed_ms": 3.681,
+          "focus_mode": null,
+          "method": "attention_aperture",
+          "required_event_ids": [
+            "705d1f68-65e8-42da-8f0f-83b74a14ed2b"
+          ],
+          "returned_event_ids": [
+            "5a62444a-0dc1-4b62-9345-fc7b52b5c183"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": null,
+          "association_hops": 3,
+          "association_limit": 600,
+          "association_trace_edges": 3,
+          "candidate_limit": 350,
+          "elapsed_ms": 4.799,
+          "focus_mode": null,
+          "method": "frozen:DEEPER_RESEARCH",
+          "required_event_ids": [
+            "705d1f68-65e8-42da-8f0f-83b74a14ed2b"
+          ],
+          "returned_event_ids": [
+            "05fc2908-8be4-4fc2-8b83-1adbcba5de53",
+            "9f53a8c4-a90c-4a9c-89e2-ce70230477c8",
+            "705d1f68-65e8-42da-8f0f-83b74a14ed2b"
+          ],
+          "scope": null,
+          "success": true
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": null,
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 3,
+          "candidate_limit": 150,
+          "elapsed_ms": 5.22,
+          "focus_mode": null,
+          "method": "frozen:FOCUSED_RECALL",
+          "required_event_ids": [
+            "705d1f68-65e8-42da-8f0f-83b74a14ed2b"
+          ],
+          "returned_event_ids": [
+            "05fc2908-8be4-4fc2-8b83-1adbcba5de53",
+            "9f53a8c4-a90c-4a9c-89e2-ce70230477c8",
+            "705d1f68-65e8-42da-8f0f-83b74a14ed2b"
+          ],
+          "scope": null,
+          "success": true
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": "AssociationEffort.DEEP",
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 3,
+          "candidate_limit": 175,
+          "elapsed_ms": 5.839,
+          "focus_mode": "FocusMode.SINGLE_ANCHOR",
+          "method": "adaptive",
+          "required_event_ids": [
+            "705d1f68-65e8-42da-8f0f-83b74a14ed2b"
+          ],
+          "returned_event_ids": [
+            "05fc2908-8be4-4fc2-8b83-1adbcba5de53",
+            "9f53a8c4-a90c-4a9c-89e2-ce70230477c8",
+            "705d1f68-65e8-42da-8f0f-83b74a14ed2b"
+          ],
+          "scope": "ScopeProfile.NARROW",
+          "success": true
+        }
+      ],
+      "purpose": "Required evidence is reachable only through an exact-length opaque association chain.",
+      "scenario_id": "single_anchor_depth",
+      "stress_unit": "association-hops",
+      "stress_value": 3
+    },
+    {
+      "anchor_count": 2,
+      "aperture_already_sufficient": false,
+      "observations": [
+        {
+          "association_decay": null,
+          "association_effort": null,
+          "association_hops": 0,
+          "association_limit": null,
+          "association_trace_edges": 0,
+          "candidate_limit": 750,
+          "elapsed_ms": 4.044,
+          "focus_mode": null,
+          "method": "attention_aperture",
+          "required_event_ids": [
+            "02895a2e-3ae0-43a0-83f0-9f6714bee25b"
+          ],
+          "returned_event_ids": [
+            "cb6157a4-5af6-484d-89ec-5e39dd99a04a",
+            "49b50304-6c42-431d-8d6a-14a0131e2539"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": null,
+          "association_hops": 3,
+          "association_limit": 600,
+          "association_trace_edges": 6,
+          "candidate_limit": 350,
+          "elapsed_ms": 8.607,
+          "focus_mode": null,
+          "method": "frozen:DEEPER_RESEARCH",
+          "required_event_ids": [
+            "02895a2e-3ae0-43a0-83f0-9f6714bee25b"
+          ],
+          "returned_event_ids": [
+            "9604fea6-7b36-47de-9924-7979ce38d6bf",
+            "3ab7b215-c8dd-4c52-8e2f-01e7c7757eb1",
+            "02895a2e-3ae0-43a0-83f0-9f6714bee25b",
+            "ec90e5d5-b9ac-4d6f-9b32-b4151c78d92e",
+            "69d1ecd1-7bf6-4cab-be3f-8b9a52089800"
+          ],
+          "scope": null,
+          "success": true
+        },
+        {
+          "association_decay": 0.9,
+          "association_effort": null,
+          "association_hops": 4,
+          "association_limit": 900,
+          "association_trace_edges": 5,
+          "candidate_limit": 250,
+          "elapsed_ms": 4.888,
+          "focus_mode": null,
+          "method": "frozen:CROSS_REFERENCE",
+          "required_event_ids": [
+            "02895a2e-3ae0-43a0-83f0-9f6714bee25b"
+          ],
+          "returned_event_ids": [
+            "ec90e5d5-b9ac-4d6f-9b32-b4151c78d92e",
+            "9604fea6-7b36-47de-9924-7979ce38d6bf",
+            "69d1ecd1-7bf6-4cab-be3f-8b9a52089800",
+            "3ab7b215-c8dd-4c52-8e2f-01e7c7757eb1",
+            "02895a2e-3ae0-43a0-83f0-9f6714bee25b"
+          ],
+          "scope": null,
+          "success": true
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": "AssociationEffort.DEEP",
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 5,
+          "candidate_limit": 350,
+          "elapsed_ms": 5.265,
+          "focus_mode": "FocusMode.MULTI_ANCHOR",
+          "method": "adaptive",
+          "required_event_ids": [
+            "02895a2e-3ae0-43a0-83f0-9f6714bee25b"
+          ],
+          "returned_event_ids": [
+            "ec90e5d5-b9ac-4d6f-9b32-b4151c78d92e",
+            "9604fea6-7b36-47de-9924-7979ce38d6bf",
+            "69d1ecd1-7bf6-4cab-be3f-8b9a52089800",
+            "3ab7b215-c8dd-4c52-8e2f-01e7c7757eb1",
+            "02895a2e-3ae0-43a0-83f0-9f6714bee25b"
+          ],
+          "scope": "ScopeProfile.BALANCED",
+          "success": true
+        }
+      ],
+      "purpose": "Required evidence is reachable only through an exact-length opaque association chain.",
+      "scenario_id": "multi_anchor_depth",
+      "stress_unit": "association-hops",
+      "stress_value": 3
+    },
+    {
+      "anchor_count": 1,
+      "aperture_already_sufficient": false,
+      "observations": [
+        {
+          "association_decay": null,
+          "association_effort": null,
+          "association_hops": 0,
+          "association_limit": null,
+          "association_trace_edges": 0,
+          "candidate_limit": 750,
+          "elapsed_ms": 3.871,
+          "focus_mode": null,
+          "method": "attention_aperture",
+          "required_event_ids": [
+            "c4ed571b-8dc5-42d1-b174-24e0c043ed4a"
+          ],
+          "returned_event_ids": [
+            "645fb1c8-8b1c-4fce-ab1f-8a771aa19def"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": null,
+          "association_hops": 3,
+          "association_limit": 600,
+          "association_trace_edges": 3,
+          "candidate_limit": 350,
+          "elapsed_ms": 6.295,
+          "focus_mode": null,
+          "method": "frozen:DEEPER_RESEARCH",
+          "required_event_ids": [
+            "c4ed571b-8dc5-42d1-b174-24e0c043ed4a"
+          ],
+          "returned_event_ids": [
+            "bb3549bd-3f2a-4053-87de-f100704a91b3",
+            "f20c74b7-f288-4679-a8f5-fdb03bea7f03",
+            "f9072630-5d9f-4ada-b9e1-35c67bedf2be"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": null,
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 4,
+          "candidate_limit": 150,
+          "elapsed_ms": 16.209,
+          "focus_mode": null,
+          "method": "frozen:FOCUSED_RECALL",
+          "required_event_ids": [
+            "c4ed571b-8dc5-42d1-b174-24e0c043ed4a"
+          ],
+          "returned_event_ids": [
+            "bb3549bd-3f2a-4053-87de-f100704a91b3",
+            "f20c74b7-f288-4679-a8f5-fdb03bea7f03",
+            "f9072630-5d9f-4ada-b9e1-35c67bedf2be",
+            "c4ed571b-8dc5-42d1-b174-24e0c043ed4a"
+          ],
+          "scope": null,
+          "success": true
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": "AssociationEffort.DEEP",
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 4,
+          "candidate_limit": 175,
+          "elapsed_ms": 6.376,
+          "focus_mode": "FocusMode.SINGLE_ANCHOR",
+          "method": "adaptive",
+          "required_event_ids": [
+            "c4ed571b-8dc5-42d1-b174-24e0c043ed4a"
+          ],
+          "returned_event_ids": [
+            "bb3549bd-3f2a-4053-87de-f100704a91b3",
+            "f20c74b7-f288-4679-a8f5-fdb03bea7f03",
+            "f9072630-5d9f-4ada-b9e1-35c67bedf2be",
+            "c4ed571b-8dc5-42d1-b174-24e0c043ed4a"
+          ],
+          "scope": "ScopeProfile.NARROW",
+          "success": true
+        }
+      ],
+      "purpose": "Required evidence is reachable only through an exact-length opaque association chain.",
+      "scenario_id": "single_anchor_depth",
+      "stress_unit": "association-hops",
+      "stress_value": 4
+    },
+    {
+      "anchor_count": 2,
+      "aperture_already_sufficient": false,
+      "observations": [
+        {
+          "association_decay": null,
+          "association_effort": null,
+          "association_hops": 0,
+          "association_limit": null,
+          "association_trace_edges": 0,
+          "candidate_limit": 750,
+          "elapsed_ms": 4.153,
+          "focus_mode": null,
+          "method": "attention_aperture",
+          "required_event_ids": [
+            "8cccbbb5-214c-4a2b-8d57-79abe186f491"
+          ],
+          "returned_event_ids": [
+            "c1115ebb-5612-4f39-b5e6-ec625205d240",
+            "3d769ebc-b0ba-4566-bec2-0c08831e0ab5"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": null,
+          "association_hops": 3,
+          "association_limit": 600,
+          "association_trace_edges": 6,
+          "candidate_limit": 350,
+          "elapsed_ms": 8.689,
+          "focus_mode": null,
+          "method": "frozen:DEEPER_RESEARCH",
+          "required_event_ids": [
+            "8cccbbb5-214c-4a2b-8d57-79abe186f491"
+          ],
+          "returned_event_ids": [
+            "a3f39c9d-c6e8-4cda-8883-7db830034cdf",
+            "b7703412-3161-45f7-ab2b-649d8fe0989f",
+            "9df31288-2660-44d4-a1be-1d3a6ad0ad79",
+            "2519a11d-644d-414e-bc0b-ea8f206326cd",
+            "b8f3d77c-891b-4c65-9139-ee72d963cc5c",
+            "2abefcb5-bbf8-46e5-99b9-c7beb07a426c"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.9,
+          "association_effort": null,
+          "association_hops": 4,
+          "association_limit": 900,
+          "association_trace_edges": 7,
+          "candidate_limit": 250,
+          "elapsed_ms": 6.013,
+          "focus_mode": null,
+          "method": "frozen:CROSS_REFERENCE",
+          "required_event_ids": [
+            "8cccbbb5-214c-4a2b-8d57-79abe186f491"
+          ],
+          "returned_event_ids": [
+            "2519a11d-644d-414e-bc0b-ea8f206326cd",
+            "a3f39c9d-c6e8-4cda-8883-7db830034cdf",
+            "b8f3d77c-891b-4c65-9139-ee72d963cc5c",
+            "b7703412-3161-45f7-ab2b-649d8fe0989f",
+            "2abefcb5-bbf8-46e5-99b9-c7beb07a426c",
+            "9df31288-2660-44d4-a1be-1d3a6ad0ad79",
+            "8cccbbb5-214c-4a2b-8d57-79abe186f491"
+          ],
+          "scope": null,
+          "success": true
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": "AssociationEffort.DEEP",
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 7,
+          "candidate_limit": 350,
+          "elapsed_ms": 5.502,
+          "focus_mode": "FocusMode.MULTI_ANCHOR",
+          "method": "adaptive",
+          "required_event_ids": [
+            "8cccbbb5-214c-4a2b-8d57-79abe186f491"
+          ],
+          "returned_event_ids": [
+            "2519a11d-644d-414e-bc0b-ea8f206326cd",
+            "a3f39c9d-c6e8-4cda-8883-7db830034cdf",
+            "b8f3d77c-891b-4c65-9139-ee72d963cc5c",
+            "b7703412-3161-45f7-ab2b-649d8fe0989f",
+            "2abefcb5-bbf8-46e5-99b9-c7beb07a426c",
+            "9df31288-2660-44d4-a1be-1d3a6ad0ad79",
+            "8cccbbb5-214c-4a2b-8d57-79abe186f491"
+          ],
+          "scope": "ScopeProfile.BALANCED",
+          "success": true
+        }
+      ],
+      "purpose": "Required evidence is reachable only through an exact-length opaque association chain.",
+      "scenario_id": "multi_anchor_depth",
+      "stress_unit": "association-hops",
+      "stress_value": 4
+    },
+    {
+      "anchor_count": 1,
+      "aperture_already_sufficient": false,
+      "observations": [
+        {
+          "association_decay": null,
+          "association_effort": null,
+          "association_hops": 0,
+          "association_limit": null,
+          "association_trace_edges": 0,
+          "candidate_limit": 750,
+          "elapsed_ms": 4.067,
+          "focus_mode": null,
+          "method": "attention_aperture",
+          "required_event_ids": [
+            "270ca71a-a338-46fb-b3ed-711b552681ed"
+          ],
+          "returned_event_ids": [
+            "bb6662e5-b0c9-452e-88d3-06448a99d626"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": null,
+          "association_hops": 3,
+          "association_limit": 600,
+          "association_trace_edges": 3,
+          "candidate_limit": 350,
+          "elapsed_ms": 5.771,
+          "focus_mode": null,
+          "method": "frozen:DEEPER_RESEARCH",
+          "required_event_ids": [
+            "270ca71a-a338-46fb-b3ed-711b552681ed"
+          ],
+          "returned_event_ids": [
+            "a92a50e4-9c60-4d2f-93ce-97479ce3cd01",
+            "64d55a6a-457a-4ad9-9183-ad75876664ed",
+            "0b3209f5-1b4f-4583-98c5-6d19b39bad4f"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": null,
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 5,
+          "candidate_limit": 150,
+          "elapsed_ms": 6.835,
+          "focus_mode": null,
+          "method": "frozen:FOCUSED_RECALL",
+          "required_event_ids": [
+            "270ca71a-a338-46fb-b3ed-711b552681ed"
+          ],
+          "returned_event_ids": [
+            "a92a50e4-9c60-4d2f-93ce-97479ce3cd01",
+            "64d55a6a-457a-4ad9-9183-ad75876664ed",
+            "0b3209f5-1b4f-4583-98c5-6d19b39bad4f",
+            "d6d972bf-3d9f-4d30-a19c-58eb44d86c9e",
+            "270ca71a-a338-46fb-b3ed-711b552681ed"
+          ],
+          "scope": null,
+          "success": true
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": "AssociationEffort.DEEP",
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 5,
+          "candidate_limit": 175,
+          "elapsed_ms": 5.888,
+          "focus_mode": "FocusMode.SINGLE_ANCHOR",
+          "method": "adaptive",
+          "required_event_ids": [
+            "270ca71a-a338-46fb-b3ed-711b552681ed"
+          ],
+          "returned_event_ids": [
+            "a92a50e4-9c60-4d2f-93ce-97479ce3cd01",
+            "64d55a6a-457a-4ad9-9183-ad75876664ed",
+            "0b3209f5-1b4f-4583-98c5-6d19b39bad4f",
+            "d6d972bf-3d9f-4d30-a19c-58eb44d86c9e",
+            "270ca71a-a338-46fb-b3ed-711b552681ed"
+          ],
+          "scope": "ScopeProfile.NARROW",
+          "success": true
+        }
+      ],
+      "purpose": "Required evidence is reachable only through an exact-length opaque association chain.",
+      "scenario_id": "single_anchor_depth",
+      "stress_unit": "association-hops",
+      "stress_value": 5
+    },
+    {
+      "anchor_count": 2,
+      "aperture_already_sufficient": false,
+      "observations": [
+        {
+          "association_decay": null,
+          "association_effort": null,
+          "association_hops": 0,
+          "association_limit": null,
+          "association_trace_edges": 0,
+          "candidate_limit": 750,
+          "elapsed_ms": 4.226,
+          "focus_mode": null,
+          "method": "attention_aperture",
+          "required_event_ids": [
+            "f0ce942c-c0cd-458d-a239-e3ed0a0ab8b6"
+          ],
+          "returned_event_ids": [
+            "c752e6cd-0ec8-4a6e-b74e-d1856ec97f49",
+            "a31dee62-4690-4c39-8f29-284b5f53d7b5"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": null,
+          "association_hops": 3,
+          "association_limit": 600,
+          "association_trace_edges": 6,
+          "candidate_limit": 350,
+          "elapsed_ms": 8.901,
+          "focus_mode": null,
+          "method": "frozen:DEEPER_RESEARCH",
+          "required_event_ids": [
+            "f0ce942c-c0cd-458d-a239-e3ed0a0ab8b6"
+          ],
+          "returned_event_ids": [
+            "0a3aaa4e-681c-41aa-81f1-383eba6dbf89",
+            "6a2384a1-2ba4-41cb-9a77-daef4ce27f61",
+            "36b46236-22cb-4261-ae56-09e7e6d68f52",
+            "9126fd88-b9e5-45c5-af6f-474b11fb411d",
+            "5737b5c7-4afb-486b-b35f-6da5d8fc23ae",
+            "f560de17-574a-4b24-a88c-80c3255b6943"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.9,
+          "association_effort": null,
+          "association_hops": 4,
+          "association_limit": 900,
+          "association_trace_edges": 8,
+          "candidate_limit": 250,
+          "elapsed_ms": 5.659,
+          "focus_mode": null,
+          "method": "frozen:CROSS_REFERENCE",
+          "required_event_ids": [
+            "f0ce942c-c0cd-458d-a239-e3ed0a0ab8b6"
+          ],
+          "returned_event_ids": [
+            "9126fd88-b9e5-45c5-af6f-474b11fb411d",
+            "0a3aaa4e-681c-41aa-81f1-383eba6dbf89",
+            "5737b5c7-4afb-486b-b35f-6da5d8fc23ae",
+            "6a2384a1-2ba4-41cb-9a77-daef4ce27f61",
+            "f560de17-574a-4b24-a88c-80c3255b6943",
+            "36b46236-22cb-4261-ae56-09e7e6d68f52",
+            "000e4a76-4909-4e6c-a777-e1f12588ba2e",
+            "c1692bcd-7b21-4022-8b52-6d80883a152c"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": "AssociationEffort.DEEP",
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 9,
+          "candidate_limit": 350,
+          "elapsed_ms": 6.365,
+          "focus_mode": "FocusMode.MULTI_ANCHOR",
+          "method": "adaptive",
+          "required_event_ids": [
+            "f0ce942c-c0cd-458d-a239-e3ed0a0ab8b6"
+          ],
+          "returned_event_ids": [
+            "9126fd88-b9e5-45c5-af6f-474b11fb411d",
+            "0a3aaa4e-681c-41aa-81f1-383eba6dbf89",
+            "5737b5c7-4afb-486b-b35f-6da5d8fc23ae",
+            "6a2384a1-2ba4-41cb-9a77-daef4ce27f61",
+            "f560de17-574a-4b24-a88c-80c3255b6943",
+            "36b46236-22cb-4261-ae56-09e7e6d68f52",
+            "000e4a76-4909-4e6c-a777-e1f12588ba2e",
+            "c1692bcd-7b21-4022-8b52-6d80883a152c",
+            "f0ce942c-c0cd-458d-a239-e3ed0a0ab8b6"
+          ],
+          "scope": "ScopeProfile.BALANCED",
+          "success": true
+        }
+      ],
+      "purpose": "Required evidence is reachable only through an exact-length opaque association chain.",
+      "scenario_id": "multi_anchor_depth",
+      "stress_unit": "association-hops",
+      "stress_value": 5
+    },
+    {
+      "anchor_count": 1,
+      "aperture_already_sufficient": false,
+      "observations": [
+        {
+          "association_decay": null,
+          "association_effort": null,
+          "association_hops": 0,
+          "association_limit": null,
+          "association_trace_edges": 0,
+          "candidate_limit": 750,
+          "elapsed_ms": 4.355,
+          "focus_mode": null,
+          "method": "attention_aperture",
+          "required_event_ids": [
+            "3f7d4323-478c-4eb9-8253-f512f7681ff7"
+          ],
+          "returned_event_ids": [
+            "44d8e69b-6e0a-43aa-93be-d396d9f360bc"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": null,
+          "association_hops": 3,
+          "association_limit": 600,
+          "association_trace_edges": 3,
+          "candidate_limit": 350,
+          "elapsed_ms": 5.407,
+          "focus_mode": null,
+          "method": "frozen:DEEPER_RESEARCH",
+          "required_event_ids": [
+            "3f7d4323-478c-4eb9-8253-f512f7681ff7"
+          ],
+          "returned_event_ids": [
+            "836e3d40-0d18-4689-8039-c93979e036a9",
+            "0cbabae4-714e-474f-b7da-cf2bebb369bf",
+            "7a7500c9-3019-4d49-a1d9-ce45eceaa53c"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": null,
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 5,
+          "candidate_limit": 150,
+          "elapsed_ms": 6.902,
+          "focus_mode": null,
+          "method": "frozen:FOCUSED_RECALL",
+          "required_event_ids": [
+            "3f7d4323-478c-4eb9-8253-f512f7681ff7"
+          ],
+          "returned_event_ids": [
+            "836e3d40-0d18-4689-8039-c93979e036a9",
+            "0cbabae4-714e-474f-b7da-cf2bebb369bf",
+            "7a7500c9-3019-4d49-a1d9-ce45eceaa53c",
+            "e6720459-9899-4d61-a6a1-0f7e4ef84fe0",
+            "156feb0e-47bb-49e0-bd0a-3cdc62acc267"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": "AssociationEffort.DEEP",
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 5,
+          "candidate_limit": 175,
+          "elapsed_ms": 6.72,
+          "focus_mode": "FocusMode.SINGLE_ANCHOR",
+          "method": "adaptive",
+          "required_event_ids": [
+            "3f7d4323-478c-4eb9-8253-f512f7681ff7"
+          ],
+          "returned_event_ids": [
+            "836e3d40-0d18-4689-8039-c93979e036a9",
+            "0cbabae4-714e-474f-b7da-cf2bebb369bf",
+            "7a7500c9-3019-4d49-a1d9-ce45eceaa53c",
+            "e6720459-9899-4d61-a6a1-0f7e4ef84fe0",
+            "156feb0e-47bb-49e0-bd0a-3cdc62acc267"
+          ],
+          "scope": "ScopeProfile.NARROW",
+          "success": false
+        }
+      ],
+      "purpose": "Required evidence is reachable only through an exact-length opaque association chain.",
+      "scenario_id": "single_anchor_depth",
+      "stress_unit": "association-hops",
+      "stress_value": 6
+    },
+    {
+      "anchor_count": 2,
+      "aperture_already_sufficient": false,
+      "observations": [
+        {
+          "association_decay": null,
+          "association_effort": null,
+          "association_hops": 0,
+          "association_limit": null,
+          "association_trace_edges": 0,
+          "candidate_limit": 750,
+          "elapsed_ms": 5.042,
+          "focus_mode": null,
+          "method": "attention_aperture",
+          "required_event_ids": [
+            "e5f64292-f6cc-4d33-a16a-6cadfb32514a"
+          ],
+          "returned_event_ids": [
+            "cec0f494-f4b9-42f2-8039-90dfbffb3fae",
+            "aab77061-ea68-4732-ba22-f8422e74dcd6"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": null,
+          "association_hops": 3,
+          "association_limit": 600,
+          "association_trace_edges": 6,
+          "candidate_limit": 350,
+          "elapsed_ms": 10.915,
+          "focus_mode": null,
+          "method": "frozen:DEEPER_RESEARCH",
+          "required_event_ids": [
+            "e5f64292-f6cc-4d33-a16a-6cadfb32514a"
+          ],
+          "returned_event_ids": [
+            "52b5ed0f-5401-4931-a891-c3cdb64c99e1",
+            "a3abc380-6ab9-4f91-b6ae-fe97f5787fbf",
+            "84de03c3-6c66-4bc8-b515-909c623daf4a",
+            "e07af3a6-975b-48a0-9885-b26cbec7ca78",
+            "509b93fd-c153-4811-8b62-83b87b1bd1e0",
+            "714d8333-843f-41c7-ad5b-1f6230db96a6"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.9,
+          "association_effort": null,
+          "association_hops": 4,
+          "association_limit": 900,
+          "association_trace_edges": 8,
+          "candidate_limit": 250,
+          "elapsed_ms": 9.817,
+          "focus_mode": null,
+          "method": "frozen:CROSS_REFERENCE",
+          "required_event_ids": [
+            "e5f64292-f6cc-4d33-a16a-6cadfb32514a"
+          ],
+          "returned_event_ids": [
+            "e07af3a6-975b-48a0-9885-b26cbec7ca78",
+            "52b5ed0f-5401-4931-a891-c3cdb64c99e1",
+            "509b93fd-c153-4811-8b62-83b87b1bd1e0",
+            "a3abc380-6ab9-4f91-b6ae-fe97f5787fbf",
+            "714d8333-843f-41c7-ad5b-1f6230db96a6",
+            "84de03c3-6c66-4bc8-b515-909c623daf4a",
+            "75c4e19a-942f-44de-8ece-f6d796f03552",
+            "8a83f00f-d20c-4bda-a6bd-7869795c1a4a"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": "AssociationEffort.DEEP",
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 10,
+          "candidate_limit": 350,
+          "elapsed_ms": 12.369,
+          "focus_mode": "FocusMode.MULTI_ANCHOR",
+          "method": "adaptive",
+          "required_event_ids": [
+            "e5f64292-f6cc-4d33-a16a-6cadfb32514a"
+          ],
+          "returned_event_ids": [
+            "e07af3a6-975b-48a0-9885-b26cbec7ca78",
+            "52b5ed0f-5401-4931-a891-c3cdb64c99e1",
+            "509b93fd-c153-4811-8b62-83b87b1bd1e0",
+            "a3abc380-6ab9-4f91-b6ae-fe97f5787fbf",
+            "714d8333-843f-41c7-ad5b-1f6230db96a6",
+            "84de03c3-6c66-4bc8-b515-909c623daf4a",
+            "75c4e19a-942f-44de-8ece-f6d796f03552",
+            "8a83f00f-d20c-4bda-a6bd-7869795c1a4a",
+            "589db6dc-3238-4094-8905-84d436de944c",
+            "b13a786a-a5a0-4ddd-8dee-192af571e3d1"
+          ],
+          "scope": "ScopeProfile.BALANCED",
+          "success": false
+        }
+      ],
+      "purpose": "Required evidence is reachable only through an exact-length opaque association chain.",
+      "scenario_id": "multi_anchor_depth",
+      "stress_unit": "association-hops",
+      "stress_value": 6
+    },
+    {
+      "aperture_already_sufficient": false,
+      "observations": [
+        {
+          "association_decay": null,
+          "association_effort": null,
+          "association_hops": 0,
+          "association_limit": null,
+          "association_trace_edges": 0,
+          "candidate_limit": 750,
+          "elapsed_ms": 9.589,
+          "focus_mode": null,
+          "method": "attention_aperture",
+          "required_event_ids": [
+            "999ed3f4-0083-48c9-8e96-9229450056d4"
+          ],
+          "returned_event_ids": [
+            "43bcecc5-c797-43b2-ad41-be87099a21b8"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": null,
+          "association_hops": 3,
+          "association_limit": 600,
+          "association_trace_edges": 251,
+          "candidate_limit": 350,
+          "elapsed_ms": 33.05,
+          "focus_mode": null,
+          "method": "frozen:DEEPER_RESEARCH",
+          "required_event_ids": [
+            "999ed3f4-0083-48c9-8e96-9229450056d4"
+          ],
+          "returned_event_ids": [
+            "999ed3f4-0083-48c9-8e96-9229450056d4",
+            "e3c3c970-9313-4c10-a8f8-7b3cc96b259d",
+            "eb197a11-8b55-481d-8667-ae7eaa729a45",
+            "9e507fc3-f0dd-49fb-9080-e1edd286add2",
+            "2b93b169-142e-4b4f-a6dd-38137275419f",
+            "c5092e1f-46f2-40f1-8413-2ef97bc7a6d5",
+            "50e5e998-87f0-4409-a7aa-535a6f0265d9",
+            "70671b2b-f07a-4ba6-9942-6e6aeaab5ce5",
+            "8ab4700b-7eef-40b6-a162-f9adeba9e0f3",
+            "e9efea6e-dd4c-4980-85e2-db45bdc69067"
+          ],
+          "scope": null,
+          "success": true
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": null,
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 251,
+          "candidate_limit": 150,
+          "elapsed_ms": 29.697,
+          "focus_mode": null,
+          "method": "frozen:FOCUSED_RECALL",
+          "required_event_ids": [
+            "999ed3f4-0083-48c9-8e96-9229450056d4"
+          ],
+          "returned_event_ids": [
+            "999ed3f4-0083-48c9-8e96-9229450056d4",
+            "e3c3c970-9313-4c10-a8f8-7b3cc96b259d",
+            "eb197a11-8b55-481d-8667-ae7eaa729a45",
+            "9e507fc3-f0dd-49fb-9080-e1edd286add2",
+            "2b93b169-142e-4b4f-a6dd-38137275419f",
+            "c5092e1f-46f2-40f1-8413-2ef97bc7a6d5",
+            "50e5e998-87f0-4409-a7aa-535a6f0265d9",
+            "70671b2b-f07a-4ba6-9942-6e6aeaab5ce5",
+            "8ab4700b-7eef-40b6-a162-f9adeba9e0f3",
+            "e9efea6e-dd4c-4980-85e2-db45bdc69067"
+          ],
+          "scope": null,
+          "success": true
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": "AssociationEffort.DEEP",
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 251,
+          "candidate_limit": 175,
+          "elapsed_ms": 29.554,
+          "focus_mode": "FocusMode.SINGLE_ANCHOR",
+          "method": "adaptive",
+          "required_event_ids": [
+            "999ed3f4-0083-48c9-8e96-9229450056d4"
+          ],
+          "returned_event_ids": [
+            "999ed3f4-0083-48c9-8e96-9229450056d4",
+            "e3c3c970-9313-4c10-a8f8-7b3cc96b259d",
+            "eb197a11-8b55-481d-8667-ae7eaa729a45",
+            "9e507fc3-f0dd-49fb-9080-e1edd286add2",
+            "2b93b169-142e-4b4f-a6dd-38137275419f",
+            "c5092e1f-46f2-40f1-8413-2ef97bc7a6d5",
+            "50e5e998-87f0-4409-a7aa-535a6f0265d9",
+            "70671b2b-f07a-4ba6-9942-6e6aeaab5ce5",
+            "8ab4700b-7eef-40b6-a162-f9adeba9e0f3",
+            "e9efea6e-dd4c-4980-85e2-db45bdc69067"
+          ],
+          "scope": "ScopeProfile.NARROW",
+          "success": true
+        }
+      ],
+      "purpose": "The required edge sorts behind a hostile fanout frontier and disappears when the association budget is exhausted.",
+      "scenario_id": "association_fanout_ceiling",
+      "stress_unit": "earlier-sorted-outgoing-edges",
+      "stress_value": 250
+    },
+    {
+      "aperture_already_sufficient": false,
+      "observations": [
+        {
+          "association_decay": null,
+          "association_effort": null,
+          "association_hops": 0,
+          "association_limit": null,
+          "association_trace_edges": 0,
+          "candidate_limit": 750,
+          "elapsed_ms": 10.707,
+          "focus_mode": null,
+          "method": "attention_aperture",
+          "required_event_ids": [
+            "fd9e0789-a7b4-4891-ad16-e187c7e5c310"
+          ],
+          "returned_event_ids": [
+            "dd210bf9-e81d-4f5e-a96d-2d13979df33a"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": null,
+          "association_hops": 3,
+          "association_limit": 600,
+          "association_trace_edges": 351,
+          "candidate_limit": 350,
+          "elapsed_ms": 41.928,
+          "focus_mode": null,
+          "method": "frozen:DEEPER_RESEARCH",
+          "required_event_ids": [
+            "fd9e0789-a7b4-4891-ad16-e187c7e5c310"
+          ],
+          "returned_event_ids": [
+            "fd9e0789-a7b4-4891-ad16-e187c7e5c310",
+            "da3a412a-228f-40cb-b197-dac906b919c9",
+            "22e36b6e-11be-4ccf-abb6-c40b1f09505b",
+            "2d74a3c9-7f5a-4c35-be45-13d86e75277b",
+            "e25b057d-dc0b-461c-aaf5-be41a7ccbcc8",
+            "68e858f0-7e3b-49e9-8093-c4f89278316f",
+            "2562c935-f790-4988-be9f-e37e1fd1b455",
+            "214c37d3-d452-44dd-ac9a-381847145a45",
+            "f3a4b984-2209-4407-9b7a-8923a6504405",
+            "48e248c5-7f09-4e99-aa26-e1420359e03b"
+          ],
+          "scope": null,
+          "success": true
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": null,
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 351,
+          "candidate_limit": 150,
+          "elapsed_ms": 40.252,
+          "focus_mode": null,
+          "method": "frozen:FOCUSED_RECALL",
+          "required_event_ids": [
+            "fd9e0789-a7b4-4891-ad16-e187c7e5c310"
+          ],
+          "returned_event_ids": [
+            "fd9e0789-a7b4-4891-ad16-e187c7e5c310",
+            "da3a412a-228f-40cb-b197-dac906b919c9",
+            "22e36b6e-11be-4ccf-abb6-c40b1f09505b",
+            "2d74a3c9-7f5a-4c35-be45-13d86e75277b",
+            "e25b057d-dc0b-461c-aaf5-be41a7ccbcc8",
+            "68e858f0-7e3b-49e9-8093-c4f89278316f",
+            "2562c935-f790-4988-be9f-e37e1fd1b455",
+            "214c37d3-d452-44dd-ac9a-381847145a45",
+            "f3a4b984-2209-4407-9b7a-8923a6504405",
+            "48e248c5-7f09-4e99-aa26-e1420359e03b"
+          ],
+          "scope": null,
+          "success": true
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": "AssociationEffort.DEEP",
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 351,
+          "candidate_limit": 175,
+          "elapsed_ms": 40.292,
+          "focus_mode": "FocusMode.SINGLE_ANCHOR",
+          "method": "adaptive",
+          "required_event_ids": [
+            "fd9e0789-a7b4-4891-ad16-e187c7e5c310"
+          ],
+          "returned_event_ids": [
+            "fd9e0789-a7b4-4891-ad16-e187c7e5c310",
+            "da3a412a-228f-40cb-b197-dac906b919c9",
+            "22e36b6e-11be-4ccf-abb6-c40b1f09505b",
+            "2d74a3c9-7f5a-4c35-be45-13d86e75277b",
+            "e25b057d-dc0b-461c-aaf5-be41a7ccbcc8",
+            "68e858f0-7e3b-49e9-8093-c4f89278316f",
+            "2562c935-f790-4988-be9f-e37e1fd1b455",
+            "214c37d3-d452-44dd-ac9a-381847145a45",
+            "f3a4b984-2209-4407-9b7a-8923a6504405",
+            "48e248c5-7f09-4e99-aa26-e1420359e03b"
+          ],
+          "scope": "ScopeProfile.NARROW",
+          "success": true
+        }
+      ],
+      "purpose": "The required edge sorts behind a hostile fanout frontier and disappears when the association budget is exhausted.",
+      "scenario_id": "association_fanout_ceiling",
+      "stress_unit": "earlier-sorted-outgoing-edges",
+      "stress_value": 350
+    },
+    {
+      "aperture_already_sufficient": false,
+      "observations": [
+        {
+          "association_decay": null,
+          "association_effort": null,
+          "association_hops": 0,
+          "association_limit": null,
+          "association_trace_edges": 0,
+          "candidate_limit": 750,
+          "elapsed_ms": 12.802,
+          "focus_mode": null,
+          "method": "attention_aperture",
+          "required_event_ids": [
+            "69de56aa-4ada-48f5-86ba-ed7517c9aeea"
+          ],
+          "returned_event_ids": [
+            "ea8da0ad-c2c8-4b31-9dd8-7def4f905c31"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": null,
+          "association_hops": 3,
+          "association_limit": 600,
+          "association_trace_edges": 551,
+          "candidate_limit": 350,
+          "elapsed_ms": 69.262,
+          "focus_mode": null,
+          "method": "frozen:DEEPER_RESEARCH",
+          "required_event_ids": [
+            "69de56aa-4ada-48f5-86ba-ed7517c9aeea"
+          ],
+          "returned_event_ids": [
+            "69de56aa-4ada-48f5-86ba-ed7517c9aeea",
+            "0a335780-f2ff-4176-a036-e4868dca6c18",
+            "40bc064b-b44f-4eac-900d-4ffc32024af8",
+            "f0383ee0-3cba-471a-9a46-f627d4f4ac76",
+            "d85a1292-f93a-4aaa-b3bc-d5b14694d8c4",
+            "a57be286-6aae-40ae-9419-07f51263b0f0",
+            "7210f3ec-8be4-4caa-9d01-b6e74a2df04a",
+            "e2ff0782-a4d4-4e8a-8d08-a654078f9491",
+            "a1f1a41a-b28f-4026-b7ad-f5c820364dc5",
+            "0f8c22aa-6676-47e8-a639-e75ff6c1ce2f"
+          ],
+          "scope": null,
+          "success": true
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": null,
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 551,
+          "candidate_limit": 150,
+          "elapsed_ms": 60.709,
+          "focus_mode": null,
+          "method": "frozen:FOCUSED_RECALL",
+          "required_event_ids": [
+            "69de56aa-4ada-48f5-86ba-ed7517c9aeea"
+          ],
+          "returned_event_ids": [
+            "69de56aa-4ada-48f5-86ba-ed7517c9aeea",
+            "0a335780-f2ff-4176-a036-e4868dca6c18",
+            "40bc064b-b44f-4eac-900d-4ffc32024af8",
+            "f0383ee0-3cba-471a-9a46-f627d4f4ac76",
+            "d85a1292-f93a-4aaa-b3bc-d5b14694d8c4",
+            "a57be286-6aae-40ae-9419-07f51263b0f0",
+            "7210f3ec-8be4-4caa-9d01-b6e74a2df04a",
+            "e2ff0782-a4d4-4e8a-8d08-a654078f9491",
+            "a1f1a41a-b28f-4026-b7ad-f5c820364dc5",
+            "0f8c22aa-6676-47e8-a639-e75ff6c1ce2f"
+          ],
+          "scope": null,
+          "success": true
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": "AssociationEffort.DEEP",
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 551,
+          "candidate_limit": 175,
+          "elapsed_ms": 59.576,
+          "focus_mode": "FocusMode.SINGLE_ANCHOR",
+          "method": "adaptive",
+          "required_event_ids": [
+            "69de56aa-4ada-48f5-86ba-ed7517c9aeea"
+          ],
+          "returned_event_ids": [
+            "69de56aa-4ada-48f5-86ba-ed7517c9aeea",
+            "0a335780-f2ff-4176-a036-e4868dca6c18",
+            "40bc064b-b44f-4eac-900d-4ffc32024af8",
+            "f0383ee0-3cba-471a-9a46-f627d4f4ac76",
+            "d85a1292-f93a-4aaa-b3bc-d5b14694d8c4",
+            "a57be286-6aae-40ae-9419-07f51263b0f0",
+            "7210f3ec-8be4-4caa-9d01-b6e74a2df04a",
+            "e2ff0782-a4d4-4e8a-8d08-a654078f9491",
+            "a1f1a41a-b28f-4026-b7ad-f5c820364dc5",
+            "0f8c22aa-6676-47e8-a639-e75ff6c1ce2f"
+          ],
+          "scope": "ScopeProfile.NARROW",
+          "success": true
+        }
+      ],
+      "purpose": "The required edge sorts behind a hostile fanout frontier and disappears when the association budget is exhausted.",
+      "scenario_id": "association_fanout_ceiling",
+      "stress_unit": "earlier-sorted-outgoing-edges",
+      "stress_value": 550
+    },
+    {
+      "aperture_already_sufficient": false,
+      "observations": [
+        {
+          "association_decay": null,
+          "association_effort": null,
+          "association_hops": 0,
+          "association_limit": null,
+          "association_trace_edges": 0,
+          "candidate_limit": 750,
+          "elapsed_ms": 14.324,
+          "focus_mode": null,
+          "method": "attention_aperture",
+          "required_event_ids": [
+            "62d670df-82c6-4a5a-893b-85a7136954f3"
+          ],
+          "returned_event_ids": [
+            "46131960-201c-41f5-b964-53aaa9eaf9d5"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": null,
+          "association_hops": 3,
+          "association_limit": 600,
+          "association_trace_edges": 600,
+          "candidate_limit": 350,
+          "elapsed_ms": 62.267,
+          "focus_mode": null,
+          "method": "frozen:DEEPER_RESEARCH",
+          "required_event_ids": [
+            "62d670df-82c6-4a5a-893b-85a7136954f3"
+          ],
+          "returned_event_ids": [
+            "43ea40ae-1622-44db-9e0b-c360920b439e",
+            "9d253348-4a3c-4d5b-bce9-e938831e0331",
+            "db9a77d0-3edf-4242-854b-cad80b9eafda",
+            "6b6536c5-1e4e-4efc-b93f-a3874e3e647e",
+            "5e93c0e0-eb2e-4d7a-b73e-cc44cd93487e",
+            "8d756b16-5add-4b8a-9c39-06c961deef0f",
+            "657e5a6b-e032-4709-ae99-996149bf951c",
+            "29fecab0-2a1b-458e-bd08-f34cc2b6e22c",
+            "4a54bbbb-c470-4941-9a00-082743930894",
+            "72b27fc4-2585-4b56-b972-442442d29fa2"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": null,
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 651,
+          "candidate_limit": 150,
+          "elapsed_ms": 72.505,
+          "focus_mode": null,
+          "method": "frozen:FOCUSED_RECALL",
+          "required_event_ids": [
+            "62d670df-82c6-4a5a-893b-85a7136954f3"
+          ],
+          "returned_event_ids": [
+            "62d670df-82c6-4a5a-893b-85a7136954f3",
+            "95845171-e0a7-4a8f-af9a-3792025fafca",
+            "63c8b0ec-e869-457e-8264-af7046494cea",
+            "ae8aefd5-f952-433e-8351-0235c2221d4a",
+            "f6dcfb1d-754d-4068-bf1c-66e81ed2f41a",
+            "bf53ff2a-78e6-482c-975b-ab32b6172ac6",
+            "3ebb3147-03fb-40fa-af11-168a091d2629",
+            "0f1e03ed-a57a-4c46-b70d-d229d252edfa",
+            "7666f433-8409-4c4b-9899-3b75f6416f1f",
+            "1c961ac7-654c-4252-ad2c-ff780d169f07"
+          ],
+          "scope": null,
+          "success": true
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": "AssociationEffort.DEEP",
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 651,
+          "candidate_limit": 175,
+          "elapsed_ms": 81.993,
+          "focus_mode": "FocusMode.SINGLE_ANCHOR",
+          "method": "adaptive",
+          "required_event_ids": [
+            "62d670df-82c6-4a5a-893b-85a7136954f3"
+          ],
+          "returned_event_ids": [
+            "62d670df-82c6-4a5a-893b-85a7136954f3",
+            "95845171-e0a7-4a8f-af9a-3792025fafca",
+            "63c8b0ec-e869-457e-8264-af7046494cea",
+            "ae8aefd5-f952-433e-8351-0235c2221d4a",
+            "f6dcfb1d-754d-4068-bf1c-66e81ed2f41a",
+            "bf53ff2a-78e6-482c-975b-ab32b6172ac6",
+            "3ebb3147-03fb-40fa-af11-168a091d2629",
+            "0f1e03ed-a57a-4c46-b70d-d229d252edfa",
+            "7666f433-8409-4c4b-9899-3b75f6416f1f",
+            "1c961ac7-654c-4252-ad2c-ff780d169f07"
+          ],
+          "scope": "ScopeProfile.NARROW",
+          "success": true
+        }
+      ],
+      "purpose": "The required edge sorts behind a hostile fanout frontier and disappears when the association budget is exhausted.",
+      "scenario_id": "association_fanout_ceiling",
+      "stress_unit": "earlier-sorted-outgoing-edges",
+      "stress_value": 650
+    },
+    {
+      "aperture_already_sufficient": false,
+      "observations": [
+        {
+          "association_decay": null,
+          "association_effort": null,
+          "association_hops": 0,
+          "association_limit": null,
+          "association_trace_edges": 0,
+          "candidate_limit": 750,
+          "elapsed_ms": 15.346,
+          "focus_mode": null,
+          "method": "attention_aperture",
+          "required_event_ids": [
+            "f89286b8-f942-4172-a971-fe7fc9307bc6"
+          ],
+          "returned_event_ids": [
+            "42b84f4a-f66f-47fe-b648-8e1f5ed69b66"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": null,
+          "association_hops": 3,
+          "association_limit": 600,
+          "association_trace_edges": 600,
+          "candidate_limit": 350,
+          "elapsed_ms": 65.484,
+          "focus_mode": null,
+          "method": "frozen:DEEPER_RESEARCH",
+          "required_event_ids": [
+            "f89286b8-f942-4172-a971-fe7fc9307bc6"
+          ],
+          "returned_event_ids": [
+            "51b2a499-a673-4be2-ad7f-790214da146c",
+            "7b10379f-77c4-426b-8184-b39a6039a0f3",
+            "d6c7680b-c9ab-4312-956d-93414452590d",
+            "af1314cd-1acb-4901-ad58-ce6615eae2a7",
+            "c3ab3801-154f-4226-838c-3f1a17e7b2cb",
+            "3ed2bf03-55e1-45ff-b9aa-d1acb288497f",
+            "9e1ab0e6-a5bd-4e59-aff7-21f0cd856172",
+            "cb038230-af3b-4a3f-87cc-d2680842ab11",
+            "e3803124-14b3-46d1-a465-014ea2cb54e5",
+            "a03f09d6-8f30-4cdc-9d83-e1e58b604da0"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": null,
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 701,
+          "candidate_limit": 150,
+          "elapsed_ms": 73.304,
+          "focus_mode": null,
+          "method": "frozen:FOCUSED_RECALL",
+          "required_event_ids": [
+            "f89286b8-f942-4172-a971-fe7fc9307bc6"
+          ],
+          "returned_event_ids": [
+            "f89286b8-f942-4172-a971-fe7fc9307bc6",
+            "8c12972e-584e-4456-8a68-db7fea8fad3a",
+            "9abb6f34-dceb-491f-b93c-1d225e999e56",
+            "97a9faa1-0fad-45f7-8267-a02ff1b0b72a",
+            "c550aacf-3de1-41f6-9869-be9d8851b254",
+            "02ceb8d0-ab12-43c3-9787-222eb4f9d6b3",
+            "59c4ce93-8948-4577-a9c4-38d08f5773e3",
+            "7b03c15d-40bf-45bc-9b99-2684330c59ac",
+            "a036c43b-ecfe-4eaf-a751-9bdd1db64777",
+            "02063dd5-150f-444f-aeb1-7aa3842288b6"
+          ],
+          "scope": null,
+          "success": true
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": "AssociationEffort.DEEP",
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 701,
+          "candidate_limit": 175,
+          "elapsed_ms": 89.693,
+          "focus_mode": "FocusMode.SINGLE_ANCHOR",
+          "method": "adaptive",
+          "required_event_ids": [
+            "f89286b8-f942-4172-a971-fe7fc9307bc6"
+          ],
+          "returned_event_ids": [
+            "f89286b8-f942-4172-a971-fe7fc9307bc6",
+            "8c12972e-584e-4456-8a68-db7fea8fad3a",
+            "9abb6f34-dceb-491f-b93c-1d225e999e56",
+            "97a9faa1-0fad-45f7-8267-a02ff1b0b72a",
+            "c550aacf-3de1-41f6-9869-be9d8851b254",
+            "02ceb8d0-ab12-43c3-9787-222eb4f9d6b3",
+            "59c4ce93-8948-4577-a9c4-38d08f5773e3",
+            "7b03c15d-40bf-45bc-9b99-2684330c59ac",
+            "a036c43b-ecfe-4eaf-a751-9bdd1db64777",
+            "02063dd5-150f-444f-aeb1-7aa3842288b6"
+          ],
+          "scope": "ScopeProfile.NARROW",
+          "success": true
+        }
+      ],
+      "purpose": "The required edge sorts behind a hostile fanout frontier and disappears when the association budget is exhausted.",
+      "scenario_id": "association_fanout_ceiling",
+      "stress_unit": "earlier-sorted-outgoing-edges",
+      "stress_value": 700
+    },
+    {
+      "aperture_already_sufficient": false,
+      "observations": [
+        {
+          "association_decay": null,
+          "association_effort": null,
+          "association_hops": 0,
+          "association_limit": null,
+          "association_trace_edges": 0,
+          "candidate_limit": 750,
+          "elapsed_ms": 15.898,
+          "focus_mode": null,
+          "method": "attention_aperture",
+          "required_event_ids": [
+            "c580c0ac-4390-44ce-82c9-5036f546eadb"
+          ],
+          "returned_event_ids": [
+            "92c04d99-4eda-4d21-977d-7eb49fd2fd65"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": null,
+          "association_hops": 3,
+          "association_limit": 600,
+          "association_trace_edges": 600,
+          "candidate_limit": 350,
+          "elapsed_ms": 64.324,
+          "focus_mode": null,
+          "method": "frozen:DEEPER_RESEARCH",
+          "required_event_ids": [
+            "c580c0ac-4390-44ce-82c9-5036f546eadb"
+          ],
+          "returned_event_ids": [
+            "070716a4-b307-4b62-9075-eea5e95106e3",
+            "04598ed3-2e0a-45e4-8d60-470a62543b3f",
+            "22a8c6b0-5740-4c20-ac5c-abec780873f1",
+            "c501acab-3622-45b5-93b9-7655ebbb9464",
+            "2c895fa7-0d5a-4eb8-9af3-279258829093",
+            "ed408ee0-d6c7-4db8-8ddc-d24c88d4e620",
+            "38db91c4-4958-4935-902e-788319db6ab2",
+            "19239de1-2e31-43f9-8c9b-200299562d9b",
+            "7e1df4c0-45e1-411b-9fb1-5c2c1598583a",
+            "20b7df14-460b-4f0a-b27f-05788a858267"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": null,
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 801,
+          "candidate_limit": 150,
+          "elapsed_ms": 90.075,
+          "focus_mode": null,
+          "method": "frozen:FOCUSED_RECALL",
+          "required_event_ids": [
+            "c580c0ac-4390-44ce-82c9-5036f546eadb"
+          ],
+          "returned_event_ids": [
+            "c580c0ac-4390-44ce-82c9-5036f546eadb",
+            "996d9dc5-eb10-4e90-81b1-263d5d427af4",
+            "6216562d-f22d-41df-b25c-cd8db2899e15",
+            "d5017df8-73bf-4324-89b9-84644626e589",
+            "8171b6ed-767e-4078-b445-d5cab18e1e89",
+            "3209fca5-c481-4fe6-86db-f85f2e065f18",
+            "ea16a9cf-a5df-4e3b-a524-23205edb3103",
+            "1980925d-cc3b-4bb2-b5a1-86aed8658607",
+            "4a0b3891-7bc3-47a9-b48c-fd4ad2217917",
+            "2165f261-8a24-47c2-9d0e-64c86f7e3f68"
+          ],
+          "scope": null,
+          "success": true
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": "AssociationEffort.DEEP",
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 801,
+          "candidate_limit": 175,
+          "elapsed_ms": 89.8,
+          "focus_mode": "FocusMode.SINGLE_ANCHOR",
+          "method": "adaptive",
+          "required_event_ids": [
+            "c580c0ac-4390-44ce-82c9-5036f546eadb"
+          ],
+          "returned_event_ids": [
+            "c580c0ac-4390-44ce-82c9-5036f546eadb",
+            "996d9dc5-eb10-4e90-81b1-263d5d427af4",
+            "6216562d-f22d-41df-b25c-cd8db2899e15",
+            "d5017df8-73bf-4324-89b9-84644626e589",
+            "8171b6ed-767e-4078-b445-d5cab18e1e89",
+            "3209fca5-c481-4fe6-86db-f85f2e065f18",
+            "ea16a9cf-a5df-4e3b-a524-23205edb3103",
+            "1980925d-cc3b-4bb2-b5a1-86aed8658607",
+            "4a0b3891-7bc3-47a9-b48c-fd4ad2217917",
+            "2165f261-8a24-47c2-9d0e-64c86f7e3f68"
+          ],
+          "scope": "ScopeProfile.NARROW",
+          "success": true
+        }
+      ],
+      "purpose": "The required edge sorts behind a hostile fanout frontier and disappears when the association budget is exhausted.",
+      "scenario_id": "association_fanout_ceiling",
+      "stress_unit": "earlier-sorted-outgoing-edges",
+      "stress_value": 800
+    },
+    {
+      "aperture_already_sufficient": false,
+      "observations": [
+        {
+          "association_decay": null,
+          "association_effort": null,
+          "association_hops": 0,
+          "association_limit": null,
+          "association_trace_edges": 0,
+          "candidate_limit": 750,
+          "elapsed_ms": 16.055,
+          "focus_mode": null,
+          "method": "attention_aperture",
+          "required_event_ids": [
+            "f328a978-9a83-4200-a32e-15556b0738a4"
+          ],
+          "returned_event_ids": [
+            "de410679-9e1c-47e4-8163-a2e116c8b00f"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": null,
+          "association_hops": 3,
+          "association_limit": 600,
+          "association_trace_edges": 600,
+          "candidate_limit": 350,
+          "elapsed_ms": 74.407,
+          "focus_mode": null,
+          "method": "frozen:DEEPER_RESEARCH",
+          "required_event_ids": [
+            "f328a978-9a83-4200-a32e-15556b0738a4"
+          ],
+          "returned_event_ids": [
+            "d8e97953-0003-403a-ae3c-46c573bf1927",
+            "241e80e5-b5f7-4a5f-9fe3-20a8f7e4db69",
+            "1f9b3e09-ba1f-4a36-bb22-6fcd7b6c3c2a",
+            "e1d0f640-e9c6-4d16-8a69-cbf178f2bede",
+            "1da26636-f1aa-4b59-b29f-b37c2958d7a8",
+            "8db3dcd6-bf8a-43f9-a798-819aee04bf9a",
+            "3790dccf-08b6-457a-a9ca-1d6d4a10b3a9",
+            "6a18c578-3e95-4f07-866f-bb3a5f0d9cc2",
+            "f645dc78-5a39-4389-9a19-fe93b8e19676",
+            "31983bd5-c7cf-4f78-ae6f-e1cf9df8625d"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": null,
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 851,
+          "candidate_limit": 150,
+          "elapsed_ms": 99.678,
+          "focus_mode": null,
+          "method": "frozen:FOCUSED_RECALL",
+          "required_event_ids": [
+            "f328a978-9a83-4200-a32e-15556b0738a4"
+          ],
+          "returned_event_ids": [
+            "f328a978-9a83-4200-a32e-15556b0738a4",
+            "28102d2a-745b-4d81-ad91-e3294b424eae",
+            "e9846c67-733f-4962-8a8a-19767fa406ec",
+            "9cd0745a-6d31-403c-b2cd-8d4fa95516ab",
+            "874b5fd7-4009-4a15-9950-5ca82b1e2e0c",
+            "57bb99bc-c1fc-45c4-9956-c9f4076ab0d8",
+            "74406d2d-aa96-47d1-8b37-ac90bf721210",
+            "b6baaa2a-74cf-4abe-9f8e-080af0d6829d",
+            "506a231a-5018-4830-b7d5-f93611394c51",
+            "03f69f0f-1fed-4cf3-b284-22c1a50a4eaa"
+          ],
+          "scope": null,
+          "success": true
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": "AssociationEffort.DEEP",
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 851,
+          "candidate_limit": 175,
+          "elapsed_ms": 107.425,
+          "focus_mode": "FocusMode.SINGLE_ANCHOR",
+          "method": "adaptive",
+          "required_event_ids": [
+            "f328a978-9a83-4200-a32e-15556b0738a4"
+          ],
+          "returned_event_ids": [
+            "f328a978-9a83-4200-a32e-15556b0738a4",
+            "28102d2a-745b-4d81-ad91-e3294b424eae",
+            "e9846c67-733f-4962-8a8a-19767fa406ec",
+            "9cd0745a-6d31-403c-b2cd-8d4fa95516ab",
+            "874b5fd7-4009-4a15-9950-5ca82b1e2e0c",
+            "57bb99bc-c1fc-45c4-9956-c9f4076ab0d8",
+            "74406d2d-aa96-47d1-8b37-ac90bf721210",
+            "b6baaa2a-74cf-4abe-9f8e-080af0d6829d",
+            "506a231a-5018-4830-b7d5-f93611394c51",
+            "03f69f0f-1fed-4cf3-b284-22c1a50a4eaa"
+          ],
+          "scope": "ScopeProfile.NARROW",
+          "success": true
+        }
+      ],
+      "purpose": "The required edge sorts behind a hostile fanout frontier and disappears when the association budget is exhausted.",
+      "scenario_id": "association_fanout_ceiling",
+      "stress_unit": "earlier-sorted-outgoing-edges",
+      "stress_value": 850
+    },
+    {
+      "aperture_already_sufficient": false,
+      "observations": [
+        {
+          "association_decay": null,
+          "association_effort": null,
+          "association_hops": 0,
+          "association_limit": null,
+          "association_trace_edges": 0,
+          "candidate_limit": 750,
+          "elapsed_ms": 17.646,
+          "focus_mode": null,
+          "method": "attention_aperture",
+          "required_event_ids": [
+            "f5a3a47b-a684-45f9-8bdd-6f9012dbb572"
+          ],
+          "returned_event_ids": [
+            "1894bc0e-cb64-4532-af18-2f6b20dc7631"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": null,
+          "association_hops": 3,
+          "association_limit": 600,
+          "association_trace_edges": 600,
+          "candidate_limit": 350,
+          "elapsed_ms": 67.182,
+          "focus_mode": null,
+          "method": "frozen:DEEPER_RESEARCH",
+          "required_event_ids": [
+            "f5a3a47b-a684-45f9-8bdd-6f9012dbb572"
+          ],
+          "returned_event_ids": [
+            "33f6efae-c3d4-4a45-818c-aa0e2a885721",
+            "fc894e3f-4247-45e0-89dd-ecc00429de10",
+            "46a5a993-7527-469f-ae45-510e9a32e26d",
+            "9f620320-5736-4c2e-b986-3bb1e39f4fd0",
+            "30ec15bf-66b8-4f3f-a5e9-78bf2901f892",
+            "a9cada0d-ad49-4615-99b6-9891ca8d8891",
+            "f89e99bb-b4f6-412c-84ee-d6e7d5cbbdfd",
+            "d0223573-9675-4a81-baf9-40e718c9fe77",
+            "e7eb0e78-fc43-48f9-8510-12c059828a4d",
+            "c0e6e3d7-73d2-42e9-aa9f-f76ef3e7e843"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": null,
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 951,
+          "candidate_limit": 150,
+          "elapsed_ms": 95.468,
+          "focus_mode": null,
+          "method": "frozen:FOCUSED_RECALL",
+          "required_event_ids": [
+            "f5a3a47b-a684-45f9-8bdd-6f9012dbb572"
+          ],
+          "returned_event_ids": [
+            "f5a3a47b-a684-45f9-8bdd-6f9012dbb572",
+            "830f903e-4688-411c-b774-83893f179ac8",
+            "2739a9fa-fefa-471d-869c-d83311e0b286",
+            "fce6b075-3adf-4ab0-8a4e-84b79e326684",
+            "6bda181f-2539-4bcc-bc22-24efdb3ae147",
+            "ccfef8b2-94b0-4980-8748-11e705aab82e",
+            "4e9d36e8-31ed-462c-9ff9-883d453093fc",
+            "f6969700-900d-4bc4-bc2f-17ed149df920",
+            "a22870cb-7776-49af-9d75-1f3750ac3f53",
+            "e2c2f962-305c-4f46-b68a-4d0295a72120"
+          ],
+          "scope": null,
+          "success": true
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": "AssociationEffort.DEEP",
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 951,
+          "candidate_limit": 175,
+          "elapsed_ms": 118.602,
+          "focus_mode": "FocusMode.SINGLE_ANCHOR",
+          "method": "adaptive",
+          "required_event_ids": [
+            "f5a3a47b-a684-45f9-8bdd-6f9012dbb572"
+          ],
+          "returned_event_ids": [
+            "f5a3a47b-a684-45f9-8bdd-6f9012dbb572",
+            "830f903e-4688-411c-b774-83893f179ac8",
+            "2739a9fa-fefa-471d-869c-d83311e0b286",
+            "fce6b075-3adf-4ab0-8a4e-84b79e326684",
+            "6bda181f-2539-4bcc-bc22-24efdb3ae147",
+            "ccfef8b2-94b0-4980-8748-11e705aab82e",
+            "4e9d36e8-31ed-462c-9ff9-883d453093fc",
+            "f6969700-900d-4bc4-bc2f-17ed149df920",
+            "a22870cb-7776-49af-9d75-1f3750ac3f53",
+            "e2c2f962-305c-4f46-b68a-4d0295a72120"
+          ],
+          "scope": "ScopeProfile.NARROW",
+          "success": true
+        }
+      ],
+      "purpose": "The required edge sorts behind a hostile fanout frontier and disappears when the association budget is exhausted.",
+      "scenario_id": "association_fanout_ceiling",
+      "stress_unit": "earlier-sorted-outgoing-edges",
+      "stress_value": 950
+    },
+    {
+      "aperture_already_sufficient": false,
+      "observations": [
+        {
+          "association_decay": null,
+          "association_effort": null,
+          "association_hops": 0,
+          "association_limit": null,
+          "association_trace_edges": 0,
+          "candidate_limit": 750,
+          "elapsed_ms": 20.011,
+          "focus_mode": null,
+          "method": "attention_aperture",
+          "required_event_ids": [
+            "4aa9ab85-012a-4297-a8d3-f99e1ddda63c"
+          ],
+          "returned_event_ids": [
+            "740f5bd3-f0f1-488e-97c7-b3e3de2b6a0c"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": null,
+          "association_hops": 3,
+          "association_limit": 600,
+          "association_trace_edges": 600,
+          "candidate_limit": 350,
+          "elapsed_ms": 68.148,
+          "focus_mode": null,
+          "method": "frozen:DEEPER_RESEARCH",
+          "required_event_ids": [
+            "4aa9ab85-012a-4297-a8d3-f99e1ddda63c"
+          ],
+          "returned_event_ids": [
+            "1fcfe6ba-5860-4a8f-8bfd-c468f723bdf0",
+            "9a503b65-dca7-4efc-bca0-6856b235fc89",
+            "3d668888-6fac-4d5a-bee7-86b5bc0cab42",
+            "53f947a7-433c-4698-8c10-39fc7ce74cae",
+            "523eb0cf-20b0-4255-bc18-4d7aac0bb98e",
+            "b2654367-dba2-4b74-b6ec-878e58771d1b",
+            "791362c7-298b-4861-8ea4-7eae3890fa75",
+            "65f22f58-f1e9-4041-b6d9-32c960601847",
+            "4211821d-f0a8-4b02-8555-acdc45909624",
+            "08a43eec-321b-449d-b7f4-71ca2bdfb131"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": null,
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 1151,
+          "candidate_limit": 150,
+          "elapsed_ms": 146.939,
+          "focus_mode": null,
+          "method": "frozen:FOCUSED_RECALL",
+          "required_event_ids": [
+            "4aa9ab85-012a-4297-a8d3-f99e1ddda63c"
+          ],
+          "returned_event_ids": [
+            "4aa9ab85-012a-4297-a8d3-f99e1ddda63c",
+            "6b745614-166f-4d60-9a6a-34b3fe92e0d0",
+            "d9fc7eb9-9970-4381-9578-9db5052add0f",
+            "25368236-d94c-442a-a3ef-b1f872dea34f",
+            "4c4286c6-1e1b-4d8e-8038-796e461c0c19",
+            "acf32f9c-eaf8-4e2f-8f7e-7c72facff6dd",
+            "703eabf0-5829-4958-92e5-524af25ae390",
+            "382253ec-b6c1-42f6-94ac-c00839af8152",
+            "2a2939c1-850c-46b8-b5a2-88dc9a1c65c2",
+            "64689f50-278d-470d-955a-01005c8936b1"
+          ],
+          "scope": null,
+          "success": true
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": "AssociationEffort.DEEP",
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 1151,
+          "candidate_limit": 175,
+          "elapsed_ms": 133.888,
+          "focus_mode": "FocusMode.SINGLE_ANCHOR",
+          "method": "adaptive",
+          "required_event_ids": [
+            "4aa9ab85-012a-4297-a8d3-f99e1ddda63c"
+          ],
+          "returned_event_ids": [
+            "4aa9ab85-012a-4297-a8d3-f99e1ddda63c",
+            "6b745614-166f-4d60-9a6a-34b3fe92e0d0",
+            "d9fc7eb9-9970-4381-9578-9db5052add0f",
+            "25368236-d94c-442a-a3ef-b1f872dea34f",
+            "4c4286c6-1e1b-4d8e-8038-796e461c0c19",
+            "acf32f9c-eaf8-4e2f-8f7e-7c72facff6dd",
+            "703eabf0-5829-4958-92e5-524af25ae390",
+            "382253ec-b6c1-42f6-94ac-c00839af8152",
+            "2a2939c1-850c-46b8-b5a2-88dc9a1c65c2",
+            "64689f50-278d-470d-955a-01005c8936b1"
+          ],
+          "scope": "ScopeProfile.NARROW",
+          "success": true
+        }
+      ],
+      "purpose": "The required edge sorts behind a hostile fanout frontier and disappears when the association budget is exhausted.",
+      "scenario_id": "association_fanout_ceiling",
+      "stress_unit": "earlier-sorted-outgoing-edges",
+      "stress_value": 1150
+    },
+    {
+      "aperture_already_sufficient": false,
+      "observations": [
+        {
+          "association_decay": null,
+          "association_effort": null,
+          "association_hops": 0,
+          "association_limit": null,
+          "association_trace_edges": 0,
+          "candidate_limit": 750,
+          "elapsed_ms": 24.299,
+          "focus_mode": null,
+          "method": "attention_aperture",
+          "required_event_ids": [
+            "8d436ca6-206b-496e-b8d1-7203aef9b0ce"
+          ],
+          "returned_event_ids": [
+            "f0335f55-c48f-4fb7-bd26-d40b64896ba2"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": null,
+          "association_hops": 3,
+          "association_limit": 600,
+          "association_trace_edges": 600,
+          "candidate_limit": 350,
+          "elapsed_ms": 77.484,
+          "focus_mode": null,
+          "method": "frozen:DEEPER_RESEARCH",
+          "required_event_ids": [
+            "8d436ca6-206b-496e-b8d1-7203aef9b0ce"
+          ],
+          "returned_event_ids": [
+            "ddc5f393-0958-4a05-b7fe-ffe0855edf36",
+            "0712cacf-6684-4e38-8aca-4beffe562fe0",
+            "dd9544ae-1b2f-4854-8d94-f6af69027eee",
+            "de93eaf6-be05-47ce-8437-ce98f9460bd7",
+            "269ab4f1-29a4-40ee-904b-c52c575b77b8",
+            "1f323ff1-a3b0-49f7-93ed-24fe94783149",
+            "51e3cb51-e1fe-492a-a919-a2311bdd9c2f",
+            "381d21b6-3c31-44a1-a5fc-7c0a888cd1e7",
+            "5bc7461b-9592-41df-bb51-6bfb2384ec55",
+            "2bf22b70-5cbb-4236-94f6-9a686e8f359c"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": null,
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 1200,
+          "candidate_limit": 150,
+          "elapsed_ms": 125.586,
+          "focus_mode": null,
+          "method": "frozen:FOCUSED_RECALL",
+          "required_event_ids": [
+            "8d436ca6-206b-496e-b8d1-7203aef9b0ce"
+          ],
+          "returned_event_ids": [
+            "67cb065d-42e9-49fc-9a5b-5e0b7f7be046",
+            "3fb3dbe1-bf08-45a1-82b8-53ffbae3c95a",
+            "924e581b-88ad-49f3-87f6-478a58245262",
+            "fb9ee325-e039-4845-b497-f8a5abc8bd3d",
+            "cd59a3f8-4e51-4ca6-9b33-aeaa0c316175",
+            "92a3590c-952f-418b-8d0f-975524bfb812",
+            "aa86d12f-fe48-427d-b3a5-dad9528f7018",
+            "256c92ad-f766-4405-a06c-9515999b1625",
+            "73ad1d44-86dc-4a1a-afb1-a5659186e93c",
+            "19609a93-75de-4a0a-8989-b7acda70f659"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": "AssociationEffort.DEEP",
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 1200,
+          "candidate_limit": 175,
+          "elapsed_ms": 115.941,
+          "focus_mode": "FocusMode.SINGLE_ANCHOR",
+          "method": "adaptive",
+          "required_event_ids": [
+            "8d436ca6-206b-496e-b8d1-7203aef9b0ce"
+          ],
+          "returned_event_ids": [
+            "67cb065d-42e9-49fc-9a5b-5e0b7f7be046",
+            "3fb3dbe1-bf08-45a1-82b8-53ffbae3c95a",
+            "924e581b-88ad-49f3-87f6-478a58245262",
+            "fb9ee325-e039-4845-b497-f8a5abc8bd3d",
+            "cd59a3f8-4e51-4ca6-9b33-aeaa0c316175",
+            "92a3590c-952f-418b-8d0f-975524bfb812",
+            "aa86d12f-fe48-427d-b3a5-dad9528f7018",
+            "256c92ad-f766-4405-a06c-9515999b1625",
+            "73ad1d44-86dc-4a1a-afb1-a5659186e93c",
+            "19609a93-75de-4a0a-8989-b7acda70f659"
+          ],
+          "scope": "ScopeProfile.NARROW",
+          "success": false
+        }
+      ],
+      "purpose": "The required edge sorts behind a hostile fanout frontier and disappears when the association budget is exhausted.",
+      "scenario_id": "association_fanout_ceiling",
+      "stress_unit": "earlier-sorted-outgoing-edges",
+      "stress_value": 1250
+    },
+    {
+      "aperture_already_sufficient": false,
+      "observations": [
+        {
+          "association_decay": null,
+          "association_effort": null,
+          "association_hops": 0,
+          "association_limit": null,
+          "association_trace_edges": 0,
+          "candidate_limit": 750,
+          "elapsed_ms": 62.268,
+          "focus_mode": null,
+          "method": "attention_aperture",
+          "required_event_ids": [
+            "473537b5-efea-4b6c-98c0-631496f7f238"
+          ],
+          "returned_event_ids": [
+            "11f99c38-6caa-4471-bc99-86a4737e2e5e",
+            "4092d69d-2c02-4bd5-8370-9bfdb7403cca",
+            "0ec6cb0c-558f-47e7-94e1-3f90e9281887",
+            "f8ad78d5-a8fe-4009-8f10-28f03ae37b68",
+            "e0ba1c88-5fce-4d9e-a2a2-ac6659a4bf93",
+            "16ee6ac5-c584-46c1-b413-446460281cba",
+            "d9ea4955-e119-46ff-9118-c051b63480c4"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": null,
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 1200,
+          "candidate_limit": 150,
+          "elapsed_ms": 126.803,
+          "focus_mode": null,
+          "method": "frozen:FOCUSED_RECALL",
+          "required_event_ids": [
+            "473537b5-efea-4b6c-98c0-631496f7f238"
+          ],
+          "returned_event_ids": [
+            "4092d69d-2c02-4bd5-8370-9bfdb7403cca",
+            "0ec6cb0c-558f-47e7-94e1-3f90e9281887",
+            "f8ad78d5-a8fe-4009-8f10-28f03ae37b68",
+            "e0ba1c88-5fce-4d9e-a2a2-ac6659a4bf93",
+            "16ee6ac5-c584-46c1-b413-446460281cba",
+            "d9ea4955-e119-46ff-9118-c051b63480c4",
+            "749ac0db-a7d7-4761-8936-4ce0af1e5065",
+            "1db1b6d5-dd37-4552-a4fa-5e1865224bf9",
+            "a6b6599a-c276-4a69-b5bc-e1d14da3f9f7",
+            "c3b50e12-cdc6-41f8-8610-b2bd6cfa0795"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": "AssociationEffort.DEEP",
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 1200,
+          "candidate_limit": 175,
+          "elapsed_ms": 136.514,
+          "focus_mode": "FocusMode.SINGLE_ANCHOR",
+          "method": "adaptive:round-1",
+          "required_event_ids": [
+            "473537b5-efea-4b6c-98c0-631496f7f238"
+          ],
+          "returned_event_ids": [
+            "4092d69d-2c02-4bd5-8370-9bfdb7403cca",
+            "0ec6cb0c-558f-47e7-94e1-3f90e9281887",
+            "f8ad78d5-a8fe-4009-8f10-28f03ae37b68",
+            "e0ba1c88-5fce-4d9e-a2a2-ac6659a4bf93",
+            "16ee6ac5-c584-46c1-b413-446460281cba",
+            "d9ea4955-e119-46ff-9118-c051b63480c4",
+            "749ac0db-a7d7-4761-8936-4ce0af1e5065",
+            "1db1b6d5-dd37-4552-a4fa-5e1865224bf9",
+            "a6b6599a-c276-4a69-b5bc-e1d14da3f9f7",
+            "c3b50e12-cdc6-41f8-8610-b2bd6cfa0795"
+          ],
+          "scope": "ScopeProfile.NARROW",
+          "success": false
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": "AssociationEffort.DEEP",
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 1200,
+          "candidate_limit": 175,
+          "elapsed_ms": 125.064,
+          "focus_mode": "FocusMode.SINGLE_ANCHOR",
+          "method": "adaptive:round-2",
+          "required_event_ids": [
+            "473537b5-efea-4b6c-98c0-631496f7f238"
+          ],
+          "returned_event_ids": [
+            "4092d69d-2c02-4bd5-8370-9bfdb7403cca",
+            "0ec6cb0c-558f-47e7-94e1-3f90e9281887",
+            "f8ad78d5-a8fe-4009-8f10-28f03ae37b68",
+            "e0ba1c88-5fce-4d9e-a2a2-ac6659a4bf93",
+            "16ee6ac5-c584-46c1-b413-446460281cba",
+            "d9ea4955-e119-46ff-9118-c051b63480c4",
+            "749ac0db-a7d7-4761-8936-4ce0af1e5065",
+            "1db1b6d5-dd37-4552-a4fa-5e1865224bf9",
+            "a6b6599a-c276-4a69-b5bc-e1d14da3f9f7",
+            "c3b50e12-cdc6-41f8-8610-b2bd6cfa0795"
+          ],
+          "scope": "ScopeProfile.NARROW",
+          "success": false
+        },
+        {
+          "association_decay": 0.85,
+          "association_effort": "AssociationEffort.SHALLOW",
+          "association_hops": 2,
+          "association_limit": 300,
+          "association_trace_edges": 1,
+          "candidate_limit": 600,
+          "elapsed_ms": 54.819,
+          "focus_mode": "FocusMode.REORIENT",
+          "method": "adaptive:round-3",
+          "required_event_ids": [
+            "473537b5-efea-4b6c-98c0-631496f7f238"
+          ],
+          "returned_event_ids": [
+            "473537b5-efea-4b6c-98c0-631496f7f238"
+          ],
+          "scope": "ScopeProfile.CONTEXTUAL",
+          "success": true
+        }
+      ],
+      "purpose": "A misleading anchor exhausts graph budget; adaptive attention must eventually drop it and recover a cue-term route.",
+      "scenario_id": "anchor_lock_in_and_reorientation",
+      "stress_unit": "misleading-anchor-edges",
+      "stress_value": 1200
+    }
+  ],
+  "comparison_rule": "Automatic aperture is common substrate. Head-to-head counts only cases where the aperture did not already contain all required evidence. Frozen success means any applicable explicit v0.7 research profile succeeded.",
+  "database": "jit_agent_test",
+  "generated_at": "2026-08-29T01:22:27.276427+00:00",
+  "head_to_head": {
+    "adaptive_only": 2,
+    "aperture_already_sufficient": 0,
+    "both": 19,
+    "frozen_only": 0,
+    "neither": 17
+  },
+  "mode": "stress",
+  "observed_limits": {
+    "association_fanout": {
+      "adaptive": {
+        "largest_tested_success": 1150,
+        "smallest_tested_failure": 1250,
+        "tested_points": [
+          {
+            "stress_value": 250,
+            "success": true
+          },
+          {
+            "stress_value": 350,
+            "success": true
+          },
+          {
+            "stress_value": 550,
+            "success": true
+          },
+          {
+            "stress_value": 650,
+            "success": true
+          },
+          {
+            "stress_value": 700,
+            "success": true
+          },
+          {
+            "stress_value": 800,
+            "success": true
+          },
+          {
+            "stress_value": 850,
+            "success": true
+          },
+          {
+            "stress_value": 950,
+            "success": true
+          },
+          {
+            "stress_value": 1150,
+            "success": true
+          },
+          {
+            "stress_value": 1250,
+            "success": false
+          }
+        ]
+      },
+      "frozen:DEEPER_RESEARCH": {
+        "largest_tested_success": 550,
+        "smallest_tested_failure": 650,
+        "tested_points": [
+          {
+            "stress_value": 250,
+            "success": true
+          },
+          {
+            "stress_value": 350,
+            "success": true
+          },
+          {
+            "stress_value": 550,
+            "success": true
+          },
+          {
+            "stress_value": 650,
+            "success": false
+          },
+          {
+            "stress_value": 700,
+            "success": false
+          },
+          {
+            "stress_value": 800,
+            "success": false
+          },
+          {
+            "stress_value": 850,
+            "success": false
+          },
+          {
+            "stress_value": 950,
+            "success": false
+          },
+          {
+            "stress_value": 1150,
+            "success": false
+          },
+          {
+            "stress_value": 1250,
+            "success": false
+          }
+        ]
+      },
+      "frozen:FOCUSED_RECALL": {
+        "largest_tested_success": 1150,
+        "smallest_tested_failure": 1250,
+        "tested_points": [
+          {
+            "stress_value": 250,
+            "success": true
+          },
+          {
+            "stress_value": 350,
+            "success": true
+          },
+          {
+            "stress_value": 550,
+            "success": true
+          },
+          {
+            "stress_value": 650,
+            "success": true
+          },
+          {
+            "stress_value": 700,
+            "success": true
+          },
+          {
+            "stress_value": 800,
+            "success": true
+          },
+          {
+            "stress_value": 850,
+            "success": true
+          },
+          {
+            "stress_value": 950,
+            "success": true
+          },
+          {
+            "stress_value": 1150,
+            "success": true
+          },
+          {
+            "stress_value": 1250,
+            "success": false
+          }
+        ]
+      }
+    },
+    "candidate_distractors": {
+      "adaptive": {
+        "largest_tested_success": null,
+        "smallest_tested_failure": 120,
+        "tested_points": [
+          {
+            "stress_value": 120,
+            "success": false
+          },
+          {
+            "stress_value": 140,
+            "success": false
+          },
+          {
+            "stress_value": 160,
+            "success": false
+          },
+          {
+            "stress_value": 240,
+            "success": false
+          },
+          {
+            "stress_value": 280,
+            "success": false
+          },
+          {
+            "stress_value": 320,
+            "success": false
+          },
+          {
+            "stress_value": 360,
+            "success": false
+          },
+          {
+            "stress_value": 440,
+            "success": false
+          },
+          {
+            "stress_value": 460,
+            "success": false
+          },
+          {
+            "stress_value": 520,
+            "success": false
+          },
+          {
+            "stress_value": 560,
+            "success": false
+          },
+          {
+            "stress_value": 620,
+            "success": false
+          },
+          {
+            "stress_value": 660,
+            "success": false
+          },
+          {
+            "stress_value": 700,
+            "success": false
+          }
+        ]
+      },
+      "attention_aperture": {
+        "largest_tested_success": null,
+        "smallest_tested_failure": 120,
+        "tested_points": [
+          {
+            "stress_value": 120,
+            "success": false
+          },
+          {
+            "stress_value": 140,
+            "success": false
+          },
+          {
+            "stress_value": 160,
+            "success": false
+          },
+          {
+            "stress_value": 240,
+            "success": false
+          },
+          {
+            "stress_value": 280,
+            "success": false
+          },
+          {
+            "stress_value": 320,
+            "success": false
+          },
+          {
+            "stress_value": 360,
+            "success": false
+          },
+          {
+            "stress_value": 440,
+            "success": false
+          },
+          {
+            "stress_value": 460,
+            "success": false
+          },
+          {
+            "stress_value": 520,
+            "success": false
+          },
+          {
+            "stress_value": 560,
+            "success": false
+          },
+          {
+            "stress_value": 620,
+            "success": false
+          },
+          {
+            "stress_value": 660,
+            "success": false
+          },
+          {
+            "stress_value": 700,
+            "success": false
+          }
+        ]
+      },
+      "frozen:DEEPER_RESEARCH": {
+        "largest_tested_success": null,
+        "smallest_tested_failure": 120,
+        "tested_points": [
+          {
+            "stress_value": 120,
+            "success": false
+          },
+          {
+            "stress_value": 140,
+            "success": false
+          },
+          {
+            "stress_value": 160,
+            "success": false
+          },
+          {
+            "stress_value": 240,
+            "success": false
+          },
+          {
+            "stress_value": 280,
+            "success": false
+          },
+          {
+            "stress_value": 320,
+            "success": false
+          },
+          {
+            "stress_value": 360,
+            "success": false
+          },
+          {
+            "stress_value": 440,
+            "success": false
+          },
+          {
+            "stress_value": 460,
+            "success": false
+          },
+          {
+            "stress_value": 520,
+            "success": false
+          },
+          {
+            "stress_value": 560,
+            "success": false
+          },
+          {
+            "stress_value": 620,
+            "success": false
+          },
+          {
+            "stress_value": 660,
+            "success": false
+          },
+          {
+            "stress_value": 700,
+            "success": false
+          }
+        ]
+      },
+      "frozen:FOCUSED_RECALL": {
+        "largest_tested_success": null,
+        "smallest_tested_failure": 120,
+        "tested_points": [
+          {
+            "stress_value": 120,
+            "success": false
+          },
+          {
+            "stress_value": 140,
+            "success": false
+          },
+          {
+            "stress_value": 160,
+            "success": false
+          },
+          {
+            "stress_value": 240,
+            "success": false
+          },
+          {
+            "stress_value": 280,
+            "success": false
+          },
+          {
+            "stress_value": 320,
+            "success": false
+          },
+          {
+            "stress_value": 360,
+            "success": false
+          },
+          {
+            "stress_value": 440,
+            "success": false
+          },
+          {
+            "stress_value": 460,
+            "success": false
+          },
+          {
+            "stress_value": 520,
+            "success": false
+          },
+          {
+            "stress_value": 560,
+            "success": false
+          },
+          {
+            "stress_value": 620,
+            "success": false
+          },
+          {
+            "stress_value": 660,
+            "success": false
+          },
+          {
+            "stress_value": 700,
+            "success": false
+          }
+        ]
+      },
+      "frozen:STANDARD": {
+        "largest_tested_success": null,
+        "smallest_tested_failure": 120,
+        "tested_points": [
+          {
+            "stress_value": 120,
+            "success": false
+          },
+          {
+            "stress_value": 140,
+            "success": false
+          },
+          {
+            "stress_value": 160,
+            "success": false
+          },
+          {
+            "stress_value": 240,
+            "success": false
+          },
+          {
+            "stress_value": 280,
+            "success": false
+          },
+          {
+            "stress_value": 320,
+            "success": false
+          },
+          {
+            "stress_value": 360,
+            "success": false
+          },
+          {
+            "stress_value": 440,
+            "success": false
+          },
+          {
+            "stress_value": 460,
+            "success": false
+          },
+          {
+            "stress_value": 520,
+            "success": false
+          },
+          {
+            "stress_value": 560,
+            "success": false
+          },
+          {
+            "stress_value": 620,
+            "success": false
+          },
+          {
+            "stress_value": 660,
+            "success": false
+          },
+          {
+            "stress_value": 700,
+            "success": false
+          }
+        ]
+      }
+    },
+    "multi_anchor_depth": {
+      "adaptive": {
+        "largest_tested_success": 5,
+        "smallest_tested_failure": 6,
+        "tested_points": [
+          {
+            "stress_value": 1,
+            "success": true
+          },
+          {
+            "stress_value": 2,
+            "success": true
+          },
+          {
+            "stress_value": 3,
+            "success": true
+          },
+          {
+            "stress_value": 4,
+            "success": true
+          },
+          {
+            "stress_value": 5,
+            "success": true
+          },
+          {
+            "stress_value": 6,
+            "success": false
+          }
+        ]
+      },
+      "frozen:CROSS_REFERENCE": {
+        "largest_tested_success": 4,
+        "smallest_tested_failure": 5,
+        "tested_points": [
+          {
+            "stress_value": 1,
+            "success": true
+          },
+          {
+            "stress_value": 2,
+            "success": true
+          },
+          {
+            "stress_value": 3,
+            "success": true
+          },
+          {
+            "stress_value": 4,
+            "success": true
+          },
+          {
+            "stress_value": 5,
+            "success": false
+          },
+          {
+            "stress_value": 6,
+            "success": false
+          }
+        ]
+      },
+      "frozen:DEEPER_RESEARCH": {
+        "largest_tested_success": 3,
+        "smallest_tested_failure": 4,
+        "tested_points": [
+          {
+            "stress_value": 1,
+            "success": true
+          },
+          {
+            "stress_value": 2,
+            "success": true
+          },
+          {
+            "stress_value": 3,
+            "success": true
+          },
+          {
+            "stress_value": 4,
+            "success": false
+          },
+          {
+            "stress_value": 5,
+            "success": false
+          },
+          {
+            "stress_value": 6,
+            "success": false
+          }
+        ]
+      }
+    },
+    "single_anchor_depth": {
+      "adaptive": {
+        "largest_tested_success": 5,
+        "smallest_tested_failure": 6,
+        "tested_points": [
+          {
+            "stress_value": 1,
+            "success": true
+          },
+          {
+            "stress_value": 2,
+            "success": true
+          },
+          {
+            "stress_value": 3,
+            "success": true
+          },
+          {
+            "stress_value": 4,
+            "success": true
+          },
+          {
+            "stress_value": 5,
+            "success": true
+          },
+          {
+            "stress_value": 6,
+            "success": false
+          }
+        ]
+      },
+      "frozen:DEEPER_RESEARCH": {
+        "largest_tested_success": 3,
+        "smallest_tested_failure": 4,
+        "tested_points": [
+          {
+            "stress_value": 1,
+            "success": true
+          },
+          {
+            "stress_value": 2,
+            "success": true
+          },
+          {
+            "stress_value": 3,
+            "success": true
+          },
+          {
+            "stress_value": 4,
+            "success": false
+          },
+          {
+            "stress_value": 5,
+            "success": false
+          },
+          {
+            "stress_value": 6,
+            "success": false
+          }
+        ]
+      },
+      "frozen:FOCUSED_RECALL": {
+        "largest_tested_success": 5,
+        "smallest_tested_failure": 6,
+        "tested_points": [
+          {
+            "stress_value": 1,
+            "success": true
+          },
+          {
+            "stress_value": 2,
+            "success": true
+          },
+          {
+            "stress_value": 3,
+            "success": true
+          },
+          {
+            "stress_value": 4,
+            "success": true
+          },
+          {
+            "stress_value": 5,
+            "success": true
+          },
+          {
+            "stress_value": 6,
+            "success": false
+          }
+        ]
+      }
+    }
+  },
+  "schema_version": 1
+}

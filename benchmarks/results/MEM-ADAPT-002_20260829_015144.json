@@ -1,0 +1,904 @@
+{
+  "benchmark_id": "MEM-ADAPT-002",
+  "cases": [
+    {
+      "aperture_already_sufficient": false,
+      "comparison_eligible": true,
+      "evaluation": "required_evidence_complete",
+      "notes": "Success means evidence completeness only; retrieval is not asked to decide which claim is authoritative.",
+      "observations": [
+        {
+          "association_decay": null,
+          "association_effort": null,
+          "association_hops": 0,
+          "association_limit": null,
+          "association_trace_edges": 0,
+          "candidate_limit": 750,
+          "elapsed_ms": 7.078,
+          "focus_mode": null,
+          "method": "attention_aperture",
+          "required_event_ids": [
+            "8a9cc6a9-26ea-4377-a10f-0cb7870bd800",
+            "ca3bdd3a-bfff-42ef-9004-7cd63d7560c8"
+          ],
+          "returned_event_ids": [
+            "411bc743-ce0f-4a01-9573-128b45b236fa",
+            "fc5fb8e6-2203-4b70-8120-0f53cc3ba9ea",
+            "4813c821-2bf4-4352-94a7-9c0319c09e04",
+            "c7b5ac37-29d9-4367-bc55-ec5a79d8cc80",
+            "156f9d93-6071-443f-accd-a49d11f818de",
+            "04441164-cedb-4692-b99b-71333a14a49e",
+            "e20e2bde-0a31-4f45-8519-a0bd60a56aea"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": null,
+          "association_hops": 3,
+          "association_limit": 600,
+          "association_trace_edges": 0,
+          "candidate_limit": 350,
+          "elapsed_ms": 8.766,
+          "focus_mode": null,
+          "method": "frozen:DEEPER_RESEARCH",
+          "required_event_ids": [
+            "8a9cc6a9-26ea-4377-a10f-0cb7870bd800",
+            "ca3bdd3a-bfff-42ef-9004-7cd63d7560c8"
+          ],
+          "returned_event_ids": [
+            "fc5fb8e6-2203-4b70-8120-0f53cc3ba9ea",
+            "4813c821-2bf4-4352-94a7-9c0319c09e04",
+            "c7b5ac37-29d9-4367-bc55-ec5a79d8cc80",
+            "156f9d93-6071-443f-accd-a49d11f818de",
+            "04441164-cedb-4692-b99b-71333a14a49e",
+            "e20e2bde-0a31-4f45-8519-a0bd60a56aea",
+            "6d3a0f0c-666f-4d65-9faa-25ad6e547477",
+            "27d40ba7-7ed1-4d8e-bc97-d2bbb36d743d",
+            "ca3bdd3a-bfff-42ef-9004-7cd63d7560c8",
+            "8a9cc6a9-26ea-4377-a10f-0cb7870bd800"
+          ],
+          "scope": null,
+          "success": true
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": null,
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 0,
+          "candidate_limit": 150,
+          "elapsed_ms": 6.745,
+          "focus_mode": null,
+          "method": "frozen:FOCUSED_RECALL",
+          "required_event_ids": [
+            "8a9cc6a9-26ea-4377-a10f-0cb7870bd800",
+            "ca3bdd3a-bfff-42ef-9004-7cd63d7560c8"
+          ],
+          "returned_event_ids": [
+            "fc5fb8e6-2203-4b70-8120-0f53cc3ba9ea",
+            "4813c821-2bf4-4352-94a7-9c0319c09e04",
+            "c7b5ac37-29d9-4367-bc55-ec5a79d8cc80",
+            "156f9d93-6071-443f-accd-a49d11f818de",
+            "04441164-cedb-4692-b99b-71333a14a49e",
+            "e20e2bde-0a31-4f45-8519-a0bd60a56aea",
+            "6d3a0f0c-666f-4d65-9faa-25ad6e547477",
+            "27d40ba7-7ed1-4d8e-bc97-d2bbb36d743d",
+            "ca3bdd3a-bfff-42ef-9004-7cd63d7560c8",
+            "8a9cc6a9-26ea-4377-a10f-0cb7870bd800"
+          ],
+          "scope": null,
+          "success": true
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": "AssociationEffort.DEEP",
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 0,
+          "candidate_limit": 600,
+          "elapsed_ms": 6.772,
+          "focus_mode": "FocusMode.SINGLE_ANCHOR",
+          "method": "adaptive",
+          "required_event_ids": [
+            "8a9cc6a9-26ea-4377-a10f-0cb7870bd800",
+            "ca3bdd3a-bfff-42ef-9004-7cd63d7560c8"
+          ],
+          "returned_event_ids": [
+            "fc5fb8e6-2203-4b70-8120-0f53cc3ba9ea",
+            "4813c821-2bf4-4352-94a7-9c0319c09e04",
+            "c7b5ac37-29d9-4367-bc55-ec5a79d8cc80",
+            "156f9d93-6071-443f-accd-a49d11f818de",
+            "04441164-cedb-4692-b99b-71333a14a49e",
+            "e20e2bde-0a31-4f45-8519-a0bd60a56aea",
+            "6d3a0f0c-666f-4d65-9faa-25ad6e547477",
+            "27d40ba7-7ed1-4d8e-bc97-d2bbb36d743d",
+            "ca3bdd3a-bfff-42ef-9004-7cd63d7560c8",
+            "8a9cc6a9-26ea-4377-a10f-0cb7870bd800"
+          ],
+          "scope": "ScopeProfile.CONTEXTUAL",
+          "success": true
+        }
+      ],
+      "purpose": "Retrieve both an older claim and its later correction so downstream cognition can reason about supersession instead of seeing only the newest statement.",
+      "scenario_id": "correction_pair_complete_evidence"
+    },
+    {
+      "aperture_already_sufficient": false,
+      "comparison_eligible": true,
+      "evaluation": "required_evidence_complete",
+      "observations": [
+        {
+          "association_decay": null,
+          "association_effort": null,
+          "association_hops": 0,
+          "association_limit": null,
+          "association_trace_edges": 0,
+          "candidate_limit": 750,
+          "elapsed_ms": 4.704,
+          "focus_mode": null,
+          "method": "attention_aperture",
+          "required_event_ids": [
+            "f38b59cf-9784-466c-b55c-85b511548b11"
+          ],
+          "returned_event_ids": [
+            "552fb310-cd60-441b-9a32-1f7c1955b4dd"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": null,
+          "association_hops": 3,
+          "association_limit": 600,
+          "association_trace_edges": 1,
+          "candidate_limit": 350,
+          "elapsed_ms": 5.677,
+          "focus_mode": null,
+          "method": "frozen:DEEPER_RESEARCH",
+          "required_event_ids": [
+            "f38b59cf-9784-466c-b55c-85b511548b11"
+          ],
+          "returned_event_ids": [
+            "f38b59cf-9784-466c-b55c-85b511548b11"
+          ],
+          "scope": null,
+          "success": true
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": null,
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 1,
+          "candidate_limit": 150,
+          "elapsed_ms": 5.618,
+          "focus_mode": null,
+          "method": "frozen:FOCUSED_RECALL",
+          "required_event_ids": [
+            "f38b59cf-9784-466c-b55c-85b511548b11"
+          ],
+          "returned_event_ids": [
+            "f38b59cf-9784-466c-b55c-85b511548b11"
+          ],
+          "scope": null,
+          "success": true
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": "AssociationEffort.DEEP",
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 1,
+          "candidate_limit": 175,
+          "elapsed_ms": 5.863,
+          "focus_mode": "FocusMode.SINGLE_ANCHOR",
+          "method": "adaptive",
+          "required_event_ids": [
+            "f38b59cf-9784-466c-b55c-85b511548b11"
+          ],
+          "returned_event_ids": [
+            "f38b59cf-9784-466c-b55c-85b511548b11"
+          ],
+          "scope": "ScopeProfile.NARROW",
+          "success": true
+        }
+      ],
+      "purpose": "Recover canonical evidence with zero lexical overlap by following a selected contextual anchor while preserving the current percept as semantic cue.",
+      "scenario_id": "zero_overlap_anchor_bridge"
+    },
+    {
+      "aperture_already_sufficient": false,
+      "comparison_eligible": true,
+      "evaluation": "required_evidence_complete",
+      "observations": [
+        {
+          "association_decay": null,
+          "association_effort": null,
+          "association_hops": 0,
+          "association_limit": null,
+          "association_trace_edges": 0,
+          "candidate_limit": 750,
+          "elapsed_ms": 4.175,
+          "focus_mode": null,
+          "method": "attention_aperture",
+          "required_event_ids": [
+            "9a23611d-7822-47e8-b625-e7b10bd2d1df",
+            "51e840b3-e770-4b36-80db-97dfce2bc1a9"
+          ],
+          "returned_event_ids": [
+            "b044a907-fede-43dd-8592-0d7ee2eaeb4d"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": null,
+          "association_hops": 3,
+          "association_limit": 600,
+          "association_trace_edges": 4,
+          "candidate_limit": 350,
+          "elapsed_ms": 7.088,
+          "focus_mode": null,
+          "method": "frozen:DEEPER_RESEARCH",
+          "required_event_ids": [
+            "9a23611d-7822-47e8-b625-e7b10bd2d1df",
+            "51e840b3-e770-4b36-80db-97dfce2bc1a9"
+          ],
+          "returned_event_ids": [
+            "ff5f7f4e-ece9-48af-846e-8b74ace681a4",
+            "9a23611d-7822-47e8-b625-e7b10bd2d1df",
+            "2f517174-399f-4f80-9fe4-30639273450d",
+            "e40a98cc-8886-4f94-93bb-7a5466bd4b5f"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": null,
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 6,
+          "candidate_limit": 150,
+          "elapsed_ms": 7.341,
+          "focus_mode": null,
+          "method": "frozen:FOCUSED_RECALL",
+          "required_event_ids": [
+            "9a23611d-7822-47e8-b625-e7b10bd2d1df",
+            "51e840b3-e770-4b36-80db-97dfce2bc1a9"
+          ],
+          "returned_event_ids": [
+            "ff5f7f4e-ece9-48af-846e-8b74ace681a4",
+            "9a23611d-7822-47e8-b625-e7b10bd2d1df",
+            "2f517174-399f-4f80-9fe4-30639273450d",
+            "e40a98cc-8886-4f94-93bb-7a5466bd4b5f",
+            "2425c934-ab17-4409-ac6c-a0a9059553a9",
+            "51e840b3-e770-4b36-80db-97dfce2bc1a9"
+          ],
+          "scope": null,
+          "success": true
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": "AssociationEffort.DEEP",
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 6,
+          "candidate_limit": 600,
+          "elapsed_ms": 6.613,
+          "focus_mode": "FocusMode.SINGLE_ANCHOR",
+          "method": "adaptive",
+          "required_event_ids": [
+            "9a23611d-7822-47e8-b625-e7b10bd2d1df",
+            "51e840b3-e770-4b36-80db-97dfce2bc1a9"
+          ],
+          "returned_event_ids": [
+            "ff5f7f4e-ece9-48af-846e-8b74ace681a4",
+            "9a23611d-7822-47e8-b625-e7b10bd2d1df",
+            "2f517174-399f-4f80-9fe4-30639273450d",
+            "e40a98cc-8886-4f94-93bb-7a5466bd4b5f",
+            "2425c934-ab17-4409-ac6c-a0a9059553a9",
+            "51e840b3-e770-4b36-80db-97dfce2bc1a9"
+          ],
+          "scope": "ScopeProfile.CONTEXTUAL",
+          "success": true
+        }
+      ],
+      "purpose": "Expose both an attractive one-hop claim and deeper counterevidence instead of allowing the shorter associative route to monopolize the evidence packet.",
+      "scenario_id": "false_short_path_true_deep_counterevidence"
+    },
+    {
+      "aperture_already_sufficient": false,
+      "comparison_eligible": true,
+      "evaluation": "required_evidence_complete",
+      "observations": [
+        {
+          "association_decay": null,
+          "association_effort": null,
+          "association_hops": 0,
+          "association_limit": null,
+          "association_trace_edges": 0,
+          "candidate_limit": 750,
+          "elapsed_ms": 4.92,
+          "focus_mode": null,
+          "method": "attention_aperture",
+          "required_event_ids": [
+            "a97c355a-f058-4c9f-a776-20713e14fffc"
+          ],
+          "returned_event_ids": [
+            "8bd51585-6b95-48ac-8613-5ee81502a049",
+            "b3cea30e-869e-4eb3-9949-4b4fcbb40e77"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": null,
+          "association_hops": 3,
+          "association_limit": 600,
+          "association_trace_edges": 6,
+          "candidate_limit": 350,
+          "elapsed_ms": 11.167,
+          "focus_mode": null,
+          "method": "frozen:DEEPER_RESEARCH",
+          "required_event_ids": [
+            "a97c355a-f058-4c9f-a776-20713e14fffc"
+          ],
+          "returned_event_ids": [
+            "84a630e7-bd90-401a-99b5-b52d4eba1d28",
+            "121758c2-22bd-4c83-8891-1a40dac97fa2",
+            "29494425-223b-4988-b06a-bb5ee1786297",
+            "21a71512-ed0f-4453-ae0e-0807c306d860",
+            "fba3aa26-b3cb-46c3-aab3-4ea8f63acc2a",
+            "8916a3ae-fdaa-4def-99cb-bf1a99cd9043"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.9,
+          "association_effort": null,
+          "association_hops": 4,
+          "association_limit": 900,
+          "association_trace_edges": 8,
+          "candidate_limit": 250,
+          "elapsed_ms": 7.412,
+          "focus_mode": null,
+          "method": "frozen:CROSS_REFERENCE",
+          "required_event_ids": [
+            "a97c355a-f058-4c9f-a776-20713e14fffc"
+          ],
+          "returned_event_ids": [
+            "84a630e7-bd90-401a-99b5-b52d4eba1d28",
+            "121758c2-22bd-4c83-8891-1a40dac97fa2",
+            "29494425-223b-4988-b06a-bb5ee1786297",
+            "21a71512-ed0f-4453-ae0e-0807c306d860",
+            "fba3aa26-b3cb-46c3-aab3-4ea8f63acc2a",
+            "8916a3ae-fdaa-4def-99cb-bf1a99cd9043",
+            "8e334e07-8d5c-4dfe-a3f8-7686e7e9b315",
+            "0408d058-085a-44fd-910d-56739d8171cc"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": "AssociationEffort.DEEP",
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 9,
+          "candidate_limit": 350,
+          "elapsed_ms": 9.349,
+          "focus_mode": "FocusMode.MULTI_ANCHOR",
+          "method": "adaptive",
+          "required_event_ids": [
+            "a97c355a-f058-4c9f-a776-20713e14fffc"
+          ],
+          "returned_event_ids": [
+            "84a630e7-bd90-401a-99b5-b52d4eba1d28",
+            "121758c2-22bd-4c83-8891-1a40dac97fa2",
+            "29494425-223b-4988-b06a-bb5ee1786297",
+            "21a71512-ed0f-4453-ae0e-0807c306d860",
+            "fba3aa26-b3cb-46c3-aab3-4ea8f63acc2a",
+            "8916a3ae-fdaa-4def-99cb-bf1a99cd9043",
+            "8e334e07-8d5c-4dfe-a3f8-7686e7e9b315",
+            "0408d058-085a-44fd-910d-56739d8171cc",
+            "a97c355a-f058-4c9f-a776-20713e14fffc"
+          ],
+          "scope": "ScopeProfile.BALANCED",
+          "success": true
+        }
+      ],
+      "purpose": "Test whether anchor cardinality and traversal depth can vary independently when a relationship requires multiple foci and a five-hop opaque route.",
+      "scenario_id": "multi_anchor_five_hop_relationship"
+    },
+    {
+      "aperture_already_sufficient": true,
+      "comparison_eligible": true,
+      "evaluation": "required_evidence_complete",
+      "observations": [
+        {
+          "association_decay": null,
+          "association_effort": null,
+          "association_hops": 0,
+          "association_limit": null,
+          "association_trace_edges": 0,
+          "candidate_limit": 750,
+          "elapsed_ms": 22.793,
+          "focus_mode": null,
+          "method": "attention_aperture",
+          "required_event_ids": [
+            "28da7c10-d286-41e3-88b3-327d746a54e7"
+          ],
+          "returned_event_ids": [
+            "88cf14b6-8874-4399-bc42-0d24a0676f5d",
+            "28da7c10-d286-41e3-88b3-327d746a54e7"
+          ],
+          "scope": null,
+          "success": true
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": null,
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 1200,
+          "candidate_limit": 150,
+          "elapsed_ms": 119.134,
+          "focus_mode": null,
+          "method": "frozen:FOCUSED_RECALL",
+          "required_event_ids": [
+            "28da7c10-d286-41e3-88b3-327d746a54e7"
+          ],
+          "returned_event_ids": [
+            "61415ae0-a444-4b80-9e9a-cf6bfee05dc0",
+            "c3d473d4-f742-4820-84b5-1e556cc78fd9",
+            "57ee4885-55c0-4708-b5bc-d175eb58f2f0",
+            "fe588555-2b32-49ea-901a-91089b7f6d92",
+            "dc6bc474-ee6e-4841-9497-19548447ab4e",
+            "5205e438-a55b-4ced-888f-11560a5508cd",
+            "a5c7bc90-7bfc-40b6-9a36-cf328cf36c02",
+            "a3770705-c73e-4021-a637-f76887d803ef",
+            "1257fbfb-9d70-431b-aec7-090eba70fed9",
+            "02a64906-f1ea-4e31-8f24-a46fceef4782"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": "AssociationEffort.DEEP",
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 1200,
+          "candidate_limit": 175,
+          "elapsed_ms": 116.792,
+          "focus_mode": "FocusMode.SINGLE_ANCHOR",
+          "method": "adaptive:round-1",
+          "required_event_ids": [
+            "28da7c10-d286-41e3-88b3-327d746a54e7"
+          ],
+          "returned_event_ids": [
+            "61415ae0-a444-4b80-9e9a-cf6bfee05dc0",
+            "c3d473d4-f742-4820-84b5-1e556cc78fd9",
+            "57ee4885-55c0-4708-b5bc-d175eb58f2f0",
+            "fe588555-2b32-49ea-901a-91089b7f6d92",
+            "dc6bc474-ee6e-4841-9497-19548447ab4e",
+            "5205e438-a55b-4ced-888f-11560a5508cd",
+            "a5c7bc90-7bfc-40b6-9a36-cf328cf36c02",
+            "a3770705-c73e-4021-a637-f76887d803ef",
+            "1257fbfb-9d70-431b-aec7-090eba70fed9",
+            "02a64906-f1ea-4e31-8f24-a46fceef4782"
+          ],
+          "scope": "ScopeProfile.NARROW",
+          "success": false
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": "AssociationEffort.DEEP",
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 1200,
+          "candidate_limit": 175,
+          "elapsed_ms": 125.404,
+          "focus_mode": "FocusMode.SINGLE_ANCHOR",
+          "method": "adaptive:round-2",
+          "required_event_ids": [
+            "28da7c10-d286-41e3-88b3-327d746a54e7"
+          ],
+          "returned_event_ids": [
+            "61415ae0-a444-4b80-9e9a-cf6bfee05dc0",
+            "c3d473d4-f742-4820-84b5-1e556cc78fd9",
+            "57ee4885-55c0-4708-b5bc-d175eb58f2f0",
+            "fe588555-2b32-49ea-901a-91089b7f6d92",
+            "dc6bc474-ee6e-4841-9497-19548447ab4e",
+            "5205e438-a55b-4ced-888f-11560a5508cd",
+            "a5c7bc90-7bfc-40b6-9a36-cf328cf36c02",
+            "a3770705-c73e-4021-a637-f76887d803ef",
+            "1257fbfb-9d70-431b-aec7-090eba70fed9",
+            "02a64906-f1ea-4e31-8f24-a46fceef4782"
+          ],
+          "scope": "ScopeProfile.NARROW",
+          "success": false
+        },
+        {
+          "association_decay": 0.85,
+          "association_effort": "AssociationEffort.SHALLOW",
+          "association_hops": 2,
+          "association_limit": 300,
+          "association_trace_edges": 1,
+          "candidate_limit": 600,
+          "elapsed_ms": 23.136,
+          "focus_mode": "FocusMode.REORIENT",
+          "method": "adaptive:round-3",
+          "required_event_ids": [
+            "28da7c10-d286-41e3-88b3-327d746a54e7"
+          ],
+          "returned_event_ids": [
+            "28da7c10-d286-41e3-88b3-327d746a54e7"
+          ],
+          "scope": "ScopeProfile.CONTEXTUAL",
+          "success": true
+        }
+      ],
+      "purpose": "Test whether repeated non-improving focus on a plausible obsolete explanation is abandoned so cue-reachable correction evidence can enter.",
+      "scenario_id": "obsolete_single_anchor_requires_reorientation"
+    },
+    {
+      "aperture_already_sufficient": true,
+      "comparison_eligible": true,
+      "evaluation": "required_evidence_complete",
+      "observations": [
+        {
+          "association_decay": null,
+          "association_effort": null,
+          "association_hops": 0,
+          "association_limit": null,
+          "association_trace_edges": 0,
+          "candidate_limit": 750,
+          "elapsed_ms": 22.46,
+          "focus_mode": null,
+          "method": "attention_aperture",
+          "required_event_ids": [
+            "3ba84270-4713-4c13-aaf8-b8869ec728db"
+          ],
+          "returned_event_ids": [
+            "8f6713f1-824c-4b4c-89d0-1c42ce1be298",
+            "c94f2c2b-bfbe-43ce-86e6-15d5dae84527",
+            "3ba84270-4713-4c13-aaf8-b8869ec728db"
+          ],
+          "scope": null,
+          "success": true
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": null,
+          "association_hops": 3,
+          "association_limit": 600,
+          "association_trace_edges": 600,
+          "candidate_limit": 350,
+          "elapsed_ms": 148.876,
+          "focus_mode": null,
+          "method": "frozen:DEEPER_RESEARCH",
+          "required_event_ids": [
+            "3ba84270-4713-4c13-aaf8-b8869ec728db"
+          ],
+          "returned_event_ids": [
+            "ca12e9ee-59bc-4776-b52c-adcda8923acd",
+            "c3f398d1-2a03-4675-90cf-585aa745d7cc",
+            "47f8d276-61c9-48ba-82af-44e60546f966",
+            "5ce6c41b-4244-4eb1-95d1-ce9de0e6f8ae",
+            "6cdfbed8-0e72-49f8-9b5d-add63ee8360b",
+            "5fc945f6-41b0-435a-8062-47056152f2b0",
+            "464050bc-57bf-435f-b90f-a86e865c15de",
+            "54300281-a77b-44bb-87d5-d8ecbf8bbeb5",
+            "79f9fd5c-dd6c-4f9f-a92a-5c1475cc4f01",
+            "1a043e48-5515-48e3-bb56-b01345ec0d60"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.9,
+          "association_effort": null,
+          "association_hops": 4,
+          "association_limit": 900,
+          "association_trace_edges": 900,
+          "candidate_limit": 250,
+          "elapsed_ms": 102.194,
+          "focus_mode": null,
+          "method": "frozen:CROSS_REFERENCE",
+          "required_event_ids": [
+            "3ba84270-4713-4c13-aaf8-b8869ec728db"
+          ],
+          "returned_event_ids": [
+            "94e43936-cbab-4910-bc65-b45b80c1ea46",
+            "ba7366c2-a236-443c-8484-b3114a49ba87",
+            "080b8d2a-4693-4e57-b8c4-c733c6b555fd",
+            "2ee8319f-355d-4aea-89c2-271f48beb615",
+            "fbaebef4-ebde-4a0e-a0ea-0473c2241c03",
+            "6fe1b5fc-d4c0-49dd-9467-e2be8bee64e1",
+            "4db36569-c036-486b-b30d-9b370c6c3705",
+            "cc8dbdb1-8c8e-48fc-b844-352bf319c913",
+            "a4035329-ff1d-4450-88b9-9364c145ef62",
+            "45bbfe4b-f67f-48dd-926c-e6fd350d3330"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": "AssociationEffort.DEEP",
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 1200,
+          "candidate_limit": 600,
+          "elapsed_ms": 123.424,
+          "focus_mode": "FocusMode.MULTI_ANCHOR",
+          "method": "adaptive:round-1",
+          "required_event_ids": [
+            "3ba84270-4713-4c13-aaf8-b8869ec728db"
+          ],
+          "returned_event_ids": [
+            "3f41049b-363e-4033-86f3-3faeb9cb4e7c",
+            "1098e8a8-013e-4d87-b4ae-a37430e62459",
+            "fc94d671-c6af-4fa7-8335-7075748ac83d",
+            "4e42f093-905c-4a10-a42d-d21236ad45ea",
+            "3ac82f1c-3e25-4c89-a4a2-70b919965405",
+            "bbf00743-520a-469d-a2fc-288135003b37",
+            "d60c2dfe-d6c7-4f51-9268-8927caabca54",
+            "77e0e812-131a-45ce-a10e-c4be38e42232",
+            "8a5ce6ae-62ed-41e0-b3ce-4edc344ded0e",
+            "df0977b9-a027-47a7-96ad-78da6bd7e2e1"
+          ],
+          "scope": "ScopeProfile.CONTEXTUAL",
+          "success": false
+        },
+        {
+          "association_decay": 0.92,
+          "association_effort": "AssociationEffort.DEEP",
+          "association_hops": 5,
+          "association_limit": 1200,
+          "association_trace_edges": 1200,
+          "candidate_limit": 600,
+          "elapsed_ms": 136.516,
+          "focus_mode": "FocusMode.MULTI_ANCHOR",
+          "method": "adaptive:round-2",
+          "required_event_ids": [
+            "3ba84270-4713-4c13-aaf8-b8869ec728db"
+          ],
+          "returned_event_ids": [
+            "3f41049b-363e-4033-86f3-3faeb9cb4e7c",
+            "1098e8a8-013e-4d87-b4ae-a37430e62459",
+            "fc94d671-c6af-4fa7-8335-7075748ac83d",
+            "4e42f093-905c-4a10-a42d-d21236ad45ea",
+            "3ac82f1c-3e25-4c89-a4a2-70b919965405",
+            "bbf00743-520a-469d-a2fc-288135003b37",
+            "d60c2dfe-d6c7-4f51-9268-8927caabca54",
+            "77e0e812-131a-45ce-a10e-c4be38e42232",
+            "8a5ce6ae-62ed-41e0-b3ce-4edc344ded0e",
+            "df0977b9-a027-47a7-96ad-78da6bd7e2e1"
+          ],
+          "scope": "ScopeProfile.CONTEXTUAL",
+          "success": false
+        },
+        {
+          "association_decay": 0.85,
+          "association_effort": "AssociationEffort.SHALLOW",
+          "association_hops": 2,
+          "association_limit": 300,
+          "association_trace_edges": 300,
+          "candidate_limit": 600,
+          "elapsed_ms": 54.572,
+          "focus_mode": "FocusMode.REORIENT",
+          "method": "adaptive:round-3",
+          "required_event_ids": [
+            "3ba84270-4713-4c13-aaf8-b8869ec728db"
+          ],
+          "returned_event_ids": [
+            "9076ce99-9e23-4db1-803f-b803a8c2da03",
+            "ea11c986-73ac-40a4-8a56-0455e64d90ad",
+            "1a3537b9-3fda-4477-8e71-be4563a70bf1",
+            "121398c7-3ef5-47c2-99b8-8a6fd8bbd5ff",
+            "a11d2ea6-6be7-4529-a4fa-71818d01bdde",
+            "0a504a82-6e2d-408c-91fe-03dccbe4f2a4",
+            "347cb85e-ee48-44e5-a9cc-f34140d84703",
+            "9c897030-2ba3-47f8-a6e5-5198408bbb76",
+            "ee417465-bbe5-489a-9ca2-ec56b7b66b3d",
+            "ea642887-ac30-4120-993f-d7e107163bfe"
+          ],
+          "scope": "ScopeProfile.CONTEXTUAL",
+          "success": false
+        }
+      ],
+      "purpose": "Test whether a bad multi-anchor cluster can be escaped after bounded non-improving exploitation instead of becoming an attentional attractor.",
+      "scenario_id": "mutually_reinforcing_anchor_cluster_requires_reorientation"
+    },
+    {
+      "aperture_already_sufficient": false,
+      "comparison_eligible": true,
+      "evaluation": "required_evidence_complete",
+      "notes": "Hostile exact-looking distractors: 18",
+      "observations": [
+        {
+          "association_decay": null,
+          "association_effort": null,
+          "association_hops": 0,
+          "association_limit": null,
+          "association_trace_edges": 0,
+          "candidate_limit": 750,
+          "elapsed_ms": 6.671,
+          "focus_mode": null,
+          "method": "attention_aperture",
+          "required_event_ids": [
+            "2e7d0592-5517-48e5-aae7-e07ab50163a5",
+            "7a78d48e-9639-4bf2-87a7-34cf4789f57c",
+            "c50fe567-9113-4665-8726-05c63adc57dd"
+          ],
+          "returned_event_ids": [
+            "6be6c187-34e4-4370-b445-32b7e5979547",
+            "5ee8bed7-3254-4d73-b71c-b85ed9277182",
+            "c75b5364-5bef-4517-b666-8c491cd26082",
+            "2714aaa1-24d8-46c8-ad22-e7a7886d135e",
+            "8bae4681-905c-4ae6-a041-3dca2ccab824",
+            "d1069dd9-9558-45ce-a739-b153e1a27952",
+            "b225cb75-df35-42be-b473-e47b6407dce6",
+            "019b6094-1ad6-4eda-ae23-ebb81ba68409"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": null,
+          "association_hops": 3,
+          "association_limit": 600,
+          "association_trace_edges": 0,
+          "candidate_limit": 350,
+          "elapsed_ms": 14.067,
+          "focus_mode": null,
+          "method": "frozen:DEEPER_RESEARCH",
+          "required_event_ids": [
+            "2e7d0592-5517-48e5-aae7-e07ab50163a5",
+            "7a78d48e-9639-4bf2-87a7-34cf4789f57c",
+            "c50fe567-9113-4665-8726-05c63adc57dd"
+          ],
+          "returned_event_ids": [
+            "c75b5364-5bef-4517-b666-8c491cd26082",
+            "2714aaa1-24d8-46c8-ad22-e7a7886d135e",
+            "8bae4681-905c-4ae6-a041-3dca2ccab824",
+            "d1069dd9-9558-45ce-a739-b153e1a27952",
+            "b225cb75-df35-42be-b473-e47b6407dce6",
+            "019b6094-1ad6-4eda-ae23-ebb81ba68409",
+            "d19f380a-ac45-45a3-ba69-dabdd7dbf548",
+            "5ce6f876-8eb8-42bc-9d89-2625ae234c44",
+            "7e75cd0a-a669-4bb4-a197-5525e5e6d31d",
+            "00ec482b-3023-4696-a183-c223cb8d9fab"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.9,
+          "association_effort": null,
+          "association_hops": 4,
+          "association_limit": 900,
+          "association_trace_edges": 0,
+          "candidate_limit": 250,
+          "elapsed_ms": 8.053,
+          "focus_mode": null,
+          "method": "frozen:CROSS_REFERENCE",
+          "required_event_ids": [
+            "2e7d0592-5517-48e5-aae7-e07ab50163a5",
+            "7a78d48e-9639-4bf2-87a7-34cf4789f57c",
+            "c50fe567-9113-4665-8726-05c63adc57dd"
+          ],
+          "returned_event_ids": [
+            "c75b5364-5bef-4517-b666-8c491cd26082",
+            "2714aaa1-24d8-46c8-ad22-e7a7886d135e",
+            "8bae4681-905c-4ae6-a041-3dca2ccab824",
+            "d1069dd9-9558-45ce-a739-b153e1a27952",
+            "b225cb75-df35-42be-b473-e47b6407dce6",
+            "019b6094-1ad6-4eda-ae23-ebb81ba68409",
+            "d19f380a-ac45-45a3-ba69-dabdd7dbf548",
+            "5ce6f876-8eb8-42bc-9d89-2625ae234c44",
+            "7e75cd0a-a669-4bb4-a197-5525e5e6d31d",
+            "00ec482b-3023-4696-a183-c223cb8d9fab"
+          ],
+          "scope": null,
+          "success": false
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": "AssociationEffort.MODERATE",
+          "association_hops": 3,
+          "association_limit": 750,
+          "association_trace_edges": 0,
+          "candidate_limit": 350,
+          "elapsed_ms": 7.531,
+          "focus_mode": "FocusMode.MULTI_ANCHOR",
+          "method": "adaptive",
+          "required_event_ids": [
+            "2e7d0592-5517-48e5-aae7-e07ab50163a5",
+            "7a78d48e-9639-4bf2-87a7-34cf4789f57c",
+            "c50fe567-9113-4665-8726-05c63adc57dd"
+          ],
+          "returned_event_ids": [
+            "c75b5364-5bef-4517-b666-8c491cd26082",
+            "2714aaa1-24d8-46c8-ad22-e7a7886d135e",
+            "8bae4681-905c-4ae6-a041-3dca2ccab824",
+            "d1069dd9-9558-45ce-a739-b153e1a27952",
+            "b225cb75-df35-42be-b473-e47b6407dce6",
+            "019b6094-1ad6-4eda-ae23-ebb81ba68409",
+            "d19f380a-ac45-45a3-ba69-dabdd7dbf548",
+            "5ce6f876-8eb8-42bc-9d89-2625ae234c44",
+            "7e75cd0a-a669-4bb4-a197-5525e5e6d31d",
+            "00ec482b-3023-4696-a183-c223cb8d9fab"
+          ],
+          "scope": "ScopeProfile.BALANCED",
+          "success": false
+        }
+      ],
+      "purpose": "Require several individually weaker memories while exact-looking distractors compete, probing whether top-k selection discards distributed evidence.",
+      "scenario_id": "multiple_weak_clues_under_packet_pressure"
+    },
+    {
+      "aperture_already_sufficient": false,
+      "comparison_eligible": false,
+      "evaluation": "no_historical_evidence_returned",
+      "notes": "This is a shared safety behavior check, not a frozen-vs-adaptive win. Automatic WorkingState activation is intentionally excluded.",
+      "observations": [
+        {
+          "association_decay": 0.85,
+          "association_effort": null,
+          "association_hops": 2,
+          "association_limit": 250,
+          "association_trace_edges": 0,
+          "candidate_limit": 500,
+          "elapsed_ms": 6.422,
+          "focus_mode": null,
+          "method": "frozen:STANDARD",
+          "required_event_ids": [],
+          "returned_event_ids": [],
+          "scope": null,
+          "success": true
+        },
+        {
+          "association_decay": 0.88,
+          "association_effort": "AssociationEffort.MODERATE",
+          "association_hops": 3,
+          "association_limit": 750,
+          "association_trace_edges": 0,
+          "candidate_limit": 600,
+          "elapsed_ms": 3.911,
+          "focus_mode": "FocusMode.UNANCHORED",
+          "method": "adaptive",
+          "required_event_ids": [],
+          "returned_event_ids": [],
+          "scope": "ScopeProfile.CONTEXTUAL",
+          "success": true
+        }
+      ],
+      "purpose": "Verify that widening attention does not manufacture historical support when the canonical ledger contains no evidence for the cue.",
+      "scenario_id": "unsupported_query_abstention"
+    }
+  ],
+  "database": "jit_agent_test",
+  "evaluation_boundary": "This benchmark evaluates whether complete canonical evidence needed by a downstream stateless worker is surfaced. It does not award retrieval credit for interpreting corrections, causality, truth, or contradiction.",
+  "generated_at": "2026-08-29T01:51:44.801158+00:00",
+  "head_to_head": {
+    "adaptive_only": 1,
+    "aperture_already_sufficient": 2,
+    "both": 3,
+    "excluded_common_behavior": 1,
+    "frozen_only": 0,
+    "neither": 1
+  },
+  "mode": "stress",
+  "schema_version": 1
+}

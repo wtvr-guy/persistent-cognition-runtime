@@ -1,0 +1,412 @@
+{
+  "captured_at": "2026-08-27T18:46:44.120887+00:00",
+  "completion_failures": [],
+  "requested_measurements_complete": true,
+  "results": {
+    "CAP-LOOP-001": {
+      "acceptance_executed": true,
+      "acceptance_skipped": false,
+      "admission_diagnostics": null,
+      "benchmark_id": "CAP-LOOP-001",
+      "decision": "A passing four-turn real-Ollama continuity run demonstrates that the production round guard is non-binding for this frozen native workload. It does not establish the empirical tail of capability-round demand; representative successful, adversarial, and deliberately nonconvergent local-model tasks are still required before changing or verifying MAX_CAPABILITY_ROUNDS.",
+      "elapsed_seconds": 155.313,
+      "result": "PILOT_NATIVE_MEASUREMENT",
+      "returncode": 0,
+      "round_limit_failure_observed": false,
+      "stderr_tail": "",
+      "stdout_tail": "\nHistorical seed \u2014 User:\nFor Project Kestrel, never use Docker; deploy PostgreSQL directly on Windows because virtualization is disabled. I track that constraint under profile VX-2806C19C.\n\nHistorical seed \u2014 Prometheist:\nFor Project Kestrel, never use Docker; deploy PostgreSQL directly on Windows because virtualization is disabled. I track that constraint under profile VX-2806C19C.\n\nTurn 1 \u2014 User:\nI'm revisiting Project Kestrel. For this conversation, call the plan BlueHarbor-AD40B4. I'm choosing between Docker Compose and PostgreSQL directly on Windows. Based on my established constraints, choose the compatible approach. Return exactly one of these labels and nothing else: Docker Compose | PostgreSQL directly on Windows.\n\nTurn 1 \u2014 Prometheist:\nPostgreSQL directly on Windows\n\nTurn 2 \u2014 User:\nWhich approach conflicts with my established Kestrel rule, and what constraint profile did I give that rule? Return exactly '<approach> | <profile>' and nothing else.\n\nTurn 2 \u2014 Prometheist:\nDocker Compose | VX-2806C19C\n\nTurn 3 \u2014 User:\nWhat nickname are we using for this plan, and which approach did you just rule out? Return exactly '<nickname> | <approach>' and nothing else.\n\nTurn 3 \u2014 Prometheist:\nBlueHarbor-AD40B4 | Docker Compose\n\nTurn 4 \u2014 User:\nName that ruled-out approach and its underlying technical reason. Return exactly '<approach> | <reason>' and use the reason wording from my established rule.\n\nTurn 4 \u2014 Prometheist:\nDocker Compose | virtualization is disabled\n\nPASS: v0.7 task/worker continuity preserved recent and older evidence.\n.\n1 passed in 154.72s (0:02:34)\n"
+    },
+    "LLM-NATIVE-001": {
+      "base_url": "http://localhost:11434",
+      "benchmark_id": "LLM-NATIVE-001",
+      "decision": "This pilot identifies truncation/latency behavior for a controlled structured call. Repeat cold/warm/contention and production-schema scenarios before verifying HTTP, token, or retry bounds.",
+      "model": "qwen3:4b-instruct-2507-q4_K_M",
+      "observations": [
+        {
+          "content_length": 37,
+          "done_reason": "length",
+          "elapsed_seconds": 4.438,
+          "eval_count": 16,
+          "http_or_parse_error": null,
+          "literal_preserved": false,
+          "num_predict": 16,
+          "prompt_eval_count": 59
+        },
+        {
+          "content_length": 42,
+          "done_reason": "stop",
+          "elapsed_seconds": 1.766,
+          "eval_count": 21,
+          "http_or_parse_error": null,
+          "literal_preserved": true,
+          "num_predict": 24,
+          "prompt_eval_count": 59
+        },
+        {
+          "content_length": 42,
+          "done_reason": "stop",
+          "elapsed_seconds": 1.765,
+          "eval_count": 21,
+          "http_or_parse_error": null,
+          "literal_preserved": true,
+          "num_predict": 32,
+          "prompt_eval_count": 59
+        },
+        {
+          "content_length": 42,
+          "done_reason": "stop",
+          "elapsed_seconds": 1.781,
+          "eval_count": 21,
+          "http_or_parse_error": null,
+          "literal_preserved": true,
+          "num_predict": 48,
+          "prompt_eval_count": 59
+        },
+        {
+          "content_length": 42,
+          "done_reason": "stop",
+          "elapsed_seconds": 1.813,
+          "eval_count": 21,
+          "http_or_parse_error": null,
+          "literal_preserved": true,
+          "num_predict": 64,
+          "prompt_eval_count": 59
+        },
+        {
+          "content_length": 42,
+          "done_reason": "stop",
+          "elapsed_seconds": 1.734,
+          "eval_count": 21,
+          "http_or_parse_error": null,
+          "literal_preserved": true,
+          "num_predict": 128,
+          "prompt_eval_count": 59
+        },
+        {
+          "content_length": 42,
+          "done_reason": "stop",
+          "elapsed_seconds": 1.782,
+          "eval_count": 21,
+          "http_or_parse_error": null,
+          "literal_preserved": true,
+          "num_predict": 256,
+          "prompt_eval_count": 59
+        },
+        {
+          "content_length": 42,
+          "done_reason": "stop",
+          "elapsed_seconds": 1.781,
+          "eval_count": 21,
+          "http_or_parse_error": null,
+          "literal_preserved": true,
+          "num_predict": 512,
+          "prompt_eval_count": 59
+        }
+      ],
+      "result": "PILOT_NATIVE_MEASUREMENT",
+      "token_caps": [
+        16,
+        24,
+        32,
+        48,
+        64,
+        128,
+        256,
+        512
+      ]
+    },
+    "OLLAMA-RUNTIME-001": {
+      "benchmark_id": "OLLAMA-RUNTIME-001",
+      "decision": "The running-model observation determines the interaction's incremental RAM requirement before scheduler admission. A verified resident configured model uses ordinary worker overhead; a nonresident or failed probe uses the full cold-load budget. Worker claims recheck this state before every process launch.",
+      "incremental_process_memory_mib": 512,
+      "policy_under_measurement": {
+        "cpu_system_headroom_percent": 10,
+        "default_llm_process_memory_mib": 3072,
+        "default_process_cpu_units": 1,
+        "default_process_memory_mib": 512,
+        "llm_concurrency_limit": 1,
+        "max_cpu_pressure_percent": 85,
+        "memory_system_headroom_min_mib": 1024,
+        "memory_system_headroom_percent": 10,
+        "observation_max_age_seconds": 5,
+        "policy_version": "v0.7-native-calibration-v1",
+        "uncertainty_headroom_percent": 5
+      },
+      "result": "PILOT_NATIVE_MEASUREMENT",
+      "reusable_system_memory_credit_mib": 2560,
+      "runtime_state": {
+        "error": null,
+        "expires_at": "2026-08-27T11:49:06.5009639-07:00",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "probe_ok": true,
+        "reported_name": "qwen3:4b-instruct-2507-q4_K_M",
+        "resident": true,
+        "size_bytes": 3184001022,
+        "size_vram_bytes": 0
+      }
+    },
+    "RES-NATIVE-001": {
+      "benchmark_id": "RES-NATIVE-001",
+      "capture_completed_at": "2026-08-27T18:43:39.732950+00:00",
+      "capture_started_at": "2026-08-27T18:43:37.667272+00:00",
+      "cpu_utilization_percent": {
+        "max": 15.0,
+        "median": 0.0,
+        "min": 0.0
+      },
+      "decision": "Pilot observations establish actual target-host pressure ranges. Repeat under the idle, CPU-pressure, memory-pressure, cold-model, and warm-model scenarios before changing or verifying admission margins.",
+      "logical_cpu_counts": [
+        8
+      ],
+      "memory_available_mib": {
+        "max": 7338.0,
+        "median": 7336.0,
+        "min": 7335.0
+      },
+      "memory_total_mib": [
+        16118
+      ],
+      "platforms": [
+        "Windows"
+      ],
+      "policy_under_measurement": {
+        "cpu_system_headroom_percent": 10,
+        "default_llm_process_memory_mib": 3072,
+        "default_process_cpu_units": 1,
+        "default_process_memory_mib": 512,
+        "llm_concurrency_limit": 1,
+        "max_cpu_pressure_percent": 85,
+        "memory_system_headroom_min_mib": 1024,
+        "memory_system_headroom_percent": 10,
+        "observation_max_age_seconds": 5,
+        "policy_version": "v0.7-native-calibration-v1",
+        "uncertainty_headroom_percent": 5
+      },
+      "raw_samples": [
+        {
+          "cpu_utilization_percent": 7,
+          "load_1m": null,
+          "logical_cpu_count": 8,
+          "memory_available_mib": 7335,
+          "memory_total_mib": 16118,
+          "platform": "Windows"
+        },
+        {
+          "cpu_utilization_percent": 15,
+          "load_1m": null,
+          "logical_cpu_count": 8,
+          "memory_available_mib": 7335,
+          "memory_total_mib": 16118,
+          "platform": "Windows"
+        },
+        {
+          "cpu_utilization_percent": 0,
+          "load_1m": null,
+          "logical_cpu_count": 8,
+          "memory_available_mib": 7335,
+          "memory_total_mib": 16118,
+          "platform": "Windows"
+        },
+        {
+          "cpu_utilization_percent": 0,
+          "load_1m": null,
+          "logical_cpu_count": 8,
+          "memory_available_mib": 7335,
+          "memory_total_mib": 16118,
+          "platform": "Windows"
+        },
+        {
+          "cpu_utilization_percent": 0,
+          "load_1m": null,
+          "logical_cpu_count": 8,
+          "memory_available_mib": 7335,
+          "memory_total_mib": 16118,
+          "platform": "Windows"
+        },
+        {
+          "cpu_utilization_percent": 0,
+          "load_1m": null,
+          "logical_cpu_count": 8,
+          "memory_available_mib": 7335,
+          "memory_total_mib": 16118,
+          "platform": "Windows"
+        },
+        {
+          "cpu_utilization_percent": 2,
+          "load_1m": null,
+          "logical_cpu_count": 8,
+          "memory_available_mib": 7338,
+          "memory_total_mib": 16118,
+          "platform": "Windows"
+        },
+        {
+          "cpu_utilization_percent": 2,
+          "load_1m": null,
+          "logical_cpu_count": 8,
+          "memory_available_mib": 7338,
+          "memory_total_mib": 16118,
+          "platform": "Windows"
+        },
+        {
+          "cpu_utilization_percent": 0,
+          "load_1m": null,
+          "logical_cpu_count": 8,
+          "memory_available_mib": 7338,
+          "memory_total_mib": 16118,
+          "platform": "Windows"
+        },
+        {
+          "cpu_utilization_percent": 0,
+          "load_1m": null,
+          "logical_cpu_count": 8,
+          "memory_available_mib": 7336,
+          "memory_total_mib": 16118,
+          "platform": "Windows"
+        },
+        {
+          "cpu_utilization_percent": 0,
+          "load_1m": null,
+          "logical_cpu_count": 8,
+          "memory_available_mib": 7336,
+          "memory_total_mib": 16118,
+          "platform": "Windows"
+        },
+        {
+          "cpu_utilization_percent": 0,
+          "load_1m": null,
+          "logical_cpu_count": 8,
+          "memory_available_mib": 7336,
+          "memory_total_mib": 16118,
+          "platform": "Windows"
+        },
+        {
+          "cpu_utilization_percent": 0,
+          "load_1m": null,
+          "logical_cpu_count": 8,
+          "memory_available_mib": 7336,
+          "memory_total_mib": 16118,
+          "platform": "Windows"
+        },
+        {
+          "cpu_utilization_percent": 4,
+          "load_1m": null,
+          "logical_cpu_count": 8,
+          "memory_available_mib": 7336,
+          "memory_total_mib": 16118,
+          "platform": "Windows"
+        },
+        {
+          "cpu_utilization_percent": 0,
+          "load_1m": null,
+          "logical_cpu_count": 8,
+          "memory_available_mib": 7336,
+          "memory_total_mib": 16118,
+          "platform": "Windows"
+        },
+        {
+          "cpu_utilization_percent": 0,
+          "load_1m": null,
+          "logical_cpu_count": 8,
+          "memory_available_mib": 7336,
+          "memory_total_mib": 16118,
+          "platform": "Windows"
+        },
+        {
+          "cpu_utilization_percent": 0,
+          "load_1m": null,
+          "logical_cpu_count": 8,
+          "memory_available_mib": 7336,
+          "memory_total_mib": 16118,
+          "platform": "Windows"
+        },
+        {
+          "cpu_utilization_percent": 0,
+          "load_1m": null,
+          "logical_cpu_count": 8,
+          "memory_available_mib": 7336,
+          "memory_total_mib": 16118,
+          "platform": "Windows"
+        },
+        {
+          "cpu_utilization_percent": 2,
+          "load_1m": null,
+          "logical_cpu_count": 8,
+          "memory_available_mib": 7337,
+          "memory_total_mib": 16118,
+          "platform": "Windows"
+        },
+        {
+          "cpu_utilization_percent": 2,
+          "load_1m": null,
+          "logical_cpu_count": 8,
+          "memory_available_mib": 7336,
+          "memory_total_mib": 16118,
+          "platform": "Windows"
+        }
+      ],
+      "result": "PILOT_NATIVE_MEASUREMENT",
+      "sample_count": 20
+    },
+    "RES-PRE-CAP-001": {
+      "benchmark_id": "RES-PRE-CAP-001",
+      "capture_completed_at": "2026-08-27T18:44:08.814249+00:00",
+      "capture_started_at": "2026-08-27T18:44:08.713619+00:00",
+      "cpu_utilization_percent": {
+        "max": 4.0,
+        "median": 4.0,
+        "min": 4.0
+      },
+      "decision": "This single immediate sample is ordered after Ollama calibration and directly before CAP-LOOP-001. Compare it with RES-NATIVE-001 and OLLAMA-RUNTIME-001 to distinguish physical free RAM from reusable resident-model memory.",
+      "logical_cpu_counts": [
+        8
+      ],
+      "memory_available_mib": {
+        "max": 7191.0,
+        "median": 7191.0,
+        "min": 7191.0
+      },
+      "memory_total_mib": [
+        16118
+      ],
+      "platforms": [
+        "Windows"
+      ],
+      "policy_under_measurement": {
+        "cpu_system_headroom_percent": 10,
+        "default_llm_process_memory_mib": 3072,
+        "default_process_cpu_units": 1,
+        "default_process_memory_mib": 512,
+        "llm_concurrency_limit": 1,
+        "max_cpu_pressure_percent": 85,
+        "memory_system_headroom_min_mib": 1024,
+        "memory_system_headroom_percent": 10,
+        "observation_max_age_seconds": 5,
+        "policy_version": "v0.7-native-calibration-v1",
+        "uncertainty_headroom_percent": 5
+      },
+      "raw_samples": [
+        {
+          "cpu_utilization_percent": 4,
+          "load_1m": null,
+          "logical_cpu_count": 8,
+          "memory_available_mib": 7191,
+          "memory_total_mib": 16118,
+          "platform": "Windows"
+        }
+      ],
+      "result": "PILOT_NATIVE_MEASUREMENT",
+      "sample_count": 1
+    },
+    "WORKER-NATIVE-001": {
+      "benchmark_id": "WORKER-NATIVE-001",
+      "decision": "One frozen runtime-block duration is a pilot only. Lease/timeout/retry verification requires repeated normal, slow, killed, spawn-failure, and resource-denial trials.",
+      "elapsed_seconds": 9.688,
+      "result": "PILOT_NATIVE_MEASUREMENT",
+      "returncode": 0,
+      "stderr_tail": "",
+      "stdout_tail": ".........................                                                [100%]\n25 passed in 9.06s\n"
+    }
+  },
+  "runner": "benchmarks/native_constraint_calibration.py",
+  "schema_version": 1
+}

@@ -1,0 +1,39 @@
+{
+  "association_version": "jordan-vale-associations-v1",
+  "benchmark": "jordan_vale_v1.json",
+  "description": "Curated deterministic association fixture used only to validate the v0.3 spreading-activation mechanism against the Jordan Vale control benchmark. The v0.2 retrieval algorithm remains the control; the benchmark's unknown-fact case was corrected to true open-world absence during v0.3 development. This fixture is not claimed to be a production association-extraction system.",
+  "associations": [
+    {
+      "association_id": "a001",
+      "source_kind": "EVENT",
+      "source": "e014",
+      "target_kind": "EVENT",
+      "target": "e001",
+      "relationship": "PREVIOUS_STATE",
+      "strength": 1.0,
+      "provenance_event_ids": ["e001", "e014"],
+      "required_cue_terms": ["before"]
+    },
+    {
+      "association_id": "a002",
+      "source_kind": "EVENT",
+      "source": "e007",
+      "target_kind": "EVENT",
+      "target": "e008",
+      "relationship": "RESOLVED_BY",
+      "strength": 1.0,
+      "provenance_event_ids": ["e007", "e008"],
+      "required_cue_terms": ["recover"]
+    },
+    {
+      "association_id": "a003",
+      "source_kind": "TERM",
+      "source": "vehicle",
+      "target_kind": "EVENT",
+      "target": "e011",
+      "relationship": "CONCEPT_INSTANCE",
+      "strength": 1.0,
+      "provenance_event_ids": ["e011"]
+    }
+  ]
+}

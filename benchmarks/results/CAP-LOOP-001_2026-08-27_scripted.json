@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "benchmark_id": "CAP-LOOP-001",
+  "evidence_kind": "deterministic_scripted_ci",
+  "result": "NATIVE_REQUIRED",
+  "production_round_budget": 4,
+  "candidate_budgets": [1, 2, 3, 4, 5, 6, 7, 8],
+  "passing_budgets": [4, 5, 6, 7, 8],
+  "minimum_passing_scripted_budget": 4,
+  "production_budget_passes_frozen_scripts": true,
+  "all_finite_candidates_fail_closed_on_nonconvergence": true,
+  "frozen_scenarios": [
+    {
+      "scenario_id": "respond_without_capability",
+      "required_evaluated_rounds": 1,
+      "required_capability_rounds": 0
+    },
+    {
+      "scenario_id": "one_capability_then_respond",
+      "required_evaluated_rounds": 2,
+      "required_capability_rounds": 1
+    },
+    {
+      "scenario_id": "multiple_independent_capabilities_then_respond",
+      "required_evaluated_rounds": 2,
+      "required_capability_rounds": 1
+    },
+    {
+      "scenario_id": "two_stage_progressive_research",
+      "required_evaluated_rounds": 3,
+      "required_capability_rounds": 2
+    },
+    {
+      "scenario_id": "three_stage_progressive_research",
+      "required_evaluated_rounds": 4,
+      "required_capability_rounds": 3
+    },
+    {
+      "scenario_id": "nonconvergent_router",
+      "expected_outcome_for_every_finite_candidate": "ROUND_LIMIT_FAIL_CLOSED"
+    }
+  ],
+  "candidate_summary": {
+    "1": "fails convergent workflows after zero capability follow-up capacity; nonconvergent router fails closed",
+    "2": "passes one-stage/parallel workflows but truncates two- and three-stage progressive workflows; nonconvergent router fails closed",
+    "3": "passes two-stage workflow but truncates three-stage progressive workflow; nonconvergent router fails closed",
+    "4": "passes all frozen convergent workflows; nonconvergent router fails closed",
+    "5": "passes all frozen convergent workflows; nonconvergent router fails closed",
+    "6": "passes all frozen convergent workflows; nonconvergent router fails closed",
+    "7": "passes all frozen convergent workflows; nonconvergent router fails closed",
+    "8": "passes all frozen convergent workflows; nonconvergent router fails closed"
+  },
+  "ci_evidence": {
+    "workflow_run": 338,
+    "head_sha": "1e7ed9ebcc31aba4ff85d5dc5e534806357a7683",
+    "constraint_audit": "171 discovered / 171 registered / 0 uncovered / 0 stale / 0 mismatched / 0 invalid",
+    "pytest": "233 passed, 5 skipped"
+  },
+  "decision": "The current round guard is non-binding for the frozen scripted workloads and fails closed for a nonconvergent router. The three-stage scripted workload makes four the smallest passing budget in this fixture, but that fixture depth is a test obligation rather than an empirical workload distribution. The exact production bound remains NATIVE_REQUIRED pending real local-model evidence."
+}
