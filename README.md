@@ -74,6 +74,12 @@ uv run pytest -q -ra
 
 See [TESTING.md](docs/TESTING.md) for PostgreSQL CI, live-model acceptance, and interpretation of skipped tests. [EXTRACTION.md](docs/EXTRACTION.md) records what was copied, adapted, and verified.
 
+### Historical validation in Prometheist
+
+[Prometheist](https://github.com/wtvr-guy/prometheist) preserves this architecture's development, benchmarks, test definitions, and local acceptance history. Its [2026-09-11 v2 validation record](https://github.com/wtvr-guy/prometheist/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/audits/V07_EPISTEMIC_RETRIEVAL_SCOPING_2026-09-11.md#3-verification--results) reports successful local Windows/PostgreSQL/live-Ollama tests for four-turn stateless continuity and epistemic memory. The [v0.7 closure record](https://github.com/wtvr-guy/prometheist/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/milestones/v0.7/CLOSURE_STATUS.md) records maintainer acceptance and closure on 2026-09-12.
+
+See the [historical evidence index](docs/TESTING.md#historical-evidence-in-prometheist) for benchmark results, native test records, and earlier failures and repairs. Those results establish behavior of the recorded upstream revisions and environments; live Ollama acceptance of this extracted repository remains pending a fresh laptop run.
+
 ## Compatibility
 
 The installed distribution is `persistent-cognition-runtime`. The source package remains `prometheist`; existing configuration names, durable IDs, model prompts, and protocol labels are retained to avoid unnecessary changes to engine behavior. Some terminal labels still show the original project name. Use a separate virtual environment, database and artifact directory from your Prometheist application.
