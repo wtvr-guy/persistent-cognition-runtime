@@ -1,0 +1,143 @@
+{
+  "version": "specialist-profiles/v1",
+  "profiles": [
+    {
+      "id": "qwen3-baseline",
+      "backend": "ollama",
+      "model": "qwen3:4b-instruct",
+      "precision": "installed",
+      "kinds": [
+        "V2_RESPONSE_POLICY",
+        "PRECOGNITIVE_USER_PROMPT_WORK",
+        "PERCEPT_TRIAGE",
+        "SELF_SCHEMA_REVIEW"
+      ]
+    },
+    {
+      "id": "functiongemma-fp32",
+      "backend": "hf",
+      "model": "google/functiongemma-270m-it",
+      "adapter": "functiongemma-selection",
+      "precision": "fp32",
+      "revision": null,
+      "device": "cpu",
+      "threads": 4,
+      "kinds": [
+        "PRECOGNITIVE_USER_PROMPT_WORK"
+      ]
+    },
+    {
+      "id": "functiongemma-bf16",
+      "backend": "hf",
+      "model": "google/functiongemma-270m-it",
+      "adapter": "functiongemma-selection",
+      "precision": "bf16",
+      "revision": null,
+      "device": "cpu",
+      "threads": 4,
+      "kinds": [
+        "PRECOGNITIVE_USER_PROMPT_WORK"
+      ]
+    },
+    {
+      "id": "functiongemma-fp16",
+      "backend": "hf",
+      "model": "google/functiongemma-270m-it",
+      "adapter": "functiongemma-selection",
+      "precision": "fp16",
+      "revision": null,
+      "device": "cpu",
+      "threads": 4,
+      "kinds": [
+        "PRECOGNITIVE_USER_PROMPT_WORK"
+      ]
+    },
+    {
+      "id": "modernbert-nli-fp32",
+      "backend": "hf",
+      "model": "tasksource/ModernBERT-base-nli",
+      "adapter": "nli-zero-shot-v1",
+      "precision": "fp32",
+      "revision": null,
+      "device": "cpu",
+      "threads": 4,
+      "kinds": [
+        "V2_RESPONSE_POLICY",
+        "SELF_SCHEMA_REVIEW"
+      ]
+    },
+    {
+      "id": "modernbert-nli-bf16",
+      "backend": "hf",
+      "model": "tasksource/ModernBERT-base-nli",
+      "adapter": "nli-zero-shot-v1",
+      "precision": "bf16",
+      "revision": null,
+      "device": "cpu",
+      "threads": 4,
+      "kinds": [
+        "V2_RESPONSE_POLICY",
+        "SELF_SCHEMA_REVIEW"
+      ]
+    },
+    {
+      "id": "modernbert-nli-fp16",
+      "backend": "hf",
+      "model": "tasksource/ModernBERT-base-nli",
+      "adapter": "nli-zero-shot-v1",
+      "precision": "fp16",
+      "revision": null,
+      "device": "cpu",
+      "threads": 4,
+      "kinds": [
+        "V2_RESPONSE_POLICY",
+        "SELF_SCHEMA_REVIEW"
+      ]
+    },
+    {
+      "id": "modernbert-base-fp32",
+      "backend": "hf",
+      "model": "answerdotai/ModernBERT-base",
+      "adapter": "pcr-head-not-trained",
+      "precision": "fp32",
+      "revision": null,
+      "device": "cpu",
+      "threads": 4,
+      "kinds": [
+        "V2_RESPONSE_POLICY",
+        "PERCEPT_TRIAGE"
+      ],
+      "blocked_reason": "No trained PCR classification head exists. Base encoder weights cannot emit worker decisions; random heads must not be scored."
+    },
+    {
+      "id": "modernbert-base-bf16",
+      "backend": "hf",
+      "model": "answerdotai/ModernBERT-base",
+      "adapter": "pcr-head-not-trained",
+      "precision": "bf16",
+      "revision": null,
+      "device": "cpu",
+      "threads": 4,
+      "kinds": [
+        "V2_RESPONSE_POLICY",
+        "PERCEPT_TRIAGE"
+      ],
+      "blocked_reason": "No trained PCR classification head exists. Base encoder weights cannot emit worker decisions; random heads must not be scored."
+    },
+    {
+      "id": "modernbert-base-fp16",
+      "backend": "hf",
+      "model": "answerdotai/ModernBERT-base",
+      "adapter": "pcr-head-not-trained",
+      "precision": "fp16",
+      "revision": null,
+      "device": "cpu",
+      "threads": 4,
+      "kinds": [
+        "V2_RESPONSE_POLICY",
+        "PERCEPT_TRIAGE"
+      ],
+      "blocked_reason": "No trained PCR classification head exists. Base encoder weights cannot emit worker decisions; random heads must not be scored."
+    }
+  ]
+}

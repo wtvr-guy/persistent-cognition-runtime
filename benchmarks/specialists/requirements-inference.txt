@@ -1,0 +1,8 @@
+# Isolated Python 3.12 environment; keep torch out of PCR's core dependencies.
+# Each run records resolved torch/transformers versions and checkpoint hashes.
+torch>=2.6,<3
+transformers>=4.57,<6
+huggingface-hub>=0.36,<2
+psutil>=7.2.2
+safetensors>=0.6
+httpx[socks]>=0.28
