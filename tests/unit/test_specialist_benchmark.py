@@ -172,6 +172,10 @@ def test_functiongemma_native_parser_is_closed_and_nonexecuting():
     assert json.loads(module.parse_hammer_selection(
         '<tool_call>{"name":"select_work","arguments":{"capability_indices":[0]}}</tool_call>'
     )) == {"capability_indices": [0]}
+    assert json.loads(module.parse_hammer_selection('```\n[]\n```')) == {"capability_indices": []}
+    assert json.loads(module.parse_hammer_selection(
+        '[{"name":"select_work","arguments":{"capability_indices":[0]}}]'
+    )) == {"capability_indices": [0]}
     with pytest.raises(ValueError):
         module.parse_hammer_selection('{"name":"delete_file","arguments":{}}')
 

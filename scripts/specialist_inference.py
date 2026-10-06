@@ -30,6 +30,8 @@ malformed response into a valid answer; failures must count against the model.
         text,
     )
     if not match:
+        if re.fullmatch(r"\s*<start_function_call>call:select_work\{\}<end_function_call>\s*", text):
+            return "{}"  # The actual PCR schema owns its default empty list.
         raise ValueError("not a valid select_work FunctionGemma call")
     return json.dumps({"capability_indices": json.loads(match.group(1))})
 
@@ -44,6 +46,13 @@ def parse_hammer_selection(text: str) -> str:
         if text.startswith("json\n"):
             text = text[5:]
     value = json.loads(text)
+    # Hammer's native template specifies a list of calls, including [] for none.
+    if isinstance(value, list):
+        if not value:
+            return json.dumps({"capability_indices": []})
+        if len(value) != 1:
+            raise ValueError("only one non-executable select_work call is allowed")
+        value = value[0]
     if not isinstance(value, dict) or set(value) != {"name", "arguments"} or value["name"] != "select_work":
         raise ValueError("not a valid select_work Hammer call")
     if not isinstance(value["arguments"], dict):
