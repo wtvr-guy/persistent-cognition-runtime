@@ -42,7 +42,7 @@
     "benchmarks/constraint_registry.json": {
       "source_path": "benchmarks/constraint_registry.json",
       "source_sha256": "fbab7d594002d6e23a05dada6ceac76ac7055139fa292c8aec5bd9599981ad6e",
-      "extracted_sha256": "7958368d60f3cdb09f5af9d25bc8d8cec5a635685f2dd899033f83618a9341f2"
+      "extracted_sha256": "e0cb2132fc3d5ca5a5feeb975f5c5aa73bdad00f6434961952d48e91dcedd9fe"
     },
     "benchmarks/jordan_vale_associations_v1.json": {
       "source_path": "benchmarks/jordan_vale_associations_v1.json",

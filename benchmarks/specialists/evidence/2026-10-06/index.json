@@ -1,0 +1,202 @@
+{
+  "archive_sha256": "040998a6ff8fe2a3c90ee5c9aa20321d6b8ac2ab9dbefede21de853e556846e8",
+  "runs": [
+    {
+      "run": "20261006T185130Z-561db9e3",
+      "classification": "DEVELOPMENT_OR_PREFLIGHT_NOT_FOR_MODEL_COMPARISON",
+      "git_sha": "582fdc245deeec976604df50aa5d56383a0f70cc",
+      "git_dirty": true,
+      "profiles": [
+        {
+          "id": "qwen3-baseline",
+          "status": "UNAVAILABLE"
+        }
+      ],
+      "files_sha256": {
+        "cases.jsonl": "e985d8068140161e7e842bddab693ecbc4611835513a1b3cd7d24a40d31cf614",
+        "manifest.json": "0aabb2f330650ce4b512359d5e29c05d31dd63b19dcc5537fdc15e93fad72656",
+        "summary.json": "53996e082fb9fe737ba8e3850beeefa2e35b80f084b99cdcac97f8321e573e6d"
+      }
+    },
+    {
+      "run": "20261006T185431Z-6ddb2659",
+      "classification": "DEVELOPMENT_OR_PREFLIGHT_NOT_FOR_MODEL_COMPARISON",
+      "git_sha": "582fdc245deeec976604df50aa5d56383a0f70cc",
+      "git_dirty": true,
+      "profiles": [
+        {
+          "id": "modernbert-nli-fp32",
+          "status": "UNAVAILABLE"
+        },
+        {
+          "id": "modernbert-nli-bf16",
+          "status": "UNAVAILABLE"
+        },
+        {
+          "id": "modernbert-nli-fp16",
+          "status": "UNAVAILABLE"
+        }
+      ],
+      "files_sha256": {
+        "cases.jsonl": "e985d8068140161e7e842bddab693ecbc4611835513a1b3cd7d24a40d31cf614",
+        "manifest.json": "71eb223b962d427832c851a78b2261cbcf7c51cd161bba086aa301f417ab2328",
+        "summary.json": "53996e082fb9fe737ba8e3850beeefa2e35b80f084b99cdcac97f8321e573e6d"
+      }
+    },
+    {
+      "run": "20261006T185501Z-eec4110c",
+      "classification": "DEVELOPMENT_OR_PREFLIGHT_NOT_FOR_MODEL_COMPARISON",
+      "git_sha": "582fdc245deeec976604df50aa5d56383a0f70cc",
+      "git_dirty": true,
+      "profiles": [
+        {
+          "id": "modernbert-nli-fp32",
+          "status": "COMPLETE"
+        },
+        {
+          "id": "modernbert-nli-bf16",
+          "status": "COMPLETE"
+        },
+        {
+          "id": "modernbert-nli-fp16",
+          "status": "COMPLETE"
+        }
+      ],
+      "files_sha256": {
+        "cases.jsonl": "e985d8068140161e7e842bddab693ecbc4611835513a1b3cd7d24a40d31cf614",
+        "manifest.json": "939b23e5fec0a381a64a7855912776b29108aecdd30624ce94b02a86b3fac644",
+        "results.jsonl": "ac610a6e15ce6f936b5f618997a81e158bccd69e453496632879b98e59611842",
+        "summary.json": "fa65515005d4d04243c5b7357f9540732b13096d9fe69d3a38d9d4c7eee342aa"
+      }
+    },
+    {
+      "run": "20261006T185559Z-397ed80c",
+      "classification": "DEVELOPMENT_OR_PREFLIGHT_NOT_FOR_MODEL_COMPARISON",
+      "git_sha": "582fdc245deeec976604df50aa5d56383a0f70cc",
+      "git_dirty": true,
+      "profiles": [
+        {
+          "id": "modernbert-nli-fp32",
+          "status": "COMPLETE"
+        },
+        {
+          "id": "modernbert-nli-bf16",
+          "status": "COMPLETE"
+        },
+        {
+          "id": "modernbert-nli-fp16",
+          "status": "COMPLETE"
+        }
+      ],
+      "files_sha256": {
+        "cases.jsonl": "e985d8068140161e7e842bddab693ecbc4611835513a1b3cd7d24a40d31cf614",
+        "manifest.json": "98fe43ceecf95b1da657cff56dd990436567d257a26c8598349511ed558fc6cd",
+        "results.jsonl": "29d71e40798a238ba8343813571a6ca261686af3d2dfea8fc532dff727cf89a7",
+        "summary.json": "7d5598fe40582c885fbba6a0f92b25d6f8188261fd017a6efc12693c124512a2"
+      }
+    },
+    {
+      "run": "20261006T190000Z-da1ee1ff",
+      "classification": "DEVELOPMENT_OR_PREFLIGHT_NOT_FOR_MODEL_COMPARISON",
+      "git_sha": "6b22d6269baa6b49f5c6387e529ab1f06904332a",
+      "git_dirty": false,
+      "profiles": [
+        {
+          "id": "modernbert-nli-fp32",
+          "status": "COMPLETE"
+        },
+        {
+          "id": "modernbert-nli-bf16",
+          "status": "COMPLETE"
+        },
+        {
+          "id": "modernbert-nli-fp16",
+          "status": "COMPLETE"
+        }
+      ],
+      "files_sha256": {
+        "cases.jsonl": "e985d8068140161e7e842bddab693ecbc4611835513a1b3cd7d24a40d31cf614",
+        "manifest.json": "1b165a8d182585aa7a30414026770d9f6d381b2e943be9a0edc453f201e26724",
+        "results.jsonl": "522c150ee31fe621571943dbfe3f76443821e8f2407acb6e38f3ce3df939ce9c",
+        "summary.json": "46557937201e1e3a640021e37d78671a672c7f26a420aa6d1f100a1554e68061"
+      }
+    },
+    {
+      "run": "20261006T190218Z-5ad9db41",
+      "classification": "DEVELOPMENT_OR_PREFLIGHT_NOT_FOR_MODEL_COMPARISON",
+      "git_sha": "17573efc29b7028cfb3ab1a1fbbe37d7ca5a52bd",
+      "git_dirty": false,
+      "profiles": [
+        {
+          "id": "hammer-fp32",
+          "status": "COMPLETE"
+        },
+        {
+          "id": "hammer-bf16",
+          "status": "COMPLETE"
+        },
+        {
+          "id": "hammer-fp16",
+          "status": "READY"
+        }
+      ],
+      "files_sha256": {
+        "cases.jsonl": "e985d8068140161e7e842bddab693ecbc4611835513a1b3cd7d24a40d31cf614",
+        "manifest.json": "add8aaedca327b6513020b3df0cb20183b76bf360a0134514c0a71ae3d0320b4",
+        "results.jsonl": "b92cf1e6346ef6c0a11d1f786e9ccd86369f4359674d8ef9633f4325932d852a"
+      }
+    },
+    {
+      "run": "20261006T190442Z-951c15de",
+      "classification": "FINAL_SEED_EXPERIMENT",
+      "git_sha": "eab8671e81c0539101491875c735b6c54e269acb",
+      "git_dirty": false,
+      "profiles": [
+        {
+          "id": "hammer-fp32",
+          "status": "COMPLETE"
+        },
+        {
+          "id": "hammer-bf16",
+          "status": "COMPLETE"
+        },
+        {
+          "id": "hammer-fp16",
+          "status": "COMPLETE"
+        }
+      ],
+      "files_sha256": {
+        "cases.jsonl": "e985d8068140161e7e842bddab693ecbc4611835513a1b3cd7d24a40d31cf614",
+        "manifest.json": "c05f66085033bae30d08224da5806cd959c1a1421d830f36b5aa907bfc7920ef",
+        "results.jsonl": "9b266e9df5d4e49b77e4f1f90fbe84e104395ff17aafeec5a81542839c3b8437",
+        "summary.json": "665ba64819371efa8268791a6db95c17203b6990c27df005024834e4dc7679c5"
+      }
+    },
+    {
+      "run": "20261006T190938Z-5ad1e5e3",
+      "classification": "FINAL_SEED_EXPERIMENT",
+      "git_sha": "eab8671e81c0539101491875c735b6c54e269acb",
+      "git_dirty": false,
+      "profiles": [
+        {
+          "id": "modernbert-nli-fp32",
+          "status": "COMPLETE"
+        },
+        {
+          "id": "modernbert-nli-bf16",
+          "status": "COMPLETE"
+        },
+        {
+          "id": "modernbert-nli-fp16",
+          "status": "COMPLETE"
+        }
+      ],
+      "files_sha256": {
+        "cases.jsonl": "e985d8068140161e7e842bddab693ecbc4611835513a1b3cd7d24a40d31cf614",
+        "manifest.json": "53d27eec60813f7f21ec4aeb4575d0f151e941ad211d476ccd123d47e6c30a3b",
+        "results.jsonl": "1dfd5c0a07409f5dea4444569604659a0015790e3b9aaefee71c5853ad472d02",
+        "summary.json": "35dabdd1243fdd2c3b8db95ed211d3aa605e562d9175448f92b18d2a362b40cc"
+      }
+    }
+  ]
+}

@@ -214,3 +214,12 @@ uv run ruff check src/prometheist/specialist_benchmark.py scripts/specialist_inf
 The tests use scripted inference only to check real validator/retry behavior,
 policy limits, bounds, deterministic bypass accounting, native syntax parsing,
 split leakage and reviewed-export integrity. They are not model-quality results.
+
+## First live experiment
+
+[The initial evidence report](../benchmarks/specialists/evidence/2026-10-06/README.md)
+contains real NLI and Hammer runs at all three precisions, provisional case
+correctness, timings, blockers, and a complete archived data trail. The benchmark
+helper's format boundaries and under-1B scope are classified in the constraint
+registry; the adapted extraction hash was updated while preserving its upstream
+source hash.

@@ -951,6 +951,26 @@
       "rationale": "Local app input, preview, listing, model-generation, polling and resource bounds are explicit provisional controls. Existing evidence/admission defaults are preserved; host and model-specific calibration is required. See docs/experiments/LOCAL_APP_001.md.",
       "benchmark_id": "LOCAL-APP-001",
       "status": "PROVISIONAL"
+    },
+    "scripts/specialist_inference.py::parse_hammer_selection::slice_lower": {
+      "expected_value": 3,
+      "classification": "STRUCTURAL_INVARIANT",
+      "rationale": "The native fenced tool-call format uses three opening backticks; slicing removes that exact delimiter, not a policy bound."
+    },
+    "scripts/specialist_inference.py::parse_hammer_selection::slice_upper": {
+      "expected_value": -3,
+      "classification": "STRUCTURAL_INVARIANT",
+      "rationale": "The native fenced tool-call format uses three closing backticks; slicing removes that exact delimiter, not a policy bound."
+    },
+    "scripts/specialist_inference.py::parse_hammer_selection::slice_lower#2": {
+      "expected_value": 5,
+      "classification": "STRUCTURAL_INVARIANT",
+      "rationale": "The optional JSON fence language marker is exactly json followed by a newline, five characters."
+    },
+    "scripts/specialist_inference.py::Inference.__init__::comparison": {
+      "expected_value": 1000000000,
+      "classification": "EXTERNAL_CONTRACT",
+      "rationale": "This experiment is explicitly restricted by the user to specialists with fewer than one billion parameters; this is its declared scope, not an inferred production policy. See docs/SPECIALIST_WORKER_PRECISION_BENCHMARK.md."
     }
   },
   "groups": {
