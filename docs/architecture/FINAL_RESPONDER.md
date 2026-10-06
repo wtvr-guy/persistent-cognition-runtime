@@ -57,8 +57,12 @@ final responder never classifies it again.
 ### 2.2 Quarantined evidence transport
 
 Admitted memory and work results are sent before the current prompt in a separate
-quarantined evidence channel. For chat transport this is a tool-role message followed
-by the current user message. For raw Qwen Instruct transport it is a bounded
+quarantined evidence channel. Ollama chat uses a tool-role message followed by the
+current user message. OpenAI Responses uses a separate user-role evidence item
+before the current user item, with evidence-authority instructions in the system
+instructions. These transports do not provide equivalent role boundaries;
+quarantine is an application framing convention, not an unbreakable model barrier.
+For raw Qwen Instruct transport it is a bounded
 tool-response block followed by a later user block; ChatML/tool control sequences in
 both evidence and current data are escaped.
 

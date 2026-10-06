@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from tests.http_fakes import StreamingHTTPFake
+
 import pytest
 
 from datetime import datetime, timezone
@@ -26,7 +28,7 @@ class _FakeResponse:
         return {"message": {"content": self._content}}
 
 
-class _FakeHTTPClient:
+class _FakeHTTPClient(StreamingHTTPFake):
     def __init__(self, contents: list[str]) -> None:
         self._contents = iter(contents)
         self.calls: list[tuple[str, dict]] = []
@@ -90,7 +92,7 @@ def test_final_responder_receives_compact_oldest_to_newest_evidence_timeline():
         memory_packet=packet,
         adaptive_recall_rounds=0,
     )
-    client = UserPromptLLM(base_url="http://ollama.test", model="model:test")
+    client = UserPromptLLM(base_url="https://ollama.test", model="model:test")
     fake = _FakeHTTPClient(['{"answer":"ok"}'])
     client._client = fake
 
@@ -143,7 +145,7 @@ def test_retrieval_completion_does_not_claim_semantic_sufficiency():
         memory_packet=packet,
         adaptive_recall_rounds=1,
     )
-    client = UserPromptLLM(base_url="http://ollama.test", model="model:test")
+    client = UserPromptLLM(base_url="https://ollama.test", model="model:test")
     fake = _FakeHTTPClient(['{"answer":"I do not know the name."}'])
     client._client = fake
 

@@ -44,7 +44,7 @@ def test_single_oversized_memory_event_cannot_expand_v2_model_context(monkeypatc
         memory_packet=packet,
         adaptive_recall_rounds=0,
     )
-    client = UserPromptLLM(base_url="http://ollama.test", model="model:test")
+    client = UserPromptLLM(base_url="https://ollama.test", model="model:test")
     client._client = _NoModelCallAllowed()
     monkeypatch.setenv("PCR_MAX_MODEL_EVIDENCE_ITEM_BYTES", "16384")
     monkeypatch.setenv("PCR_MAX_MODEL_EVIDENCE_TOTAL_BYTES", "65536")

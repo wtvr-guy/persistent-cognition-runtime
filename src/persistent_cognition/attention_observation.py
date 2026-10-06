@@ -7,6 +7,8 @@ envelope instead of falling back to optimistic configured capacity.
 """
 from __future__ import annotations
 
+from persistent_cognition.diagnostics import exception_summary
+
 import ctypes
 import json
 import math
@@ -701,7 +703,7 @@ class LocalResourceAdmissionController:
             metrics = self.probe.capture()
         except Exception as exc:  # the safety response to any probe failure is zero work
             metrics = None
-            errors.append(f"{type(exc).__name__}: {exc}")
+            errors.append(exception_summary(exc))
 
         discovered = discover_local_execution_resources(
             metrics,

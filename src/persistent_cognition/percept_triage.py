@@ -40,6 +40,7 @@ class SourcePolicy(FrozenRecord):
     evidence_domains: tuple[HistoricalEvidenceScope, ...] = (HistoricalEvidenceScope.DERIVED_INTERNAL,)
     maximum_urgency: UrgencyClass = UrgencyClass.ROUTINE
     trusted_executor: str | None = None
+    trusted_executor_revision: str = Field(default="1", min_length=1, max_length=128)
 
     @field_validator("trusted_executor")
     @classmethod

@@ -3,32 +3,19 @@ from contextlib import contextmanager
 import json
 import os
 from pathlib import Path
-import tempfile
-
-from persistent_cognition.artifact_journal import _fsync_parent, _replace_with_retry
+from persistent_cognition.private_storage import atomic_private_write, private_directory, regular_file
 
 
 def write_private_policy(path: Path, value: dict):
     """Publish a flushed owner-only file; replacements never inherit the umask."""
-    path.parent.mkdir(parents=True, exist_ok=True)
-    descriptor, name = tempfile.mkstemp(prefix=f".{path.name}.", suffix=".tmp", dir=path.parent)
-    temporary = Path(name)
-    try:
-        with os.fdopen(descriptor, "w", encoding="utf-8") as handle:
-            json.dump(value, handle, indent=2, sort_keys=True, ensure_ascii=False)
-            handle.write("\n")
-            handle.flush()
-            os.fsync(handle.fileno())
-        _replace_with_retry(temporary, path)
-        _fsync_parent(path.parent)
-    finally:
-        temporary.unlink(missing_ok=True)
+    encoded = (json.dumps(value, indent=2, sort_keys=True, ensure_ascii=False) + "\n").encode("utf-8")
+    atomic_private_write(path, encoded)
 
 
 @contextmanager
 def policy_lock(path: Path):
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with path.with_suffix(path.suffix + ".lock").open("a+b") as handle:
+    private_directory(path.parent)
+    with regular_file(path.with_suffix(path.suffix + ".lock"), write=True, create=True) as handle:
         if os.name == "nt":
             import msvcrt
             if not handle.seek(0, os.SEEK_END):

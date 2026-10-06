@@ -6,6 +6,8 @@ journal as durable checkpoints/reconstruction input.
 """
 from __future__ import annotations
 
+from persistent_cognition.diagnostics import exception_summary
+
 import argparse
 import json
 import sys
@@ -220,8 +222,8 @@ def _reset_failed_turn(conn, exc: BaseException) -> None:
         reset_chat_execution_state(conn)
     except Exception as reset_exc:
         print(
-            "PCR_TURN_RECOVERY_FAILED="
-            f"{type(reset_exc).__name__}: {reset_exc}",
+            "PCR_TURN_RECOVERY_FAILED=" +
+            exception_summary(reset_exc),
             file=sys.stderr,
         )
         raise exc from reset_exc
@@ -301,7 +303,7 @@ def _run_chat(conversation_id: uuid.UUID) -> None:
                     suffix = f" interaction_id={latest}" if latest is not None else ""
                     print(
                         "PCR_TURN_FAILED="
-                        f"{type(exc).__name__}: {exc}{suffix}\n"
+                        f"{exception_summary(exc)}{suffix}\n"
                         "Execution state reset; chat remains available.",
                         file=sys.stderr,
                     )
@@ -330,6 +332,7 @@ def main() -> None:
             "memory-fact",
             "sign",
             "verify-signature",
+            "storage-permissions",
         ),
         default="chat",
         help=(
@@ -373,6 +376,15 @@ def main() -> None:
         help="Property reference to look up with memory-fact, e.g. 'preferred_drink'.",
     )
     args = parser.parse_args()
+
+    if args.command == "storage-permissions":
+        if any((args.once is not None, args.latest, args.interaction_id is not None,
+                args.conversation_id is not None, args.digest is not None,
+                args.subject is not None, args.property_name is not None)):
+            parser.error("storage-permissions uses only the configured PCR_ARTIFACT_ROOT")
+        from persistent_cognition.private_storage import remediate_permissions
+        print(json.dumps(remediate_permissions(artifact_journal.artifact_root()), sort_keys=True))
+        return
 
     if args.command in {"inspect", "verify", "audit", "recover", "restore-events", "sign", "verify-signature"}:
         if args.once is not None:

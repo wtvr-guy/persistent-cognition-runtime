@@ -1,6 +1,8 @@
 """One claimed situation stage per fresh process, with exact artifact handoffs."""
 from __future__ import annotations
 
+from persistent_cognition.diagnostics import exception_summary
+
 from persistent_cognition.contract_registry import SEMANTIC_CONTRACTS
 
 from persistent_cognition.contract_registry import STAGE_CONTRACTS
@@ -143,6 +145,8 @@ def execute_situation_stage(conn, task: SituationTask, stage: SituationStage, *,
             from persistent_cognition.trusted_executors import resolve_trusted_executor
             if resolve_trusted_executor(task.policy.trusted_executor) is None:
                 raise RuntimeError("trusted reaction executor is absent from worker bootstrap")
+            from persistent_cognition.trusted_executors import require_executor_revision
+            require_executor_revision(task.policy.trusted_executor, task.policy.trusted_executor_revision)
         issue_action(conn, action_id=action_id, task_id=task.task_id, at=task.created_at,
                      entity_refs=task.situation.entity_refs[:16])
         if saved is None:
@@ -155,6 +159,7 @@ def execute_situation_stage(conn, task: SituationTask, stage: SituationStage, *,
                                 capability_id=f"situation.{task_class.value.casefold()}",
                                 kind=CapabilityKind.TOOL, description="Application-configured percept reaction",
                             ), routing_terms=("reaction",), executor=task.policy.trusted_executor,
+                            executor_revision=task.policy.trusted_executor_revision,
                         ),
                         capability_execution_id=action_id, requester_task_id=task.task_id,
                         requester_step_id=deterministic_worker_step_id(_assignment_id(task), stage.value),
@@ -258,7 +263,7 @@ def execute_claimed_situation_step(conn, *, claim_id: UUID, worker_id: str, sche
         artifact_journal.write_stage_error_artifact(
             interaction_id=task.task_id, conversation_id=task.conversation_id, correlation_id=task.correlation_id,
             task_id=task.task_id, assignment_id=_assignment_id(task), stage=stage.value, claim_id=claim_id,
-            error_type=type(exc).__name__, message=str(exc),
+            error_type=type(exc).__name__, message=exception_summary(exc),
         )
         release_worker_claim(conn, claim_id=claim_id, worker_id=worker_id, scheduler_key=scheduler_key)
         raise
@@ -272,4 +277,5 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    from persistent_cognition.diagnostics import run_command
+    run_command(main)

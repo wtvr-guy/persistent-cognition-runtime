@@ -3,7 +3,7 @@
 > **Historical milestone record.** This freezes the v0.2 memory kernel as accepted at
 > that milestone. Later milestones supersede parts of it: deterministic derived
 > associations now exist in
-> [`association_projection.py`](https://github.com/wtvr-guy/prometheist/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/src/jit_agent/association_projection.py), and v0.5
+> [`association_projection.py`](https://github.com/wtvr-guy/prometheist/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/src/prometheist/association_projection.py), and v0.5
 > added specificity-aware PostgreSQL candidate routing plus support-aware evidence
 > admission. Current memory authority is
 > [`LOSSLESS_PROGRESSIVE_MEMORY.md`](LOSSLESS_PROGRESSIVE_MEMORY.md) and
@@ -66,7 +66,7 @@ The Jordan Vale benchmark deliberately includes changing preferences, two people
 Run it without PostgreSQL or an LLM:
 
 ```bash
-python -m jit_agent.synthetic_benchmark
+python -m persistent_cognition.synthetic_benchmark
 ```
 
 Current deterministic-cue baseline:

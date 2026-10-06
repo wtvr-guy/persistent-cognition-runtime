@@ -61,6 +61,7 @@ from persistent_cognition.attention_store import (
     save_scheduler,
 )
 from persistent_cognition.capability_registry import (
+    DEFAULT_REGISTRY,
     CapabilityDescriptor,
     CapabilityExecutionPlan,
     CapabilityRegistry,
@@ -643,6 +644,8 @@ def begin_percept(
     clock: Callable[[], datetime] | None = None,
     scheduler_key: str = DEFAULT_SCHEDULER_KEY,
 ) -> DurableInteraction:
+    from persistent_cognition.resource_limits import validate_text_intake
+    validate_text_intake(user_text)
     normalized = user_text.strip()
     if not normalized:
         raise ValueError("user_text must not be empty")
@@ -824,9 +827,16 @@ def _execute_stage(
     registry: CapabilityRegistry,
 ) -> tuple[dict[str, Any], list[str]]:
     stage = PerceptStage(envelope.step.step_key)
+    if stage is not PerceptStage.RESOLVE_REFERENCES:
+        bootstrap = _stage_result(conn, interaction, PerceptStage.RESOLVE_REFERENCES,
+                                  scheduler_key=scheduler_key)
+        expected = bootstrap.get("capability_snapshot")
+        if expected is not None and expected != registry.snapshot():
+            raise RuntimeError("capability bindings changed during the durable interaction")
 
     if stage is PerceptStage.RESOLVE_REFERENCES:
         return {
+            "capability_snapshot": registry.snapshot(),
             "working_state_available": load_working_state(conn, interaction.conversation_id)
             is not None,
             "percept": (
@@ -1061,6 +1071,8 @@ def handle_percept_in_worker_processes(
     worker_lease_seconds: int | None = None,
     worker_timeout_seconds: int | None = None,
     progress: Callable[[str], None] | None = None,
+    registry: CapabilityRegistry = DEFAULT_REGISTRY,
+    worker_command: tuple[str, ...] | list[str] | None = None,
 ) -> str | None:
     """Run every architectural stage in a separately guarded fresh process."""
 
@@ -1113,7 +1125,9 @@ def handle_percept_in_worker_processes(
         launched = launcher.launch(
             step_id=step_id,
             worker_id=worker_id,
-            command=[sys.executable, "-m", "persistent_cognition.percept_response_worker"],
+            command=worker_command if worker_command is not None else
+                    [sys.executable, "-m", "persistent_cognition.percept_response_worker"],
+            env={"PCR_CAPABILITY_SNAPSHOT_SHA256": registry.snapshot()["sha256"]},
             lease_seconds=effective_lease,
         )
         try:

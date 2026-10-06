@@ -21,6 +21,7 @@ from uuid import UUID, uuid5
 
 from persistent_cognition.perception import Percept, SalienceAssessment
 from persistent_cognition import percept_journal
+from persistent_cognition.diagnostics import sanitize_message
 
 ARTIFACT_SCHEMA_VERSION = 1
 _ARTIFACT_NAMESPACE = UUID("b983b0b7-a203-5c60-96f0-b17d2d94bf1a")
@@ -90,8 +91,6 @@ def _replace_with_retry(source: Path, destination: Path) -> None:
 
 
 def _atomic_write_json(path: Path, value: dict[str, Any]) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    temporary = path.with_name(f".{path.name}.{os.getpid()}.tmp")
     encoded = json.dumps(
         value,
         sort_keys=True,
@@ -99,12 +98,8 @@ def _atomic_write_json(path: Path, value: dict[str, Any]) -> None:
         ensure_ascii=False,
         default=str,
     ).encode("utf-8") + b"\n"
-    with temporary.open("wb") as handle:
-        handle.write(encoded)
-        handle.flush()
-        os.fsync(handle.fileno())
-    _replace_with_retry(temporary, path)
-    _fsync_parent(path.parent)
+    from persistent_cognition.private_storage import atomic_private_write
+    atomic_private_write(path, encoded)
 
 
 def _load_json(path: Path) -> dict[str, Any]:
@@ -390,7 +385,7 @@ def write_stage_error_artifact(
         payload={
             "claim_id": str(claim_id),
             "error_type": error_type,
-            "message": message,
+            "message": sanitize_message(message),
         },
     )
 

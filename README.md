@@ -91,6 +91,11 @@ See the [historical evidence index](docs/TESTING.md#historical-upstream-evidence
 
 ## Compatibility
 
+Applications use the versioned [embedding API](docs/EMBEDDING.md). PostgreSQL and
+Ollama/OpenAI remain the supported storage/provider contracts; arbitrary backend
+interchangeability is not claimed. [Deployment and private storage](docs/SECURITY_AND_STORAGE.md)
+documents owner-only files, intake/response limits, quotas, TLS, and isolation.
+
 The installed distribution is `persistent-cognition-runtime`. The source package is `persistent_cognition`; console commands remain `pcr` and `pcr-percept`. Use a separate virtual environment, database, and artifact directory from any upstream source application.
 
 This is a copy with explicit provenance, not a GitHub fork carrying the source application's full history. [SOURCE_BASELINE.json](SOURCE_BASELINE.json) preserves original source paths/hashes and records current extraction paths, intentional adaptations, additions, and retirements.
@@ -100,3 +105,5 @@ This is a copy with explicit provenance, not a GitHub fork carrying the source a
 [Architecture](docs/ARCHITECTURE.md) · [Setup](docs/SETUP.md) · [Testing](docs/TESTING.md) · [Model routing](docs/MODEL_ROUTING.md) · [Engineering constitution](CONSTITUTION.md)
 
 [PolyForm Noncommercial License 1.0.0](LICENSE), copied exactly from the upstream source project, including its project-specific commercial-licensing notice.
+
+Commercial embedding requires a separate license.

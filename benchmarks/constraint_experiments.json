@@ -829,6 +829,55 @@
         "host resource cost"
       ],
       "search": "Sweep chunk/preview/listing limits and deadlines against large local folders, slow disks, model sizes, context lengths and native Windows. Report truncated search coverage and interrupted copies explicitly. Expand any winning boundary before calibration. Defaults remain provisional."
+    },
+    "AUDIT-RESOURCE-BOUNDS-001": {
+      "title": "Exact intake, transport, inspection and storage resource boundaries",
+      "environment": "deterministic_ci_then_target_host_memory_disk_and_windows_acceptance",
+      "parameters": [
+        "intake_bytes",
+        "json_depth",
+        "json_nodes",
+        "http_response_bytes",
+        "blob_bytes",
+        "journal_bytes",
+        "journal_entry_bytes",
+        "journal_records",
+        "artifact_quota_bytes",
+        "disk_reserve_bytes",
+        "diagnostic_chars",
+        "executor_revision_length",
+        "journal_page_size"
+      ],
+      "scenario_families": [
+        "below_at_above_utf8_bounds",
+        "wide_deep_cyclic_json",
+        "nonstring_object_keys",
+        "oversized_chunked_http",
+        "compressed_response_refusal",
+        "path_traversal_symlink_fifo",
+        "journal_torn_tail_and_pagination",
+        "quota_and_disk_exhaustion",
+        "private_file_creation_under_022_umask",
+        "credential_and_pydantic_input_redaction",
+        "temporary_worker_pressure_then_recovery"
+      ],
+      "hard_invariants": [
+        "reject before canonical intake persistence",
+        "never silently truncate canonical evidence",
+        "no out-of-root blob reads",
+        "no process started after admission denial",
+        "no external effect before bootstrap revision validation",
+        "quarantine ambiguous effects until reconciliation",
+        "keep prior records intact after rejected writes"
+      ],
+      "quality_order": [
+        "hard_invariant_pass_rate",
+        "peak_memory",
+        "quota_scan_cost",
+        "latency",
+        "valid_input_rejection_rate"
+      ],
+      "search": "Boundary regressions in tests/unit/test_audit_hardening.py and test_binding_and_admission_regressions.py verify mechanics only. Sweep deployment limits against frozen representative workloads on the target machine, including peak RSS and disk scans; expand winning boundaries. No optimum or native Windows/live-provider acceptance is claimed."
     }
   }
 }

@@ -162,6 +162,7 @@ class RegisteredCapability:
     selectable_as_external_work: bool = True
     execution_priority: int = 100
     depends_on_capability_ids: tuple[str, ...] = ()
+    executor_revision: str = "1"
 
     def __post_init__(self) -> None:
         normalized_executor = self.executor.strip()
@@ -171,6 +172,8 @@ class RegisteredCapability:
         )
         if not normalized_executor:
             raise ValueError("capability executor must not be empty")
+        if not self.executor_revision.strip():
+            raise ValueError("capability executor revision must not be empty")
         if not normalized_terms or any(not term for term in normalized_terms):
             raise ValueError("capability routing terms must not be empty")
         if len(normalized_terms) != len(set(normalized_terms)):
@@ -218,6 +221,21 @@ class CapabilityRegistry:
             self._registrations[key].descriptor.model_copy(deep=True)
             for key in sorted(self._registrations)
         )
+
+    def snapshot(self) -> dict:
+        """Reproducible registration metadata; contains no executable code."""
+        import hashlib
+        import json
+        from dataclasses import asdict
+        entries = []
+        for key in sorted(self._registrations):
+            registration = self._registrations[key]
+            entry = asdict(registration)
+            entry["descriptor"] = registration.descriptor.model_dump(mode="json")
+            entries.append(entry)
+        entries = json.loads(json.dumps(entries))
+        digest = hashlib.sha256(json.dumps(entries, sort_keys=True).encode()).hexdigest()
+        return {"schema_version": "capability-bindings/v1", "sha256": digest, "entries": entries}
 
     def capability_catalog(self) -> tuple[CapabilityDescriptor, ...]:
         """Return the deterministic catalog for pre-cognitive work selection."""

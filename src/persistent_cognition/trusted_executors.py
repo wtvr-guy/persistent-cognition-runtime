@@ -57,6 +57,7 @@ class TrustedExecutorError(RuntimeError):
 
 
 _REGISTRY: dict[str, TrustedExecutor] = {}
+_REVISIONS: dict[str, str] = {}
 
 
 def validate_executor_name(name: str) -> str:
@@ -70,20 +71,39 @@ def validate_executor_name(name: str) -> str:
     return name
 
 
-def register_trusted_executor(name: str, handler: TrustedExecutor) -> None:
+def register_trusted_executor(name: str, handler: TrustedExecutor, *, revision: str = "1") -> None:
     """Bind an application-owned executor from trusted startup, never observations."""
     validate_executor_name(name)
     if not callable(handler):
         raise TypeError("trusted executor handler must be callable")
+    if not isinstance(revision, str) or not revision.strip():
+        raise ValueError("executor revision must be a nonempty application version")
     _REGISTRY[name] = handler
+    _REVISIONS[name] = revision
 
 
 def unregister_trusted_executor(name: str) -> None:
     _REGISTRY.pop(name, None)
+    _REVISIONS.pop(name, None)
 
 
 def clear_trusted_executors() -> None:
     _REGISTRY.clear()
+    _REVISIONS.clear()
+
+
+def executor_snapshot() -> dict[str, Any]:
+    """Versioned metadata; workers still bind code through trusted startup."""
+    import hashlib
+    import json
+    entries = dict(sorted(_REVISIONS.items()))
+    return {"schema_version": "executor-bindings/v1", "executors": entries,
+            "sha256": hashlib.sha256(json.dumps(entries, sort_keys=True).encode()).hexdigest()}
+
+
+def require_executor_revision(name: str, revision: str) -> None:
+    if _REVISIONS.get(name) != revision:
+        raise RuntimeError("trusted executor bootstrap revision differs from installed source policy")
 
 
 def trusted_executor_names() -> frozenset[str]:

@@ -9,7 +9,6 @@ from __future__ import annotations
 
 from typing import Any
 from collections.abc import Mapping
-import json
 from uuid import UUID, uuid5
 
 import psycopg
@@ -205,6 +204,8 @@ def _execute_application_capability(
         raise NotImplementedError(
             f"capability executor {registration.executor!r} has no execution binding"
         )
+    from persistent_cognition.trusted_executors import require_executor_revision
+    require_executor_revision(registration.executor, registration.executor_revision)
 
     request = TrustedExecutionRequest(
         capability_id=registration.descriptor.capability_id,
@@ -228,7 +229,8 @@ def _execute_application_capability(
         )
     raw_result = dict(raw_result)
     try:
-        json.dumps(raw_result, allow_nan=False)
+        from persistent_cognition.resource_limits import validate_json_intake
+        validate_json_intake(raw_result)
     except (TypeError, ValueError) as exc:
         raise TrustedExecutorError(type(exc).__name__) from exc
 

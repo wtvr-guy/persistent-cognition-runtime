@@ -99,7 +99,8 @@ def main() -> None:
         print(json.dumps(_serve(args.scheduler_key), indent=2))
         return
     with db.get_connection() as conn:
-        data = json.loads(args.json_file.read_text(encoding="utf-8")) if hasattr(args, "json_file") else None
+        from persistent_cognition.resource_limits import read_json_file
+        data = read_json_file(args.json_file) if hasattr(args, "json_file") else None
         if args.command == "install-source":
             install_source_policy(conn, SourcePolicy.model_validate(_require_payload(data, args.command)))
         elif args.command == "expectation":
@@ -129,5 +130,10 @@ def main() -> None:
             rebuild_heads(conn)
 
 
+def cli_entry() -> None:
+    from persistent_cognition.diagnostics import run_command
+    run_command(main)
+
+
 if __name__ == "__main__":
-    main()
+    cli_entry()

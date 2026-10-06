@@ -6,6 +6,8 @@ guarantee. Unknown architectures require a registered estimator before admission
 """
 from __future__ import annotations
 
+from persistent_cognition.diagnostics import exception_summary
+
 from datetime import datetime, timezone
 import math
 from types import MappingProxyType
@@ -191,7 +193,7 @@ def assess_model(settings: AppSettings, selection: ModelSelection, installed: di
         key = _positive(info.get(f"{architecture}.attention.key_length", embedding // heads), "key dimension")
         value = _positive(info.get(f"{architecture}.attention.value_length", embedding // heads), "value dimension")
     except ValueError as exc:
-        return result("unverified", str(exc))
+        return result("unverified", exception_summary(exc))
     weights = math.ceil(weight_bytes / MIB_BYTES)
     kv = math.ceil(context * layers * kv_heads * (key + value) * KV_ELEMENT_BYTES / MIB_BYTES)
     buffers = max(settings.resources.model_runtime_headroom_min_mib,

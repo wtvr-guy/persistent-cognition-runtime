@@ -11,6 +11,7 @@ from pydantic import Field
 
 from persistent_cognition.artifact_journal import artifact_root, _fsync_parent
 from persistent_cognition.percept_context import FrozenRecord
+from persistent_cognition.private_storage import private_directory, regular_file, storage_admission
 
 MAX_MEDIA_BYTES = 67_108_864
 MEDIA_CHUNK_BYTES = 65_536
@@ -37,7 +38,7 @@ def verify_media(reference: MediaReference) -> Path:
     if path.stat().st_size != reference.byte_length:
         raise ValueError("media length does not match its immutable reference")
     digest = hashlib.sha256()
-    with path.open("rb") as handle:
+    with regular_file(path) as handle:
         for chunk in iter(lambda: handle.read(MEDIA_CHUNK_BYTES), b""):
             digest.update(chunk)
     if digest.hexdigest() != reference.sha256:
@@ -47,21 +48,26 @@ def verify_media(reference: MediaReference) -> Path:
 
 def preserve_media(path: Path, *, mime_type: str, description: str = "") -> MediaReference:
     directory = artifact_root() / "media"
-    directory.mkdir(parents=True, exist_ok=True)
+    private_directory(directory)
     digest = hashlib.sha256()
     size = 0
+    expected_size = path.stat().st_size
+    if not 1 <= expected_size <= MAX_MEDIA_BYTES:
+        raise ValueError("media exceeds the configured intake bound")
     descriptor, temporary_name = tempfile.mkstemp(dir=directory)
     temporary = Path(temporary_name)
     try:
-        with os.fdopen(descriptor, "wb") as target, path.open("rb") as source:
+        with os.fdopen(descriptor, "wb") as target, regular_file(path) as source, storage_admission(expected_size):
             for chunk in iter(lambda: source.read(MEDIA_CHUNK_BYTES), b""):
                 size += len(chunk)
-                if size > MAX_MEDIA_BYTES:
+                if size > expected_size:
                     raise ValueError("media exceeds the configured intake bound; split at the adapter")
                 digest.update(chunk)
                 target.write(chunk)
             target.flush()
             os.fsync(target.fileno())
+        if size != expected_size:
+            raise ValueError("media changed during preservation")
         reference = MediaReference(sha256=digest.hexdigest(), byte_length=size,
                                    mime_type=mime_type, description=description)
         destination = media_path(reference)
@@ -69,7 +75,7 @@ def preserve_media(path: Path, *, mime_type: str, description: str = "") -> Medi
             os.link(temporary, destination)  # Atomic create; never overwrite canonical media.
         except FileExistsError:
             verify_media(reference)
-        _fsync_parent(destination)
+        _fsync_parent(destination.parent)
         return reference
     finally:
         temporary.unlink(missing_ok=True)

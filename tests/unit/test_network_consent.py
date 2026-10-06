@@ -69,6 +69,20 @@ def test_database_environment_route_checked(monkeypatch):
         require_database_destination("host=localhost dbname=private")
 
 
+def test_remote_consent_does_not_bypass_transport_encryption():
+    url = "http://model.example:11434"
+    grant_consent(url, NetworkPurpose.MODEL,
+                  accepted_digest=content_digest(consent_proposal(url, NetworkPurpose.MODEL)))
+    with pytest.raises(PermissionError, match="HTTPS"):
+        require_destination(url, NetworkPurpose.MODEL)
+    database = "postgresql://database.example:5432"
+    grant_consent(database, NetworkPurpose.DATABASE,
+                  accepted_digest=content_digest(consent_proposal(database, NetworkPurpose.DATABASE)))
+    with pytest.raises(PermissionError, match="verify-full"):
+        require_database_destination("host=database.example dbname=test sslmode=require")
+    require_database_destination("host=database.example dbname=test sslmode=verify-full")
+
+
 def test_active_connectivity_requires_exact_https_url():
     url, purpose = "https://example.test/health?scope=network", NetworkPurpose.CONNECTIVITY
     with pytest.raises(ValueError):

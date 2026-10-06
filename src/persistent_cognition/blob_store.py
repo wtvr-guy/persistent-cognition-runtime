@@ -24,10 +24,13 @@ from collections.abc import Iterator
 from dataclasses import dataclass
 import hashlib
 import os
+import re
 from pathlib import Path
 from typing import Any
 
 from persistent_cognition.artifact_journal import artifact_root
+from persistent_cognition.private_storage import atomic_private_write, regular_file
+from persistent_cognition.resource_limits import DEFAULT_MAX_BLOB_BYTES, ResourceLimitExceeded, limit
 
 DIGEST_ALGORITHM = "sha256"
 
@@ -72,8 +75,8 @@ def _digest_ref(hex_digest: str) -> str:
 
 def _split_digest(digest: str) -> str:
     algorithm, separator, hex_digest = digest.partition(":")
-    if not separator or algorithm != DIGEST_ALGORITHM or len(hex_digest) != 64:
-        raise ValueError(f"unsupported or malformed digest: {digest}")
+    if not separator or algorithm != DIGEST_ALGORITHM or not re.fullmatch(r"[0-9a-f]{64}", hex_digest):
+        raise ValueError("unsupported or malformed SHA-256 digest")
     return hex_digest
 
 
@@ -110,31 +113,28 @@ def put_blob(data: bytes, *, media_type: str) -> BlobDescriptor:
     two different byte strings must not legitimately share one SHA-256 digest.
     """
 
+    maximum = limit("PCR_MAX_BLOB_BYTES", DEFAULT_MAX_BLOB_BYTES)
+    if len(data) > maximum:
+        raise ResourceLimitExceeded("blob exceeds PCR_MAX_BLOB_BYTES")
     hex_digest = _digest_hex(data)
     digest = _digest_ref(hex_digest)
     descriptor = BlobDescriptor(media_type=media_type, digest=digest, size=len(data))
     path = blob_path(digest)
     if path.exists():
-        if path.stat().st_size != len(data):
+        if get_blob(digest) != data:
             raise BlobIntegrityError(
                 f"blob path exists with mismatched size for digest: {digest}"
             )
         return descriptor
-    path.parent.mkdir(parents=True, exist_ok=True)
-    temporary = path.with_name(f".{path.name}.{os.getpid()}.tmp")
-    with temporary.open("wb") as handle:
-        handle.write(data)
-        handle.flush()
-        os.fsync(handle.fileno())
-    os.replace(temporary, path)
-    _fsync_parent(path.parent)
+    atomic_private_write(path, data)
     return descriptor
 
 
 def blob_exists(digest: str) -> bool:
     try:
-        return blob_path(digest).exists()
-    except ValueError:
+        with regular_file(blob_path(digest)):
+            return True
+    except (OSError, ValueError):
         return False
 
 
@@ -148,7 +148,13 @@ def get_blob(digest: str) -> bytes:
     path = blob_path(digest)
     if not path.exists():
         raise FileNotFoundError(f"blob not found: {digest}")
-    data = path.read_bytes()
+    maximum = limit("PCR_MAX_BLOB_BYTES", DEFAULT_MAX_BLOB_BYTES)
+    with regular_file(path) as handle:
+        if os.fstat(handle.fileno()).st_size > maximum:
+            raise ResourceLimitExceeded("stored blob exceeds PCR_MAX_BLOB_BYTES")
+        data = handle.read(maximum + 1)
+        if len(data) > maximum:
+            raise ResourceLimitExceeded("stored blob exceeds PCR_MAX_BLOB_BYTES")
     if _digest_ref(_digest_hex(data)) != digest:
         raise BlobIntegrityError(f"stored blob no longer matches its digest: {digest}")
     return data
@@ -159,7 +165,7 @@ def verify_blob(digest: str) -> bool:
 
     try:
         get_blob(digest)
-    except (FileNotFoundError, BlobIntegrityError, ValueError):
+    except (OSError, BlobIntegrityError, ValueError):
         return False
     return True
 
@@ -169,7 +175,7 @@ def verify_descriptor(descriptor: BlobDescriptor) -> bool:
 
     try:
         data = get_blob(descriptor.digest)
-    except (FileNotFoundError, BlobIntegrityError, ValueError):
+    except (OSError, BlobIntegrityError, ValueError):
         return False
     return len(data) == descriptor.size
 

@@ -8,6 +8,10 @@ residency and conservatively compensate if the state changed after scheduling.
 """
 from __future__ import annotations
 
+from persistent_cognition.resource_limits import bounded_http_request
+
+from persistent_cognition.diagnostics import exception_summary
+
 import math
 import os
 from typing import Any
@@ -135,7 +139,7 @@ class OllamaRuntimeProbe:
         try:
             from persistent_cognition.network_consent import NetworkPurpose, require_destination
             require_destination(str(getattr(self._client, "base_url", self.base_url)), NetworkPurpose.MODEL)
-            response = self._client.get("/api/ps")
+            response = bounded_http_request(self._client, "GET", "/api/ps")
             response.raise_for_status()
             body = response.json()
             models = body.get("models", [])
@@ -146,7 +150,7 @@ class OllamaRuntimeProbe:
                 model=self.model,
                 probe_ok=False,
                 resident=False,
-                error=f"{type(exc).__name__}: {exc}",
+                error=exception_summary(exc),
             )
 
         target = _canonical_model_name(self.model)

@@ -942,6 +942,122 @@
       "rationale": "Local app input, preview, listing, model-generation, polling and resource bounds are explicit provisional controls. Existing evidence/admission defaults are preserved; host and model-specific calibration is required. See docs/experiments/LOCAL_APP_001.md.",
       "benchmark_id": "LOCAL-APP-001",
       "status": "PROVISIONAL"
+    },
+    "src/persistent_cognition/diagnostics.py::<module>::DEFAULT_MAX_DIAGNOSTIC_CHARS": {
+      "expected_value": 2000,
+      "classification": "SAFETY_TUNABLE",
+      "benchmark_id": "AUDIT-RESOURCE-BOUNDS-001",
+      "status": "PROVISIONAL",
+      "rationale": "Explicit operator-tunable deployment/metadata bound. Rejection preserves exact canonical evidence; default is provisional and requires target-host boundary/resource measurements."
+    },
+    "src/persistent_cognition/percept_adapters.py::preserve_media::comparison": {
+      "expected_value": 1,
+      "classification": "STRUCTURAL_INVARIANT",
+      "rationale": "Media must be nonempty and a requested inspection page must contain at least one record; zero is an invalid input, not a calibrated budget."
+    },
+    "src/persistent_cognition/percept_journal.py::read_page::page_size": {
+      "expected_value": 100,
+      "classification": "SAFETY_TUNABLE",
+      "benchmark_id": "AUDIT-RESOURCE-BOUNDS-001",
+      "status": "PROVISIONAL",
+      "rationale": "Explicit operator-tunable deployment/metadata bound. Rejection preserves exact canonical evidence; default is provisional and requires target-host boundary/resource measurements."
+    },
+    "src/persistent_cognition/percept_journal.py::read_page::comparison": {
+      "expected_value": 1,
+      "classification": "STRUCTURAL_INVARIANT",
+      "rationale": "Media must be nonempty and a requested inspection page must contain at least one record; zero is an invalid input, not a calibrated budget."
+    },
+    "src/persistent_cognition/percept_triage.py::SourcePolicy::trusted_executor_revision.max_length": {
+      "expected_value": 128,
+      "classification": "SAFETY_TUNABLE",
+      "benchmark_id": "AUDIT-RESOURCE-BOUNDS-001",
+      "status": "PROVISIONAL",
+      "rationale": "Explicit operator-tunable deployment/metadata bound. Rejection preserves exact canonical evidence; default is provisional and requires target-host boundary/resource measurements."
+    },
+    "src/persistent_cognition/resource_limits.py::<module>::DEFAULT_MAX_INTAKE_BYTES": {
+      "expected_value": 1048576,
+      "classification": "SAFETY_TUNABLE",
+      "benchmark_id": "AUDIT-RESOURCE-BOUNDS-001",
+      "status": "PROVISIONAL",
+      "rationale": "Explicit operator-tunable deployment/metadata bound. Rejection preserves exact canonical evidence; default is provisional and requires target-host boundary/resource measurements."
+    },
+    "src/persistent_cognition/resource_limits.py::<module>::DEFAULT_MAX_JSON_DEPTH": {
+      "expected_value": 32,
+      "classification": "SAFETY_TUNABLE",
+      "benchmark_id": "AUDIT-RESOURCE-BOUNDS-001",
+      "status": "PROVISIONAL",
+      "rationale": "Explicit operator-tunable deployment/metadata bound. Rejection preserves exact canonical evidence; default is provisional and requires target-host boundary/resource measurements."
+    },
+    "src/persistent_cognition/resource_limits.py::<module>::DEFAULT_MAX_JSON_NODES": {
+      "expected_value": 65536,
+      "classification": "SAFETY_TUNABLE",
+      "benchmark_id": "AUDIT-RESOURCE-BOUNDS-001",
+      "status": "PROVISIONAL",
+      "rationale": "Explicit operator-tunable deployment/metadata bound. Rejection preserves exact canonical evidence; default is provisional and requires target-host boundary/resource measurements."
+    },
+    "src/persistent_cognition/resource_limits.py::<module>::DEFAULT_MAX_HTTP_RESPONSE_BYTES": {
+      "expected_value": 4194304,
+      "classification": "SAFETY_TUNABLE",
+      "benchmark_id": "AUDIT-RESOURCE-BOUNDS-001",
+      "status": "PROVISIONAL",
+      "rationale": "Explicit operator-tunable deployment/metadata bound. Rejection preserves exact canonical evidence; default is provisional and requires target-host boundary/resource measurements."
+    },
+    "src/persistent_cognition/resource_limits.py::<module>::DEFAULT_MAX_JOURNAL_BYTES": {
+      "expected_value": 67108864,
+      "classification": "SAFETY_TUNABLE",
+      "benchmark_id": "AUDIT-RESOURCE-BOUNDS-001",
+      "status": "PROVISIONAL",
+      "rationale": "Explicit operator-tunable deployment/metadata bound. Rejection preserves exact canonical evidence; default is provisional and requires target-host boundary/resource measurements."
+    },
+    "src/persistent_cognition/resource_limits.py::<module>::DEFAULT_MAX_JOURNAL_ENTRY_BYTES": {
+      "expected_value": 8388608,
+      "classification": "SAFETY_TUNABLE",
+      "benchmark_id": "AUDIT-RESOURCE-BOUNDS-001",
+      "status": "PROVISIONAL",
+      "rationale": "Explicit operator-tunable deployment/metadata bound. Rejection preserves exact canonical evidence; default is provisional and requires target-host boundary/resource measurements."
+    },
+    "src/persistent_cognition/resource_limits.py::<module>::DEFAULT_MAX_JOURNAL_RECORDS": {
+      "expected_value": 65536,
+      "classification": "SAFETY_TUNABLE",
+      "benchmark_id": "AUDIT-RESOURCE-BOUNDS-001",
+      "status": "PROVISIONAL",
+      "rationale": "Explicit operator-tunable deployment/metadata bound. Rejection preserves exact canonical evidence; default is provisional and requires target-host boundary/resource measurements."
+    },
+    "src/persistent_cognition/resource_limits.py::<module>::DEFAULT_MAX_BLOB_BYTES": {
+      "expected_value": 67108864,
+      "classification": "SAFETY_TUNABLE",
+      "benchmark_id": "AUDIT-RESOURCE-BOUNDS-001",
+      "status": "PROVISIONAL",
+      "rationale": "Explicit operator-tunable deployment/metadata bound. Rejection preserves exact canonical evidence; default is provisional and requires target-host boundary/resource measurements."
+    },
+    "src/persistent_cognition/resource_limits.py::<module>::DEFAULT_ARTIFACT_QUOTA_BYTES": {
+      "expected_value": 1073741824,
+      "classification": "SAFETY_TUNABLE",
+      "benchmark_id": "AUDIT-RESOURCE-BOUNDS-001",
+      "status": "PROVISIONAL",
+      "rationale": "Explicit operator-tunable deployment/metadata bound. Rejection preserves exact canonical evidence; default is provisional and requires target-host boundary/resource measurements."
+    },
+    "src/persistent_cognition/resource_limits.py::<module>::DEFAULT_MIN_FREE_DISK_BYTES": {
+      "expected_value": 67108864,
+      "classification": "SAFETY_TUNABLE",
+      "benchmark_id": "AUDIT-RESOURCE-BOUNDS-001",
+      "status": "PROVISIONAL",
+      "rationale": "Explicit operator-tunable deployment/metadata bound. Rejection preserves exact canonical evidence; default is provisional and requires target-host boundary/resource measurements."
+    },
+    "src/persistent_cognition/resource_limits.py::validate_json_intake::byte_count": {
+      "expected_value": 0,
+      "classification": "STRUCTURAL_INVARIANT",
+      "rationale": "A running resource counter starts at zero and counts exactly the bytes or nodes admitted; this initialization is not a policy budget."
+    },
+    "src/persistent_cognition/resource_limits.py::validate_json_intake::size": {
+      "expected_value": 0,
+      "classification": "STRUCTURAL_INVARIANT",
+      "rationale": "A running resource counter starts at zero and counts exactly the bytes or nodes admitted; this initialization is not a policy budget."
+    },
+    "src/persistent_cognition/resource_limits.py::bounded_http_request::size": {
+      "expected_value": 0,
+      "classification": "STRUCTURAL_INVARIANT",
+      "rationale": "A running resource counter starts at zero and counts exactly the bytes or nodes admitted; this initialization is not a policy budget."
     }
   },
   "groups": {
@@ -1324,7 +1440,6 @@
       "rationale": "SHA-256 digests are exactly 64 hexadecimal characters by construction of the fixed 256-bit hash output, so blob_store rejects any other length outright. The two-character shard prefix is a fixed content-addressed storage layout convention (mirroring the OCI/git loose-object sharding pattern) chosen for directory fan-out, not a quality tradeoff. The audit renderer's preview-text bound only constrains how many characters of an already-decided field appear on one human-readable timeline line in a non-authoritative projection; it does not gate, weight, or select any cognitive, retrieval, or safety decision, so no benchmark can discriminate among candidate values. journal_signing's 16-hex-character key id is a truncated SHA-256 fingerprint used only as a human-readable lookup/display label for a local keypair; the actual cryptographic verification always uses the full untruncated public key bytes, so the truncation length is a display/representation choice with no bearing on signature correctness or forgeability.",
       "members": {
         "src/persistent_cognition/audit_report.py::<module>::_PREVIEW_LIMIT": 96,
-        "src/persistent_cognition/blob_store.py::_split_digest::comparison": 64,
         "src/persistent_cognition/blob_store.py::blob_path::slice_upper": 2,
         "src/persistent_cognition/journal_signing.py::key_id_for_public_bytes::slice_upper": 16
       }

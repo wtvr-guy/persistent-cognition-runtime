@@ -36,9 +36,10 @@ DEFAULT_CLAIM_RETRY_DELAY_SECONDS = 1.0
 class WorkerLaunchDenied(WorkerProtocolError):
     """Raised when the durable claim-time gate refuses process launch."""
 
-    def __init__(self, observation: WorkerClaimResourceObservation) -> None:
+    def __init__(self, observation: WorkerClaimResourceObservation, *, retryable: bool = False) -> None:
         super().__init__(observation.reason)
         self.observation = observation.model_copy(deep=True)
+        self.retryable = retryable
 
 
 @dataclass(frozen=True)
@@ -180,7 +181,7 @@ class GuardedWorkerLauncher:
                 from persistent_cognition.reflexes import record_admission_denial
                 with self.connection_factory() as denial_conn:
                     record_admission_denial(denial_conn, last_observation)
-                raise WorkerLaunchDenied(last_observation)
+                raise WorkerLaunchDenied(last_observation, retryable=retryable)
             self.sleep(self.claim_retry_delay_seconds)
 
         raise WorkerProtocolError("guarded claim retry loop exited without a decision")

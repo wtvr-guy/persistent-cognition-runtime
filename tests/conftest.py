@@ -38,7 +38,7 @@ def consented_mock_ollama(_isolated_artifact_root):
     from persistent_cognition.content_digest import content_digest
     from persistent_cognition.network_consent import NetworkPurpose, consent_proposal, grant_consent
     purpose = NetworkPurpose.MODEL
-    url = "http://ollama.test"
+    url = "https://ollama.test"
     grant_consent(url, purpose, accepted_digest=content_digest(consent_proposal(url, purpose)))
 
 

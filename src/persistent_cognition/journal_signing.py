@@ -26,10 +26,13 @@ rewrite of already-signed history being passed off as the original.
 """
 from __future__ import annotations
 
+from persistent_cognition.diagnostics import exception_summary
+
 from datetime import datetime, timezone
 import hashlib
 import json
 import os
+import re
 from pathlib import Path
 from typing import Any
 from uuid import UUID
@@ -39,6 +42,7 @@ from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey,
 
 from persistent_cognition.artifact_journal import artifact_root, verify_interaction_chain
 from persistent_cognition import percept_journal
+from persistent_cognition.private_storage import atomic_private_write, regular_file, private_directory
 
 SIGNATURE_ALGORITHM = "ed25519"
 
@@ -52,10 +56,12 @@ def _anchors_root() -> Path:
 
 
 def _private_key_path(key_id: str) -> Path:
+    _validate_key_id(key_id)
     return _keys_root() / f"{key_id}.private"
 
 
 def _public_key_path(key_id: str) -> Path:
+    _validate_key_id(key_id)
     return _keys_root() / f"{key_id}.public"
 
 
@@ -78,15 +84,13 @@ def _fsync_parent(path: Path) -> None:
         os.close(fd)
 
 
+def _validate_key_id(key_id: str) -> None:
+    if not isinstance(key_id, str) or not re.fullmatch(r"[0-9a-f]{16}", key_id):
+        raise ValueError("malformed signing key id")
+
+
 def _atomic_write_bytes(path: Path, data: bytes) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    temporary = path.with_name(f".{path.name}.{os.getpid()}.tmp")
-    with temporary.open("wb") as handle:
-        handle.write(data)
-        handle.flush()
-        os.fsync(handle.fileno())
-    os.replace(temporary, path)
-    _fsync_parent(path.parent)
+    atomic_private_write(path, data)
 
 
 def key_id_for_public_bytes(public_bytes: bytes) -> str:
@@ -104,8 +108,12 @@ def ensure_signing_key() -> str:
     ``signing_key_id`` that produced it).
     """
 
-    existing = list(_keys_root().glob("*.private")) if _keys_root().exists() else []
+    private_directory(_keys_root())
+    existing = sorted(_keys_root().glob("*.private"))
     if existing:
+        with regular_file(existing[0], write=True):
+            pass
+        _validate_key_id(existing[0].stem)
         return existing[0].stem
 
     private_key = Ed25519PrivateKey.generate()
@@ -121,14 +129,16 @@ def _load_private_key(key_id: str) -> Ed25519PrivateKey:
     path = _private_key_path(key_id)
     if not path.exists():
         raise FileNotFoundError(f"unknown signing key id: {key_id}")
-    return Ed25519PrivateKey.from_private_bytes(path.read_bytes())
+    with regular_file(path) as handle:
+        return Ed25519PrivateKey.from_private_bytes(handle.read(33))
 
 
 def _load_public_key(key_id: str) -> Ed25519PublicKey:
     path = _public_key_path(key_id)
     if not path.exists():
         raise FileNotFoundError(f"unknown signing key id: {key_id}")
-    return Ed25519PublicKey.from_public_bytes(path.read_bytes())
+    with regular_file(path) as handle:
+        return Ed25519PublicKey.from_public_bytes(handle.read(33))
 
 
 def _canonical_anchor_bytes(anchor: dict[str, Any]) -> bytes:
@@ -199,7 +209,7 @@ def verify_signed_journal_head(interaction_id: UUID) -> dict[str, Any]:
     except (InvalidSignature, KeyError, ValueError, FileNotFoundError) as exc:
         return {
             "interaction_id": str(interaction_id), "signed": True, "valid": False,
-            "reason": f"{type(exc).__name__}: {exc}",
+            "reason": exception_summary(exc),
         }
 
     verification = verify_interaction_chain(interaction_id)
@@ -222,7 +232,7 @@ def verify_signed_journal_head(interaction_id: UUID) -> dict[str, Any]:
         except (OSError, RuntimeError, ValueError) as exc:
             return {
                 "interaction_id": str(interaction_id), "signed": True, "valid": False,
-                "reason": f"percept journal cannot be verified: {exc}",
+                "reason": "percept journal cannot be verified: " + exception_summary(exc),
             }
         if current_digest != anchor["percept_journal_sha256"]:
             return {

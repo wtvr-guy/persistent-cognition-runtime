@@ -5,6 +5,8 @@ server's residency. No weights are deleted. Remote services are not managed here
 """
 from __future__ import annotations
 
+from persistent_cognition.resource_limits import bounded_http_request
+
 from contextlib import contextmanager
 import hashlib
 import time
@@ -27,7 +29,7 @@ class ModelResidencyError(RuntimeError):
 def running_models(client, *, timeout=MODEL_HTTP_TIMEOUT_SECONDS):
     from persistent_cognition.network_consent import NetworkPurpose, require_destination
     require_destination(str(client.base_url), NetworkPurpose.MODEL)
-    response = client.get("/api/ps", timeout=timeout)
+    response = bounded_http_request(client, "GET", "/api/ps", timeout=timeout)
     response.raise_for_status()
     body = response.json()
     if not isinstance(body, dict) or not isinstance(body.get("models"), list):
@@ -65,7 +67,7 @@ def unload_and_verify(client, receipt):
             key = _canonical_model_name(item["name"])
             if key in requested:
                 continue
-            response = client.post("/api/generate", json={"model": item["name"], "keep_alive": 0,
+            response = bounded_http_request(client, "POST", "/api/generate", json={"model": item["name"], "keep_alive": 0,
                                                          "stream": False}, timeout=remaining())
             response.raise_for_status()
             body = response.json()

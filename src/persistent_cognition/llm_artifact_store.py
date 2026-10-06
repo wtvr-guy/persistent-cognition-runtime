@@ -6,6 +6,7 @@ from typing import Any, Literal
 from uuid import UUID
 
 from persistent_cognition import artifact_journal
+from persistent_cognition.diagnostics import sanitize_message
 
 
 def write_llm_invocation(
@@ -51,7 +52,7 @@ def write_llm_invocation(
         "temperature": temperature,
         "output": output,
         "error_type": error_type,
-        "error_message": error_message,
+        "error_message": sanitize_message(error_message) if error_message else None,
     }
     from persistent_cognition.contract_registry import contract_manifest
     registered = contract_manifest()["semantic_contracts"].get(kind)
@@ -133,6 +134,6 @@ def write_llm_validation(
             "raw_output_sha256": raw_output_sha256,
             "parsed_output": parsed_output,
             "error_type": error_type,
-            "error_message": error_message,
+            "error_message": sanitize_message(error_message) if error_message else None,
         },
     )

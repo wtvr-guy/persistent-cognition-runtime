@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from tests.http_fakes import StreamingHTTPFake
+
 import pytest
 
 from datetime import datetime, timezone
@@ -39,7 +41,7 @@ class _FakeResponse:
         return self._payload
 
 
-class _FakeHTTPClient:
+class _FakeHTTPClient(StreamingHTTPFake):
     def __init__(self, contents: list[str]) -> None:
         self._contents = iter(contents)
         self.calls: list[tuple[str, dict]] = []
@@ -97,7 +99,7 @@ def test_response_policy_sees_only_current_then_exact_selector_sees_filtered_evi
         assignment_id=uuid4(),
     )
     client = UserPromptLLM(
-        base_url="http://ollama.test",
+        base_url="https://ollama.test",
         model="model:test",
         interaction=interaction,
         stage=PerceptStage.RESPOND,

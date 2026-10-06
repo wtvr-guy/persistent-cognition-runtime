@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from tests.http_fakes import StreamingHTTPFake
+
 from datetime import datetime, timezone
 from uuid import uuid4
 
@@ -21,7 +23,7 @@ class _FakeResponse:
         return self._payload
 
 
-class _FakeHTTPClient:
+class _FakeHTTPClient(StreamingHTTPFake):
     def __init__(self, payloads: list[dict]) -> None:
         self._payloads = iter(payloads)
         self.calls: list[tuple[str, dict]] = []
@@ -31,7 +33,7 @@ class _FakeHTTPClient:
         return _FakeResponse(next(self._payloads))
 
 
-class _SnapshotHTTPClient:
+class _SnapshotHTTPClient(StreamingHTTPFake):
     def __init__(self, payloads: dict[str, dict]) -> None:
         self._payloads = payloads
 
@@ -87,7 +89,7 @@ def _generate_payload() -> dict:
 
 def test_runtime_snapshot_captures_ollama_version_model_digest_and_loaded_record():
     model = "qwen3:4b-instruct-2507-q4_K_M"
-    client = UserPromptLLM(base_url="http://ollama.test", model=model)
+    client = UserPromptLLM(base_url="https://ollama.test", model=model)
     client._client = _SnapshotHTTPClient(
         {
             "/api/version": {"version": "0.12.3"},
@@ -124,7 +126,7 @@ def test_runtime_snapshot_captures_ollama_version_model_digest_and_loaded_record
 
 
 def test_qwen3_structured_call_appends_latest_no_think_soft_switch():
-    client = UserPromptLLM(base_url="http://ollama.test", model="qwen3:4b")
+    client = UserPromptLLM(base_url="https://ollama.test", model="qwen3:4b")
     fake = _FakeHTTPClient([_chat_payload()])
     client._client = fake
 
@@ -146,7 +148,7 @@ def test_qwen3_structured_call_appends_latest_no_think_soft_switch():
 
 def test_qwen3_instruct_call_uses_raw_structured_generate_transport():
     client = UserPromptLLM(
-        base_url="http://ollama.test",
+        base_url="https://ollama.test",
         model="qwen3:4b-instruct-2507-q4_K_M",
     )
     fake = _FakeHTTPClient([_generate_payload()])
@@ -179,7 +181,7 @@ def test_precognitive_worker_receives_evidence_without_memory_transport_metadata
     packet = _packet()
     item = packet.items[0]
     client = UserPromptLLM(
-        base_url="http://ollama.test",
+        base_url="https://ollama.test",
         model="qwen3:4b-instruct-2507-q4_K_M",
     )
     fake = _FakeHTTPClient([_generate_payload()])
@@ -199,7 +201,7 @@ def test_precognitive_worker_receives_evidence_without_memory_transport_metadata
 
 
 def test_qwen3_empty_or_thinking_only_output_retries_with_larger_budget():
-    client = UserPromptLLM(base_url="http://ollama.test", model="qwen3:4b")
+    client = UserPromptLLM(base_url="https://ollama.test", model="qwen3:4b")
     fake = _FakeHTTPClient(
         [
             {
@@ -233,7 +235,7 @@ def test_qwen3_empty_or_thinking_only_output_retries_with_larger_budget():
 
 def test_qwen3_empty_output_failure_reports_metadata_without_reasoning_text():
     secret_reasoning = "THIS_REASONING_MUST_NOT_ESCAPE"
-    client = UserPromptLLM(base_url="http://ollama.test", model="qwen3:4b")
+    client = UserPromptLLM(base_url="https://ollama.test", model="qwen3:4b")
     client._client = _FakeHTTPClient(
         [
             {

@@ -1,13 +1,14 @@
 """Fail immediately if another app owns this private runtime."""
 from contextlib import contextmanager
 import os
+from persistent_cognition.private_storage import private_directory, regular_file
 
 
 @contextmanager
 def instance_lock(root):
     path = root / "operator" / "app-instance.lock"
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("a+b") as handle:
+    private_directory(path.parent)
+    with regular_file(path, write=True, create=True) as handle:
         try:
             if os.name == "nt":
                 import msvcrt

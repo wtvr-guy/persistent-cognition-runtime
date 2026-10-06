@@ -159,23 +159,8 @@ def _atomic_write(path: Path, value: dict[str, Any]) -> None:
 
 
 def _atomic_write_bytes(path: Path, encoded: bytes) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    temporary = path.with_name(f".{path.name}.{os.getpid()}.tmp")
-    with temporary.open("wb") as handle:
-        handle.write(encoded)
-        handle.flush()
-        os.fsync(handle.fileno())
-    os.replace(temporary, path)
-    try:
-        directory_fd = os.open(path.parent, os.O_RDONLY)
-    except OSError:
-        return
-    try:
-        os.fsync(directory_fd)
-    except OSError:
-        pass
-    finally:
-        os.close(directory_fd)
+    from persistent_cognition.private_storage import atomic_private_write
+    atomic_private_write(path, encoded)
 
 
 def _semantic_record(

@@ -25,6 +25,7 @@ from uuid import uuid4
 
 import psycopg
 
+from persistent_cognition.diagnostics import exception_summary
 from persistent_cognition import db
 from persistent_cognition.advisory_lock import scheduler_ownership
 from persistent_cognition.attention_store import DEFAULT_SCHEDULER_KEY
@@ -157,7 +158,7 @@ class PerceptService:
                 result = self._tick_fn(conn, **options)
                 completed = result.get("completed") or []
             except Exception as exc:
-                logger.exception("Percept tick failed for scheduler %r", self._scheduler_key)
+                logger.error("Percept tick failed for scheduler %r: %s", self._scheduler_key, exception_summary(exc))
                 # A lost session also loses ownership. Exit, never continue work
                 # on a reconnected session without reacquiring its lock.
                 if conn.closed or conn.broken:

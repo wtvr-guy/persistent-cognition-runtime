@@ -1,7 +1,8 @@
 """Headless chat job process using the guarded worker pipeline."""
 from __future__ import annotations
 
-import json
+from persistent_cognition.diagnostics import exception_summary
+
 import os
 from pathlib import Path
 import sys
@@ -13,9 +14,14 @@ from persistent_cognition.operator_state import write_private_policy
 
 def run(directory):
     from persistent_cognition import db
-    job = json.loads((directory / "job.json").read_text(encoding="utf-8"))
+    from persistent_cognition.resource_limits import read_json_file
+    job = read_json_file(directory / "job.json")
     action, payload = job["action"], job["payload"]
     settings = job_settings()
+    if settings is None:
+        raise ValueError("Headless jobs require PCR_GUI_JOB_CONFIG_FILE or PCR_GUI_JOB_CONFIG")
+    from persistent_cognition.resource_limits import validate_text_intake
+    validate_text_intake(payload["text"])
 
     def report(value):
         write_private_policy(directory / "progress.json", value)
@@ -83,9 +89,9 @@ def _run_chat_job(conn, *, directory, settings, payload, report, plan, scheduler
     report({"status": "Checking local capacity", "model_memory_requirement_mib": floor,
             "response_model": plan.stages["V2_RESPOND"].model, "route_reason": plan.route_reason})
     from persistent_cognition.chat_startup import reset_chat_execution_state
-    from persistent_cognition.cli import _handle_with_admission_diagnostics
+    from persistent_cognition.api import respond
     reset_chat_execution_state(conn, scheduler_key=scheduler_key)
-    text = _handle_with_admission_diagnostics(conn, payload["text"], UUID(payload["conversation_id"]),
+    text = respond(conn, payload["text"], UUID(payload["conversation_id"]),
         scheduler_key=scheduler_key, progress=lambda stage: report({"status": "Cognitive worker", "stage": stage}))
     return {"text": text, "conversation_id": payload["conversation_id"], "model_memory_requirement_mib": floor,
             "response_model": plan.stages["V2_RESPOND"].model, "task": plan.task}
@@ -99,7 +105,7 @@ def main():
         result = run(directory)
         write_private_policy(directory / "result.json", {"result": result})
     except Exception as exc:
-        message = f"{type(exc).__name__}: {exc}"
+        message = exception_summary(exc)
         for name in ("OPENAI_API_KEY", "DATABASE_URL"):
             secret = os.environ.get(name)
             if secret:

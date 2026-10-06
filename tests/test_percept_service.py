@@ -669,6 +669,7 @@ def test_quarantine_keeps_live_claim_capacity_until_lease_expiry(conn):
     assert any(value.task_id == first.task_id for value in scheduler.worker_visible_assignments())
     assert scheduler.resource_reservations()
     assert get_record(conn, "situation_failure", f"default:{first.task_id}")["attempt"] == 1
+
     conn.execute(
         "UPDATE attention_worker_claims SET lease_expires_at = now() - interval '1 second' WHERE claim_id = %s",
         (envelope.claim.claim_id,),
@@ -679,6 +680,52 @@ def test_quarantine_keeps_live_claim_capacity_until_lease_expiry(conn):
     assert scheduler.tasks[first.task_id].status.value == "FAILED"
     assert not scheduler.worker_visible_assignments() and not scheduler.resource_reservations()
     assert get_record(conn, "situation_failure", f"default:{first.task_id}")["attempt"] == 1
+
+
+def test_resource_pressure_beyond_launch_retry_budget_resumes_without_manual_recovery(conn, monkeypatch):
+    from persistent_cognition.attention_store import load_scheduler
+    from persistent_cognition.situation_runtime import submit_situation_page
+    from persistent_cognition.worker_runtime import GuardedWorkerLauncher
+    source = source_setup(conn)
+    add_observation(conn, source, subject="temporarily-busy")
+    submit_situation_page(conn, probe=FixedProbe())
+    task_id = load_scheduler(conn).worker_visible_assignments()[0].task_id
+    original_claim = GuardedWorkerLauncher.claim
+
+    def pressured_claim(launcher, **kwargs):
+        launcher.probe = FixedProbe(available=0)
+        launcher.claim_retry_attempts = 1
+        return original_claim(launcher, **kwargs)
+
+    monkeypatch.setattr(GuardedWorkerLauncher, "claim", pressured_claim)
+    assert drain_situations(conn, probe=FixedProbe()) == []
+    assert get_record(conn, "situation_failure", f"default:{task_id}") is None
+    assert load_scheduler(conn).tasks[task_id].status.value != "FAILED"
+    assert not list_records(conn, "action_execution")
+    monkeypatch.setattr(GuardedWorkerLauncher, "claim", original_claim)
+    completed = drain_situations(conn, probe=FixedProbe())
+    assert len(completed) == 1
+    assert load_scheduler(conn).tasks[task_id].status.value == "COMPLETED"
+
+
+def test_scheduler_reset_refuses_a_live_worker_after_its_session_owner_exits(conn):
+    from persistent_cognition.attention_store import load_scheduler
+    from persistent_cognition.chat_startup import reset_chat_execution_state
+    from persistent_cognition.situation_runtime import SituationStage, submit_situation_page
+    from persistent_cognition.worker_runtime import GuardedWorkerLauncher
+    from persistent_cognition.worker_store import register_worker_step
+    source = source_setup(conn)
+    add_observation(conn, source, subject="surviving-worker")
+    submit_situation_page(conn, probe=FixedProbe())
+    assignment = load_scheduler(conn).worker_visible_assignments()[0]
+    step = register_worker_step(conn, assignment_id=assignment.assignment_id,
+        step_key=SituationStage.MEMORY.value, capability=SituationStage.MEMORY.capability)
+    envelope = GuardedWorkerLauncher(db.get_connection, probe=FixedProbe()).claim(
+        step_id=step.step_id, worker_id="surviving-worker")
+    with pytest.raises(RuntimeError, match="unexpired worker"):
+        reset_chat_execution_state(conn)
+    assert conn.execute("SELECT count(*) FROM attention_worker_claims WHERE claim_id = %s",
+                        (envelope.claim.claim_id,)).fetchone()[0] == 1
 
 
 def test_one_shot_chat_cannot_compete_with_service_owner(conn, monkeypatch):

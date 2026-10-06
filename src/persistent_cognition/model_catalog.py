@@ -1,6 +1,8 @@
 """Explicit model management; catalog lookups and downloads require consent."""
 from __future__ import annotations
 
+from persistent_cognition.resource_limits import bounded_http_request
+
 from html.parser import HTMLParser
 import json
 import re
@@ -45,7 +47,7 @@ def ollama_request(base_url, path, *, method="GET", body=None):
     require_destination(base_url, NetworkPurpose.MODEL)
     with httpx.Client(base_url=base_url, trust_env=False, follow_redirects=False,
                       timeout=MODEL_HTTP_TIMEOUT_SECONDS) as client:
-        response = client.request(method, path, json=body)
+        response = bounded_http_request(client, method, path, json=body)
         response.raise_for_status()
         return response.json() if response.content else {}
 

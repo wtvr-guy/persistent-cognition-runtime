@@ -45,17 +45,19 @@
     "benchmarks/constraint_experiments.json": {
       "source_path": "benchmarks/constraint_experiments.json",
       "source_sha256": "0924e0934d963f84b0345e0c87e6e0b27a754e2bf7a36767a22b0e32601b670b",
-      "extracted_sha256": "0413f13350e9a1db8687396e3df370def215e29a451073436872342f15f752a3",
+      "extracted_sha256": "9661a67edb9e9d77057205b94fc016ba3c0a3435e0dca0f192c263d02528d013",
       "extraction_path": "benchmarks/constraint_experiments.json",
-      "status": "imported"
+      "status": "imported",
+      "reason": "remaining audit remediation: deterministic bounds, private storage, safe diagnostics and embedding contracts"
     },
     "benchmarks/constraint_registry.json": {
       "source_path": "benchmarks/constraint_registry.json",
       "source_sha256": "fbab7d594002d6e23a05dada6ceac76ac7055139fa292c8aec5bd9599981ad6e",
-      "extracted_sha256": "9da2593f955569f6968a221477723495145ac0f18ebff16c826ea0dddb126f82",
+      "extracted_sha256": "b1b16d561c5d4e39df7974d13c16d2db28403901b25c834ef15f1bfc56eaef16",
       "extraction_path": "benchmarks/constraint_registry.json",
       "status": "imported",
-      "baseline_extracted_sha256": "7958368d60f3cdb09f5af9d25bc8d8cec5a635685f2dd899033f83618a9341f2"
+      "baseline_extracted_sha256": "7958368d60f3cdb09f5af9d25bc8d8cec5a635685f2dd899033f83618a9341f2",
+      "reason": "remaining audit remediation: deterministic bounds, private storage, safe diagnostics and embedding contracts"
     },
     "benchmarks/jordan_vale_associations_v1.json": {
       "source_path": "benchmarks/jordan_vale_associations_v1.json",
@@ -301,10 +303,11 @@
     "pyproject.toml": {
       "source_path": "pyproject.toml",
       "source_sha256": "eea013a69a1296dde2ff926d5dce1d62d5b91c3d3b60440817a648a80f833a87",
-      "extracted_sha256": "17a63b60e232eabf0a68985b1f1b9d926e094580ddc97414522a034f9e23d6c6",
+      "extracted_sha256": "8be46f81e6d49220470c308019de2058df36723ed30b03a604ae01bbdada2d2c",
       "extraction_path": "pyproject.toml",
       "status": "imported",
-      "baseline_extracted_sha256": "468a2f29e30d9a741bc5ab7a375edd9bccdc6bfa15f74ef458bdb0755d4387c1"
+      "baseline_extracted_sha256": "468a2f29e30d9a741bc5ab7a375edd9bccdc6bfa15f74ef458bdb0755d4387c1",
+      "reason": "remaining audit remediation: deterministic bounds, private storage, safe diagnostics and embedding contracts"
     },
     "schema.sql": {
       "source_path": "schema.sql",
@@ -388,10 +391,11 @@
     "src/prometheist/__init__.py": {
       "source_path": "src/prometheist/__init__.py",
       "source_sha256": "1395b301f6f3e24343019180e0b05a9996d349e43093cb51d92ff540b246238d",
-      "extracted_sha256": "42f0d3dd07286e2ce7caa80775dc1d9c13182d894157d3da5ab76af1a16125b2",
+      "extracted_sha256": "d52efe613aab874d002451ffe257411a9943b19e2ae524806c80120ffdfbd4bb",
       "extraction_path": "src/persistent_cognition/__init__.py",
       "status": "imported",
-      "baseline_extracted_sha256": "1395b301f6f3e24343019180e0b05a9996d349e43093cb51d92ff540b246238d"
+      "baseline_extracted_sha256": "1395b301f6f3e24343019180e0b05a9996d349e43093cb51d92ff540b246238d",
+      "reason": "remaining audit remediation: deterministic bounds, private storage, safe diagnostics and embedding contracts"
     },
     "src/prometheist/action_outcomes.py": {
       "source_path": "src/prometheist/action_outcomes.py",
@@ -412,10 +416,11 @@
     "src/prometheist/artifact_journal.py": {
       "source_path": "src/prometheist/artifact_journal.py",
       "source_sha256": "6f8e363b009e59b254aa256f238af87829e4c4ec08a4878761b0946862aac454",
-      "extracted_sha256": "3a91ccd81a1f02aa2b855da284cba07067b7445b4ce8244bfee0c8b79ba1d1d3",
+      "extracted_sha256": "33fbb731973d555e12d98a89fbc5382d8b12f3aa58eef40c91a42057ad46bd6e",
       "extraction_path": "src/persistent_cognition/artifact_journal.py",
       "status": "imported",
-      "baseline_extracted_sha256": "6f8e363b009e59b254aa256f238af87829e4c4ec08a4878761b0946862aac454"
+      "baseline_extracted_sha256": "6f8e363b009e59b254aa256f238af87829e4c4ec08a4878761b0946862aac454",
+      "reason": "remaining audit remediation: deterministic bounds, private storage, safe diagnostics and embedding contracts"
     },
     "src/prometheist/artifact_recovery.py": {
       "source_path": "src/prometheist/artifact_recovery.py",
@@ -484,10 +489,11 @@
     "src/prometheist/attention_observation.py": {
       "source_path": "src/prometheist/attention_observation.py",
       "source_sha256": "70b9c5ba746fd59176de5a123a14442668df3490c91eb2bcebd3ba978b7a77b6",
-      "extracted_sha256": "b3c1b7d569b2bb83c4354e26c8dfde7ee0540530e717137bf56adcee2e1e1d0d",
+      "extracted_sha256": "59c1302d2086d29b5742273dacd7ac10294751db4e84605fa4a9899970f1605d",
       "extraction_path": "src/persistent_cognition/attention_observation.py",
       "status": "imported",
-      "baseline_extracted_sha256": "70b9c5ba746fd59176de5a123a14442668df3490c91eb2bcebd3ba978b7a77b6"
+      "baseline_extracted_sha256": "70b9c5ba746fd59176de5a123a14442668df3490c91eb2bcebd3ba978b7a77b6",
+      "reason": "remaining audit remediation: deterministic bounds, private storage, safe diagnostics and embedding contracts"
     },
     "src/prometheist/attention_ordering.py": {
       "source_path": "src/prometheist/attention_ordering.py",
@@ -531,10 +537,11 @@
     "src/prometheist/blob_store.py": {
       "source_path": "src/prometheist/blob_store.py",
       "source_sha256": "bc207c0ffd2da974ce9f9beccedfa2c9b526a57e375e52211e78af9b44f20d77",
-      "extracted_sha256": "84d4c8bf2521c361ec5d9573010f842043a6301a5a895d05bd3063b46eb5b31d",
+      "extracted_sha256": "a5a593ad11a3977321e4676616840c7fc469a78399b5cd040391c8589bdba572",
       "extraction_path": "src/persistent_cognition/blob_store.py",
       "status": "imported",
-      "baseline_extracted_sha256": "bc207c0ffd2da974ce9f9beccedfa2c9b526a57e375e52211e78af9b44f20d77"
+      "baseline_extracted_sha256": "bc207c0ffd2da974ce9f9beccedfa2c9b526a57e375e52211e78af9b44f20d77",
+      "reason": "remaining audit remediation: deterministic bounds, private storage, safe diagnostics and embedding contracts"
     },
     "src/prometheist/canonical_neighborhood.py": {
       "source_path": "src/prometheist/canonical_neighborhood.py",
@@ -547,34 +554,38 @@
     "src/prometheist/capability_registry.py": {
       "source_path": "src/prometheist/capability_registry.py",
       "source_sha256": "ed5304586a6c2a53d33195ba310309d6b50cbf5d4542739592c85a787159327a",
-      "extracted_sha256": "652648bcaa5122f7083debbffdb06aa851be54293c52ad05735753f87ad9bc43",
+      "extracted_sha256": "8400aab87dda0b7a832e388ea463ca457fdf68b3ba7bd128a8cde3b32800a8fb",
       "extraction_path": "src/persistent_cognition/capability_registry.py",
       "status": "imported",
-      "baseline_extracted_sha256": "ed5304586a6c2a53d33195ba310309d6b50cbf5d4542739592c85a787159327a"
+      "baseline_extracted_sha256": "ed5304586a6c2a53d33195ba310309d6b50cbf5d4542739592c85a787159327a",
+      "reason": "remaining audit remediation: deterministic bounds, private storage, safe diagnostics and embedding contracts"
     },
     "src/prometheist/capability_runtime.py": {
       "source_path": "src/prometheist/capability_runtime.py",
       "source_sha256": "965da56966ece0336999ae27c4b7dcbce5b95b6e8a2ab752434e90b0c4f754c1",
-      "extracted_sha256": "7cbe125efa1f5c008b5fbdfdd93515d760d786792b9721fb4f9ec4debda74ad1",
+      "extracted_sha256": "c539a1772ec35d2b403783d3776d080524db9ea6adf55e8c0fe25d292656d618",
       "extraction_path": "src/persistent_cognition/capability_runtime.py",
       "status": "imported",
-      "baseline_extracted_sha256": "965da56966ece0336999ae27c4b7dcbce5b95b6e8a2ab752434e90b0c4f754c1"
+      "baseline_extracted_sha256": "965da56966ece0336999ae27c4b7dcbce5b95b6e8a2ab752434e90b0c4f754c1",
+      "reason": "remaining audit remediation: deterministic bounds, private storage, safe diagnostics and embedding contracts"
     },
     "src/prometheist/chat_startup.py": {
       "source_path": "src/prometheist/chat_startup.py",
       "source_sha256": "3eba8a90a86361f6c735dc618565ff9355bfc5dbbb8cac7003eb3f0aa0ba10a0",
-      "extracted_sha256": "b1df6da45264be4b8aa2860c2c17808c19406c3e02bc52940337d421e3f211b6",
+      "extracted_sha256": "3a25cf14ac379540885397931ca1ded3b2bea43c07a6fbc4158ad6cb7d5ffd63",
       "extraction_path": "src/persistent_cognition/chat_startup.py",
       "status": "imported",
-      "baseline_extracted_sha256": "3eba8a90a86361f6c735dc618565ff9355bfc5dbbb8cac7003eb3f0aa0ba10a0"
+      "baseline_extracted_sha256": "3eba8a90a86361f6c735dc618565ff9355bfc5dbbb8cac7003eb3f0aa0ba10a0",
+      "reason": "remaining audit remediation: deterministic bounds, private storage, safe diagnostics and embedding contracts"
     },
     "src/prometheist/cli.py": {
       "source_path": "src/prometheist/cli.py",
       "source_sha256": "e9c58477781d6af14cd9056179acf2cfe36a9566b8248260617683356a4ee349",
-      "extracted_sha256": "eac0ac587670df5e8b6fcaa6ab39f2119ce53e377edb00b5c42519afc3303b36",
+      "extracted_sha256": "0543f62e3550b839a2ec3a011ddb8027edd608854e2c388615d2d7ed8304c67b",
       "extraction_path": "src/persistent_cognition/cli.py",
       "status": "imported",
-      "baseline_extracted_sha256": "d3cc61b9d7b4cad342e8b258d2820f876227f8d9c416cf7aeeea32fb1d8176ec"
+      "baseline_extracted_sha256": "d3cc61b9d7b4cad342e8b258d2820f876227f8d9c416cf7aeeea32fb1d8176ec",
+      "reason": "remaining audit remediation: deterministic bounds, private storage, safe diagnostics and embedding contracts"
     },
     "src/prometheist/cognitive_store.py": {
       "source_path": "src/prometheist/cognitive_store.py",
@@ -634,10 +645,11 @@
     "src/prometheist/event_artifact_store.py": {
       "source_path": "src/prometheist/event_artifact_store.py",
       "source_sha256": "22a0ddee70de6b23219d4bf875cc178e558dae8d131e64b159442812a6725428",
-      "extracted_sha256": "b94916f0efae3c9bd699e2c251b922b1272b14e167d853d9290decbf81c3296c",
+      "extracted_sha256": "697d00851ce81dffa128ee1e1693788312df3bead4d908e1683aad095c3deb39",
       "extraction_path": "src/persistent_cognition/event_artifact_store.py",
       "status": "imported",
-      "baseline_extracted_sha256": "22a0ddee70de6b23219d4bf875cc178e558dae8d131e64b159442812a6725428"
+      "baseline_extracted_sha256": "22a0ddee70de6b23219d4bf875cc178e558dae8d131e64b159442812a6725428",
+      "reason": "remaining audit remediation: deterministic bounds, private storage, safe diagnostics and embedding contracts"
     },
     "src/prometheist/event_store.py": {
       "source_path": "src/prometheist/event_store.py",
@@ -698,26 +710,29 @@
     "src/prometheist/journal_signing.py": {
       "source_path": "src/prometheist/journal_signing.py",
       "source_sha256": "501fe3f08ddc3f9b7b62c2b694b87f487ee1fe9c351cc07544cfb9c816e46c45",
-      "extracted_sha256": "675dfb7c128ec3ac4f36e875e752b11b343dc81659c88e5eb81c0eb1a9d90962",
+      "extracted_sha256": "c9f5dbb78ed85556e33e761e75e6ab2c3bc06c7729731ff3de71f45e56989aa7",
       "extraction_path": "src/persistent_cognition/journal_signing.py",
       "status": "imported",
-      "baseline_extracted_sha256": "501fe3f08ddc3f9b7b62c2b694b87f487ee1fe9c351cc07544cfb9c816e46c45"
+      "baseline_extracted_sha256": "501fe3f08ddc3f9b7b62c2b694b87f487ee1fe9c351cc07544cfb9c816e46c45",
+      "reason": "remaining audit remediation: deterministic bounds, private storage, safe diagnostics and embedding contracts"
     },
     "src/prometheist/llm.py": {
       "source_path": "src/prometheist/llm.py",
       "source_sha256": "e6b524a72ec492932f0554f6f7e7c1f89b22b590003b6a30379cad1ff9babae1",
-      "extracted_sha256": "3c5d10a0af9ad78bf8842f495f9e112b639769bb65bd2cf596cb9caadab7c340",
+      "extracted_sha256": "427fbec0e513fc0f8480f38db55451c99a75319aaaf91042d7356644faa52848",
       "extraction_path": "src/persistent_cognition/llm.py",
       "status": "imported",
-      "baseline_extracted_sha256": "e6b524a72ec492932f0554f6f7e7c1f89b22b590003b6a30379cad1ff9babae1"
+      "baseline_extracted_sha256": "e6b524a72ec492932f0554f6f7e7c1f89b22b590003b6a30379cad1ff9babae1",
+      "reason": "remaining audit remediation: deterministic bounds, private storage, safe diagnostics and embedding contracts"
     },
     "src/prometheist/llm_artifact_store.py": {
       "source_path": "src/prometheist/llm_artifact_store.py",
       "source_sha256": "8fc177396942d900467bea350dd7d4c265951557c2d23b2f60b678d6af7138cd",
-      "extracted_sha256": "2c5e6d9344459e248919de62e557466f2371fb22f29cf139e58a4540adbde2a2",
+      "extracted_sha256": "1d89bdaf091855cbbe1345858f282b7ebe8a130a482feb88134e79baf6f9e8c5",
       "extraction_path": "src/persistent_cognition/llm_artifact_store.py",
       "status": "imported",
-      "baseline_extracted_sha256": "8fc177396942d900467bea350dd7d4c265951557c2d23b2f60b678d6af7138cd"
+      "baseline_extracted_sha256": "8fc177396942d900467bea350dd7d4c265951557c2d23b2f60b678d6af7138cd",
+      "reason": "remaining audit remediation: deterministic bounds, private storage, safe diagnostics and embedding contracts"
     },
     "src/prometheist/memory_integrity.py": {
       "source_path": "src/prometheist/memory_integrity.py",
@@ -746,18 +761,20 @@
     "src/prometheist/model_admission.py": {
       "source_path": "src/prometheist/model_admission.py",
       "source_sha256": "eb27f27e6740f7182245e3253edbdbc096ec741f5a54d7d5a290be3cdf36ac4c",
-      "extracted_sha256": "8e8fd19d0350397f19922b9a3d01ec14272f36d6be44f41d9484954bbd7da032",
+      "extracted_sha256": "1e19b7f2715658c8c20c80bd6c2f4c76e02ef8ea98124e9e276332b5f9bf4c0c",
       "extraction_path": "src/persistent_cognition/model_admission.py",
       "status": "imported",
-      "baseline_extracted_sha256": "cd90f78a2c4471fee25b00ea8f55ebbb9cafd8c35112bee08c2e93e4c9062cfd"
+      "baseline_extracted_sha256": "cd90f78a2c4471fee25b00ea8f55ebbb9cafd8c35112bee08c2e93e4c9062cfd",
+      "reason": "remaining audit remediation: deterministic bounds, private storage, safe diagnostics and embedding contracts"
     },
     "src/prometheist/model_catalog.py": {
       "source_path": "src/prometheist/gui_models.py",
       "source_sha256": "ea9bc4d6d7cc3529d3e73f5bc0de4a937450058f03d5d21f1ddca185c5ab9503",
-      "extracted_sha256": "9a39e09e2f3b3e9ca670a48213dc304436e9f1801d75ffb1a94613775de35555",
+      "extracted_sha256": "14a79d3ece21becc3f8605093db9422bb57016d45ca16ffd89239be5bb52dc9b",
       "extraction_path": "src/persistent_cognition/model_catalog.py",
       "status": "imported",
-      "baseline_extracted_sha256": "ebadbd45d354e7cb27813453e2defadc59eba056a529cc8d58b45af39c637610"
+      "baseline_extracted_sha256": "ebadbd45d354e7cb27813453e2defadc59eba056a529cc8d58b45af39c637610",
+      "reason": "remaining audit remediation: deterministic bounds, private storage, safe diagnostics and embedding contracts"
     },
     "src/prometheist/model_evidence_budget.py": {
       "source_path": "src/prometheist/model_evidence_budget.py",
@@ -777,10 +794,11 @@
     "src/prometheist/model_residency.py": {
       "source_path": "src/prometheist/model_residency.py",
       "source_sha256": "d83d9aa47592b5a44dae8bd3d97cd34a4039964c81da14084ebebed15911e7c5",
-      "extracted_sha256": "407915e02f7894f4b1db4f2d3b969aa0aac12d5e5830a3d19b6a83deba952f27",
+      "extracted_sha256": "483b08d96251ef16f097d76af065a6c288423eef3960afbb3e8acf3f5fe50370",
       "extraction_path": "src/persistent_cognition/model_residency.py",
       "status": "imported",
-      "baseline_extracted_sha256": "d5819a2edc47607bcec9f05f9c757b12d8b33508f2e0be3600acb66bfbd58ebe"
+      "baseline_extracted_sha256": "d5819a2edc47607bcec9f05f9c757b12d8b33508f2e0be3600acb66bfbd58ebe",
+      "reason": "remaining audit remediation: deterministic bounds, private storage, safe diagnostics and embedding contracts"
     },
     "src/prometheist/model_runtime.py": {
       "source_path": "src/prometheist/gui_runtime.py",
@@ -808,50 +826,56 @@
     "src/prometheist/network_consent.py": {
       "source_path": "src/prometheist/network_consent.py",
       "source_sha256": "d5106234965367a4be94c45465f5327d99b9be08b15df7079121d18b06083284",
-      "extracted_sha256": "b00d37526e6b6111efbecb19985ab45c1de1b8cd997f18a4c027bb8fc48064d1",
+      "extracted_sha256": "d0f2e0bc317bbc156070aa906a6aba3e22fad0e8cd902275e2f381eddbf9e5d6",
       "extraction_path": "src/persistent_cognition/network_consent.py",
       "status": "imported",
-      "baseline_extracted_sha256": "355da30e6aeb05f171b84c45382655b85d121546c6906161909fb5e886e7a093"
+      "baseline_extracted_sha256": "355da30e6aeb05f171b84c45382655b85d121546c6906161909fb5e886e7a093",
+      "reason": "remaining audit remediation: deterministic bounds, private storage, safe diagnostics and embedding contracts"
     },
     "src/prometheist/ollama_runtime.py": {
       "source_path": "src/prometheist/ollama_runtime.py",
       "source_sha256": "ae8140114ec6a8b7c570a14436df2ddc67ca2cc25f513d764c1b778cf07c1233",
-      "extracted_sha256": "c78018e6de69a992177cbe32c092b618214e10ae9318a1a69e7cd251abd7a8f2",
+      "extracted_sha256": "cf0c2b945dfcd2a164c10cf27505f44f2e920314c209ee7773416a3d2040df3f",
       "extraction_path": "src/persistent_cognition/ollama_runtime.py",
       "status": "imported",
-      "baseline_extracted_sha256": "ae8140114ec6a8b7c570a14436df2ddc67ca2cc25f513d764c1b778cf07c1233"
+      "baseline_extracted_sha256": "ae8140114ec6a8b7c570a14436df2ddc67ca2cc25f513d764c1b778cf07c1233",
+      "reason": "remaining audit remediation: deterministic bounds, private storage, safe diagnostics and embedding contracts"
     },
     "src/prometheist/openai_transport.py": {
       "source_path": "src/prometheist/openai_transport.py",
       "source_sha256": "f2f1cfb4b21e09b6fd527ad3801f754ea4529e072ff6c9ec203b12db77b8dcb3",
-      "extracted_sha256": "53751ed1a9830fc9932ac4485bb97bf59603f7f5bfd0f0c77714ab6f6e68ac9c",
+      "extracted_sha256": "97cecfc844a2fe27fdd98802aa4c4cb090931fc380b0196fe081a13a35c601b3",
       "extraction_path": "src/persistent_cognition/openai_transport.py",
       "status": "imported",
-      "baseline_extracted_sha256": "f2f1cfb4b21e09b6fd527ad3801f754ea4529e072ff6c9ec203b12db77b8dcb3"
+      "baseline_extracted_sha256": "f2f1cfb4b21e09b6fd527ad3801f754ea4529e072ff6c9ec203b12db77b8dcb3",
+      "reason": "remaining audit remediation: deterministic bounds, private storage, safe diagnostics and embedding contracts"
     },
     "src/prometheist/operator_state.py": {
       "source_path": "src/prometheist/operator_state.py",
       "source_sha256": "42b749abaebf0a13ef2b34cf32147a73f322956d787f99c3778546518a2cbbeb",
-      "extracted_sha256": "9389856fac133e6306c385153213c4820bbd5961cc7cad17d793647f422e5761",
+      "extracted_sha256": "950399c4392e5f77a50e782e9a0977f379bef67ef57b30a1bc8ad28b2fe7fc58",
       "extraction_path": "src/persistent_cognition/operator_state.py",
       "status": "imported",
-      "baseline_extracted_sha256": "42b749abaebf0a13ef2b34cf32147a73f322956d787f99c3778546518a2cbbeb"
+      "baseline_extracted_sha256": "42b749abaebf0a13ef2b34cf32147a73f322956d787f99c3778546518a2cbbeb",
+      "reason": "remaining audit remediation: deterministic bounds, private storage, safe diagnostics and embedding contracts"
     },
     "src/prometheist/percept_adapters.py": {
       "source_path": "src/prometheist/percept_adapters.py",
       "source_sha256": "f2a1b148a840a0fc6116e20ab206f66ddde1e5913c90f6d4085c4a134991fdfa",
-      "extracted_sha256": "e1aa5e6e026a108e1f34b20076588c72d0f1fd160271a8693e6e76d9de954f72",
+      "extracted_sha256": "0663554d391332500a1648a355455c69d01436e1b88433c93ea630108b454a0c",
       "extraction_path": "src/persistent_cognition/percept_adapters.py",
       "status": "imported",
-      "baseline_extracted_sha256": "f2a1b148a840a0fc6116e20ab206f66ddde1e5913c90f6d4085c4a134991fdfa"
+      "baseline_extracted_sha256": "f2a1b148a840a0fc6116e20ab206f66ddde1e5913c90f6d4085c4a134991fdfa",
+      "reason": "remaining audit remediation: deterministic bounds, private storage, safe diagnostics and embedding contracts"
     },
     "src/prometheist/percept_cli.py": {
       "source_path": "src/prometheist/percept_cli.py",
       "source_sha256": "1adeacf512cb7b4dc7cc77f3a60c62fda81d7ea55feed6354300e85aa25e51cc",
-      "extracted_sha256": "5bd98f73d8294e1f40833a217e06d3039b4691269ddc4330d9ff0f2a2241b49f",
+      "extracted_sha256": "12e7b3eef2e17d34c766c337c2ac2d8ed70835974d5ab8dc51ef2cb557129a07",
       "extraction_path": "src/persistent_cognition/percept_cli.py",
       "status": "imported",
-      "baseline_extracted_sha256": "877e9d064255b8503094c01ae13d44d7f33db799a1dab22edb49c27c37b04be8"
+      "baseline_extracted_sha256": "877e9d064255b8503094c01ae13d44d7f33db799a1dab22edb49c27c37b04be8",
+      "reason": "remaining audit remediation: deterministic bounds, private storage, safe diagnostics and embedding contracts"
     },
     "src/prometheist/percept_context.py": {
       "source_path": "src/prometheist/percept_context.py",
@@ -863,50 +887,56 @@
     "src/prometheist/percept_intake.py": {
       "source_path": "src/prometheist/percept_intake.py",
       "source_sha256": "6e662e7ca85a5c4c68ce7147b56d2dd0e9c0fe531ff54722fbf047cf3fb785df",
-      "extracted_sha256": "d2ef4599410d3f8a299c1c4635b0b75d61f0ec23d3c946e71cec6e5e71349160",
+      "extracted_sha256": "7e8d791f9b325aba336a21a9f74cf687360b86a6f142a5732ea84813c655b72d",
       "extraction_path": "src/persistent_cognition/percept_intake.py",
       "status": "imported",
-      "baseline_extracted_sha256": "6e662e7ca85a5c4c68ce7147b56d2dd0e9c0fe531ff54722fbf047cf3fb785df"
+      "baseline_extracted_sha256": "6e662e7ca85a5c4c68ce7147b56d2dd0e9c0fe531ff54722fbf047cf3fb785df",
+      "reason": "remaining audit remediation: deterministic bounds, private storage, safe diagnostics and embedding contracts"
     },
     "src/prometheist/percept_journal.py": {
       "source_path": "src/prometheist/percept_journal.py",
       "source_sha256": "8472d9a939fc849db105efa03d3afeced55993c9f6b185ccb3eb6e53eb8795f5",
-      "extracted_sha256": "7ed9f5d64dee23c560120fb2d907c0b3fa56809da4b295d56f575c02dc0d857a",
+      "extracted_sha256": "e7378c401078ffef296c7e591007c7cd0c327b949db323cc7500bc6f185558c6",
       "extraction_path": "src/persistent_cognition/percept_journal.py",
       "status": "imported",
-      "baseline_extracted_sha256": "8472d9a939fc849db105efa03d3afeced55993c9f6b185ccb3eb6e53eb8795f5"
+      "baseline_extracted_sha256": "8472d9a939fc849db105efa03d3afeced55993c9f6b185ccb3eb6e53eb8795f5",
+      "reason": "remaining audit remediation: deterministic bounds, private storage, safe diagnostics and embedding contracts"
     },
     "src/prometheist/percept_response_runtime.py": {
       "source_path": "src/prometheist/percept_response_runtime.py",
       "source_sha256": "c726091b0395fab5722e422c6aa5b48b175b833b87ed590161728a2f84c754e8",
-      "extracted_sha256": "1c68577c57a53de2d3b5da42ce05f2b75066eecab5cdf556af4fb08c973ade85",
+      "extracted_sha256": "ce7680b58ddcb6bcfe013aa2d30c8e63628d347437d9844e1b6e22150034af6e",
       "extraction_path": "src/persistent_cognition/percept_response_runtime.py",
       "status": "imported",
-      "baseline_extracted_sha256": "100d2a4a3f490ac1e264620cb36ff7a8099d56ee471ce5973e6e7ad006b9e7dd"
+      "baseline_extracted_sha256": "100d2a4a3f490ac1e264620cb36ff7a8099d56ee471ce5973e6e7ad006b9e7dd",
+      "reason": "remaining audit remediation: deterministic bounds, private storage, safe diagnostics and embedding contracts"
     },
     "src/prometheist/percept_response_worker.py": {
       "source_path": "src/prometheist/percept_response_worker.py",
       "source_sha256": "44343632dcd7ae9d33f1153c4547b28d096067b1c71c417ab2bedbf3781f1554",
-      "extracted_sha256": "7575b47f155cdee93d04a47cb1dcf61bf6b8ef5407874d1b045b283d3ad2b937",
+      "extracted_sha256": "afd8fb6891b382bd36a3cee0b0419364f495f5b9faccfd14c8469deaae480134",
       "extraction_path": "src/persistent_cognition/percept_response_worker.py",
       "status": "imported",
-      "baseline_extracted_sha256": "c28143a7f3ba0b5eced7a12830b6dd7f38a1539d8ce665f678613fc57f668e5e"
+      "baseline_extracted_sha256": "c28143a7f3ba0b5eced7a12830b6dd7f38a1539d8ce665f678613fc57f668e5e",
+      "reason": "remaining audit remediation: deterministic bounds, private storage, safe diagnostics and embedding contracts"
     },
     "src/prometheist/percept_triage.py": {
       "source_path": "src/prometheist/percept_triage.py",
       "source_sha256": "bb0964aa8e7863ef66f1bab58cf55953d6bad308942f78c70e01ffff80a83227",
-      "extracted_sha256": "a639827adb37e4755f25cfb5f3e16b0b982acc8bf990dad57caad069a11b02b3",
+      "extracted_sha256": "88d52fb41eb9463bfe504f837a59d6aa4a03f0b413c3320fb1a2a24bc0b619d2",
       "extraction_path": "src/persistent_cognition/percept_triage.py",
       "status": "imported",
-      "baseline_extracted_sha256": "bb0964aa8e7863ef66f1bab58cf55953d6bad308942f78c70e01ffff80a83227"
+      "baseline_extracted_sha256": "bb0964aa8e7863ef66f1bab58cf55953d6bad308942f78c70e01ffff80a83227",
+      "reason": "remaining audit remediation: deterministic bounds, private storage, safe diagnostics and embedding contracts"
     },
     "src/prometheist/perception.py": {
       "source_path": "src/prometheist/perception.py",
       "source_sha256": "3822cbbb8f120b64ae87295235ddb7402919618689526bdf461a69082a546db3",
-      "extracted_sha256": "9c4bc4a7aca4cef46708d9cfdc6fff674798d98b577de480884516fa2c7dabb7",
+      "extracted_sha256": "eb12d7b49bb1321fd0c429937d157da3b3fcadf80dbb9e56ac57258ea2d23dc8",
       "extraction_path": "src/persistent_cognition/perception.py",
       "status": "imported",
-      "baseline_extracted_sha256": "3822cbbb8f120b64ae87295235ddb7402919618689526bdf461a69082a546db3"
+      "baseline_extracted_sha256": "3822cbbb8f120b64ae87295235ddb7402919618689526bdf461a69082a546db3",
+      "reason": "remaining audit remediation: deterministic bounds, private storage, safe diagnostics and embedding contracts"
     },
     "src/prometheist/postgres_association_projection.py": {
       "source_path": "src/prometheist/postgres_association_projection.py",
@@ -927,18 +957,20 @@
     "src/prometheist/postgres_scale_benchmark.py": {
       "source_path": "src/prometheist/postgres_scale_benchmark.py",
       "source_sha256": "1db0fb2c6410e7af66c552baa8e1151fdcfaf9ece5988b523943d2c786b0dd33",
-      "extracted_sha256": "dc0539b62ed0127972b88a923034cdd1d009b33e9e8ed0ddda5b9f6452c2a759",
+      "extracted_sha256": "62fb2f289e73ea8512c6f2178589e2bf0672fd75d158947927315b60c3310742",
       "extraction_path": "src/persistent_cognition/postgres_scale_benchmark.py",
       "status": "imported",
-      "baseline_extracted_sha256": "1db0fb2c6410e7af66c552baa8e1151fdcfaf9ece5988b523943d2c786b0dd33"
+      "baseline_extracted_sha256": "1db0fb2c6410e7af66c552baa8e1151fdcfaf9ece5988b523943d2c786b0dd33",
+      "reason": "remaining audit remediation: deterministic bounds, private storage, safe diagnostics and embedding contracts"
     },
     "src/prometheist/process_lock.py": {
       "source_path": "src/prometheist/gui_instance.py",
       "source_sha256": "09dfacabf88e8e2bb3212b002b6482b2a3b19456705bbdb6101a011cb98d8162",
-      "extracted_sha256": "a44a7bcf07789fd2796f3a49ce94a92aa994839bf518a4f89b75ad5c4855495f",
+      "extracted_sha256": "077917952c8aef2bc30894b3d306572d56daf0a9f40c5d807fea378b48f25899",
       "extraction_path": "src/persistent_cognition/process_lock.py",
       "status": "imported",
-      "baseline_extracted_sha256": "09dfacabf88e8e2bb3212b002b6482b2a3b19456705bbdb6101a011cb98d8162"
+      "baseline_extracted_sha256": "09dfacabf88e8e2bb3212b002b6482b2a3b19456705bbdb6101a011cb98d8162",
+      "reason": "remaining audit remediation: deterministic bounds, private storage, safe diagnostics and embedding contracts"
     },
     "src/prometheist/projection_freshness.py": {
       "source_path": "src/prometheist/projection_freshness.py",
@@ -983,18 +1015,20 @@
     "src/prometheist/runtime_job.py": {
       "source_path": "src/prometheist/gui_worker.py",
       "source_sha256": "76617b1e462136f906a01979386fcee3a5c43f7f8d481f1758ffa0010ca24c5c",
-      "extracted_sha256": "aa914fc989c4f80ed227ec93891697c624b7991e47324af06b6c6f3fe30434f4",
+      "extracted_sha256": "6c1b1607f3840b94de3f3577b29e6d497c8547807a52fc57a3eea2a0dcd53b0e",
       "extraction_path": "src/persistent_cognition/runtime_job.py",
       "status": "imported",
-      "baseline_extracted_sha256": "2f5b2423b4b3f487dee9ae4cf6f3540dcede8247688e0dc473a8b693dab36c31"
+      "baseline_extracted_sha256": "2f5b2423b4b3f487dee9ae4cf6f3540dcede8247688e0dc473a8b693dab36c31",
+      "reason": "remaining audit remediation: deterministic bounds, private storage, safe diagnostics and embedding contracts"
     },
     "src/prometheist/runtime_settings.py": {
       "source_path": "src/prometheist/gui_config.py",
       "source_sha256": "4e6c9dcfdab51709bba7b955916f558c34ebe24ec6f57dd6b9a2446e2310115a",
-      "extracted_sha256": "28e76cabf0244ef97e82317de1b6fd68c61aaefb14ed6fcc69e67219f56b971f",
+      "extracted_sha256": "5ae664155ddc42e60937779c804e170899655fb352bd7521d516b43320206983",
       "extraction_path": "src/persistent_cognition/runtime_settings.py",
       "status": "imported",
-      "baseline_extracted_sha256": "ebb656ae77d5f05e86eaaf9f6c23ffe6035ea44c6d348d01c0ac05c3ffe6e340"
+      "baseline_extracted_sha256": "ebb656ae77d5f05e86eaaf9f6c23ffe6035ea44c6d348d01c0ac05c3ffe6e340",
+      "reason": "remaining audit remediation: deterministic bounds, private storage, safe diagnostics and embedding contracts"
     },
     "src/prometheist/scale_benchmark.py": {
       "source_path": "src/prometheist/scale_benchmark.py",
@@ -1049,18 +1083,20 @@
     "src/prometheist/situation_runtime.py": {
       "source_path": "src/prometheist/situation_runtime.py",
       "source_sha256": "8ae4b7f0f03b94522e6a5e8afa1db0c8098d1bed3ba5cac60e3b184dbb4bf4a6",
-      "extracted_sha256": "08532d17835e2dc6ad15bb091f48f67aa1b89ad3cff06eb9854ff43f43048fa0",
+      "extracted_sha256": "0cfce1f077fc9e1aa65b97dda8b2ef13ecfe5789e5a1671e8f2e8c8dc560e610",
       "extraction_path": "src/persistent_cognition/situation_runtime.py",
       "status": "imported",
-      "baseline_extracted_sha256": "8ae4b7f0f03b94522e6a5e8afa1db0c8098d1bed3ba5cac60e3b184dbb4bf4a6"
+      "baseline_extracted_sha256": "8ae4b7f0f03b94522e6a5e8afa1db0c8098d1bed3ba5cac60e3b184dbb4bf4a6",
+      "reason": "remaining audit remediation: deterministic bounds, private storage, safe diagnostics and embedding contracts"
     },
     "src/prometheist/situation_worker.py": {
       "source_path": "src/prometheist/situation_worker.py",
       "source_sha256": "190d3508e051711effc300983ab145446112cffc40ae8d3869b7f2a8b1794bdb",
-      "extracted_sha256": "e4e028411646a514df3bfb97ea79c3bcd0517471bc5057cd59903df894277fe3",
+      "extracted_sha256": "ee6de7237f817fce06f1592de34f7e63dd3519802286a95ed78112dd7ffb8f55",
       "extraction_path": "src/persistent_cognition/situation_worker.py",
       "status": "imported",
-      "baseline_extracted_sha256": "190d3508e051711effc300983ab145446112cffc40ae8d3869b7f2a8b1794bdb"
+      "baseline_extracted_sha256": "190d3508e051711effc300983ab145446112cffc40ae8d3869b7f2a8b1794bdb",
+      "reason": "remaining audit remediation: deterministic bounds, private storage, safe diagnostics and embedding contracts"
     },
     "src/prometheist/situations.py": {
       "source_path": "src/prometheist/situations.py",
@@ -1089,18 +1125,20 @@
     "src/prometheist/worker_runtime.py": {
       "source_path": "src/prometheist/worker_runtime.py",
       "source_sha256": "2dbba4ddc9fde9cdadac4e0e3e3f7caae6353a24f481d3d78ad57e5bfae40131",
-      "extracted_sha256": "0d6c37c210bd6c4c8287f5fa5ecbd94cf60c1ef04de60b59df878d78a4716ab6",
+      "extracted_sha256": "49a4849bc3b4d70bc09ec9a847179dfc7c0e6487013c18d7f3c834b78460a0e5",
       "extraction_path": "src/persistent_cognition/worker_runtime.py",
       "status": "imported",
-      "baseline_extracted_sha256": "2dbba4ddc9fde9cdadac4e0e3e3f7caae6353a24f481d3d78ad57e5bfae40131"
+      "baseline_extracted_sha256": "2dbba4ddc9fde9cdadac4e0e3e3f7caae6353a24f481d3d78ad57e5bfae40131",
+      "reason": "remaining audit remediation: deterministic bounds, private storage, safe diagnostics and embedding contracts"
     },
     "src/prometheist/worker_store.py": {
       "source_path": "src/prometheist/worker_store.py",
       "source_sha256": "dedc7f408d9720c5e870f9929712f135c5e0f558100762c3ddc64abfe22d9c8b",
-      "extracted_sha256": "313687c67cb7b3f774c20ee0ed29d981e3d29b020a7fb98a84bb26ba4f847316",
+      "extracted_sha256": "9c5e19d03d738a983cf93855d66b5eba59b9b56a43ab8418e07b0e8ba7126149",
       "extraction_path": "src/persistent_cognition/worker_store.py",
       "status": "imported",
-      "baseline_extracted_sha256": "dedc7f408d9720c5e870f9929712f135c5e0f558100762c3ddc64abfe22d9c8b"
+      "baseline_extracted_sha256": "dedc7f408d9720c5e870f9929712f135c5e0f558100762c3ddc64abfe22d9c8b",
+      "reason": "remaining audit remediation: deterministic bounds, private storage, safe diagnostics and embedding contracts"
     },
     "tests/__init__.py": {
       "source_path": "tests/__init__.py",
@@ -1160,10 +1198,11 @@
     "tests/conftest.py": {
       "source_path": "tests/conftest.py",
       "source_sha256": "77f20459ab0511bff297a0c3da0da89401f3f96113f0a3e31f7b43b7be65fd48",
-      "extracted_sha256": "57935a26464297fde1d2d64dcdac255ed459e31c5dc267d21060d859294636ca",
+      "extracted_sha256": "a5302bb87aee29a0269f52693ecc2f1f80532046e571c27eb522c37c72bae69f",
       "extraction_path": "tests/conftest.py",
       "status": "imported",
-      "baseline_extracted_sha256": "4ba829368855eca06de8edb48c8935a3fa2bbea852ebb1e4a9a96f9bb35d4a75"
+      "baseline_extracted_sha256": "4ba829368855eca06de8edb48c8935a3fa2bbea852ebb1e4a9a96f9bb35d4a75",
+      "reason": "remaining audit remediation: deterministic bounds, private storage, safe diagnostics and embedding contracts"
     },
     "tests/fixtures/retrieval_corpus.json": {
       "source_path": "benchmarks/person_fidelity_public_v1.json",
@@ -1461,10 +1500,11 @@
     "tests/test_evidence_bound_transport_v2.py": {
       "source_path": "tests/test_evidence_bound_transport_v2.py",
       "source_sha256": "89a1103d37eb1201c74321636f8519daa60c8f5e5da6800d1eb31193f8a678ee",
-      "extracted_sha256": "2dd73c23a1aa9686ea8ab79afd359fd7e92a9de21e5118a70fb3e368de0e2df3",
+      "extracted_sha256": "ba8ff67797cd121fdc29d8f2c2d1953d38ad7c94d460ace3d971a5a95729319b",
       "extraction_path": "tests/test_evidence_bound_transport_v2.py",
       "status": "imported",
-      "baseline_extracted_sha256": "89a1103d37eb1201c74321636f8519daa60c8f5e5da6800d1eb31193f8a678ee"
+      "baseline_extracted_sha256": "89a1103d37eb1201c74321636f8519daa60c8f5e5da6800d1eb31193f8a678ee",
+      "reason": "remaining audit remediation: deterministic bounds, private storage, safe diagnostics and embedding contracts"
     },
     "tests/test_fts_failure_corpus.py": {
       "source_path": "tests/test_fts_failure_corpus.py",
@@ -1517,10 +1557,11 @@
     "tests/test_llm.py": {
       "source_path": "tests/test_llm.py",
       "source_sha256": "c9e451fa1c267f3d7fecd84205a81d96a2a026071d37543d6d3ca34398a6f51b",
-      "extracted_sha256": "28a8d2ad0b8e66efb042616a1b44bacd28273fe32654d79594d0decbcfd38d43",
+      "extracted_sha256": "81646b618e4e99a67601a3aeaec0e9fdbbf243dc4e35416da4ec17430ab26016",
       "extraction_path": "tests/test_llm.py",
       "status": "imported",
-      "baseline_extracted_sha256": "c9e451fa1c267f3d7fecd84205a81d96a2a026071d37543d6d3ca34398a6f51b"
+      "baseline_extracted_sha256": "c9e451fa1c267f3d7fecd84205a81d96a2a026071d37543d6d3ca34398a6f51b",
+      "reason": "remaining audit remediation: deterministic bounds, private storage, safe diagnostics and embedding contracts"
     },
     "tests/test_memory_integrity.py": {
       "source_path": "tests/test_memory_integrity.py",
@@ -1573,10 +1614,11 @@
     "tests/test_ollama_adapter_robustness.py": {
       "source_path": "tests/test_ollama_adapter_robustness.py",
       "source_sha256": "009224c33c1fc32586bb5fa71d98fb8aa29317573a17b6947fe44245b39421a8",
-      "extracted_sha256": "06bb53985ae1a83c18c36d4b9b529c6a7dbee6cb834d8f6d6653f03dfc9538d4",
+      "extracted_sha256": "d8452274bce9b58cd70cd985d0474e3f99561cda79b4d8e8f5d0a0cfb06f653d",
       "extraction_path": "tests/test_ollama_adapter_robustness.py",
       "status": "imported",
-      "baseline_extracted_sha256": "009224c33c1fc32586bb5fa71d98fb8aa29317573a17b6947fe44245b39421a8"
+      "baseline_extracted_sha256": "009224c33c1fc32586bb5fa71d98fb8aa29317573a17b6947fe44245b39421a8",
+      "reason": "remaining audit remediation: deterministic bounds, private storage, safe diagnostics and embedding contracts"
     },
     "tests/test_ollama_response_native.py": {
       "source_path": "tests/test_ollama_response_native.py",
@@ -1597,18 +1639,20 @@
     "tests/test_ollama_runtime.py": {
       "source_path": "tests/test_ollama_runtime.py",
       "source_sha256": "09579a97b87bc4be89f36e2fab0967fb19d2e306bb9e51df921709cbf882b772",
-      "extracted_sha256": "5ddf4bdac031151ce247f6eb3a2a9ceed428ec938b0ebf080f516e501ba84499",
+      "extracted_sha256": "1ea6a252f1bfc8103f6742ef6ac1f0ec92a28ad2a754f5a09433af3d17bb21ed",
       "extraction_path": "tests/test_ollama_runtime.py",
       "status": "imported",
-      "baseline_extracted_sha256": "09579a97b87bc4be89f36e2fab0967fb19d2e306bb9e51df921709cbf882b772"
+      "baseline_extracted_sha256": "09579a97b87bc4be89f36e2fab0967fb19d2e306bb9e51df921709cbf882b772",
+      "reason": "remaining audit remediation: deterministic bounds, private storage, safe diagnostics and embedding contracts"
     },
     "tests/test_percept_journal.py": {
       "source_path": "tests/test_percept_journal.py",
       "source_sha256": "01559f650b7a59c4c011995a4e71fbbb976a76e3426874db473bafe387cfcb8b",
-      "extracted_sha256": "05ec925b0a33c60df88f0555c686ec8128ef70a8b06e198cd19591b36d0a1fce",
+      "extracted_sha256": "ba9e1a268a25ed8714e23ee278b8b486aa608a24183e1e27b5797f4fa86b8fd8",
       "extraction_path": "tests/test_percept_journal.py",
       "status": "imported",
-      "baseline_extracted_sha256": "01559f650b7a59c4c011995a4e71fbbb976a76e3426874db473bafe387cfcb8b"
+      "baseline_extracted_sha256": "01559f650b7a59c4c011995a4e71fbbb976a76e3426874db473bafe387cfcb8b",
+      "reason": "remaining audit remediation: deterministic bounds, private storage, safe diagnostics and embedding contracts"
     },
     "tests/test_percept_response_contract.py": {
       "source_path": "tests/test_percept_response_contract.py",
@@ -1701,10 +1745,11 @@
     "tests/test_redteam_memory_item_size_bound.py": {
       "source_path": "tests/test_redteam_memory_item_size_bound.py",
       "source_sha256": "9d357d31c74b0129f26f36ce9b645831a03dc0f1e4feda9e7415f61098f2b92d",
-      "extracted_sha256": "5b840a970f25b069958219f238cd3a30f00d8fb0fa502850636dd5c11890e5eb",
+      "extracted_sha256": "06fb479901b9c40481138aa1c6098f7c725de326d66c4eeafcf2f6506631dd23",
       "extraction_path": "tests/test_redteam_memory_item_size_bound.py",
       "status": "imported",
-      "baseline_extracted_sha256": "9d357d31c74b0129f26f36ce9b645831a03dc0f1e4feda9e7415f61098f2b92d"
+      "baseline_extracted_sha256": "9d357d31c74b0129f26f36ce9b645831a03dc0f1e4feda9e7415f61098f2b92d",
+      "reason": "remaining audit remediation: deterministic bounds, private storage, safe diagnostics and embedding contracts"
     },
     "tests/test_redteam_projection_freshness_bounded.py": {
       "source_path": "tests/test_redteam_projection_freshness_bounded.py",
@@ -1733,10 +1778,11 @@
     "tests/test_response_memory_view.py": {
       "source_path": "tests/test_response_memory_view.py",
       "source_sha256": "4c0fb863ad6d7f01ce6ac1c9d1e70fb11f56fb303efdbf7444e8f547d3ded56e",
-      "extracted_sha256": "8f9f3dc93b3120b511afb23da666d9501ad744d53d0aa1553fae7956cabe80dc",
+      "extracted_sha256": "f135173cebe774ff97ebe1a233d6fce3f7f1f4841062775f5fe7178ec4e858e6",
       "extraction_path": "tests/test_response_memory_view.py",
       "status": "imported",
-      "baseline_extracted_sha256": "4c0fb863ad6d7f01ce6ac1c9d1e70fb11f56fb303efdbf7444e8f547d3ded56e"
+      "baseline_extracted_sha256": "4c0fb863ad6d7f01ce6ac1c9d1e70fb11f56fb303efdbf7444e8f547d3ded56e",
+      "reason": "remaining audit remediation: deterministic bounds, private storage, safe diagnostics and embedding contracts"
     },
     "tests/test_response_policy.py": {
       "source_path": "tests/test_response_policy.py",
@@ -1943,10 +1989,11 @@
     "tests/unit/test_network_consent.py": {
       "source_path": "tests/unit/test_network_consent.py",
       "source_sha256": "e2e6a5c4c19b5c93e7557f94e151e25169d4be3007239554e26df2a147bfcd9b",
-      "extracted_sha256": "0f6b325184c9617f2c6e0fdfbd01fe780b716d25d807444dc995bd266efc3b2a",
+      "extracted_sha256": "3d6136fc321136a04bf75ea3e8a76d44374c0f0afa928085c5885ef887a8d956",
       "extraction_path": "tests/unit/test_network_consent.py",
       "status": "imported",
-      "baseline_extracted_sha256": "a4d22153b93657b99e229dbbd4074dc3dc270a479c2b80678b4a589496ad90a8"
+      "baseline_extracted_sha256": "a4d22153b93657b99e229dbbd4074dc3dc270a479c2b80678b4a589496ad90a8",
+      "reason": "remaining audit remediation: deterministic bounds, private storage, safe diagnostics and embedding contracts"
     },
     "tests/unit/test_predictive_situations.py": {
       "source_path": "tests/unit/test_predictive_situations.py",
@@ -1984,32 +2031,96 @@
       "source_path": null,
       "source_sha256": null,
       "extraction_path": "src/persistent_cognition/percept_service.py",
-      "extracted_sha256": "48f24edcc355f0eef160caa06342bc3f1c2f8c96afc34350be7d1a2c4f98b01e",
-      "reason": "Bounded continuous percept supervisor with namespace propagation, graceful stop, observable failures and restart-safe progress."
+      "extracted_sha256": "8c47930f6f01c932655e5ce7a1234369f687cd3bac3086148c7b7f89df951bac",
+      "reason": "Bounded continuous percept supervisor with namespace propagation, graceful stop, observable failures and restart-safe progress.; remaining audit remediation: deterministic bounds, private storage, safe diagnostics and embedding contracts"
     },
     "src/persistent_cognition/trusted_executors.py": {
       "status": "added",
       "source_path": null,
       "source_sha256": null,
       "extraction_path": "src/persistent_cognition/trusted_executors.py",
-      "extracted_sha256": "202fff2097fc82be76662872650c316317c8830e8414b15de6f444b15a74efef",
-      "reason": "Explicit trusted application executor registry and typed execution/idempotency request; never import observed-data code."
+      "extracted_sha256": "e4fb147461af381a9b6be2c2e97f48298fa400910b6884e6b787b271ba8a6ca3",
+      "reason": "Explicit trusted application executor registry and typed execution/idempotency request; never import observed-data code.; remaining audit remediation: deterministic bounds, private storage, safe diagnostics and embedding contracts"
     },
     "tests/test_percept_service.py": {
       "status": "added",
       "source_path": null,
       "source_sha256": null,
       "extraction_path": "tests/test_percept_service.py",
-      "extracted_sha256": "48235a62562d930ef08f8c5a8022570387686c6b32c6102e2711cf48d27432d4",
-      "reason": "Continuous service, ownership, namespace isolation, fresh worker callback bootstrap, error handling and finite feedback regressions."
+      "extracted_sha256": "879ad54289e2024eeabe6db41edcbb13c9316cf47133eaca6ba658ab0c4fa7c4",
+      "reason": "Continuous service, ownership, namespace isolation, fresh worker callback bootstrap, error handling and finite feedback regressions.; remaining audit remediation: deterministic bounds, private storage, safe diagnostics and embedding contracts"
     },
     "scripts/verify_source_baseline.py": {
       "status": "added",
       "source_path": null,
       "source_sha256": null,
       "extraction_path": "scripts/verify_source_baseline.py",
-      "extracted_sha256": "e7da6fe62e982f3c172e407165c45c26b4bf65026dd06e7fa3157c61c7c6ffea",
-      "reason": "Extraction provenance verifier for imported/adapted files, additions, retirements and unrecorded code."
+      "extracted_sha256": "6daacbe3b41bf68d385ac0c5fcb280c212603299ccdbe24baf3fa19293cd619a",
+      "reason": "Extraction provenance verifier for imported/adapted files, additions, retirements and unrecorded code.; remaining audit remediation: deterministic bounds, private storage, safe diagnostics and embedding contracts"
+    },
+    "src/persistent_cognition/resource_limits.py": {
+      "source_path": null,
+      "source_sha256": null,
+      "extraction_path": "src/persistent_cognition/resource_limits.py",
+      "extracted_sha256": "487f6ddef130a047e9283dd240212abbd087f41c857167a02cfe073f8165d3fb",
+      "status": "added",
+      "reason": "Remaining audit remediation: supported embedding, deterministic safety boundaries or regression coverage."
+    },
+    "src/persistent_cognition/private_storage.py": {
+      "source_path": null,
+      "source_sha256": null,
+      "extraction_path": "src/persistent_cognition/private_storage.py",
+      "extracted_sha256": "80c4aada2f2318632e16b6ea2f2f2ad8b2ff2433222fa27e8c5fd6c085349eac",
+      "status": "added",
+      "reason": "Remaining audit remediation: supported embedding, deterministic safety boundaries or regression coverage."
+    },
+    "src/persistent_cognition/api.py": {
+      "source_path": null,
+      "source_sha256": null,
+      "extraction_path": "src/persistent_cognition/api.py",
+      "extracted_sha256": "7f08108d119e5fbc53d07a3ceee22e068a1883beec35a10b2d22dd40ca18884b",
+      "status": "added",
+      "reason": "Remaining audit remediation: supported embedding, deterministic safety boundaries or regression coverage."
+    },
+    "src/persistent_cognition/diagnostics.py": {
+      "source_path": null,
+      "source_sha256": null,
+      "extraction_path": "src/persistent_cognition/diagnostics.py",
+      "extracted_sha256": "b19768fe7f6a119032ba2ca399e7006c485e9081a45f436f1b4deb78e170a6b7",
+      "status": "added",
+      "reason": "Remaining audit remediation: supported embedding, deterministic safety boundaries or regression coverage."
+    },
+    "tests/http_fakes.py": {
+      "source_path": null,
+      "source_sha256": null,
+      "extraction_path": "tests/http_fakes.py",
+      "extracted_sha256": "96bb958a1c0213a2a9744044384690e467e2a1a6d58ca2310616e9c5c095cd1f",
+      "status": "added",
+      "reason": "Remaining audit remediation: supported embedding, deterministic safety boundaries or regression coverage."
+    },
+    "tests/unit/test_binding_and_admission_regressions.py": {
+      "source_path": null,
+      "source_sha256": null,
+      "extraction_path": "tests/unit/test_binding_and_admission_regressions.py",
+      "extracted_sha256": "e209b251d16af795985668ed3d63ef58a0e6d18a6cf0b8e12d2b82fa3d80ac38",
+      "status": "added",
+      "reason": "Remaining audit remediation: supported embedding, deterministic safety boundaries or regression coverage."
+    },
+    "tests/unit/test_audit_hardening.py": {
+      "source_path": null,
+      "source_sha256": null,
+      "extraction_path": "tests/unit/test_audit_hardening.py",
+      "extracted_sha256": "898846f6bf2e699d69d26d2c0b39a7d88288b5a6b05671507413a67536a29537",
+      "status": "added",
+      "reason": "Remaining audit remediation: supported embedding, deterministic safety boundaries or regression coverage."
+    },
+    "src/persistent_cognition/schema.sql": {
+      "source_path": null,
+      "source_sha256": null,
+      "extraction_path": "src/persistent_cognition/schema.sql",
+      "extracted_sha256": "9d03a3a3945db6438badc158dc2af73bc9e03080785389ac64fa05674dee4291",
+      "status": "added",
+      "reason": "Installed-wheel copy of the checkout PostgreSQL schema; verifier requires byte identity."
     }
   },
   "manifest_version": 2

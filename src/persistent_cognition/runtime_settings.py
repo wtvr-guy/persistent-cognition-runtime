@@ -151,13 +151,19 @@ class AppSettings(SettingsRecord):
 
 def job_settings() -> AppSettings | None:
     path = os.environ.get(GUI_CONFIG_FILE_ENV)
-    raw = Path(path).read_text(encoding="utf-8") if path else os.environ.get(GUI_CONFIG_ENV)
+    from persistent_cognition.resource_limits import read_json_file, validate_text_intake
+    if path:
+        return AppSettings.model_validate(read_json_file(Path(path)))
+    raw = os.environ.get(GUI_CONFIG_ENV)
+    if raw:
+        validate_text_intake(raw)
     return AppSettings.model_validate_json(raw) if raw else None
 
 
 def load_settings(root: Path) -> AppSettings:
     path = root / "operator" / "app-settings.json"
-    return AppSettings.model_validate_json(path.read_text(encoding="utf-8")) if path.exists() else AppSettings()
+    from persistent_cognition.resource_limits import read_json_file
+    return AppSettings.model_validate(read_json_file(path)) if path.exists() else AppSettings()
 
 
 def save_settings(root: Path, settings: AppSettings):

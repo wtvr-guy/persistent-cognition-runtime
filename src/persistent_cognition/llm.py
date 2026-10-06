@@ -1,6 +1,10 @@
 """Stateless Ollama transport and evidence-formatting primitives."""
 from __future__ import annotations
 
+from persistent_cognition.resource_limits import bounded_http_request
+
+from persistent_cognition.diagnostics import exception_summary
+
 from datetime import datetime, timezone
 import hashlib
 import json
@@ -391,7 +395,7 @@ class OllamaClient:
             from persistent_cognition.model_residency import managed_inference
             with managed_inference(self._client, request_json, diagnostics):
                 validate_model_input(request_json)
-                response = self._client.post(request_path, json=request_json)
+                response = bounded_http_request(self._client, "POST", request_path, json=request_json)
                 diagnostics["http_status_code"] = getattr(response, "status_code", None)
                 response_content = getattr(response, "content", None)
                 if isinstance(response_content, bytes):
@@ -407,7 +411,7 @@ class OllamaClient:
             return body
         except Exception as exc:
             diagnostics["transport_error_type"] = type(exc).__name__
-            diagnostics["transport_error_message"] = str(exc)
+            diagnostics["transport_error_message"] = exception_summary(exc)
             raise
         finally:
             elapsed = time.monotonic() - t0
@@ -479,7 +483,7 @@ class OllamaClient:
             try:
                 from persistent_cognition.network_consent import NetworkPurpose, require_destination
                 require_destination(str(getattr(self._client, "base_url", self.base_url)), NetworkPurpose.MODEL)
-                response = self._client.get(path)
+                response = bounded_http_request(self._client, "GET", path)
                 response.raise_for_status()
                 payload = response.json()
                 if not isinstance(payload, dict):
@@ -492,7 +496,7 @@ class OllamaClient:
                     {
                         "endpoint": path,
                         "error_type": type(exc).__name__,
-                        "error_message": str(exc),
+                        "error_message": exception_summary(exc),
                     }
                 )
 

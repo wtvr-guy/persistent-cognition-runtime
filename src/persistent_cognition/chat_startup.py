@@ -46,8 +46,14 @@ def reset_chat_execution_state(
     """
 
     counts: dict[str, int] = {}
+    from persistent_cognition.advisory_lock import scheduler_ownership
     try:
-        with conn.cursor() as cur:
+        with scheduler_ownership(conn, scheduler_key), conn.cursor() as cur:
+            cur.execute("""SELECT EXISTS(SELECT 1 FROM attention_worker_claims
+                        WHERE scheduler_key = %s AND status = 'ACTIVE' AND lease_expires_at > now())""",
+                        (scheduler_key,))
+            if cur.fetchone()[0]:
+                raise RuntimeError("cannot reset scheduler state while an unexpired worker claim exists")
             for table in _RESET_TABLES_IN_DELETE_ORDER:
                 cur.execute(
                     sql.SQL("DELETE FROM {} WHERE scheduler_key = %s").format(

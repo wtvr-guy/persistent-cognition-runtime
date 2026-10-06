@@ -17,7 +17,7 @@ dependencies = [
 
 [project.scripts]
 pcr = "persistent_cognition:main"
-pcr-percept = "persistent_cognition.percept_cli:main"
+pcr-percept = "persistent_cognition.percept_cli:cli_entry"
 
 [build-system]
 requires = ["uv_build>=0.12.5,<0.13.0"]

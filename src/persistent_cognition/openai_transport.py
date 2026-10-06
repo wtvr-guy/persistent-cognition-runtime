@@ -85,7 +85,8 @@ def perform_response(owner, *, kind, system, user, evidence, schema, max_tokens)
             raise ValueError("Connect an OpenAI API key in Models or set OPENAI_API_KEY")
         # Fixed origin; proxies, redirects and user-supplied endpoints cannot receive credentials.
         with httpx.Client(trust_env=False, follow_redirects=False, timeout=300.0) as client:
-            response = client.post(OPENAI_BASE_URL + "/responses", json=request,
+            from persistent_cognition.resource_limits import bounded_http_request
+            response = bounded_http_request(client, "POST", OPENAI_BASE_URL + "/responses", json=request,
                                    headers={"Authorization": "Bearer " + key})
         diagnostics["http_status_code"] = response.status_code
         diagnostics["response_body_sha256"] = hashlib.sha256(response.content).hexdigest()

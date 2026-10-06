@@ -8,6 +8,10 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def verify_manifest(manifest, root=ROOT):
     failures = []
+    if (root / "src/persistent_cognition/schema.sql").exists() and (
+        (root / "src/persistent_cognition/schema.sql").read_bytes() != (root / "schema.sql").read_bytes()
+    ):
+        failures.append("packaged PostgreSQL schema differs from checkout schema")
     counts = {"unchanged": 0, "adapted": 0, "added": 0, "retired": 0}
     extraction_paths = set()
     for relative, record in manifest["files"].items():

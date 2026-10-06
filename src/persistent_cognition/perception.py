@@ -198,6 +198,11 @@ def _is_json_compatible(value: Any) -> bool:
 
 
 def _observation_text(value: Any, modality: PerceptModality) -> str:
+    from persistent_cognition.resource_limits import validate_json_intake, validate_text_intake
+    if modality is PerceptModality.TEXT:
+        validate_text_intake(value)
+    else:
+        validate_json_intake(value)
     if modality in {PerceptModality.IMAGE, PerceptModality.AUDIO, PerceptModality.VIDEO,
                      PerceptModality.FILE, PerceptModality.DOCUMENT}:
         from persistent_cognition.percept_adapters import MediaReference, verify_media

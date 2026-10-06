@@ -18,7 +18,7 @@ def _client(payload: dict, *, status_code: int = 200) -> httpx.Client:
         return httpx.Response(status_code, json=payload, request=request)
 
     return httpx.Client(
-        base_url="http://ollama.test",
+        base_url="https://ollama.test",
         transport=httpx.MockTransport(handler),
     )
 

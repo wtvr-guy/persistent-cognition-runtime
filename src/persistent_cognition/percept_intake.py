@@ -44,6 +44,9 @@ def ingest_percept(
     """
     if not delivery_id.strip():
         raise ValueError("delivery_id is required")
+    from persistent_cognition.resource_limits import validate_json_intake
+    validate_json_intake({"source": source.model_dump(mode="json"), "delivery_id": delivery_id,
+                          "observation": observation, "context": context.model_dump(mode="json") if context else None})
     if source.kind is PerceptKind.USER_INTERACTION:
         raise ValueError("explicit user prompts enter through begin_percept")
     policy_data = get_record(conn, "source_policy", source.source_id)

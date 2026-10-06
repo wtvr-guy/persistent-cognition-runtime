@@ -38,7 +38,7 @@ from persistent_cognition.percept_triage import (
 )
 from persistent_cognition.situations import Situation
 from persistent_cognition.worker_protocol import deterministic_worker_step_id, WorkerEffectPolicy
-from persistent_cognition.worker_runtime import GuardedWorkerLauncher
+from persistent_cognition.worker_runtime import GuardedWorkerLauncher, WorkerLaunchDenied
 from persistent_cognition.worker_store import register_worker_step, load_worker_result
 
 SITUATION_PROTOCOL = "v0.8-situation-v4"
@@ -519,6 +519,10 @@ def drain_situations(
                 scheduler_key=scheduler_key, worker_command=worker_command, should_stop=should_stop,
             )
         except Exception as exc:
+            if isinstance(exc, WorkerLaunchDenied) and exc.retryable:
+                # No process or external effect was started. Leave the durable
+                # task pending for the next bounded tick, with the same guards.
+                continue
             _quarantine_situation_task(
                 conn, task_id, exc, scheduler_key=scheduler_key, probe=probe, policy=policy,
             )

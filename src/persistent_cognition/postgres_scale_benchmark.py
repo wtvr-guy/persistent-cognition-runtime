@@ -367,6 +367,8 @@ def main() -> None:
         help="Base benchmark filenames under benchmarks/.",
     )
     parser.add_argument("--report", type=Path)
+    parser.add_argument("--confirm-database", required=True,
+                        help="Exact disposable database name; acknowledges destructive replacement.")
     args = parser.parse_args()
 
     if not args.database_url:
@@ -377,8 +379,15 @@ def main() -> None:
 
     benchmark_dir = Path(__file__).resolve().parents[2] / "benchmarks"
     results: list[PostgresScaleBenchmarkResult] = []
+    from persistent_cognition.network_consent import require_database_destination
+    from psycopg.conninfo import conninfo_to_dict
+    require_database_destination(args.database_url)
+    if conninfo_to_dict(args.database_url).get("dbname") != args.confirm_database:
+        parser.error("--confirm-database must match the explicit connection database name")
     with psycopg.connect(args.database_url) as conn:
         database_name = _require_benchmark_database(conn)
+        if database_name != args.confirm_database:
+            raise ValueError("connected database differs from destructive benchmark confirmation")
         print(f"benchmark_database={database_name}")
         for base_name in args.base:
             base_document = load_document(benchmark_dir / base_name)

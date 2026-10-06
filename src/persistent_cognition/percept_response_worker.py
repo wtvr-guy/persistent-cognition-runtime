@@ -11,6 +11,8 @@ model worker was given rather than inferring it from downstream behavior.
 """
 from __future__ import annotations
 
+from persistent_cognition.diagnostics import exception_summary
+
 from persistent_cognition.contract_registry import SEMANTIC_CONTRACTS
 
 from persistent_cognition.contract_registry import STAGE_CONTRACTS
@@ -337,7 +339,7 @@ class UserPromptLLM(PerceptSpecialists):
             temperature=self.temperature_for_kind(kind),
             output=output,
             error_type=type(error).__name__ if error is not None else None,
-            error_message=str(error) if error is not None else None,
+            error_message=exception_summary(error) if error is not None else None,
             evidence_prompt=evidence,
             transport_layout=(
                 ("responses:instructions,evidence,current-user" if getattr(self, "selection", None) is not None and self.selection.provider == "openai"
@@ -386,7 +388,7 @@ class UserPromptLLM(PerceptSpecialists):
             ),
             parsed_output=parsed_output,
             error_type=type(error).__name__ if error is not None else None,
-            error_message=str(error) if error is not None else None,
+            error_message=exception_summary(error) if error is not None else None,
         )
 
     def _record_validation_outcome(
@@ -522,6 +524,7 @@ def _execute_claimed_user_prompt_step(
     claim_id: UUID,
     worker_id: str,
     scheduler_key: str,
+    registry=DEFAULT_REGISTRY,
 ) -> PerceptStage:
     """Execute or rehydrate one stage with artifact-before-terminal ordering."""
 
@@ -550,7 +553,7 @@ def _execute_claimed_user_prompt_step(
                 envelope,
                 interaction,
                 scheduler_key=scheduler_key,
-                registry=DEFAULT_REGISTRY,
+                registry=registry,
             )
             artifact_journal.write_stage_result_artifact(
                 interaction_id=interaction.interaction_id,
@@ -585,7 +588,7 @@ def _execute_claimed_user_prompt_step(
             stage=stage.value,
             claim_id=claim_id,
             error_type=type(exc).__name__,
-            message=str(exc),
+            message=exception_summary(exc),
         )
         event_store.record_event(
             conn,
@@ -596,7 +599,7 @@ def _execute_claimed_user_prompt_step(
             payload={
                 "stage": stage.value,
                 "error_type": type(exc).__name__,
-                "message": str(exc),
+                "message": exception_summary(exc),
             },
             event_id=uuid5(claim_id, "error-event"),
         )
@@ -623,8 +626,11 @@ def _required_environment(name: str) -> str:
     return value
 
 
-def main() -> None:
+def main(*, registry=DEFAULT_REGISTRY) -> None:
     _configure_utf8_streams()
+    expected = os.environ.get("PCR_CAPABILITY_SNAPSHOT_SHA256")
+    if expected is not None and expected != registry.snapshot()["sha256"]:
+        raise RuntimeError("worker capability bootstrap differs from the parent registration snapshot")
     claim_id = UUID(_required_environment("PCR_WORKER_CLAIM_ID"))
     worker_id = _required_environment("PCR_WORKER_ID")
     scheduler_key = _required_environment("PCR_WORKER_SCHEDULER_KEY")
@@ -651,6 +657,7 @@ def main() -> None:
             claim_id=claim_id,
             worker_id=worker_id,
             scheduler_key=scheduler_key,
+            registry=registry,
         )
         if stage is PerceptStage.PERSIST_RESULT:
             persisted = _stage_result(
@@ -675,4 +682,5 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    from persistent_cognition.diagnostics import run_command
+    run_command(main)

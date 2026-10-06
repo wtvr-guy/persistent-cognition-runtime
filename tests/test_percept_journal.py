@@ -159,7 +159,7 @@ def test_complete_input_budget_counts_current_prompt_and_schema(monkeypatch):
 
 def test_full_prompt_budget_blocks_transport(monkeypatch):
     monkeypatch.setenv("PCR_MAX_MODEL_INPUT_BYTES", "100")
-    client = OllamaClient(base_url="http://ollama.test", model="model:test")
+    client = OllamaClient(base_url="https://ollama.test", model="model:test")
     attempted = []
     monkeypatch.setattr(client._client, "post", lambda *args, **kwargs: attempted.append(args))
     with pytest.raises(ModelEvidenceBudgetExceeded, match="complete model input"):

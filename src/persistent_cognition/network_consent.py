@@ -124,6 +124,8 @@ def require_destination(url: str, purpose: NetworkPurpose, *, root: Path | None 
     # endpoint; a generic "online" setting cannot silently authorize probing.
     if purpose in (NetworkPurpose.MODEL, NetworkPurpose.DATABASE) and _loopback(urlsplit(destination).hostname):
         return
+    if purpose is NetworkPurpose.MODEL and urlsplit(destination).scheme != "https":
+        raise PermissionError("remote model endpoints require verified HTTPS")
     proposal = consent_proposal(url, purpose)
     for grant in load_consent(root).grants:
         if (grant.schema_version == CONSENT_VERSION and grant.granted_by == "LOCAL_OPERATOR"
@@ -147,6 +149,8 @@ def require_database_destination(conninfo: str, *, root: Path | None = None):
         for index, host in enumerate(field.split(",")):
             if not host or host.startswith(("/", "@")):
                 continue  # local Unix-domain socket
+            if not _loopback(host) and params.get("sslmode", os.environ.get("PGSSLMODE")) != "verify-full":
+                raise PermissionError("remote PostgreSQL destinations require sslmode=verify-full")
             port = ports[index] if len(ports) > 1 else ports[0]
             formatted = f"[{host}]" if ":" in host else host
             require_destination(f"postgresql://{formatted}:{port}", NetworkPurpose.DATABASE, root=root)

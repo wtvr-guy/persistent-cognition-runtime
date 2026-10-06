@@ -1,6 +1,8 @@
 """PostgreSQL durability and guarded leasing for disposable workers."""
 from __future__ import annotations
 
+from persistent_cognition.diagnostics import exception_summary
+
 from collections.abc import Callable
 from datetime import datetime, timedelta, timezone
 from typing import Any
@@ -196,7 +198,7 @@ def guarded_claim_worker_step(
         metrics = host_probe.capture()
     except Exception as exc:  # every probe failure is a persisted denial input
         metrics = None
-        errors.append(f"{type(exc).__name__}: {exc}")
+        errors.append(exception_summary(exc))
     captured_at = _as_utc(current_time())
 
     try:
