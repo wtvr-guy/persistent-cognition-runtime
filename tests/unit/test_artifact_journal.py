@@ -4,6 +4,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from uuid import uuid4
 
+import pytest
+
 from persistent_cognition import artifact_journal, event_artifact_store, llm_artifact_store
 from tests._native_artifact_assertions import assert_response_evidence_receipt
 
@@ -545,6 +547,7 @@ def test_event_stream_rejects_corrupt_tail_and_reads_legacy_pair(tmp_path, monke
 
 def test_parallel_event_commit_retries_append_only_one_stamp(tmp_path, monkeypatch):
     from concurrent.futures import ThreadPoolExecutor
+    from threading import Barrier
 
     monkeypatch.setenv("PCR_ARTIFACT_ROOT", str(tmp_path))
     event_id = uuid4()
@@ -559,8 +562,10 @@ def test_parallel_event_commit_retries_append_only_one_stamp(tmp_path, monkeypat
         payload_text="test",
     )
     committed_at = datetime.now(timezone.utc)
+    start = Barrier(4)
 
     def commit_retry():
+        start.wait(timeout=30)
         return event_artifact_store.write_event_commit(
             event_id=event_id,
             global_seq=1,
@@ -574,3 +579,126 @@ def test_parallel_event_commit_retries_append_only_one_stamp(tmp_path, monkeypat
     assert all(result == results[0] for result in results)
     path = tmp_path / "events" / f"{event_id}.jsonl"
     assert len(path.read_text(encoding="utf-8").splitlines()) == 2
+
+
+@pytest.fixture
+def stream_event(tmp_path, monkeypatch):
+    monkeypatch.setenv("PCR_ARTIFACT_ROOT", str(tmp_path))
+    arguments = dict(
+        event_id=uuid4(), conversation_id=uuid4(), correlation_id=uuid4(),
+        conversation_seq=1, event_type="USER_PROMPT", source="user",
+        payload={"text": "test"}, payload_text="test",
+    )
+    record = event_artifact_store.write_event_record(**arguments)
+    path = tmp_path / "events" / f"{arguments['event_id']}.jsonl"
+    return arguments, record, path
+
+
+def _stream_operation(operation, arguments, path):
+    if operation == "read":
+        return event_artifact_store.read_event_file(path)
+    if operation == "record_retry":
+        return event_artifact_store.write_event_record(**arguments)
+    if operation == "commit_retry":
+        return event_artifact_store.write_event_commit(
+            event_id=arguments["event_id"], global_seq=1, conversation_seq=1,
+            created_at=datetime.now(timezone.utc), schema_version=1,
+        )
+    return event_artifact_store.iter_event_artifacts()
+
+
+@pytest.mark.parametrize("operation", ["read", "record_retry", "commit_retry", "inventory"])
+def test_event_stream_reads_use_the_owned_handle(stream_event, monkeypatch, operation):
+    """Model mandatory locks even on POSIX, where unlocked reads often succeed."""
+    from contextlib import contextmanager
+
+    arguments, record, path = stream_event
+    owned = set()
+    reads = []
+    regular_file = event_artifact_store.regular_file
+    locked = event_artifact_store._locked_event_file
+    read_bytes = Path.read_bytes
+
+    class CheckedHandle:
+        def __init__(self, handle):
+            self.handle = handle
+
+        def __getattr__(self, name):
+            return getattr(self.handle, name)
+
+        def read(self, *args):
+            assert self.handle.fileno() in owned, "stream read preceded lock acquisition"
+            reads.append(self.handle.fileno())
+            return self.handle.read(*args)
+
+    @contextmanager
+    def checked_file(*args, **kwargs):
+        with regular_file(*args, **kwargs) as handle:
+            yield CheckedHandle(handle)
+
+    @contextmanager
+    def tracked_lock(handle):
+        with locked(handle):
+            owned.add(handle.fileno())
+            try:
+                yield
+            finally:
+                owned.remove(handle.fileno())
+
+    def deny_unlocked_read(candidate):
+        if candidate == path:
+            raise PermissionError("a second handle cannot read the locked stream")
+        return read_bytes(candidate)
+
+    monkeypatch.setattr(event_artifact_store, "regular_file", checked_file)
+    monkeypatch.setattr(event_artifact_store, "_locked_event_file", tracked_lock)
+    monkeypatch.setattr(Path, "read_bytes", deny_unlocked_read)
+    result = _stream_operation(operation, arguments, path)
+    assert reads and not owned
+    if operation == "read":
+        assert result == (record, None)
+    elif operation == "record_retry":
+        assert result == record
+    elif operation == "commit_retry":
+        assert event_artifact_store.verify_event_commit(result)
+        assert event_artifact_store.read_event_file(path) == (record, result)
+    else:
+        assert result == [{"record": record, "commit": None}]
+
+
+@pytest.mark.parametrize("operation", ["read", "record_retry", "commit_retry", "inventory"])
+def test_native_windows_event_reader_waits_for_writer(stream_event, monkeypatch, operation):
+    import os
+    if os.name != "nt":
+        pytest.skip("requires native Windows mandatory byte-range locks")
+    import msvcrt
+    from concurrent.futures import ThreadPoolExecutor
+    from threading import Event
+
+    arguments, record, path = stream_event
+    busy = Event()
+    native_locking = msvcrt.locking
+
+    def observed_locking(fd, mode, size):
+        try:
+            return native_locking(fd, mode, size)
+        except OSError:
+            busy.set()
+            raise
+
+    monkeypatch.setattr(msvcrt, "locking", observed_locking)
+    with ThreadPoolExecutor(max_workers=1) as pool:
+        with path.open("r+b") as writer, event_artifact_store._locked_event_file(writer):
+            # Establish that this host really enforces locks on other handles.
+            with pytest.raises(PermissionError):
+                path.read_bytes()
+            future = pool.submit(_stream_operation, operation, arguments, path)
+            assert busy.wait(timeout=5), "reader did not wait for the writer's lock"
+            assert not future.done()
+        result = future.result(timeout=20)
+    stored_record, commit = event_artifact_store.read_event_file(path)
+    assert stored_record == record
+    if operation == "commit_retry":
+        assert commit == result
+    else:
+        assert commit is None

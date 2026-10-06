@@ -51,7 +51,7 @@ try {
         tests/test_percept_response_contract.py `
         tests/test_user_prompt_worker_contract.py `
         tests/test_percept_response_failures.py `
-        tests/test_artifact_journal.py
+        tests/unit/test_artifact_journal.py
     if ($LASTEXITCODE -ne 0) { throw "v2 worker/runtime acceptance failed" }
 
     # Run the complete deterministic regression suite before the expensive

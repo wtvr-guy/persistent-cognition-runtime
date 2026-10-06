@@ -11,7 +11,7 @@ from typing import Any, BinaryIO, Iterator
 from uuid import UUID, uuid5
 
 from persistent_cognition import percept_journal
-from persistent_cognition.private_storage import acquire_windows_lock, seek_lock_byte
+from persistent_cognition.private_storage import acquire_windows_lock, regular_file, seek_lock_byte
 
 ARTIFACT_SCHEMA_VERSION = 1
 
@@ -66,7 +66,11 @@ def _line(value: dict[str, Any]) -> bytes:
 def _read_stream(
     path: Path, *, allow_partial_commit: bool = False
 ) -> tuple[dict[str, Any], dict[str, Any] | None, bytes]:
-    return _parse_stream(path.read_bytes(), path, allow_partial_commit=allow_partial_commit)
+    # Windows byte locks deny reads through a second handle, even in the same
+    # process. All readers must acquire the append lock before touching bytes.
+    with regular_file(path) as handle, _locked_event_file(handle):
+        handle.seek(0)
+        return _parse_stream(handle.read(), path, allow_partial_commit=allow_partial_commit)
 
 
 def _parse_stream(
@@ -361,7 +365,7 @@ def write_event_commit(
         _atomic_write(path, commit)
         return commit
 
-    with stream_path.open("r+b") as handle, _locked_event_file(handle):
+    with regular_file(stream_path, write=True) as handle, _locked_event_file(handle):
         # Read under the lock: another process may have completed the same retry.
         handle.seek(0)
         current_record, existing, partial = _parse_stream(
