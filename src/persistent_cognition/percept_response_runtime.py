@@ -1127,7 +1127,7 @@ def handle_percept_in_worker_processes(
             worker_id=worker_id,
             command=worker_command if worker_command is not None else
                     [sys.executable, "-m", "persistent_cognition.percept_response_worker"],
-            env={"PCR_CAPABILITY_SNAPSHOT_SHA256": registry.snapshot()["sha256"]},
+            env={**os.environ, "PCR_CAPABILITY_SNAPSHOT_SHA256": registry.snapshot()["sha256"]},
             lease_seconds=effective_lease,
         )
         try:

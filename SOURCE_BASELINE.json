@@ -367,7 +367,7 @@
     "scripts/run_v05_scale.ps1": {
       "source_path": "scripts/run_v05_scale.ps1",
       "source_sha256": "4ac59730b352cd05f4325707150b77394d333a9ad58a56645ce0c80af0646474",
-      "extracted_sha256": "81f110b47b347a048532ef2826a114361d361b68d6243704fed50b5872ef15ed",
+      "extracted_sha256": "160e895d9ce66dd1d01b7e687e13b1de64e9bc16c9d24d864bda0eceab67be38",
       "extraction_path": "scripts/run_v05_scale.ps1",
       "status": "imported",
       "baseline_extracted_sha256": "4ac59730b352cd05f4325707150b77394d333a9ad58a56645ce0c80af0646474"
@@ -905,7 +905,7 @@
     "src/prometheist/percept_response_runtime.py": {
       "source_path": "src/prometheist/percept_response_runtime.py",
       "source_sha256": "c726091b0395fab5722e422c6aa5b48b175b833b87ed590161728a2f84c754e8",
-      "extracted_sha256": "ce7680b58ddcb6bcfe013aa2d30c8e63628d347437d9844e1b6e22150034af6e",
+      "extracted_sha256": "75f1767f6210648f04dd0c7df2005949842e56d6bc0bdaf7b87d301a00187d04",
       "extraction_path": "src/persistent_cognition/percept_response_runtime.py",
       "status": "imported",
       "baseline_extracted_sha256": "100d2a4a3f490ac1e264620cb36ff7a8099d56ee471ce5973e6e7ad006b9e7dd",
@@ -999,7 +999,7 @@
     "src/prometheist/response_policy.py": {
       "source_path": "src/prometheist/response_policy.py",
       "source_sha256": "441bc9fad3b9db60058441b8522b726ed7946d8cfee8d5dfaafd0b76fcfa6adf",
-      "extracted_sha256": "35c430f1eebecefe0b41e8ad9e5cfdccf3f6f34b23226fbdeeeec259b927fb00",
+      "extracted_sha256": "129f2bf25808e24f86da153704382dc8e4d4a80508c7ba658d00acf656952515",
       "extraction_path": "src/persistent_cognition/response_policy.py",
       "status": "imported",
       "baseline_extracted_sha256": "441bc9fad3b9db60058441b8522b726ed7946d8cfee8d5dfaafd0b76fcfa6adf"
@@ -1882,7 +1882,7 @@
     "tests/test_user_prompt_worker_contract.py": {
       "source_path": "tests/test_user_prompt_worker_contract.py",
       "source_sha256": "cae56e829d8c663fa2a6735e69bca09de006badd12f0458b4678acadb82e4dcd",
-      "extracted_sha256": "24a75d56ab291a272c1e115bdce4cda9f41ac7fe04a2e7d598ce5199fa6d5758",
+      "extracted_sha256": "c20fb440660ca9d58c053b09a2609cf69327c5d6b5e606bf74dfa01cec2fe731",
       "extraction_path": "tests/test_user_prompt_worker_contract.py",
       "status": "imported",
       "baseline_extracted_sha256": "cae56e829d8c663fa2a6735e69bca09de006badd12f0458b4678acadb82e4dcd"
@@ -2027,7 +2027,7 @@
       "source_path": null,
       "source_sha256": null,
       "extraction_path": "src/persistent_cognition/advisory_lock.py",
-      "extracted_sha256": "660776592c61184def4f26d78115334950ff8cb4531d29a21457dff0751ab0f1",
+      "extracted_sha256": "f4495d3bcbd611456ee81661c951daf078230da991de1b83ecae206a9d63a767",
       "reason": "Shared single-owner scheduler boundary for CLI, ticks, headless jobs and continuous service."
     },
     "src/persistent_cognition/percept_service.py": {
@@ -2125,6 +2125,22 @@
       "extracted_sha256": "9d03a3a3945db6438badc158dc2af73bc9e03080785389ac64fa05674dee4291",
       "status": "added",
       "reason": "Installed-wheel copy of the checkout PostgreSQL schema; verifier requires byte identity."
+    },
+    "tests/test_advisory_lock.py": {
+      "source_path": null,
+      "source_sha256": null,
+      "extraction_path": "tests/test_advisory_lock.py",
+      "extracted_sha256": "9246f53a78338327a9dc3f2740d165a6f78f0eecc68a6a56d1229d4663464ffd",
+      "status": "added",
+      "reason": "Post-CI audit review regression coverage for ownership rollback, inherited worker environment and explicit benchmark confirmation."
+    },
+    "tests/unit/test_audit_review_regressions.py": {
+      "source_path": null,
+      "source_sha256": null,
+      "extraction_path": "tests/unit/test_audit_review_regressions.py",
+      "extracted_sha256": "e9425ac9c7b6ace70fcac353f63e4d4ef11fa7bb164e5c4e9f14ff6e2b1deb53",
+      "status": "added",
+      "reason": "Post-CI audit review regression coverage for ownership rollback, inherited worker environment and explicit benchmark confirmation."
     }
   },
   "manifest_version": 2

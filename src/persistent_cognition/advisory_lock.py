@@ -48,6 +48,12 @@ def scheduler_ownership(conn: psycopg.Connection, scheduler_key: str) -> Iterato
         )
     try:
         yield
+    except BaseException:
+        # Python failures can leave successful SQL in INTRANS. Discard it before
+        # the unlock transaction is committed, including on cancellation.
+        if not conn.closed and not conn.broken:
+            conn.rollback()
+        raise
     finally:
         if not conn.closed and not conn.broken:
             if conn.info.transaction_status is psycopg.pq.TransactionStatus.INERROR:

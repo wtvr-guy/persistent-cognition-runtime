@@ -1,5 +1,6 @@
 param(
     [string]$DatabaseUrl = $env:PCR_BENCHMARK_DATABASE_URL,
+    [string]$ConfirmDatabase,
     [int[]]$EventCounts = @(1000, 10000, 50000),
     [int]$ProbeEvery = 500,
     [int]$ConfusableEvery = 12,
@@ -10,6 +11,16 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
+
+# Require an operator acknowledgement before any validation or corpus work.
+if (-not $SkipPostgres) {
+    if (-not $DatabaseUrl) {
+        throw "PostgreSQL benchmark requires -DatabaseUrl or PCR_BENCHMARK_DATABASE_URL. Use only a dedicated database whose name contains 'test' or 'benchmark'."
+    }
+    if ([string]::IsNullOrWhiteSpace($ConfirmDatabase)) {
+        throw "PostgreSQL benchmark requires -ConfirmDatabase with the exact disposable database name; its contents will be replaced."
+    }
+}
 
 $root = Split-Path -Parent $PSScriptRoot
 Set-Location $root
@@ -53,13 +64,10 @@ if ($LASTEXITCODE -ne 0) {
 if ($SkipPostgres) {
     Write-Host "`n[4/4] PostgreSQL benchmark skipped by request."
 } else {
-    if (-not $DatabaseUrl) {
-        throw "PostgreSQL benchmark requires -DatabaseUrl or PCR_BENCHMARK_DATABASE_URL. Use only a dedicated database whose name contains 'test' or 'benchmark'."
-    }
-
-    $env:PCR_BENCHMARK_DATABASE_URL = $DatabaseUrl
     Write-Host "`n[4/4] Running indexed PostgreSQL associative benchmark..."
     & uv run python -m persistent_cognition.postgres_scale_benchmark `
+        --database-url $DatabaseUrl `
+        --confirm-database $ConfirmDatabase `
         --events $EventCounts `
         --probe-every $ProbeEvery `
         --confusable-every $ConfusableEvery `

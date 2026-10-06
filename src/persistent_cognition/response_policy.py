@@ -17,9 +17,9 @@ from persistent_cognition.models import EventType, MemoryPacket
 RESPONSE_POLICY_VERSION = "response-source-authority-v6"
 
 _EXPLICIT_PRIOR_ASSISTANT_REFERENCE = re.compile(
-    r"\b(?:you|assistant|persistent_cognition)\s+"
+    r"\b(?:you|assistant|persistent[_\s]+cognition)\s+"
     r"(?:just\s+)?(?:said|answered|recommended|ruled\s+out|asked|mentioned)\b"
-    r"|\bwhat\s+did\s+(?:you|the\s+assistant|persistent_cognition)\b"
+    r"|\bwhat\s+did\s+(?:you|the\s+assistant|persistent[_\s]+cognition)\b"
     r"|\bprevious\s+(?:answer|response|recommendation)\b"
     r"|\bthat\s+(?:was\s+)?ruled[- ]out\b",
     re.IGNORECASE,

@@ -140,8 +140,16 @@ def test_response_policy_worker_selects_scope_without_historical_evidence(
     assert len(calls) == 1
 
 
+@pytest.mark.parametrize("prompt", [
+    "What did you tell me earlier about PostgreSQL?",
+    "What did Persistent Cognition tell me earlier about PostgreSQL?",
+    "Persistent Cognition recommended PostgreSQL. Why?",
+    "PERSISTENT COGNITION just said to use PostgreSQL. Why?",
+    "persistent_cognition mentioned PostgreSQL. Explain.",
+])
 def test_explicit_prior_assistant_reference_uses_mixed_scope_without_model_classification(
     monkeypatch,
+    prompt,
 ) -> None:
     llm = UserPromptLLM()
 
@@ -151,7 +159,7 @@ def test_explicit_prior_assistant_reference_uses_mixed_scope_without_model_class
 
     monkeypatch.setattr(llm, "_structured_with_evidence", fail_if_called)
 
-    policy = llm._response_policy("What did you tell me earlier about PostgreSQL?")
+    policy = llm._response_policy(prompt)
 
     assert policy.evidence_scope is HistoricalEvidenceScope.MIXED_CONVERSATION
     assert set(source_types_for_scope(policy.evidence_scope)) == {
