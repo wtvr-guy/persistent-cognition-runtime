@@ -375,7 +375,7 @@
     "scripts/run_v07_acceptance.ps1": {
       "source_path": "scripts/run_v07_acceptance.ps1",
       "source_sha256": "43812a1812391e99255f3d629c106e5ae7b8fa6f9e97a52199e2b1f9cfddf5f6",
-      "extracted_sha256": "858e41bf4a5491fd0fc16c3564a3f9bdec18fa097168c912541f45ed10684618",
+      "extracted_sha256": "78e58d0e819c3214213f58c2f863cfe4b8a4cd4dc320506c6403c5aab266f3e9",
       "extraction_path": "scripts/run_v07_acceptance.ps1",
       "status": "imported",
       "baseline_extracted_sha256": "43812a1812391e99255f3d629c106e5ae7b8fa6f9e97a52199e2b1f9cfddf5f6"
@@ -645,7 +645,7 @@
     "src/prometheist/event_artifact_store.py": {
       "source_path": "src/prometheist/event_artifact_store.py",
       "source_sha256": "22a0ddee70de6b23219d4bf875cc178e558dae8d131e64b159442812a6725428",
-      "extracted_sha256": "697d00851ce81dffa128ee1e1693788312df3bead4d908e1683aad095c3deb39",
+      "extracted_sha256": "e067a246bea805e294335ebe0c643ff7995de8300c14bc1854758538200e5387",
       "extraction_path": "src/persistent_cognition/event_artifact_store.py",
       "status": "imported",
       "baseline_extracted_sha256": "22a0ddee70de6b23219d4bf875cc178e558dae8d131e64b159442812a6725428",
@@ -853,7 +853,7 @@
     "src/prometheist/operator_state.py": {
       "source_path": "src/prometheist/operator_state.py",
       "source_sha256": "42b749abaebf0a13ef2b34cf32147a73f322956d787f99c3778546518a2cbbeb",
-      "extracted_sha256": "950399c4392e5f77a50e782e9a0977f379bef67ef57b30a1bc8ad28b2fe7fc58",
+      "extracted_sha256": "e940eb1f39295fe83eebee51b1d0c08a5a42d647e85c8532c154343d45787b82",
       "extraction_path": "src/persistent_cognition/operator_state.py",
       "status": "imported",
       "baseline_extracted_sha256": "42b749abaebf0a13ef2b34cf32147a73f322956d787f99c3778546518a2cbbeb",
@@ -896,7 +896,7 @@
     "src/prometheist/percept_journal.py": {
       "source_path": "src/prometheist/percept_journal.py",
       "source_sha256": "8472d9a939fc849db105efa03d3afeced55993c9f6b185ccb3eb6e53eb8795f5",
-      "extracted_sha256": "e7378c401078ffef296c7e591007c7cd0c327b949db323cc7500bc6f185558c6",
+      "extracted_sha256": "9d7ab12120ab2e6e347db6918cdf22492316ecc6cebc33fc1d6ca2f9bf2c5e11",
       "extraction_path": "src/persistent_cognition/percept_journal.py",
       "status": "imported",
       "baseline_extracted_sha256": "8472d9a939fc849db105efa03d3afeced55993c9f6b185ccb3eb6e53eb8795f5",
@@ -966,7 +966,7 @@
     "src/prometheist/process_lock.py": {
       "source_path": "src/prometheist/gui_instance.py",
       "source_sha256": "09dfacabf88e8e2bb3212b002b6482b2a3b19456705bbdb6101a011cb98d8162",
-      "extracted_sha256": "077917952c8aef2bc30894b3d306572d56daf0a9f40c5d807fea378b48f25899",
+      "extracted_sha256": "d6c78ccd6d85414e83e983087407080251b6c61a92651d139c3ec14495ce7b67",
       "extraction_path": "src/persistent_cognition/process_lock.py",
       "status": "imported",
       "baseline_extracted_sha256": "09dfacabf88e8e2bb3212b002b6482b2a3b19456705bbdb6101a011cb98d8162",
@@ -2074,7 +2074,7 @@
       "source_path": null,
       "source_sha256": null,
       "extraction_path": "src/persistent_cognition/private_storage.py",
-      "extracted_sha256": "80c4aada2f2318632e16b6ea2f2f2ad8b2ff2433222fa27e8c5fd6c085349eac",
+      "extracted_sha256": "074e0c8c98b8918c31ab0c7ff911b5d937e19380ff88848ae53c066ee22dd148",
       "status": "added",
       "reason": "Remaining audit remediation: supported embedding, deterministic safety boundaries or regression coverage."
     },
@@ -2141,6 +2141,14 @@
       "extracted_sha256": "e9425ac9c7b6ace70fcac353f63e4d4ef11fa7bb164e5c4e9f14ff6e2b1deb53",
       "status": "added",
       "reason": "Post-CI audit review regression coverage for ownership rollback, inherited worker environment and explicit benchmark confirmation."
+    },
+    "tests/unit/test_windows_journal_lock.py": {
+      "source_path": null,
+      "source_sha256": null,
+      "extraction_path": "tests/unit/test_windows_journal_lock.py",
+      "extracted_sha256": "2fbe14657a8aeaf79b1437d32476133c078c9a11698820a9acbf882c1789b0c6",
+      "status": "added",
+      "reason": "Windows native acceptance regression: buffered journal reads must release the same OS byte-range lock, preserve failures and exclude concurrent processes."
     }
   },
   "manifest_version": 2

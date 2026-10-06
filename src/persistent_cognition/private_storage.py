@@ -7,6 +7,7 @@ from pathlib import Path
 import shutil
 import stat
 import tempfile
+from typing import BinaryIO
 
 from persistent_cognition.resource_limits import (
     DEFAULT_ARTIFACT_QUOTA_BYTES, DEFAULT_MIN_FREE_DISK_BYTES,
@@ -72,6 +73,17 @@ def regular_file(path: Path, *, write: bool = False, create: bool = False):
             os.close(parent_fd)
 
 
+def seek_lock_byte(handle: BinaryIO) -> None:
+    """Position the OS descriptor at byte zero, even after buffered read-ahead.
+
+    A buffered seek can move only Python's logical cursor. Seeking from EOF
+    first synchronizes and clears that buffer before the absolute seek used by
+    Windows byte-range locking. Pending writes are flushed by the seek.
+    """
+    handle.seek(0, os.SEEK_END)
+    handle.seek(0)
+
+
 def _store_root() -> Path:
     configured = os.environ.get("PCR_ARTIFACT_ROOT", "").strip()
     return Path(configured) if configured else Path(".pcr") / "artifacts"
@@ -93,7 +105,7 @@ def storage_admission(additional_bytes: int):
             if not lock.tell():
                 lock.write(b"\0")
                 lock.flush()
-            lock.seek(0)
+            seek_lock_byte(lock)
             msvcrt.locking(lock.fileno(), msvcrt.LK_LOCK, 1)
         else:
             import fcntl
@@ -119,7 +131,7 @@ def storage_admission(additional_bytes: int):
             yield
         finally:
             if os.name == "nt":
-                lock.seek(0)
+                seek_lock_byte(lock)
                 msvcrt.locking(lock.fileno(), msvcrt.LK_UNLCK, 1)
             else:
                 fcntl.flock(lock.fileno(), fcntl.LOCK_UN)

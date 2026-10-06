@@ -3,7 +3,9 @@ from contextlib import contextmanager
 import json
 import os
 from pathlib import Path
-from persistent_cognition.private_storage import atomic_private_write, private_directory, regular_file
+from persistent_cognition.private_storage import (
+    atomic_private_write, private_directory, regular_file, seek_lock_byte,
+)
 
 
 def write_private_policy(path: Path, value: dict):
@@ -21,14 +23,14 @@ def policy_lock(path: Path):
             if not handle.seek(0, os.SEEK_END):
                 handle.write(b"\0")
                 handle.flush()
-            handle.seek(0)
+            seek_lock_byte(handle)
             # Windows retries a contended byte lock using its native bounded
             # LK_LOCK behavior. Failure aborts the edit rather than losing it.
             msvcrt.locking(handle.fileno(), msvcrt.LK_LOCK, 1)
             try:
                 yield
             finally:
-                handle.seek(0)
+                seek_lock_byte(handle)
                 msvcrt.locking(handle.fileno(), msvcrt.LK_UNLCK, 1)
         else:
             import fcntl

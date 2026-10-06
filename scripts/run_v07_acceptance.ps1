@@ -57,10 +57,10 @@ try {
     # Run the complete deterministic regression suite before the expensive
     # native Ollama gate. This catches policy/contract regressions in seconds
     # instead of allowing them to surface only after multi-minute model runs.
-    uv run --locked pytest -q -m "not ollama"
+    uv run --locked pytest -q -ra -m "not ollama"
     if ($LASTEXITCODE -ne 0) { throw "deterministic regression suite failed" }
 
-    uv run --locked pytest -vv -s -m ollama
+    uv run --locked pytest -vv -s -ra -m ollama
     $exitCode = $LASTEXITCODE
     if ($exitCode -ne 0) { throw "Ollama continuity acceptance failed" }
     Write-Host (

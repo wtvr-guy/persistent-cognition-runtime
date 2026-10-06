@@ -1,7 +1,7 @@
 """Fail immediately if another app owns this private runtime."""
 from contextlib import contextmanager
 import os
-from persistent_cognition.private_storage import private_directory, regular_file
+from persistent_cognition.private_storage import private_directory, regular_file, seek_lock_byte
 
 
 @contextmanager
@@ -15,7 +15,7 @@ def instance_lock(root):
                 if not handle.seek(0, os.SEEK_END):
                     handle.write(b"\0")
                     handle.flush()
-                handle.seek(0)
+                seek_lock_byte(handle)
                 msvcrt.locking(handle.fileno(), msvcrt.LK_NBLCK, 1)
             else:
                 import fcntl
@@ -26,7 +26,7 @@ def instance_lock(root):
             yield
         finally:
             if os.name == "nt":
-                handle.seek(0)
+                seek_lock_byte(handle)
                 msvcrt.locking(handle.fileno(), msvcrt.LK_UNLCK, 1)
             else:
                 fcntl.flock(handle.fileno(), fcntl.LOCK_UN)

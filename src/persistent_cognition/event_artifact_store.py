@@ -11,6 +11,7 @@ from typing import Any, BinaryIO, Iterator
 from uuid import UUID, uuid5
 
 from persistent_cognition import percept_journal
+from persistent_cognition.private_storage import seek_lock_byte
 
 ARTIFACT_SCHEMA_VERSION = 1
 
@@ -131,11 +132,12 @@ def _locked_event_file(handle: BinaryIO) -> Iterator[None]:
     if os.name == "nt":
         import msvcrt
 
+        seek_lock_byte(handle)
         msvcrt.locking(handle.fileno(), msvcrt.LK_LOCK, 1)
         try:
             yield
         finally:
-            handle.seek(0)
+            seek_lock_byte(handle)
             msvcrt.locking(handle.fileno(), msvcrt.LK_UNLCK, 1)
     else:
         import fcntl

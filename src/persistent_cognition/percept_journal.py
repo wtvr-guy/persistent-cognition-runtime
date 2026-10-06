@@ -12,7 +12,9 @@ import os
 from pathlib import Path
 from typing import Any, BinaryIO, Iterator
 from uuid import UUID, uuid5
-from persistent_cognition.private_storage import private_directory, regular_file, storage_admission
+from persistent_cognition.private_storage import (
+    private_directory, regular_file, seek_lock_byte, storage_admission,
+)
 from persistent_cognition.resource_limits import (
     DEFAULT_MAX_JOURNAL_BYTES, DEFAULT_MAX_JOURNAL_ENTRY_BYTES, DEFAULT_MAX_JOURNAL_RECORDS,
     ResourceLimitExceeded, limit,
@@ -48,13 +50,14 @@ def locked(path: Path, *, create: bool = False) -> Iterator[BinaryIO]:
         if os.name == "nt":
             import msvcrt
 
+            seek_lock_byte(handle)
             msvcrt.locking(handle.fileno(), msvcrt.LK_LOCK, 1)
             try:
                 if create and not existed:
                     _fsync_directory(path.parent)
                 yield handle
             finally:
-                handle.seek(0)
+                seek_lock_byte(handle)
                 msvcrt.locking(handle.fileno(), msvcrt.LK_UNLCK, 1)
         else:
             import fcntl
