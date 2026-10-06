@@ -138,6 +138,51 @@
         "PERCEPT_TRIAGE"
       ],
       "blocked_reason": "No trained PCR classification head exists. Base encoder weights cannot emit worker decisions; random heads must not be scored."
+    },
+    {
+      "id": "hammer-fp32",
+      "backend": "hf",
+      "model": "MadeAgents/Hammer2.1-0.5b",
+      "adapter": "hammer-selection",
+      "precision": "fp32",
+      "revision": null,
+      "device": "cpu",
+      "threads": 4,
+      "kinds": [
+        "PRECOGNITIVE_USER_PROMPT_WORK"
+      ],
+      "license": "CC-BY-NC-4.0",
+      "research_only": true
+    },
+    {
+      "id": "hammer-bf16",
+      "backend": "hf",
+      "model": "MadeAgents/Hammer2.1-0.5b",
+      "adapter": "hammer-selection",
+      "precision": "bf16",
+      "revision": null,
+      "device": "cpu",
+      "threads": 4,
+      "kinds": [
+        "PRECOGNITIVE_USER_PROMPT_WORK"
+      ],
+      "license": "CC-BY-NC-4.0",
+      "research_only": true
+    },
+    {
+      "id": "hammer-fp16",
+      "backend": "hf",
+      "model": "MadeAgents/Hammer2.1-0.5b",
+      "adapter": "hammer-selection",
+      "precision": "fp16",
+      "revision": null,
+      "device": "cpu",
+      "threads": 4,
+      "kinds": [
+        "PRECOGNITIVE_USER_PROMPT_WORK"
+      ],
+      "license": "CC-BY-NC-4.0",
+      "research_only": true
     }
   ]
 }

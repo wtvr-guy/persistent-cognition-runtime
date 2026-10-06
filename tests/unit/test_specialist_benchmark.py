@@ -169,6 +169,11 @@ def test_functiongemma_native_parser_is_closed_and_nonexecuting():
                 "<start_function_call>call:select_work{capability_indices:[__import__('os')]}<end_function_call>"):
         with pytest.raises(ValueError):
             module.parse_function_selection(bad)
+    assert json.loads(module.parse_hammer_selection(
+        '<tool_call>{"name":"select_work","arguments":{"capability_indices":[0]}}</tool_call>'
+    )) == {"capability_indices": [0]}
+    with pytest.raises(ValueError):
+        module.parse_hammer_selection('{"name":"delete_file","arguments":{}}')
 
 
 def test_precision_comparison_reports_changed_decision():

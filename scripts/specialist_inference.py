@@ -15,6 +15,8 @@ import sys
 import threading
 import time
 
+SOURCE_SHA256 = hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
+
 
 def parse_function_selection(text: str) -> str:
     """Accept only the declared non-executable selection function and integer list.
@@ -30,6 +32,23 @@ malformed response into a valid answer; failures must count against the model.
     if not match:
         raise ValueError("not a valid select_work FunctionGemma call")
     return json.dumps({"capability_indices": json.loads(match.group(1))})
+
+
+def parse_hammer_selection(text: str) -> str:
+    """Accept one native tool call, never arbitrary surrounding prose or code."""
+    text = text.strip()
+    if text.startswith("<tool_call>") and text.endswith("</tool_call>"):
+        text = text.removeprefix("<tool_call>").removesuffix("</tool_call>").strip()
+    elif text.startswith("```") and text.endswith("```"):
+        text = text[3:-3].strip()
+        if text.startswith("json\n"):
+            text = text[5:]
+    value = json.loads(text)
+    if not isinstance(value, dict) or set(value) != {"name", "arguments"} or value["name"] != "select_work":
+        raise ValueError("not a valid select_work Hammer call")
+    if not isinstance(value["arguments"], dict):
+        raise ValueError("Hammer arguments must be an object")
+    return json.dumps(value["arguments"])
 
 
 SCOPE_HYPOTHESES = {
@@ -94,7 +113,7 @@ class Inference:
         ))
         self.tokenizer = transformers.AutoTokenizer.from_pretrained(
             snapshot, local_files_only=True, trust_remote_code=False)
-        model_class = (transformers.AutoModelForCausalLM if profile["adapter"] == "functiongemma-selection"
+        model_class = (transformers.AutoModelForCausalLM if profile["adapter"] in ("functiongemma-selection", "hammer-selection")
                        else transformers.AutoModelForSequenceClassification)
         self.model = model_class.from_pretrained(
             snapshot, dtype=dtype, local_files_only=True, trust_remote_code=False,
@@ -121,6 +140,7 @@ class Inference:
                          "threads": torch.get_num_threads(), "attention": "eager",
                          "deterministic_algorithms": True, "weight_and_config_sha256": files,
                          "adapter": profile["adapter"],
+                         "inference_source_sha256": SOURCE_SHA256,
                          "precision_note": "Casts one released checkpoint; FP32 cannot recover precision absent in its original weights."}
         self.raw = None
 
@@ -158,16 +178,19 @@ class Inference:
         started = time.perf_counter()
         try:
             with torch.inference_mode():
-                if self.profile["adapter"] == "functiongemma-selection":
+                if self.profile["adapter"] in ("functiongemma-selection", "hammer-selection"):
                     if request["kind"] != "PRECOGNITIVE_USER_PROMPT_WORK":
                         raise ValueError("FunctionGemma adapter supports only capability selection")
                     tools = [{"type": "function", "function": {
                         "name": "select_work", "description": "Select indices from PCR's admitted catalog; use an empty list when no work applies. This records a decision and executes no action.",
                         "parameters": request["schema"],
                     }}]
-                    messages = [{"role": "developer", "content":
-                                 "You are a model that can do function calling with the following functions\n" + request["system_prompt"]},
+                    functiongemma = self.profile["adapter"] == "functiongemma-selection"
+                    messages = [{"role": "developer" if functiongemma else "system", "content":
+                                 ("You are a model that can do function calling with the following functions\n" if functiongemma else "") + request["system_prompt"]},
                                 {"role": "user", "content": request["evidence_prompt"] + "\n\n" + request["user_prompt"]}]
+                    if not functiongemma:
+                        tools = [tool["function"] for tool in tools]
                     rendered = self.tokenizer.apply_chat_template(messages, tools=tools,
                                                                   add_generation_prompt=True, tokenize=False)
                     tokens = self.tokenizer(rendered, add_special_tokens=False, return_tensors="pt").to(self.device)
@@ -181,11 +204,11 @@ class Inference:
                     answer_tokens = generated[0][prompt_tokens:]
                     # Remove turn delimiters only; native function delimiters remain.
                     native = self.tokenizer.decode(answer_tokens, skip_special_tokens=False)
-                    native = re.sub(r"(?:<end_of_turn>|<eos>|<pad>)+$", "", native).strip()
+                    native = re.sub(r"(?:<end_of_turn>|<eos>|<pad>|<\|im_end\|>|<\|endoftext\|>)+$", "", native).strip()
                     self.raw = {"native_output": native, "rendered_prompt": rendered,
                                 "tools": tools, "prompt_tokens": prompt_tokens,
                                 "generated_tokens": len(answer_tokens), "decoding": "greedy"}
-                    output = parse_function_selection(native)
+                    output = parse_function_selection(native) if functiongemma else parse_hammer_selection(native)
                 elif request["kind"] == "V2_RESPONSE_POLICY":
                     scores = {}
                     chosen = {}

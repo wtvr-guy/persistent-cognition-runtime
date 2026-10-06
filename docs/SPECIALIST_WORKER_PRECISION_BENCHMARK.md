@@ -12,6 +12,7 @@ The default conversational responder and production contracts are unchanged.
 | FunctionGemma 270M FP32/BF16/FP16 | `UserPromptLLM.decide_disposition` | Native function-call adapter; requires gated weights |
 | ModernBERT-base-NLI FP32/BF16/FP16 | `_response_policy`, `SituationLLM.review_self_schema` | Experimental zero-shot/pairwise NLI adapters |
 | ModernBERT-base FP32/BF16/FP16 | Policy and triage | **Blocked** until PCR classification heads are trained |
+| Hammer 2.1 0.5B FP32/BF16/FP16 | `UserPromptLLM.decide_disposition` | Optional research comparator; noncommercial license |
 
 ModernBERT-base is an encoder, not an already trained PCR classifier. Loading a
 random classification head and scoring it would not test the proposed specialist.
@@ -101,6 +102,14 @@ locally with Hugging Face (`hf auth login` in the inference environment). Then:
 .venv-inference/Scripts/python.exe scripts/prepare_specialist_models.py --model google/functiongemma-270m-it --output benchmarks/generated/specialists/frozen-functiongemma.json
 uv run python -m prometheist.specialist_benchmark run --matrix benchmarks/generated/specialists/frozen-functiongemma.json --profile qwen3-baseline --profile functiongemma-fp32 --profile functiongemma-bf16 --profile functiongemma-fp16 --inference-python .venv-inference/Scripts/python.exe --repeats 3
 ```
+
+The earlier candidate list also included Hammer 2.1 0.5B. Its three profiles are
+optional research comparators, not production defaults. Prepare the checkpoint
+with `--model MadeAgents/Hammer2.1-0.5b` and select `hammer-fp32`, `hammer-bf16`
+and `hammer-fp16`. Its publisher's native tool template and a closed one-function
+parser are used. The model has a noncommercial license; a later production
+decision must account for that. The 1B xLAM candidate is outside the **under-1B**
+precision experiment, as are the 1.5B Hammer, 1.7B Qwen and 3B Ministral candidates.
 
 On Linux use `.venv-inference/bin/python`. Change CPU thread count or device only
 by making a new matrix file; those settings are part of the experiment identity.
