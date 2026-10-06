@@ -21,4 +21,8 @@ Non-user situations preserve deterministic-first triage and execution. Natural r
 
 The continuous percept service (`persistent_cognition.percept_service.PerceptService`, also exposed as `pcr-percept serve`) can run the same governed pipeline for scheduled events, anomaly/error alerts, external observations, and asynchronous tool/action outcomes. It uses bounded polling with backoff, durable restart-safe cursors, one PostgreSQL advisory ownership lock per scheduler namespace, and safe application-owned executor dispatch through trusted executors registered from process configuration. Observed data never supplies executor code, imports, or eval/exec behavior.
 
+Installed source policy binds `trusted_executor` to an explicit deterministic task. Embedded applications supply a trusted worker argument sequence to re-register callbacks in every fresh process; the stock CLI worker intentionally has no application bindings. Structured work and observed success/failure receipts persist even without a response. External handlers must deduplicate by execution ID across crash retries. Tick failures are logged and durably recorded; database session loss stops execution until ownership is reacquired on restart.
+
+There is no self-model or identity stage, schema, or response-policy field. Generic semantic facts, expectations, situations, and consolidation remain part of the pipeline.
+
 The prior Composer, memory requirements, and coverage judge are historical experiments. Their prompts and decision fields are not active cognitive control. Original evidence remains inspectable in prior Git revisions and journal artifacts.

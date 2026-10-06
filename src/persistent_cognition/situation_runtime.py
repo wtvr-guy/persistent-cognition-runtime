@@ -41,7 +41,7 @@ from persistent_cognition.worker_protocol import deterministic_worker_step_id, W
 from persistent_cognition.worker_runtime import GuardedWorkerLauncher
 from persistent_cognition.worker_store import register_worker_step, load_worker_result
 
-SITUATION_PROTOCOL = "v0.8-situation-v3"
+SITUATION_PROTOCOL = "v0.8-situation-v4"
 SITUATION_WORKER_LEASE_SECONDS = 600
 SITUATION_WORKER_TIMEOUT_SECONDS = 660
 
@@ -137,6 +137,11 @@ def submit_situation_page(
             active = get_record(conn, "situation_active", f"{scheduler_key}:{key}")
             if active and UUID(active["task_id"]) in scheduler.tasks:
                 old = scheduler.tasks[UUID(active["task_id"])]
+                failure = get_record(conn, "situation_failure", f"{scheduler_key}:{old.task_id}")
+                if failure and failure["quarantined"]:
+                    if _has_live_situation_claim(conn, old.task_id, scheduler_key=scheduler_key):
+                        continue
+                    old = scheduler.fail_task(old.task_id)
                 if old.status.value not in {"COMPLETED", "FAILED"}:
                     continue
                 if old.status.value == "COMPLETED":
@@ -146,13 +151,26 @@ def submit_situation_page(
                     completed = SituationTask.model_validate(
                         get_record(conn, "situation_task", str(old.task_id))
                     )
-                    _finalize_situation_artifacts(conn, completed, scheduler_key=scheduler_key)
-                    _record_situation_progress(conn, completed, scheduler_key=scheduler_key)
+                    failure = get_record(conn, "situation_failure", f"{scheduler_key}:{old.task_id}")
+                    if failure and failure["quarantined"]:
+                        continue
+                    try:
+                        _finalize_situation_artifacts(conn, completed, scheduler_key=scheduler_key)
+                        _record_situation_progress(conn, completed, scheduler_key=scheduler_key)
+                    except Exception as exc:
+                        _record_situation_failure(conn, old.task_id, exc, scheduler_key=scheduler_key)
+                        continue
                     if completed.situation.snapshot_id == situation.snapshot_id:
                         continue
             percept = Percept.model_validate(candidate["percept"])
             source_policy = SourcePolicy.model_validate(candidate["policy"])
             task_id = uuid5(situation.snapshot_id, f"attention:{scheduler_key}")
+            failure = get_record(conn, "situation_failure", f"{scheduler_key}:{task_id}")
+            if failure and failure["quarantined"]:
+                # Repair a crash between the durable quarantine and its epoch.
+                if not _has_live_situation_claim(conn, task_id, scheduler_key=scheduler_key):
+                    scheduler.fail_task(task_id)
+                continue
             task_data = get_record(conn, "situation_task", str(task_id))
             if task_data:
                 task = SituationTask.model_validate(task_data)
@@ -166,18 +184,9 @@ def submit_situation_page(
                                      policy=source_policy, before_global_seq=source_event.global_seq,
                                      created_at=datetime.now(timezone.utc))
                 put_record(conn, "situation_task", str(task_id), task.model_dump(mode="json"), revision="submitted")
-            triage = deterministic_triage(percept, situation, source_policy)
-            requires_model = (
-                triage is None
-                or (
-                    triage is not None
-                    and triage.candidate_task_class is not None
-                    and triage.candidate_task_class.value == "CONSOLIDATE"
-                )
-                or (
-                    source_policy.response_required
-                    and source_policy.natural_language_response
-                )
+            requires_model = any(
+                situation_stage_uses_model(conn, task, stage, scheduler_key=scheduler_key)
+                for stage in SituationStage
             )
             if requires_model and runtime_state is None:
                 runtime_state = runtime_probe.capture()
@@ -235,6 +244,69 @@ def submit_situation_page(
     return submitted
 
 
+def retry_situation_task(
+    conn: psycopg.Connection, task_id: UUID, *,
+    scheduler_key: str = DEFAULT_SCHEDULER_KEY, effects_reconciled: bool = False,
+) -> None:
+    """Application-owned recovery, after inspecting any ambiguous external effect.
+
+    Invoke under scheduler ownership. Completed stage artifacts, receipts, action
+    IDs and immutable assignment history survive re-admission.
+    """
+    key = f"{scheduler_key}:{task_id}"
+    failure = get_record(conn, "situation_failure", key)
+    if not failure or not failure["quarantined"]:
+        raise ValueError("situation task is not quarantined")
+    action_id = uuid5(task_id, "registered-action")
+    if (get_record(conn, "action_intention", str(action_id))
+            and not get_record(conn, "action_execution", str(action_id))
+            and not effects_reconciled):
+        raise ValueError("ambiguous action requires application reconciliation before retry")
+    scheduler = load_scheduler(conn, scheduler_key=scheduler_key)
+    if scheduler.tasks[task_id].status.value != "COMPLETED":
+        scheduler.retry_failed_task(task_id)
+        save_scheduler(conn, scheduler, scheduler_key=scheduler_key)
+    put_record(conn, "situation_failure", key, {**failure, "quarantined": False},
+               revision=f"retry:{failure['attempt']}")
+
+
+def _record_situation_failure(conn, task_id: UUID, exc: Exception, *, scheduler_key: str) -> None:
+    if conn.closed or conn.broken:
+        raise exc
+    conn.rollback()
+    key = f"{scheduler_key}:{task_id}"
+    previous = get_record(conn, "situation_failure", key)
+    attempt = previous["attempt"] + 1 if previous else 1
+    put_record(conn, "situation_failure", key,
+               {"quarantined": True, "attempt": attempt, "error_type": type(exc).__name__,
+                "observed_at": datetime.now(timezone.utc).isoformat()}, revision=str(attempt))
+
+
+def _has_live_situation_claim(conn, task_id: UUID, *, scheduler_key: str) -> bool:
+    return conn.execute(
+        """SELECT EXISTS(
+            SELECT 1 FROM attention_worker_claims c
+            JOIN attention_worker_steps s ON s.step_id = c.step_id AND s.scheduler_key = c.scheduler_key
+            WHERE c.scheduler_key = %s AND s.task_id = %s
+              AND c.status = 'ACTIVE' AND c.lease_expires_at > now()
+        )""", (scheduler_key, task_id),
+    ).fetchone()[0]
+
+
+def _quarantine_situation_task(conn, task_id: UUID, exc: Exception, *, scheduler_key: str,
+                              probe=None, policy=None) -> None:
+    _record_situation_failure(conn, task_id, exc, scheduler_key=scheduler_key)
+    scheduler = load_scheduler(conn, scheduler_key=scheduler_key)
+    # A surviving worker still owns its lease and capacity. Do not publish a
+    # replacement epoch until it releases or expires; other assignments can run.
+    if not _has_live_situation_claim(conn, task_id, scheduler_key=scheduler_key):
+        scheduler.fail_task(task_id)
+    LocalResourceAdmissionController(
+        scheduler, probe=probe, policy=policy or native_resource_safety_policy(),
+    ).plan_scheduling_epoch()
+    save_scheduler(conn, scheduler, scheduler_key=scheduler_key)
+
+
 def situation_stage_uses_model(
     conn: psycopg.Connection,
     task: SituationTask,
@@ -270,10 +342,15 @@ def run_situation_task(
     ollama_runtime_probe: OllamaRuntimeProbe | None = None,
     scheduler_key: str = DEFAULT_SCHEDULER_KEY,
     launcher=None,
+    worker_command=None,
+    should_stop=None,
 ) -> dict | None:
     data = get_record(conn, "situation_task", str(task_id))
     if data is None:
         raise KeyError(task_id)
+    failure = get_record(conn, "situation_failure", f"{scheduler_key}:{task_id}")
+    if failure and failure["quarantined"]:
+        return None
     task = SituationTask.model_validate(data)
     if task.protocol_version != SITUATION_PROTOCOL:
         raise ValueError("unsupported situation worker protocol")
@@ -305,6 +382,8 @@ def run_situation_task(
     runtime_probe = ollama_runtime_probe or OllamaRuntimeProbe()
 
     for stage in SituationStage:
+        if should_stop is not None and should_stop():
+            return None
         step_id = deterministic_worker_step_id(assignment_id, stage.value)
         if load_worker_result(conn, step_id, scheduler_key=scheduler_key):
             _require_situation_result(conn, task, stage, scheduler_key=scheduler_key)
@@ -341,7 +420,8 @@ def run_situation_task(
                 scheduler_key=scheduler_key,
             )
         launched = stage_launcher.launch(step_id=step_id, worker_id=f"situation-{task_id}-{stage.name}",
-                                   command=[sys.executable, "-m", "persistent_cognition.situation_worker"],
+                                   command=worker_command if worker_command is not None else
+                                   [sys.executable, "-m", "persistent_cognition.situation_worker"],
                                    lease_seconds=SITUATION_WORKER_LEASE_SECONDS)
         try:
             code = launched.process.wait(timeout=SITUATION_WORKER_TIMEOUT_SECONDS)
@@ -413,6 +493,8 @@ def drain_situations(
     policy=None,
     ollama_runtime_probe: OllamaRuntimeProbe | None = None,
     scheduler_key: str = DEFAULT_SCHEDULER_KEY,
+    worker_command=None,
+    should_stop=None,
 ) -> list[dict]:
     submitted = submit_situation_page(
         conn,
@@ -427,18 +509,20 @@ def drain_situations(
     # Completed tasks no longer have worker assignments, but a candidate whose
     # progress write was interrupted still needs its bounded finalization retry.
     task_ids.extend(task_id for task_id in submitted if scheduler.tasks[task_id].status.value == "COMPLETED")
-    return [
-        result
-        for task_id in task_ids
-        if (
-            result := run_situation_task(
-                conn,
-                task_id,
-                probe=probe,
-                policy=policy,
-                ollama_runtime_probe=ollama_runtime_probe,
-                scheduler_key=scheduler_key,
+    completed = []
+    for task_id in task_ids:
+        if should_stop is not None and should_stop():
+            break
+        try:
+            result = run_situation_task(
+                conn, task_id, probe=probe, policy=policy, ollama_runtime_probe=ollama_runtime_probe,
+                scheduler_key=scheduler_key, worker_command=worker_command, should_stop=should_stop,
             )
-        )
-        is not None
-    ]
+        except Exception as exc:
+            _quarantine_situation_task(
+                conn, task_id, exc, scheduler_key=scheduler_key, probe=probe, policy=policy,
+            )
+            continue
+        if result is not None:
+            completed.append(result)
+    return completed

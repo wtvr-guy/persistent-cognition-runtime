@@ -74,6 +74,7 @@ SCHEMA_CONTRACTS = MappingProxyType({
     "memory-packet/v1": "models:MemoryPacket",
     "percept/v1": "perception:Percept",
     "source-policy/v1": "percept_triage:SourcePolicy",
+    "trusted-execution-request/v1": "trusted_executors:TrustedExecutionRequest",
 })
 
 

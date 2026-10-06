@@ -10,7 +10,7 @@ Changes to these rules require explicit documentation and appropriate regression
 
 **Why it matters.** A persistent cognitive system cannot be persistent if its state disappears when disposable compute disappears.
 
-**Deep dive:** [`docs/architecture/COGNITIVE_ARCHITECTURE.md`](https://github.com/wtvr-guy/persistent_cognition/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/architecture/COGNITIVE_ARCHITECTURE.md)
+**Deep dive:** [`docs/architecture/COGNITIVE_ARCHITECTURE.md`](https://github.com/wtvr-guy/prometheist/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/architecture/COGNITIVE_ARCHITECTURE.md)
 
 ### Article 8 — Every LLM invocation is stateless; workers are disposable
 
@@ -18,7 +18,7 @@ Changes to these rules require explicit documentation and appropriate regression
 
 **Why it matters.** Stateless inference makes continuity inspectable, restart-safe, model-replaceable, and independent of process lifetime.
 
-**Deep dive:** [`docs/architecture/COGNITIVE_ARCHITECTURE.md`](https://github.com/wtvr-guy/persistent_cognition/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/architecture/COGNITIVE_ARCHITECTURE.md)
+**Deep dive:** [`docs/architecture/COGNITIVE_ARCHITECTURE.md`](https://github.com/wtvr-guy/prometheist/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/architecture/COGNITIVE_ARCHITECTURE.md)
 
 ### Article 9 — Admitted durable memory is lossless, append-only canonical evidence
 
@@ -122,7 +122,7 @@ Changes to these rules require explicit documentation and appropriate regression
 
 **Why it matters.** Semantic interpretation is useful; model-authored control planes are difficult to validate, replay, secure, and audit.
 
-**Deep dives:** [`docs/architecture/COGNITIVE_ARCHITECTURE.md`](https://github.com/wtvr-guy/persistent_cognition/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/architecture/COGNITIVE_ARCHITECTURE.md), [`docs/architecture/INTERACTION_CONTINUITY.md`](docs/architecture/INTERACTION_CONTINUITY.md)
+**Deep dives:** [`docs/architecture/COGNITIVE_ARCHITECTURE.md`](https://github.com/wtvr-guy/prometheist/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/architecture/COGNITIVE_ARCHITECTURE.md), [`docs/architecture/INTERACTION_CONTINUITY.md`](docs/architecture/INTERACTION_CONTINUITY.md)
 
 ### Article 22 — Model-generated natural language is control/state of last resort
 
@@ -130,7 +130,7 @@ Changes to these rules require explicit documentation and appropriate regression
 
 **Why it matters.** Closed representations reduce ambiguity, hallucinated control data, brittle parsers, and nondeterministic protocol behavior.
 
-**Deep dives:** [`docs/architecture/COGNITIVE_ARCHITECTURE.md`](https://github.com/wtvr-guy/persistent_cognition/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/architecture/COGNITIVE_ARCHITECTURE.md), [`docs/architecture/INTERACTION_CONTINUITY.md`](docs/architecture/INTERACTION_CONTINUITY.md)
+**Deep dives:** [`docs/architecture/COGNITIVE_ARCHITECTURE.md`](https://github.com/wtvr-guy/prometheist/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/architecture/COGNITIVE_ARCHITECTURE.md), [`docs/architecture/INTERACTION_CONTINUITY.md`](docs/architecture/INTERACTION_CONTINUITY.md)
 
 ### Article 23 — Relevance, activation, evidence sufficiency, and truth are distinct
 
@@ -138,7 +138,7 @@ Changes to these rules require explicit documentation and appropriate regression
 
 **Why it matters.** High-recall memory activation is useful only if it does not silently lower epistemic standards.
 
-**Deep dives:** [`docs/architecture/COGNITIVE_ARCHITECTURE.md`](https://github.com/wtvr-guy/persistent_cognition/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/architecture/COGNITIVE_ARCHITECTURE.md), [`docs/architecture/LOSSLESS_PROGRESSIVE_MEMORY.md`](docs/architecture/LOSSLESS_PROGRESSIVE_MEMORY.md)
+**Deep dives:** [`docs/architecture/COGNITIVE_ARCHITECTURE.md`](https://github.com/wtvr-guy/prometheist/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/architecture/COGNITIVE_ARCHITECTURE.md), [`docs/architecture/LOSSLESS_PROGRESSIVE_MEMORY.md`](docs/architecture/LOSSLESS_PROGRESSIVE_MEMORY.md)
 
 ### Article 24 — Material influence must leave durable causal provenance
 
@@ -146,7 +146,7 @@ Changes to these rules require explicit documentation and appropriate regression
 
 **Why it matters.** A persistent system must be able to explain why it acted as it did even if raw sensor/input buffers are later gone.
 
-**Deep dives:** [`docs/architecture/COGNITIVE_ARCHITECTURE.md`](https://github.com/wtvr-guy/persistent_cognition/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/architecture/COGNITIVE_ARCHITECTURE.md), [`docs/architecture/LOSSLESS_PROGRESSIVE_MEMORY.md`](docs/architecture/LOSSLESS_PROGRESSIVE_MEMORY.md)
+**Deep dives:** [`docs/architecture/COGNITIVE_ARCHITECTURE.md`](https://github.com/wtvr-guy/prometheist/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/architecture/COGNITIVE_ARCHITECTURE.md), [`docs/architecture/LOSSLESS_PROGRESSIVE_MEMORY.md`](docs/architecture/LOSSLESS_PROGRESSIVE_MEMORY.md)
 
 ### Article 25 — Internal memory and external knowledge remain distinct evidence domains
 
@@ -154,7 +154,7 @@ Changes to these rules require explicit documentation and appropriate regression
 
 **Why it matters.** Remembering what the system/user previously experienced is epistemically different from learning something from the outside world now.
 
-**Deep dive:** [`docs/architecture/COGNITIVE_ARCHITECTURE.md`](https://github.com/wtvr-guy/persistent_cognition/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/architecture/COGNITIVE_ARCHITECTURE.md)
+**Deep dive:** [`docs/architecture/COGNITIVE_ARCHITECTURE.md`](https://github.com/wtvr-guy/prometheist/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/architecture/COGNITIVE_ARCHITECTURE.md)
 
 ### Article 26 — Natural-language continuity must not become vocabulary patchwork
 
@@ -192,7 +192,7 @@ Changes to these rules require explicit documentation and appropriate regression
 
 **Why it matters.** Synthetic determinism catches regressions; real-machine acceptance proves that assumptions about processes, memory pressure, local models, databases, and recovery survive contact with the actual deployment environment.
 
-**Deep dive:** [`docs/engineering/TESTING_AND_ACCEPTANCE.md`](https://github.com/wtvr-guy/persistent_cognition/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/engineering/TESTING_AND_ACCEPTANCE.md)
+**Deep dive:** [`docs/engineering/TESTING_AND_ACCEPTANCE.md`](https://github.com/wtvr-guy/prometheist/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/engineering/TESTING_AND_ACCEPTANCE.md)
 
 ### Article 32 — Constitutional changes must be explicit
 
@@ -200,7 +200,7 @@ Changes to these rules require explicit documentation and appropriate regression
 
 **Why it matters.** The Constitution is useful for audits only if architectural drift cannot redefine the rules implicitly.
 
-**Deep dive:** [`docs/engineering/CONSTITUTIONAL_GOVERNANCE.md`](https://github.com/wtvr-guy/persistent_cognition/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/engineering/CONSTITUTIONAL_GOVERNANCE.md)
+**Deep dive:** [`docs/engineering/CONSTITUTIONAL_GOVERNANCE.md`](https://github.com/wtvr-guy/prometheist/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/engineering/CONSTITUTIONAL_GOVERNANCE.md)
 
 ### Article 33 — Retrieval control is bounded, deterministic, and evidence-preserving
 

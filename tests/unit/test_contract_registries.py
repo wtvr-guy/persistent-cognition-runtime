@@ -32,3 +32,51 @@ def test_registered_prompts_and_schemas_are_resolvable(kind):
     assert len(contract["schema_sha256"]) == 64
     assert len(contract["prompt_sha256"]) == 64
     assert SEMANTIC_CONTRACTS[kind].output_schema()["type"] == "object"
+
+
+def test_source_verifier_checks_extraction_paths_and_retirements(tmp_path):
+    import hashlib
+    import runpy
+    from pathlib import Path
+    verify = runpy.run_path(str(Path(__file__).resolve().parents[2] / "scripts/verify_source_baseline.py"))["verify_manifest"]
+    path = tmp_path / "src/persistent_cognition/example.py"
+    path.parent.mkdir(parents=True)
+    path.write_text("adapted code")
+    source_hash = hashlib.sha256(b"original code").hexdigest()
+    manifest = {"files": {
+        "src/prometheist/example.py": {
+            "source_path": "src/prometheist/example.py", "source_sha256": source_hash,
+            "extraction_path": "src/persistent_cognition/example.py",
+            "extracted_sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+        },
+        "src/prometheist/self_model.py": {
+            "source_path": "src/prometheist/self_model.py", "source_sha256": source_hash,
+            "extraction_path": "src/persistent_cognition/self_model.py",
+            "status": "retired", "extracted_sha256": None, "reason": "Removed operational identity",
+        },
+    }}
+    assert verify(manifest, tmp_path) == {"unchanged": 0, "adapted": 1, "added": 0, "retired": 1}
+    path.write_text("unexpected drift")
+    with pytest.raises(SystemExit, match="modified extraction"):
+        verify(manifest, tmp_path)
+    path.write_text("adapted code")
+    path.with_name("self_model.py").write_text("retired code restored")
+    with pytest.raises(SystemExit, match="invalid retirement"):
+        verify(manifest, tmp_path)
+
+
+def test_source_verifier_detects_new_unrecorded_code_and_missing_addition(tmp_path):
+    import runpy
+    from pathlib import Path
+    verify = runpy.run_path(str(Path(__file__).resolve().parents[2] / "scripts/verify_source_baseline.py"))["verify_manifest"]
+    path = tmp_path / "src/persistent_cognition/new.py"
+    path.parent.mkdir(parents=True)
+    path.write_text("new code")
+    with pytest.raises(SystemExit, match="unrecorded code"):
+        verify({"files": {}}, tmp_path)
+    manifest = {"files": {"missing.py": {
+        "status": "added", "source_path": None, "source_sha256": None,
+        "extraction_path": "missing.py", "extracted_sha256": None, "reason": "New runtime boundary",
+    }}}
+    with pytest.raises(SystemExit, match="missing current file"):
+        verify(manifest, tmp_path)

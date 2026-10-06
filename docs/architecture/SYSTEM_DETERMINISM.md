@@ -189,7 +189,7 @@ Constitutional determinism should be tested through:
 - process-destruction tests proving decisions survive loss of process-local state;
 - explicit assertions that unordered/racing worker behavior cannot choose durable authority.
 
-See [`../engineering/TESTING_AND_ACCEPTANCE.md`](https://github.com/wtvr-guy/persistent_cognition/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/engineering/TESTING_AND_ACCEPTANCE.md).
+See [`../engineering/TESTING_AND_ACCEPTANCE.md`](https://github.com/wtvr-guy/prometheist/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/engineering/TESTING_AND_ACCEPTANCE.md).
 
 ## Relationship to probabilistic intelligence
 

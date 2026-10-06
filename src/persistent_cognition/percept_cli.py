@@ -7,9 +7,12 @@ import json
 import signal
 from pathlib import Path
 from typing import Any
+from collections.abc import Sequence
 from uuid import UUID, uuid4
 
 from persistent_cognition import db
+from persistent_cognition.advisory_lock import scheduler_ownership
+from persistent_cognition.attention_store import DEFAULT_SCHEDULER_KEY
 from persistent_cognition.cognitive_store import get_record, list_records, put_record, rebuild_heads
 from persistent_cognition.consolidation import ConsolidationSchedule, emit_due_consolidations, schedule_consolidation
 from persistent_cognition.expectations import Expectation
@@ -22,13 +25,21 @@ from persistent_cognition.situation_runtime import drain_situations
 from persistent_cognition.situations import register_expectation
 
 
-def tick(conn) -> dict:
-    poll_reflexes(conn)
-    cursor = get_record(conn, "schedule_cursor", "consolidation") or {"after_key": "", "revision": 0}
-    after = emit_due_consolidations(conn, now=datetime.now(timezone.utc), after_key=cursor["after_key"])
-    revision = cursor["revision"] + 1
-    put_record(conn, "schedule_cursor", "consolidation", {"after_key": after or "", "revision": revision}, revision=str(revision))
-    return {"completed": drain_situations(conn), "schedule_cursor": after}
+def tick(
+    conn, *, scheduler_key: str = DEFAULT_SCHEDULER_KEY,
+    worker_command: Sequence[str] | None = None,
+    should_stop=None,
+) -> dict:
+    """Drain one bounded page under the same ownership boundary as chat/service."""
+    with scheduler_ownership(conn, scheduler_key):
+        poll_reflexes(conn, scheduler_key=scheduler_key)
+        cursor = get_record(conn, "schedule_cursor", scheduler_key) or {"after_key": "", "revision": 0}
+        after = emit_due_consolidations(conn, now=datetime.now(timezone.utc), after_key=cursor["after_key"])
+        revision = cursor["revision"] + 1
+        put_record(conn, "schedule_cursor", scheduler_key, {"after_key": after or "", "revision": revision}, revision=str(revision))
+        return {"completed": drain_situations(conn, scheduler_key=scheduler_key, worker_command=worker_command,
+                                             should_stop=should_stop),
+                "schedule_cursor": after}
 
 
 def _require_payload(data: Any, command: str) -> dict[str, Any]:
@@ -74,11 +85,12 @@ def main() -> None:
     commands = parser.add_subparsers(dest="command", required=True)
     for name in ("install-source", "ingest", "expectation", "schedule-consolidation"):
         commands.add_parser(name).add_argument("json_file", type=Path)
-    commands.add_parser("tick")
+    commands.add_parser("tick").add_argument("--scheduler-key", default=DEFAULT_SCHEDULER_KEY)
     serve = commands.add_parser("serve", help="Run the always-on governed percept service until SIGINT/SIGTERM")
     serve.add_argument("--scheduler-key", default="default")
     consolidate = commands.add_parser("consolidate", help="Schedule one bounded consolidation page and run one scheduler tick")
     consolidate.add_argument("--after-key", default="")
+    consolidate.add_argument("--scheduler-key", default=DEFAULT_SCHEDULER_KEY)
     commands.add_parser("rebuild-heads")
     show = commands.add_parser("situations")
     show.add_argument("--after-key", default="")
@@ -108,9 +120,9 @@ def main() -> None:
             schedule_consolidation(conn, ConsolidationSchedule(
                 schedule_id=uuid4(), due_at=datetime.now(timezone.utc), after_key=args.after_key,
             ))
-            print(json.dumps(tick(conn), indent=2))
+            print(json.dumps(tick(conn, scheduler_key=args.scheduler_key), indent=2))
         elif args.command == "tick":
-            print(json.dumps(tick(conn), indent=2))
+            print(json.dumps(tick(conn, scheduler_key=args.scheduler_key), indent=2))
         elif args.command == "situations":
             print(json.dumps(list_records(conn, "situation", after_key=args.after_key), indent=2))
         elif args.command == "rebuild-heads":

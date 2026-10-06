@@ -106,7 +106,17 @@ def test_run_chat_resets_execution_state_before_accepting_input(monkeypatch) -> 
             return [True]
 
     class FakeConnection:
+        closed = False
+        broken = False
+
+        @property
+        def info(self):
+            from types import SimpleNamespace
+            from psycopg.pq import TransactionStatus
+            return SimpleNamespace(transaction_status=TransactionStatus.IDLE)
+
         def execute(self, *args, **kwargs):
+            calls.append("lock" if "pg_try_advisory_lock" in args[0] else "unlock")
             return FakeCursorResult()
 
         def commit(self):
@@ -137,4 +147,4 @@ def test_run_chat_resets_execution_state_before_accepting_input(monkeypatch) -> 
 
     cli._run_chat(uuid.uuid4())
 
-    assert calls == ["connection", ("reset", fake_conn)]
+    assert calls == ["connection", "lock", ("reset", fake_conn), "unlock"]

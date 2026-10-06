@@ -193,13 +193,16 @@ def _run_memory_fact(subject: str, property_name: str) -> None:
 
 
 def _run_recover(interaction_id: uuid.UUID | None, *, latest: bool) -> None:
+    from persistent_cognition.advisory_lock import scheduler_ownership
+    from persistent_cognition.attention_store import DEFAULT_SCHEDULER_KEY
     resolved = _resolve_artifact_interaction_id(
         interaction_id,
         latest=latest,
         complete=False if interaction_id is None else None,
     )
     with db.get_connection() as conn:
-        response = artifact_recovery.resume_interaction_from_artifacts(conn, resolved)
+        with scheduler_ownership(conn, DEFAULT_SCHEDULER_KEY):
+            response = artifact_recovery.resume_interaction_from_artifacts(conn, resolved)
     if response is not None:
         print(response)
 
@@ -439,8 +442,11 @@ def main() -> None:
         parser.error("--subject/--property are only valid with memory-fact")
     conversation_id = args.conversation_id or uuid.uuid4()
     if args.once is not None:
+        from persistent_cognition.advisory_lock import scheduler_ownership
+        from persistent_cognition.attention_store import DEFAULT_SCHEDULER_KEY
         with db.get_connection() as conn:
-            response = _handle_with_admission_diagnostics(conn, args.once, conversation_id)
+            with scheduler_ownership(conn, DEFAULT_SCHEDULER_KEY):
+                response = _handle_with_admission_diagnostics(conn, args.once, conversation_id)
         if response is not None:
             print(response)
         return

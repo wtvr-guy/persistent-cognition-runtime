@@ -24,19 +24,7 @@ def run(directory):
         raise ValueError("Unregistered job action")
     from persistent_cognition.model_admission import prepare_task
     from persistent_cognition.model_residency import prepare_local_models
-    # Unload local models first, then measure real freed capacity. A required
-    # fallback choice or capacity block is decided here, before opening any
-    # cognitive database session, so a non-eligible job never starts a
-    # transaction. The unload itself is guarded by residency_lock internally.
-    report({"status": "Unloading local models before measuring available capacity"})
-    residency = prepare_local_models(settings)
-    report({"status": "Matching installed models to the task and measured host capacity"})
-    plan = prepare_task(settings, payload["text"], payload.get("task", "auto"), fallback=payload.get("fallback", "review"))
-    plan = plan.model_copy(update={"residency": residency})
-    write_private_policy(directory / "admission.json", plan.model_dump(mode="json"))
-    if plan.status != "eligible":
-        raise ValueError("; ".join(plan.reasons))
-    from persistent_cognition.advisory_lock import scheduler_ownership
+    from persistent_cognition.advisory_lock import SchedulerOwnershipError, scheduler_ownership
     scheduler_key = "gui-chat"
     with db.get_connection() as conn:
         # Take single-owner authority over this scheduler namespace BEFORE the
@@ -45,6 +33,16 @@ def run(directory):
         # can never perform them for this namespace.
         try:
             with scheduler_ownership(conn, scheduler_key):
+                # Do not unload models belonging to a live namespace owner.
+                # Admission still precedes any cognitive execution-state writes.
+                report({"status": "Unloading local models before measuring available capacity"})
+                residency = prepare_local_models(settings)
+                report({"status": "Matching installed models to the task and measured host capacity"})
+                plan = prepare_task(settings, payload["text"], payload.get("task", "auto"), fallback=payload.get("fallback", "review"))
+                plan = plan.model_copy(update={"residency": residency})
+                write_private_policy(directory / "admission.json", plan.model_dump(mode="json"))
+                if plan.status != "eligible":
+                    raise ValueError("; ".join(plan.reasons))
                 return _run_chat_job(
                     conn,
                     directory=directory,
@@ -54,8 +52,8 @@ def run(directory):
                     plan=plan,
                     scheduler_key=scheduler_key,
                 )
-        except RuntimeError as exc:
-            raise ValueError("Another Persistent Cognition GUI is already running a chat task") from exc
+        except SchedulerOwnershipError as exc:
+            raise ValueError("Another owner is already running a headless chat task") from exc
 
 
 def _run_chat_job(conn, *, directory, settings, payload, report, plan, scheduler_key):

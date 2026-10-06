@@ -286,7 +286,8 @@ def test_installed_weight_ratio_ignores_architecture_and_capability(monkeypatch)
 
 def test_worker_records_choice_without_starting_cognition(monkeypatch, tmp_path):
     import json
-    from persistent_cognition import db, runtime_job, model_admission, model_residency
+    from contextlib import contextmanager, nullcontext
+    from persistent_cognition import advisory_lock, db, runtime_job, model_admission, model_residency
     settings = configured()
     plan = plan_task(settings, "code task", "coding", {"default:latest": evidence()}, observation(), at=AT)
     assert plan.status == "needs_choice"
@@ -294,11 +295,24 @@ def test_worker_records_choice_without_starting_cognition(monkeypatch, tmp_path)
     monkeypatch.setattr(runtime_job, "job_settings", lambda: settings)
     monkeypatch.setattr(model_residency, "prepare_local_models", lambda settings: {})
     monkeypatch.setattr(model_admission, "prepare_task", lambda *args, **kwargs: plan)
-    def forbidden():
-        raise AssertionError("No cognitive transaction may start while a fallback choice is required")
-    monkeypatch.setattr(db, "get_connection", forbidden)
+    connection = object()
+    ownership = []
+    monkeypatch.setattr(db, "get_connection", lambda: nullcontext(connection))
+    @contextmanager
+    def own_namespace(conn, scheduler_key):
+        assert conn is connection and scheduler_key == "gui-chat"
+        ownership.append("acquired")
+        try:
+            yield
+        finally:
+            ownership.append("released")
+    monkeypatch.setattr(advisory_lock, "scheduler_ownership", own_namespace)
+    def forbidden(*_args, **_kwargs):
+        raise AssertionError("No cognitive work may start while a fallback choice is required")
+    monkeypatch.setattr(runtime_job, "_run_chat_job", forbidden)
     with pytest.raises(ValueError, match="Choose a fallback"):
         runtime_job.run(tmp_path)
+    assert ownership == ["acquired", "released"]
     assert json.loads((tmp_path / "admission.json").read_text())["status"] == "needs_choice"
     assert not (tmp_path / "effective-settings.json").exists()
 

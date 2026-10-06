@@ -55,7 +55,9 @@ def observe_action_outcome(
         observation={"action_id": str(action_id), "receipt_event_id": str(receipt_event_id), "status": status},
         observed_at=observed_at, delivery_id=f"{action_id}:{receipt_event_id}", correlation_id=action_id,
         context=PerceptContext(
-            entity_refs=tuple(intention["entity_refs"]), expectation_refs=(uuid5(action_id, "completion-expectation"),),
+            # Feedback owns an action situation, not the source entity's pending
+            # reaction. The intention retains the original entity links.
+            entity_refs=(f"action:{action_id}",), expectation_refs=(uuid5(action_id, "completion-expectation"),),
             observations=(Observation(subject=f"action:{action_id}", property="completion", value=status),),
             uncertainty=3 if status == "UNKNOWN" else 0,
         ),

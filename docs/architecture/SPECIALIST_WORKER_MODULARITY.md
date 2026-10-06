@@ -67,7 +67,7 @@ The triage result is an immutable stage artifact. Execution, fixed retrieval, an
 The retrieval result is an immutable stage artifact containing evidence and route
 receipts. It has no requirements, deficit, coverage decision, or sufficiency flag.
 The retired split is preserved as an experiment in
-[COMPOSER_REQUIREMENTS_001.md](https://github.com/wtvr-guy/persistent_cognition/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/experiments/COMPOSER_REQUIREMENTS_001.md).
+[COMPOSER_REQUIREMENTS_001.md](https://github.com/wtvr-guy/prometheist/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/experiments/COMPOSER_REQUIREMENTS_001.md).
 
 ## Percept triage for non-user inputs
 

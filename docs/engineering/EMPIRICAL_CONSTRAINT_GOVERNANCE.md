@@ -192,4 +192,4 @@ A release is not considered empirically calibrated merely because all functional
 
 When current evidence cannot establish an optimum, the registry must say so explicitly. The accepted value is then a documented provisional bound, not falsely presented as optimal.
 
-Testing and environment-evidence requirements are further defined in [`TESTING_AND_ACCEPTANCE.md`](https://github.com/wtvr-guy/persistent_cognition/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/engineering/TESTING_AND_ACCEPTANCE.md).
+Testing and environment-evidence requirements are further defined in [`TESTING_AND_ACCEPTANCE.md`](https://github.com/wtvr-guy/prometheist/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/engineering/TESTING_AND_ACCEPTANCE.md).

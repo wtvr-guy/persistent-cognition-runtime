@@ -57,7 +57,7 @@ locally and excluded from new Git commits. A native benchmark run writes a
 content-addressed manifest over every raw event and interaction artifact so the
 compact result under `benchmarks/results/` remains connected to the exact causal
 record. A verified Git-visible ZIP in `.tmp/` makes the latest run portable for review; see
-[`BENCHMARK_SHARING_BUNDLE.md`](https://github.com/wtvr-guy/persistent_cognition/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/architecture/BENCHMARK_SHARING_BUNDLE.md). Historical Git commits
+[`BENCHMARK_SHARING_BUNDLE.md`](https://github.com/wtvr-guy/prometheist/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/architecture/BENCHMARK_SHARING_BUNDLE.md). Historical Git commits
 still contain the previously checked-in raw evidence.
 
 Current mechanism-run manifests also bind the host/runtime evidence used to interpret

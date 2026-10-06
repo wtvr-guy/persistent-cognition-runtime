@@ -8,7 +8,7 @@ from persistent_cognition.prompt_registry import (
 from enum import Enum
 from typing import Callable
 
-from pydantic import Field, model_validator
+from pydantic import Field, field_validator, model_validator
 
 from persistent_cognition.percept_context import FrozenRecord, Reference
 from persistent_cognition.perception import Percept, PerceptKind, PerceptModality
@@ -39,6 +39,13 @@ class SourcePolicy(FrozenRecord):
     allowed_task_classes: tuple[TaskClass, ...] = (TaskClass.OBSERVE, TaskClass.RECONCILE)
     evidence_domains: tuple[HistoricalEvidenceScope, ...] = (HistoricalEvidenceScope.DERIVED_INTERNAL,)
     maximum_urgency: UrgencyClass = UrgencyClass.ROUTINE
+    trusted_executor: str | None = None
+
+    @field_validator("trusted_executor")
+    @classmethod
+    def validated_executor(cls, value: str | None) -> str | None:
+        from persistent_cognition.trusted_executors import validate_executor_name
+        return validate_executor_name(value) if value is not None else None
 
     @model_validator(mode="after")
     def coherent_policy(self) -> "SourcePolicy":
@@ -50,6 +57,9 @@ class SourcePolicy(FrozenRecord):
             raise ValueError("consolidation must be a scheduled task")
         if len(set(self.evidence_domains)) != len(self.evidence_domains):
             raise ValueError("duplicate evidence domain")
+        if self.trusted_executor is not None and (
+                self.deterministic_task is None or self.deterministic_task is TaskClass.CONSOLIDATE):
+            raise ValueError("trusted executors require an explicit non-consolidation deterministic task")
         return self
 
 

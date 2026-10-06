@@ -1,6 +1,16 @@
 {
   "schema_version": 2,
   "constraints": {
+    "src/persistent_cognition/percept_service.py::PerceptService.__init__::comparison": {
+      "expected_value": 0,
+      "classification": "STRUCTURAL_INVARIANT",
+      "rationale": "Backoff exponents must be non-negative and fit the declared supported cap; negative exponents bypass the polling floor."
+    },
+    "src/persistent_cognition/percept_service.py::PerceptService.run::comparison": {
+      "expected_value": 0,
+      "classification": "STRUCTURAL_INVARIANT",
+      "rationale": "A bounded service run accepts a non-negative integer number of ticks; zero is an explicit no-work run."
+    },
     "manual:situation-policy:prediction_error_large": {
       "manual": true,
       "expected_value": 1,
@@ -1133,9 +1143,9 @@
     },
     "percept_service": {
       "classification": "SAFETY_TUNABLE",
-      "benchmark_id": "LOCAL-APP-001",
+      "benchmark_id": "SITUATION-PIPELINE-001",
       "status": "PROVISIONAL",
-      "rationale": "Idle polling cadence, geometric backoff ceiling, backoff exponent cap, and post-error cooldown for the always-on percept service are explicit provisional bounds that keep a quiet or failing runtime from busy-spinning. They govern only when the next bounded deterministic tick runs, never what it may do; host- and workload-specific calibration is required. See docs/experiments/LOCAL_APP_001.md.",
+      "rationale": "Idle polling cadence, geometric backoff ceiling, exponent cap and post-error cooldown bound the always-on supervisor, not its execution authority. The SITUATION-PIPELINE-001 specification in benchmarks/constraint_experiments.json covers deterministic backoff/ownership invariants; host/workload tuning remains provisional.",
       "members": {
         "src/persistent_cognition/percept_service.py::<module>::SERVICE_IDLE_BACKOFF_BASE_SECONDS": 1.0,
         "src/persistent_cognition/percept_service.py::<module>::SERVICE_MAX_BACKOFF_SECONDS": 30.0,

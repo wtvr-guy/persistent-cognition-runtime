@@ -19,6 +19,8 @@ Exact history lives outside the model. Fresh specialist workers receive bounded 
 
 Android, device nodes, tunnel/sync services, sensor discovery, OS administration, desktop/web UI, deployment-only application setup, and application philosophy are excluded.
 
+The runtime has no operational identity, persona, imprinting, self-model stage, or self-reflection memory. Generic semantic facts, situations, expectations, and provenance remain. Applications supply observations and authority; model prompts describe bounded worker roles, not a personality.
+
 ## Install
 
 Requirements: Python 3.14+, uv, PostgreSQL, and Ollama for local model-backed chat. Docker is not required.
@@ -60,6 +62,13 @@ uv run pcr restore-events
 
 Inspection and verification do not require a live model. Recovery requires the relevant database and any model work that remains incomplete. `pcr-percept` exposes generic intake, bounded scheduler ticks, and `pcr-percept serve` for a continuous governed percept loop without collecting device sensors.
 
+```sh
+uv run pcr-percept serve --scheduler-key automation
+uv run pcr-percept tick --scheduler-key automation
+```
+
+Run only one owner per namespace: chat, one-shot chat, recovery, ticks, and the service share ownership locks. Install application source policies and ingest text, arbitrary JSON, metrics, bounded event streams, or verified local media references. Scheduled tasks, sensor redflags, exceptions, and asynchronous tool results are explicit inputs, not automatic device discovery. Non-chat work produces durable structured actions even when no prose response is requested. [Setup](docs/SETUP.md#continuous-percept-service-and-embedding) explains trusted callbacks in fresh workers.
+
 ## Validate
 
 Set `TEST_DATABASE_URL` in your shell to a disposable database whose name includes `test` or `benchmark`. Tests clear that database.
@@ -76,7 +85,7 @@ See [TESTING.md](docs/TESTING.md) for PostgreSQL CI, live-model acceptance, and 
 
 ### Historical upstream validation
 
-The pinned upstream evidence archive preserves this architecture's development, benchmarks, test definitions, and local acceptance history. Its [2026-09-11 v2 validation record](https://github.com/wtvr-guy/persistent_cognition/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/audits/V07_EPISTEMIC_RETRIEVAL_SCOPING_2026-09-11.md#3-verification--results) reports successful local Windows/PostgreSQL/live-Ollama tests for four-turn stateless continuity and epistemic memory. The [v0.7 closure record](https://github.com/wtvr-guy/persistent_cognition/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/milestones/v0.7/CLOSURE_STATUS.md) records maintainer acceptance and closure on 2026-09-12.
+The pinned upstream evidence archive preserves this architecture's development, benchmarks, test definitions, and local acceptance history. Its [2026-09-11 v2 validation record](https://github.com/wtvr-guy/prometheist/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/audits/V07_EPISTEMIC_RETRIEVAL_SCOPING_2026-09-11.md#3-verification--results) reports successful local Windows/PostgreSQL/live-Ollama tests for four-turn stateless continuity and epistemic memory. The [v0.7 closure record](https://github.com/wtvr-guy/prometheist/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/milestones/v0.7/CLOSURE_STATUS.md) records maintainer acceptance and closure on 2026-09-12.
 
 See the [historical evidence index](docs/TESTING.md#historical-upstream-evidence) for benchmark results, native test records, and earlier failures and repairs. Those results establish behavior of the recorded upstream revisions and environments; live Ollama acceptance of this extracted repository remains pending a fresh laptop run.
 
@@ -84,7 +93,7 @@ See the [historical evidence index](docs/TESTING.md#historical-upstream-evidence
 
 The installed distribution is `persistent-cognition-runtime`. The source package is `persistent_cognition`; console commands remain `pcr` and `pcr-percept`. Use a separate virtual environment, database, and artifact directory from any upstream source application.
 
-This is a copy with explicit provenance, not a GitHub fork carrying the source application's full history. [SOURCE_BASELINE.json](SOURCE_BASELINE.json) distinguishes byte-identical source files from the small extraction adaptations.
+This is a copy with explicit provenance, not a GitHub fork carrying the source application's full history. [SOURCE_BASELINE.json](SOURCE_BASELINE.json) preserves original source paths/hashes and records current extraction paths, intentional adaptations, additions, and retirements.
 
 ## Documentation and license
 

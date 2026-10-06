@@ -162,7 +162,9 @@ def test_four_percepts_one_guarded_task_and_finite_action_feedback(conn, monkeyp
     ids = submit_situation_page(conn, probe=FixedProbe())
     assert len(ids) == 1
     result = run_situation_task(conn, ids[0], probe=FixedProbe())
-    assert result == {"response_required": False, "response_text": None}
+    assert result["response_required"] is False and result["response_text"] is None
+    assert result["work"]["observed_status"] == "SUCCEEDED"
+    assert result["work"]["work_results"][0]["result_data"]["operation"] == "RECONCILE"
     assert len(list_records(conn, "action_execution")) == 1
     outcomes = conn.execute("SELECT payload FROM events WHERE event_type = %s", (EventType.PERCEPT_OBSERVATION.value,)).fetchall()
     assert any(row[0]["percept"]["source"]["kind"] == "ACTION_OUTCOME" for row in outcomes)
@@ -199,6 +201,18 @@ def _capture_first_situation_claim_probe(
         ConsolidationSchedule(schedule_id=uuid4(), due_at=now),
     )
     emit_due_consolidations(conn, now=now)
+    # Exercise reservation credit with an actually configured model stage.
+    configured = SourcePolicy.model_validate(get_record(conn, "source_policy", "scheduler:consolidation"))
+    install_source_policy(conn, configured.model_copy(update={
+        "response_required": True, "natural_language_response": True,
+    }))
+    candidate_key, candidate = next(
+        (key, value) for key, value in list_records(conn, "situation_candidate")
+        if value["policy"]["source_id"] == "scheduler:consolidation"
+    )
+    put_record(conn, "situation_candidate", candidate_key,
+               {**candidate, "policy": get_record(conn, "source_policy", "scheduler:consolidation")},
+               revision="test-model-response")
     task_ids = submit_situation_page(
         conn,
         probe=FixedProbe(),
@@ -388,9 +402,10 @@ def test_situation_finalization_recovers_without_repeating_work(conn, monkeypatc
     if failure_boundary == "progress":
         # The normal polling path must find completed tasks even though their
         # worker assignments have already been released and action feedback has
-        # replaced the candidate snapshot. The first page wraps the cursor.
-        drain_situations(conn, probe=FixedProbe())
-        drain_situations(conn, probe=FixedProbe())
+        # formed its independent candidate. Traverse that candidate and wrap
+        # the cursor before revisiting the source situation.
+        for _ in range(3):
+            drain_situations(conn, probe=FixedProbe())
         repaired = conn.execute(
             "SELECT payload FROM events WHERE payload->>'record_kind' = 'situation_progress' "
             "AND payload->'data'->>'snapshot_id' = %s", (snapshot_id,),
@@ -405,7 +420,8 @@ def test_situation_finalization_recovers_without_repeating_work(conn, monkeypatc
         result = run_situation_task(
             conn, task_id, probe=FixedProbe(), launcher=SimpleNamespace(launch=unexpected_launch),
         )
-        assert result == {"response_required": False, "response_text": None}
+        assert result["response_required"] is False and result["response_text"] is None
+        assert result["work"]["observed_status"] == "SUCCEEDED"
     after = artifact_journal.interaction_artifacts(task_id)
     assert [entry["artifact_hash"] for entry in after[:len(before)]] == [entry["artifact_hash"] for entry in before]
     assert len([entry for entry in after if entry["artifact_type"] == "FINAL_DISPOSITION"]) == 1
@@ -432,9 +448,9 @@ def test_situation_priority_cannot_override_memory_admission(conn):
 
 @pytest.mark.parametrize(
     ("resident", "expected_memory_mib"),
-    [(True, 512), (False, 3_072)],
+    [(True, 512), (False, 512)],
 )
-def test_consolidation_admission_uses_ollama_incremental_memory(
+def test_model_free_consolidation_admission_ignores_ollama_residency(
     conn,
     resident,
     expected_memory_mib,
@@ -458,17 +474,12 @@ def test_consolidation_admission_uses_ollama_incremental_memory(
     task = load_scheduler(conn).tasks[task_id]
     estimate = task.metadata.process_resource_estimate
     assert estimate.memory_mib == expected_memory_mib
-    assert estimate.llm_slots == 1
+    assert estimate.llm_slots == 0
     assert task.resumable_state["resource_admission"]["memory_mib"] == (
         expected_memory_mib
     )
-    assert task.resumable_state["resource_admission"]["requires_model"] is True
-    assert (
-        task.resumable_state["resource_admission"]["ollama_runtime_state"][
-            "resident"
-        ]
-        is resident
-    )
+    assert task.resumable_state["resource_admission"]["requires_model"] is False
+    assert task.resumable_state["resource_admission"]["ollama_runtime_state"] is None
 
 
 def test_scheduled_consolidation_executes_separately_and_preserves_sources(conn):

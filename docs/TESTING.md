@@ -1,6 +1,6 @@
 # Validation
 
-`scripts/verify_source_baseline.py` verifies the extracted file digests and reports unchanged versus adapted paths. This checks source fidelity; behavior requires the tests too.
+`scripts/verify_source_baseline.py` preserves original upstream paths/hashes, verifies current extraction paths/digests, checks explicit additions/retirements, and rejects unrecorded Python code. This checks provenance and intentional adaptations; behavior requires the tests too.
 
 ## PostgreSQL regression gate
 
@@ -14,6 +14,9 @@ uv run python scripts/audit_registries.py
 uv run python scripts/audit_constraints.py --fail-unregistered
 uv run python benchmarks/run_deterministic_constraints.py
 uv run pytest -q -ra
+uv build
+uv run pcr --help
+uv run pcr-percept --help
 ```
 
 This exercises real persistence, process restart, bounded memory, temporal/source authority, compact journals, recovery, and scripted specialist contracts. Hosted CI provisions PostgreSQL 16 and retains the JUnit report. The pure policy subset can also run without PostgreSQL:
@@ -21,6 +24,10 @@ This exercises real persistence, process restart, bounded memory, temporal/sourc
 ```sh
 uv run pytest -q tests/unit --confcutdir=tests/unit
 ```
+
+`test_percept_service.py` covers namespace/cursor propagation, shared CLI/tick/service ownership, rollback and lost-session boundaries, graceful stop/restart, fresh-process trusted executor bootstrap, structured non-chat completions, callback/storage failures, and finite action feedback. It uses unreachable Ollama endpoints for model-free reaction tests rather than silently depending on a live model. The media-corruption unit test isolates its artifact store so repeat runs cannot corrupt normal runtime data.
+
+The service backoff bounds remain provisional under `SITUATION-PIPELINE-001`; deterministic invariants are not workload-specific latency calibration. Likewise, the deterministic calibration runner reports `INSUFFICIENT_DISCRIMINATION` for its four retained families, not a claim of uniquely optimal settings.
 
 Frozen retrieval fixtures originally discovered during upstream application benchmarks remain under `tests/fixtures`. They test delivery of required canonical sources; application fidelity benchmark runners and subjective scoring are excluded.
 
@@ -42,11 +49,11 @@ The pinned upstream evidence archive records the engine's development and prior 
 
 | Evidence | What the record establishes |
 | --- | --- |
-| [V2 continuity and epistemic-memory validation, 2026-09-11](https://github.com/wtvr-guy/persistent_cognition/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/audits/V07_EPISTEMIC_RETRIEVAL_SCOPING_2026-09-11.md#3-verification--results) | Reports passing native four-turn stateless continuity and epistemic-memory red-team tests after local Windows/PostgreSQL/Ollama remediation, alongside 26 worker/response-policy tests. |
-| [V0.7 closure and frozen baseline](https://github.com/wtvr-guy/persistent_cognition/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/milestones/v0.7/CLOSURE_STATUS.md) | Records maintainer acceptance and closure on 2026-09-12, with baseline `39a3223c38f1b1f8fae7f9e667c6cd7460774ffe` and the historical gate/branch disposition. |
-| [Earlier native source-authority acceptance, 2026-08-28](https://github.com/wtvr-guy/persistent_cognition/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/audits/history/pr19/RT04_REMEDIATION_2026-08-28.md#acceptance-evidence) | Records 5 passing focused Windows/PostgreSQL/Ollama tests in 69.02 seconds on the historical red-team branch. This is evidence for that branch's mechanism. |
-| [Native failures and remediation, 2026-09-03](https://github.com/wtvr-guy/persistent_cognition/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/audits/V07_NATIVE_ACCEPTANCE_2026-09-03.md) | Preserves the earlier 8-pass/6-fail and 11-pass/3-fail runs, their provenance limits, and the correction to artifact-first acceptance with human response review. |
-| [Historical benchmark results](https://github.com/wtvr-guy/persistent_cognition/tree/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/benchmarks/results) and [experiment records](https://github.com/wtvr-guy/persistent_cognition/tree/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/experiments) | Retain native constraint calibration, memory/retrieval measurements, experiment methods, successes, and negative results. Consult each record's model, revision, scope, and result; these files are not a single universal pass claim. |
-| [Upstream tests](https://github.com/wtvr-guy/persistent_cognition/tree/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/tests) and [testing/acceptance contract](https://github.com/wtvr-guy/persistent_cognition/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/engineering/TESTING_AND_ACCEPTANCE.md) | Provide the test definitions and explain statelessness, restart, evidence provenance, structural acceptance, and human review of natural model answers. |
+| [V2 continuity and epistemic-memory validation, 2026-09-11](https://github.com/wtvr-guy/prometheist/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/audits/V07_EPISTEMIC_RETRIEVAL_SCOPING_2026-09-11.md#3-verification--results) | Reports passing native four-turn stateless continuity and epistemic-memory red-team tests after local Windows/PostgreSQL/Ollama remediation, alongside 26 worker/response-policy tests. |
+| [V0.7 closure and frozen baseline](https://github.com/wtvr-guy/prometheist/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/milestones/v0.7/CLOSURE_STATUS.md) | Records maintainer acceptance and closure on 2026-09-12, with baseline `39a3223c38f1b1f8fae7f9e667c6cd7460774ffe` and the historical gate/branch disposition. |
+| [Earlier native source-authority acceptance, 2026-08-28](https://github.com/wtvr-guy/prometheist/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/audits/history/pr19/RT04_REMEDIATION_2026-08-28.md#acceptance-evidence) | Records 5 passing focused Windows/PostgreSQL/Ollama tests in 69.02 seconds on the historical red-team branch. This is evidence for that branch's mechanism. |
+| [Native failures and remediation, 2026-09-03](https://github.com/wtvr-guy/prometheist/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/audits/V07_NATIVE_ACCEPTANCE_2026-09-03.md) | Preserves the earlier 8-pass/6-fail and 11-pass/3-fail runs, their provenance limits, and the correction to artifact-first acceptance with human response review. |
+| [Historical benchmark results](https://github.com/wtvr-guy/prometheist/tree/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/benchmarks/results) and [experiment records](https://github.com/wtvr-guy/prometheist/tree/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/experiments) | Retain native constraint calibration, memory/retrieval measurements, experiment methods, successes, and negative results. Consult each record's model, revision, scope, and result; these files are not a single universal pass claim. |
+| [Upstream tests](https://github.com/wtvr-guy/prometheist/tree/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/tests) and [testing/acceptance contract](https://github.com/wtvr-guy/prometheist/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/engineering/TESTING_AND_ACCEPTANCE.md) | Provide the test definitions and explain statelessness, restart, evidence provenance, structural acceptance, and human review of natural model answers. |
 
 The successful upstream native runs are historical evidence for the architecture. The current repository has its own [extraction regression results](EXTRACTION.md#verification) and still needs live-model acceptance on its own exact checkout. Save the new run's full console output and response artifacts with its commit, model, and environment so that evidence can be added here.

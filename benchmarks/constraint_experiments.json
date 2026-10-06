@@ -539,7 +539,9 @@
         "prediction_error_bins",
         "heartbeat_suspicion_seconds",
         "worker_lifetimes",
-        "triage_output_tokens"
+        "triage_output_tokens",
+        "service_idle_and_error_backoff",
+        "service_backoff_exponent_cap"
       ],
       "scenario_families": [
         "four_inputs_one_situation",
@@ -551,7 +553,12 @@
         "restart_at_each_handoff",
         "scheduled_consolidation_with_counterevidence",
         "media_checksum_quarantine",
-        "resource_denial_under_high_salience"
+        "resource_denial_under_high_salience",
+        "idle_and_failure_backoff",
+        "namespace_ownership_and_cursor_isolation",
+        "fresh_worker_trusted_bootstrap",
+        "structured_exceptions_and_async_tool_results",
+        "graceful_stop_and_connection_loss"
       ],
       "hard_invariants": [
         "canonical bytes never rewritten",
@@ -560,7 +567,10 @@
         "every explicit user prompt receives a response",
         "all execution retains resource admission",
         "deterministic retries never duplicate actions",
-        "no unbounded feedback loop"
+        "no unbounded feedback loop",
+        "observed data never supplies executable imports or commands",
+        "no silent tick failures or work after ownership session loss",
+        "external callbacks deduplicate with their stable execution ID"
       ],
       "quality_order": [
         "hard_invariant_pass_rate",

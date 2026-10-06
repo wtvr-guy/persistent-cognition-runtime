@@ -8,6 +8,8 @@ exposed in the pre-cognitive capability catalog.
 from __future__ import annotations
 
 from typing import Any
+from collections.abc import Mapping
+import json
 from uuid import UUID, uuid5
 
 import psycopg
@@ -24,6 +26,7 @@ from persistent_cognition.models import EventType, MemoryPacket
 from persistent_cognition.trusted_executors import (
     RESERVED_EXECUTORS,
     TrustedExecutionRequest,
+    TrustedExecutorError,
     resolve_trusted_executor,
 )
 
@@ -213,12 +216,21 @@ def _execute_application_capability(
         correlation_id=correlation_id,
         task_text=task_text,
         before_global_seq=before_global_seq,
+        execution_id=capability_execution_id,
     )
-    raw_result = handler(request)
-    if not isinstance(raw_result, dict):
-        raise RuntimeError(
+    try:
+        raw_result = handler(request)
+    except Exception as exc:
+        raise TrustedExecutorError(type(exc).__name__) from exc
+    if not isinstance(raw_result, Mapping):
+        raise TrustedExecutorError("TypeError",
             f"trusted executor {registration.executor!r} must return a JSON object"
         )
+    raw_result = dict(raw_result)
+    try:
+        json.dumps(raw_result, allow_nan=False)
+    except (TypeError, ValueError) as exc:
+        raise TrustedExecutorError(type(exc).__name__) from exc
 
     execution = CapabilityExecution(
         capability_execution_id=capability_execution_id,

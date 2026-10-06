@@ -235,4 +235,4 @@ A defensible v1.0 must demonstrate lossless source-backed durable memory and bou
 
 ## Constitutional relationship
 
-Articles 9 and 10 govern canonical/derived memory fidelity; Article 11 governs bounded recall; Articles 23 and 24 govern epistemic separation and durable causal provenance. Explicit policy-governed erasure is governed separately by [`LOCAL_FIRST_PORTABILITY.md`](https://github.com/wtvr-guy/persistent_cognition/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/architecture/LOCAL_FIRST_PORTABILITY.md) and must never be implemented as ordinary compaction.
+Articles 9 and 10 govern canonical/derived memory fidelity; Article 11 governs bounded recall; Articles 23 and 24 govern epistemic separation and durable causal provenance. Explicit policy-governed erasure is governed separately by [`LOCAL_FIRST_PORTABILITY.md`](https://github.com/wtvr-guy/prometheist/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/architecture/LOCAL_FIRST_PORTABILITY.md) and must never be implemented as ordinary compaction.

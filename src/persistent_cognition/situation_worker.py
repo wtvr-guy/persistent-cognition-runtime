@@ -11,6 +11,8 @@ from uuid import UUID, uuid5
 
 from persistent_cognition import artifact_journal, db, event_store, jit_memory
 from persistent_cognition.action_outcomes import issue_action, observe_action_outcome
+from persistent_cognition.capability_registry import CapabilityDescriptor, CapabilityKind, RegisteredCapability
+from persistent_cognition.capability_runtime import execute_registered_capability
 from persistent_cognition.cognitive_store import get_record, put_record
 from persistent_cognition.consolidation import consolidate_page
 from persistent_cognition.epistemic_authority import format_authority_bound_memory_packet
@@ -39,6 +41,7 @@ from persistent_cognition.situation_runtime import (
     situation_stage_uses_model,
 )
 from persistent_cognition.worker_protocol import deterministic_worker_step_id
+from persistent_cognition.trusted_executors import TrustedExecutorError
 from persistent_cognition.worker_store import complete_worker_claim, load_worker_claim_envelope, load_worker_result, release_worker_claim
 
 TRIAGE_MAX_TOKENS = 512
@@ -135,11 +138,35 @@ def execute_situation_stage(conn, task: SituationTask, stage: SituationStage, *,
         if not decision.task_required or task_class is None:
             return {"work_results": [], "task_required": False}
         action_id = uuid5(task.task_id, "registered-action")
+        saved = get_record(conn, "action_execution", str(action_id))
+        if saved is None and task.policy.trusted_executor is not None:
+            from persistent_cognition.trusted_executors import resolve_trusted_executor
+            if resolve_trusted_executor(task.policy.trusted_executor) is None:
+                raise RuntimeError("trusted reaction executor is absent from worker bootstrap")
         issue_action(conn, action_id=action_id, task_id=task.task_id, at=task.created_at,
                      entity_refs=task.situation.entity_refs[:16])
-        saved = get_record(conn, "action_execution", str(action_id))
         if saved is None:
-            if task_class is TaskClass.CONSOLIDATE:
+            status = "SUCCEEDED"
+            if task.policy.trusted_executor is not None:
+                try:
+                    execution = execute_registered_capability(
+                        conn, registration=RegisteredCapability(
+                            descriptor=CapabilityDescriptor(
+                                capability_id=f"situation.{task_class.value.casefold()}",
+                                kind=CapabilityKind.TOOL, description="Application-configured percept reaction",
+                            ), routing_terms=("reaction",), executor=task.policy.trusted_executor,
+                        ),
+                        capability_execution_id=action_id, requester_task_id=task.task_id,
+                        requester_step_id=deterministic_worker_step_id(_assignment_id(task), stage.value),
+                        plan_position=0, conversation_id=task.conversation_id, correlation_id=task.correlation_id,
+                        task_text=task.percept.normalized_text, before_global_seq=task.before_global_seq,
+                        memory_request_id=uuid5(action_id, "memory"),
+                    )
+                    result_data = execution.result_data
+                except TrustedExecutorError as exc:
+                    result_data = {"error_type": exc.error_type, "meaning": "Trusted executor failed"}
+                    status = "FAILED"
+            elif task_class is TaskClass.CONSOLIDATE:
                 cursor = json.loads(task.percept.normalized_text).get("after_key", "")
                 projection = get_record(conn, "consolidation", str(action_id)) or consolidate_page(conn, action_id=action_id, after_key=cursor)
                 result_data = {"consolidation_id": str(action_id), "projection_count": len(projection["projections"]),
@@ -149,7 +176,8 @@ def execute_situation_stage(conn, task: SituationTask, stage: SituationStage, *,
                 result_data["operation"] = task_class.value
                 result_data["meaning"] = "Observed discrepancies recorded for reconciliation; external state was not changed."
             saved = {"work_results": [{"capability_id": f"situation.{task_class.value.casefold()}",
-                                        "executor": "application", "result_data": result_data}], "task_required": True, "observed_status": "SUCCEEDED"}
+                                        "executor": task.policy.trusted_executor or "application",
+                                        "result_data": result_data}], "task_required": True, "observed_status": status}
         receipt_id = put_record(conn, "action_execution", str(action_id), saved, revision="1")
         receipt = event_store.get_event_by_id(conn, receipt_id)
         # Read-after-write confirms our registered local operation. It makes no
@@ -157,7 +185,7 @@ def execute_situation_stage(conn, task: SituationTask, stage: SituationStage, *,
         if receipt is None or get_record(conn, "action_execution", str(action_id)) != saved:
             raise RuntimeError("action completion could not be observed")
         observe_action_outcome(conn, action_id=action_id, receipt_event_id=receipt_id,
-                               status="SUCCEEDED", observed_at=receipt.created_at)
+                               status=saved["observed_status"], observed_at=receipt.created_at)
         return saved
     if stage is SituationStage.RETRIEVE:
         packet = MemoryPacket.model_validate(_output(conn, task, SituationStage.MEMORY, scheduler_key)["memory_packet"])
@@ -184,8 +212,9 @@ def execute_situation_stage(conn, task: SituationTask, stage: SituationStage, *,
         return {"response_required": True, "response_text": text}
     if stage is SituationStage.PERSIST:
         response = _output(conn, task, SituationStage.RESPOND, scheduler_key)
-        put_record(conn, "situation_completion", str(task.task_id), response, revision="1")
-        return response
+        completion = {**response, "work": _output(conn, task, SituationStage.EXECUTE, scheduler_key)}
+        put_record(conn, "situation_completion", str(task.task_id), completion, revision="1")
+        return completion
     raise ValueError("unsupported situation stage")
 
 

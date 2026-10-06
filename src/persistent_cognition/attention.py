@@ -1590,6 +1590,23 @@ class JITAttentionScheduler:
         self._transition(task_id, TaskStatus.COMPLETED, "all durable worker steps completed")
         return self.tasks[task_id].model_copy(deep=True)
 
+    def fail_task(self, task_id: UUID) -> AttentionTask:
+        """Quarantine a concurrent task; the next epoch drains its reservations."""
+        task = self.tasks[task_id]
+        if task.status not in {TaskStatus.COMPLETED, TaskStatus.FAILED}:
+            self._transition(task_id, TaskStatus.FAILED, "task quarantined after worker failure")
+        return self.tasks[task_id].model_copy(deep=True)
+
+    def retry_failed_task(self, task_id: UUID) -> AttentionTask:
+        """Explicitly requeue a reconciled task without erasing its durable state."""
+        task = self.tasks[task_id]
+        if task.status is not TaskStatus.FAILED:
+            raise RuntimeError("Only a failed task can be requeued")
+        if any(value.task_id == task_id for value in self.worker_visible_assignments()):
+            raise RuntimeError("Failed task still has a draining assignment")
+        self._transition(task_id, TaskStatus.QUEUED, "application requested reconciled retry")
+        return self.tasks[task_id].model_copy(deep=True)
+
     def _ranked_queued_task_ids(self, *, cycle: int | None = None) -> list[UUID]:
         runnable = [
             self.tasks[task_id]

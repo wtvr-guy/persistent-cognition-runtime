@@ -42,20 +42,24 @@ class TrustedExecutionRequest(BaseModel):
     correlation_id: UUID
     task_text: str
     before_global_seq: int = Field(ge=0)
+    execution_id: UUID | None = None
 
 
 TrustedExecutor = Callable[[TrustedExecutionRequest], Mapping[str, Any]]
 
+
+class TrustedExecutorError(RuntimeError):
+    """A handler failed or returned invalid data, not a persistence failure."""
+
+    def __init__(self, error_type: str, message: str | None = None) -> None:
+        super().__init__(message or f"trusted executor failed: {error_type}")
+        self.error_type = error_type
+
+
 _REGISTRY: dict[str, TrustedExecutor] = {}
 
 
-def register_trusted_executor(name: str, handler: TrustedExecutor) -> None:
-    """Bind an application-owned executor under a pre-authorized name.
-
-    Must be called from trusted application startup code, never from a path that
-    is influenced by percept data or model output.
-    """
-
+def validate_executor_name(name: str) -> str:
     if name in RESERVED_EXECUTORS:
         raise ValueError(f"executor name {name!r} is reserved by the runtime")
     if not _EXECUTOR_NAME.fullmatch(name):
@@ -63,6 +67,12 @@ def register_trusted_executor(name: str, handler: TrustedExecutor) -> None:
             "trusted executor name must be a lowercase identifier "
             "(letters, digits, underscore), 3-64 chars"
         )
+    return name
+
+
+def register_trusted_executor(name: str, handler: TrustedExecutor) -> None:
+    """Bind an application-owned executor from trusted startup, never observations."""
+    validate_executor_name(name)
     if not callable(handler):
         raise TypeError("trusted executor handler must be callable")
     _REGISTRY[name] = handler

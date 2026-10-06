@@ -129,8 +129,9 @@ def test_every_nonuser_stage_rejects_another_model_role():
             worker._require_stage_specialization("V2_RESPONSE_POLICY")
 
 
-def test_media_preserves_bytes_and_detects_corruption(tmp_path):
+def test_media_preserves_bytes_and_detects_corruption(tmp_path, monkeypatch):
     from persistent_cognition.percept_adapters import preserve_media, verify_media
+    monkeypatch.setenv("PCR_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
     source = tmp_path / "original.bin"
     source.write_bytes(b"exact media bytes")
     reference = preserve_media(source, mime_type="application/octet-stream")

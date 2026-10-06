@@ -286,16 +286,16 @@ Deterministic tests should cover:
 
 Native acceptance should cover actual host CPU/RAM pressure, local model startup/inference behavior, database/process interaction, resource re-observation, and failure/restart paths where simulation is insufficient.
 
-See [`../engineering/TESTING_AND_ACCEPTANCE.md`](https://github.com/wtvr-guy/persistent_cognition/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/engineering/TESTING_AND_ACCEPTANCE.md).
+See [`../engineering/TESTING_AND_ACCEPTANCE.md`](https://github.com/wtvr-guy/prometheist/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/engineering/TESTING_AND_ACCEPTANCE.md).
 
 ## Historical implementation evidence
 
 The following remain useful implementation records, but are subordinate to this constitutional deep dive and the Constitution:
 
-- [`../milestones/v0.7/JIT_ATTENTION_DESIGN.md`](https://github.com/wtvr-guy/persistent_cognition/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/milestones/v0.7/JIT_ATTENTION_DESIGN.md)
-- [`../milestones/v0.7/RESOURCE_ADMISSION_CLARIFICATION_2026-08-24.md`](https://github.com/wtvr-guy/persistent_cognition/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/milestones/v0.7/RESOURCE_ADMISSION_CLARIFICATION_2026-08-24.md)
-- [`../milestones/v0.7/ATTENTION_FOCUS_CONCENTRATION_2026-08-26.md`](https://github.com/wtvr-guy/persistent_cognition/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/milestones/v0.7/ATTENTION_FOCUS_CONCENTRATION_2026-08-26.md)
-- [`../milestones/v0.7/INCREMENT_F_WORKER_PROTOCOL_2026-08-26.md`](https://github.com/wtvr-guy/persistent_cognition/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/milestones/v0.7/INCREMENT_F_WORKER_PROTOCOL_2026-08-26.md)
+- [`../milestones/v0.7/JIT_ATTENTION_DESIGN.md`](https://github.com/wtvr-guy/prometheist/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/milestones/v0.7/JIT_ATTENTION_DESIGN.md)
+- [`../milestones/v0.7/RESOURCE_ADMISSION_CLARIFICATION_2026-08-24.md`](https://github.com/wtvr-guy/prometheist/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/milestones/v0.7/RESOURCE_ADMISSION_CLARIFICATION_2026-08-24.md)
+- [`../milestones/v0.7/ATTENTION_FOCUS_CONCENTRATION_2026-08-26.md`](https://github.com/wtvr-guy/prometheist/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/milestones/v0.7/ATTENTION_FOCUS_CONCENTRATION_2026-08-26.md)
+- [`../milestones/v0.7/INCREMENT_F_WORKER_PROTOCOL_2026-08-26.md`](https://github.com/wtvr-guy/prometheist/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/milestones/v0.7/INCREMENT_F_WORKER_PROTOCOL_2026-08-26.md)
 
 ## Invariant
 

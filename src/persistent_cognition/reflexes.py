@@ -12,6 +12,7 @@ from uuid import UUID
 import psycopg
 
 from persistent_cognition.artifact_journal import artifact_root, _atomic_write_json
+from persistent_cognition.attention_store import DEFAULT_SCHEDULER_KEY
 from persistent_cognition.cognitive_store import put_record
 from persistent_cognition.percept_adapters import MediaReference, MEDIA_CHUNK_BYTES, media_path
 from persistent_cognition.worker_store import release_worker_claim
@@ -27,12 +28,15 @@ def record_admission_denial(conn: psycopg.Connection, observation) -> None:
                 "evidence": observation.model_dump(mode="json"), "authority": "CLAIM_TIME_RESOURCE_GATE"}, revision="1")
 
 
-def mark_missing_heartbeats(conn: psycopg.Connection, *, now: datetime, after_claim: UUID | None = None) -> str | None:
+def mark_missing_heartbeats(
+    conn: psycopg.Connection, *, now: datetime, after_claim: UUID | None = None,
+    scheduler_key: str = DEFAULT_SCHEDULER_KEY,
+) -> str | None:
     rows = conn.execute(
         """SELECT claim_id, worker_id, last_heartbeat_at, lease_expires_at
-           FROM attention_worker_claims WHERE status = 'ACTIVE'
+           FROM attention_worker_claims WHERE status = 'ACTIVE' AND scheduler_key = %s
              AND (%s::uuid IS NULL OR claim_id > %s::uuid)
-           ORDER BY claim_id LIMIT %s""", (after_claim, after_claim, REFLEX_POLL_LIMIT),
+           ORDER BY claim_id LIMIT %s""", (scheduler_key, after_claim, after_claim, REFLEX_POLL_LIMIT),
     ).fetchall()
     for claim_id, worker_id, heartbeat_at, lease_expires_at in rows:
         if (now - heartbeat_at).total_seconds() < HEARTBEAT_SUSPECT_SECONDS and now < lease_expires_at:
@@ -83,10 +87,11 @@ def quarantine_corrupt_media(conn: psycopg.Connection, reference: MediaReference
     return True
 
 
-def poll_reflexes(conn: psycopg.Connection) -> None:
+def poll_reflexes(conn: psycopg.Connection, *, scheduler_key: str = DEFAULT_SCHEDULER_KEY) -> None:
     from persistent_cognition.cognitive_store import get_record
-    cursor = get_record(conn, "reflex_cursor", "heartbeat") or {"after_claim": None, "revision": 0}
+    cursor = get_record(conn, "reflex_cursor", scheduler_key) or {"after_claim": None, "revision": 0}
     after = UUID(cursor["after_claim"]) if cursor["after_claim"] else None
-    next_claim = mark_missing_heartbeats(conn, now=datetime.now(timezone.utc), after_claim=after)
+    next_claim = mark_missing_heartbeats(conn, now=datetime.now(timezone.utc), after_claim=after,
+                                       scheduler_key=scheduler_key)
     revision = cursor["revision"] + 1
-    put_record(conn, "reflex_cursor", "heartbeat", {"after_claim": next_claim, "revision": revision}, revision=str(revision))
+    put_record(conn, "reflex_cursor", scheduler_key, {"after_claim": next_claim, "revision": revision}, revision=str(revision))

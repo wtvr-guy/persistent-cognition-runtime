@@ -17,9 +17,15 @@ import psycopg
 LOCK_NAMESPACE = "persistent_cognition.scheduler"
 
 
+class SchedulerOwnershipError(RuntimeError):
+    """Another database session owns this scheduler namespace."""
+
+
 def scheduler_lock_name(scheduler_key: str) -> str:
     """Return the shared advisory-lock name for one scheduler namespace."""
 
+    if not isinstance(scheduler_key, str) or not scheduler_key.strip():
+        raise ValueError("scheduler_key must not be blank")
     return f"{LOCK_NAMESPACE}:{scheduler_key}"
 
 
@@ -37,11 +43,14 @@ def scheduler_ownership(conn: psycopg.Connection, scheduler_key: str) -> Iterato
     ).fetchone()[0]
     conn.commit()
     if not acquired:
-        raise RuntimeError(
+        raise SchedulerOwnershipError(
             f"Another owner already holds the {scheduler_key!r} scheduler lock"
         )
     try:
         yield
     finally:
-        conn.execute("SELECT pg_advisory_unlock(hashtext(%s))", (name,))
-        conn.commit()
+        if not conn.closed and not conn.broken:
+            if conn.info.transaction_status is psycopg.pq.TransactionStatus.INERROR:
+                conn.rollback()
+            conn.execute("SELECT pg_advisory_unlock(hashtext(%s))", (name,))
+            conn.commit()

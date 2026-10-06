@@ -169,9 +169,18 @@ def cold_plan():
 
 
 def test_actual_job_unloads_then_rechecks_without_preview_credit(managed, monkeypatch, tmp_path):
-    from persistent_cognition import runtime_job, model_admission
+    from contextlib import contextmanager, nullcontext
+    from persistent_cognition import advisory_lock, db, runtime_job, model_admission
     settings, plan, _ = cold_plan()
     order = []
+    connection = object()
+    monkeypatch.setattr(db, "get_connection", lambda: nullcontext(connection))
+    @contextmanager
+    def own_namespace(conn, scheduler_key):
+        assert conn is connection and scheduler_key == "gui-chat"
+        order.append("ownership")
+        yield
+    monkeypatch.setattr(advisory_lock, "scheduler_ownership", own_namespace)
     monkeypatch.setattr(runtime_job, "job_settings", lambda: settings)
     monkeypatch.setattr(residency, "prepare_local_models", lambda settings: order.append("unload") or {"verified_empty": True})
     def actual_plan(*args, **kwargs):
@@ -182,7 +191,7 @@ def test_actual_job_unloads_then_rechecks_without_preview_credit(managed, monkey
     (tmp_path / "job.json").write_text(json.dumps({"action": "chat", "payload": {"text": "hello"}}))
     with pytest.raises(ValueError, match="CPU/RAM"):
         runtime_job.run(tmp_path)
-    assert order == ["unload", "measure"]
+    assert order == ["ownership", "unload", "measure"]
     recorded = json.loads((tmp_path / "admission.json").read_text())
     assert recorded["status"] == "temporarily_blocked"
     assert recorded["capacity_basis"] == "measured"
