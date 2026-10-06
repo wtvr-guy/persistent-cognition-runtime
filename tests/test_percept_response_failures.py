@@ -88,7 +88,7 @@ def test_final_response_event_failure_records_error_and_releases_claim(monkeypat
     assert recorded_errors[-1]["payload"] == {
         "stage": PerceptStage.PERSIST_RESULT.value,
         "error_type": "RuntimeError",
-        "message": "final interaction event write failed",
+        "message": "RuntimeError",
     }
     assert released == [
         {

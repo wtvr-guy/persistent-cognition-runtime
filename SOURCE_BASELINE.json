@@ -1326,10 +1326,11 @@
     "tests/test_attention_observation.py": {
       "source_path": "tests/test_attention_observation.py",
       "source_sha256": "520bcef7eae061c5d14503b9f3f3feea1174551abfa52e3bceb824042367b1f2",
-      "extracted_sha256": "f2c66ef79fc802dc07a1dba6e53c424cad2aa672dc0113950669808ba6049564",
+      "extracted_sha256": "50675a8ea0ff1098acb1bfb5926cbc0b65e4db8104179d1c4959f6a7c2ea718a",
       "extraction_path": "tests/test_attention_observation.py",
       "status": "imported",
-      "baseline_extracted_sha256": "520bcef7eae061c5d14503b9f3f3feea1174551abfa52e3bceb824042367b1f2"
+      "baseline_extracted_sha256": "520bcef7eae061c5d14503b9f3f3feea1174551abfa52e3bceb824042367b1f2",
+      "reason": "; refresh CI fixtures for sanitized diagnostics, streaming transport, and durable registry validation"
     },
     "tests/test_attention_ordering.py": {
       "source_path": "tests/test_attention_ordering.py",
@@ -1665,10 +1666,11 @@
     "tests/test_percept_response_failures.py": {
       "source_path": "tests/test_percept_response_failures.py",
       "source_sha256": "bb90cad6571c6d769acf95298b41540906deb142e6036910643e650d675f88dc",
-      "extracted_sha256": "cecc2a7e0380e9f782ad4656a3b7f77fae12b43ee3696cf2fe62ce70907fb55f",
+      "extracted_sha256": "03f5f4592a3484a98432170d43c0d5785bb4379dd082eedacf4e14ebb9bb8cc4",
       "extraction_path": "tests/test_percept_response_failures.py",
       "status": "imported",
-      "baseline_extracted_sha256": "bb90cad6571c6d769acf95298b41540906deb142e6036910643e650d675f88dc"
+      "baseline_extracted_sha256": "bb90cad6571c6d769acf95298b41540906deb142e6036910643e650d675f88dc",
+      "reason": "; refresh CI fixtures for sanitized diagnostics, streaming transport, and durable registry validation"
     },
     "tests/test_perception_salience.py": {
       "source_path": "tests/test_perception_salience.py",
@@ -1681,10 +1683,11 @@
     "tests/test_perception_specialist_integration.py": {
       "source_path": "tests/test_perception_specialist_integration.py",
       "source_sha256": "47922066b2f5c065e4338e78502e36e557f2b8061daf4907724bc7f283fe0e37",
-      "extracted_sha256": "bdbb65e4490b1333186b7622b60500b7d8162b389f9bac97e9aba397b6bbec53",
+      "extracted_sha256": "89c3e92d73e2f2613c6e990e6e3861ae5a4fc489735e04b233e3a23fffcc60c8",
       "extraction_path": "tests/test_perception_specialist_integration.py",
       "status": "imported",
-      "baseline_extracted_sha256": "47922066b2f5c065e4338e78502e36e557f2b8061daf4907724bc7f283fe0e37"
+      "baseline_extracted_sha256": "47922066b2f5c065e4338e78502e36e557f2b8061daf4907724bc7f283fe0e37",
+      "reason": "; refresh CI fixtures for sanitized diagnostics, streaming transport, and durable registry validation"
     },
     "tests/test_postgres_association_projection.py": {
       "source_path": "tests/test_postgres_association_projection.py",
@@ -1862,10 +1865,11 @@
     "tests/test_specialist_worker_contract.py": {
       "source_path": "tests/test_specialist_worker_contract.py",
       "source_sha256": "30091ab933757a91f0ca395cb7ac5d514e06d29a2244e3d7c87e77c0843d7988",
-      "extracted_sha256": "cd6c18e9d69ceb59431e7a68520d18bd6f0b7232a4072b66d7ce0088610d139e",
+      "extracted_sha256": "ce471d882a2716445d66e770d2520f0e3b4dfd958db258d0faf96bafa7e5d48d",
       "extraction_path": "tests/test_specialist_worker_contract.py",
       "status": "imported",
-      "baseline_extracted_sha256": "30091ab933757a91f0ca395cb7ac5d514e06d29a2244e3d7c87e77c0843d7988"
+      "baseline_extracted_sha256": "30091ab933757a91f0ca395cb7ac5d514e06d29a2244e3d7c87e77c0843d7988",
+      "reason": "; refresh CI fixtures for sanitized diagnostics, streaming transport, and durable registry validation"
     },
     "tests/test_synthetic_benchmark.py": {
       "source_path": "tests/test_synthetic_benchmark.py",
@@ -2102,9 +2106,9 @@
       "source_path": null,
       "source_sha256": null,
       "extraction_path": "tests/unit/test_binding_and_admission_regressions.py",
-      "extracted_sha256": "e209b251d16af795985668ed3d63ef58a0e6d18a6cf0b8e12d2b82fa3d80ac38",
+      "extracted_sha256": "d536ea2c3070d11fa11500138f34aaaaddad6a40871aa75943de6f02ff2ee20a",
       "status": "added",
-      "reason": "Remaining audit remediation: supported embedding, deterministic safety boundaries or regression coverage."
+      "reason": "Remaining audit remediation: supported embedding, deterministic safety boundaries or regression coverage.; refresh CI fixtures for sanitized diagnostics, streaming transport, and durable registry validation"
     },
     "tests/unit/test_audit_hardening.py": {
       "source_path": null,

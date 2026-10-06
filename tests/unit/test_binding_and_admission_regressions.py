@@ -64,6 +64,23 @@ def test_registration_snapshots_survive_json_and_detect_changed_bindings(monkeyp
         percept_response_worker.main(registry=other)
 
 
+def test_durable_stage_rejects_changed_bindings_before_model_or_tool_work(monkeypatch):
+    from persistent_cognition import percept_response_runtime as runtime
+    old = CapabilityRegistry((registration(revision="1"),))
+    new = CapabilityRegistry((registration(revision="2"),))
+
+    def bootstrap(_conn, _interaction, stage, scheduler_key):
+        assert stage is runtime.PerceptStage.RESOLVE_REFERENCES
+        return {"capability_snapshot": old.snapshot()}
+
+    monkeypatch.setattr(runtime, "_stage_result", bootstrap)
+    llm = SimpleNamespace(_response_policy=lambda _: pytest.fail("changed bindings reached model"))
+    envelope = SimpleNamespace(step=SimpleNamespace(step_key=runtime.PerceptStage.EVIDENCE_POLICY.value))
+    with pytest.raises(RuntimeError, match="bindings changed"):
+        runtime._execute_stage(None, llm, envelope, SimpleNamespace(user_text="data"),
+                               scheduler_key="test", registry=new)
+
+
 def test_exhausted_transient_admission_defers_the_same_task_to_a_later_tick(monkeypatch):
     task_id = uuid4()
     task = SimpleNamespace(resumable_state={"situation_task_id": str(task_id)})

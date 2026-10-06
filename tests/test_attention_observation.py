@@ -226,7 +226,7 @@ def test_probe_failure_is_persistable_fail_closed_input():
     assert observation is not None
     assert observation.healthy is False
     assert observation.metrics is None
-    assert observation.probe_errors == ["OSError: counter unavailable"]
+    assert observation.probe_errors == ["OSError"]
 
 
 def test_stale_observation_is_rejected_before_policy_evaluation():

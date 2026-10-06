@@ -75,9 +75,16 @@ def test_guarded_worker_rejects_another_specialists_llm_role() -> None:
         worker._require_stage_specialization("FINAL_RESPONSE_V2")
 
 
-def test_evidence_policy_is_a_separate_durable_stage() -> None:
+def test_evidence_policy_is_a_separate_durable_stage(monkeypatch) -> None:
     policy = _policy()
     llm = SimpleNamespace(_response_policy=lambda _percept: policy)
+
+    def bootstrap(_conn, _interaction, stage, scheduler_key):
+        assert stage is PerceptStage.RESOLVE_REFERENCES
+        assert scheduler_key == "test"
+        return {"capability_snapshot": DEFAULT_REGISTRY.snapshot()}
+
+    monkeypatch.setattr("persistent_cognition.percept_response_runtime._stage_result", bootstrap)
 
     output, refs = _execute_stage(
         None,
@@ -111,6 +118,7 @@ def test_response_stage_inherits_exact_policy_without_reclassification(monkeypat
         adaptive_recall_rounds=0,
     )
     results = {
+        PerceptStage.RESOLVE_REFERENCES: {"capability_snapshot": DEFAULT_REGISTRY.snapshot()},
         PerceptStage.EVIDENCE_POLICY: {
             "response_policy_version": RESPONSE_POLICY_VERSION,
             "response_policy": policy.model_dump(mode="json"),
@@ -129,7 +137,7 @@ def test_response_stage_inherits_exact_policy_without_reclassification(monkeypat
     }
     monkeypatch.setattr(
         "persistent_cognition.percept_response_runtime._stage_result",
-        lambda _conn, _interaction, stage, _scheduler_key: results[stage],
+        lambda _conn, _interaction, stage, scheduler_key: results[stage],
     )
     received: list[ResponsePolicy] = []
 
