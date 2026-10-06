@@ -1058,6 +1058,20 @@
       "expected_value": 0,
       "classification": "STRUCTURAL_INVARIANT",
       "rationale": "A running resource counter starts at zero and counts exactly the bytes or nodes admitted; this initialization is not a policy budget."
+    },
+    "src/persistent_cognition/private_storage.py::<module>::WINDOWS_LOCK_TIMEOUT_SECONDS": {
+      "expected_value": 10.0,
+      "classification": "SAFETY_TUNABLE",
+      "benchmark_id": "WINDOWS-STORAGE-001",
+      "status": "PROVISIONAL",
+      "rationale": "Retain the prior CRT ten-second contention bound; abort without editing when ownership cannot be obtained. Provisional under slow disks and process contention."
+    },
+    "src/persistent_cognition/private_storage.py::<module>::WINDOWS_LOCK_RETRY_INTERVAL_SECONDS": {
+      "expected_value": 0.05,
+      "classification": "SAFETY_TUNABLE",
+      "benchmark_id": "WINDOWS-STORAGE-001",
+      "status": "PROVISIONAL",
+      "rationale": "Promptly observe releases during bursts of short policy/storage edits, avoiding CRT one-second retry starvation. Retry latency and CPU overhead require target-host calibration."
     }
   },
   "groups": {

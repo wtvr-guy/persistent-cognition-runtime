@@ -29,7 +29,7 @@ def byte_lock_emulator(monkeypatch):
             del owned[fd]
 
     monkeypatch.setitem(sys.modules, "msvcrt", SimpleNamespace(
-        LK_LOCK=1, LK_UNLCK=2, locking=locking,
+        LK_NBLCK=1, LK_UNLCK=2, locking=locking,
     ))
     # Replace only these modules' OS views; mutating global os.name would break
     # pathlib and would not exercise a real Linux buffered descriptor.

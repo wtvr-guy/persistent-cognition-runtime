@@ -878,6 +878,38 @@
         "valid_input_rejection_rate"
       ],
       "search": "Boundary regressions in tests/unit/test_audit_hardening.py and test_binding_and_admission_regressions.py verify mechanics only. Sweep deployment limits against frozen representative workloads on the target machine, including peak RSS and disk scans; expand winning boundaries. No optimum or native Windows/live-provider acceptance is claimed."
+    },
+    "WINDOWS-STORAGE-001": {
+      "title": "Bounded Windows byte-lock contention and durable storage edits",
+      "environment": "deterministic_ci_then_native_windows_target_disk",
+      "parameters": [
+        "WINDOWS_LOCK_TIMEOUT_SECONDS",
+        "WINDOWS_LOCK_RETRY_INTERVAL_SECONDS"
+      ],
+      "scenario_families": [
+        "simultaneous grant and revocation",
+        "thirteen contending threads",
+        "multiple processes",
+        "empty lock file",
+        "partial buffered reads",
+        "permanent contention",
+        "invalid descriptors",
+        "slow durable writes"
+      ],
+      "hard_invariants": [
+        "No edit before acquiring the OS lock",
+        "No lost updates or restored revocations",
+        "Timeout and non-contention errors abort the edit",
+        "Unlock precisely the owned byte range",
+        "No unprotected seed writes to lock files"
+      ],
+      "quality_order": [
+        "hard_invariant_pass_rate",
+        "contention_failure_rate",
+        "completion_latency",
+        "retry_CPU_cost"
+      ],
+      "search": "Compare retry intervals 0.01, 0.05, 0.1, 0.25 and 1.0 seconds under 1, 4, 13 and 32 concurrent edits on the target Windows disk, including slow fsync and separate processes. Retain the prior ten-second deadline provisionally. Expand a winning boundary before accepting calibration. Unit and CI regressions verify correctness and fail-closed bounds; they do not establish optimal host performance."
     }
   }
 }

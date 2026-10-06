@@ -45,7 +45,7 @@
     "benchmarks/constraint_experiments.json": {
       "source_path": "benchmarks/constraint_experiments.json",
       "source_sha256": "0924e0934d963f84b0345e0c87e6e0b27a754e2bf7a36767a22b0e32601b670b",
-      "extracted_sha256": "9661a67edb9e9d77057205b94fc016ba3c0a3435e0dca0f192c263d02528d013",
+      "extracted_sha256": "4c0f3b08decd0eea13676afb00d1069c2b72102c79129bfcf03fa13896dbd840",
       "extraction_path": "benchmarks/constraint_experiments.json",
       "status": "imported",
       "reason": "remaining audit remediation: deterministic bounds, private storage, safe diagnostics and embedding contracts"
@@ -53,7 +53,7 @@
     "benchmarks/constraint_registry.json": {
       "source_path": "benchmarks/constraint_registry.json",
       "source_sha256": "fbab7d594002d6e23a05dada6ceac76ac7055139fa292c8aec5bd9599981ad6e",
-      "extracted_sha256": "b1b16d561c5d4e39df7974d13c16d2db28403901b25c834ef15f1bfc56eaef16",
+      "extracted_sha256": "d67a2be39348d239bd756fb625487efec4d5f5b38b5e7bcf35101a315232bade",
       "extraction_path": "benchmarks/constraint_registry.json",
       "status": "imported",
       "baseline_extracted_sha256": "7958368d60f3cdb09f5af9d25bc8d8cec5a635685f2dd899033f83618a9341f2",
@@ -645,7 +645,7 @@
     "src/prometheist/event_artifact_store.py": {
       "source_path": "src/prometheist/event_artifact_store.py",
       "source_sha256": "22a0ddee70de6b23219d4bf875cc178e558dae8d131e64b159442812a6725428",
-      "extracted_sha256": "e067a246bea805e294335ebe0c643ff7995de8300c14bc1854758538200e5387",
+      "extracted_sha256": "02e632b7bb55185b5d6f7bec6d6b140d13e5507d2e42e38be04300dc2a8134ec",
       "extraction_path": "src/persistent_cognition/event_artifact_store.py",
       "status": "imported",
       "baseline_extracted_sha256": "22a0ddee70de6b23219d4bf875cc178e558dae8d131e64b159442812a6725428",
@@ -853,7 +853,7 @@
     "src/prometheist/operator_state.py": {
       "source_path": "src/prometheist/operator_state.py",
       "source_sha256": "42b749abaebf0a13ef2b34cf32147a73f322956d787f99c3778546518a2cbbeb",
-      "extracted_sha256": "e940eb1f39295fe83eebee51b1d0c08a5a42d647e85c8532c154343d45787b82",
+      "extracted_sha256": "b72766b620c12e9bc952ce4d2d5830f64bcbf390b5194ae7c2329d87396d4035",
       "extraction_path": "src/persistent_cognition/operator_state.py",
       "status": "imported",
       "baseline_extracted_sha256": "42b749abaebf0a13ef2b34cf32147a73f322956d787f99c3778546518a2cbbeb",
@@ -896,7 +896,7 @@
     "src/prometheist/percept_journal.py": {
       "source_path": "src/prometheist/percept_journal.py",
       "source_sha256": "8472d9a939fc849db105efa03d3afeced55993c9f6b185ccb3eb6e53eb8795f5",
-      "extracted_sha256": "9d7ab12120ab2e6e347db6918cdf22492316ecc6cebc33fc1d6ca2f9bf2c5e11",
+      "extracted_sha256": "a1b2f1963d5d9f160a885f14304d88a19ab3e69abe58de8d352ecf9d3c63462e",
       "extraction_path": "src/persistent_cognition/percept_journal.py",
       "status": "imported",
       "baseline_extracted_sha256": "8472d9a939fc849db105efa03d3afeced55993c9f6b185ccb3eb6e53eb8795f5",
@@ -1993,7 +1993,7 @@
     "tests/unit/test_network_consent.py": {
       "source_path": "tests/unit/test_network_consent.py",
       "source_sha256": "e2e6a5c4c19b5c93e7557f94e151e25169d4be3007239554e26df2a147bfcd9b",
-      "extracted_sha256": "3d6136fc321136a04bf75ea3e8a76d44374c0f0afa928085c5885ef887a8d956",
+      "extracted_sha256": "9cc3bfc8c73e23e2e45466e838c732e35bd57764bbf08ed7c25fe83122ecf1a1",
       "extraction_path": "tests/unit/test_network_consent.py",
       "status": "imported",
       "baseline_extracted_sha256": "a4d22153b93657b99e229dbbd4074dc3dc270a479c2b80678b4a589496ad90a8",
@@ -2074,7 +2074,7 @@
       "source_path": null,
       "source_sha256": null,
       "extraction_path": "src/persistent_cognition/private_storage.py",
-      "extracted_sha256": "074e0c8c98b8918c31ab0c7ff911b5d937e19380ff88848ae53c066ee22dd148",
+      "extracted_sha256": "23c09e230c88b2514aecbec107e6e3dcb16e23fff02fe393825f50013f70566c",
       "status": "added",
       "reason": "Remaining audit remediation: supported embedding, deterministic safety boundaries or regression coverage."
     },
@@ -2146,9 +2146,17 @@
       "source_path": null,
       "source_sha256": null,
       "extraction_path": "tests/unit/test_windows_journal_lock.py",
-      "extracted_sha256": "2fbe14657a8aeaf79b1437d32476133c078c9a11698820a9acbf882c1789b0c6",
+      "extracted_sha256": "0092b98bd4443432ed48905ef73dd3c15fe78cf1ea81481372dcc61e85e866f3",
       "status": "added",
       "reason": "Windows native acceptance regression: buffered journal reads must release the same OS byte-range lock, preserve failures and exclude concurrent processes."
+    },
+    "tests/unit/test_windows_lock_contention.py": {
+      "source_path": null,
+      "source_sha256": null,
+      "extraction_path": "tests/unit/test_windows_lock_contention.py",
+      "extracted_sha256": "ad8e479c0c2bf890c1cec12f5016b7f3bd11b4185f9e181e053251d710c3607b",
+      "status": "added",
+      "reason": "Bounded Windows file-lock contention regressions, including native and emulated concurrent policy edits."
     }
   },
   "manifest_version": 2

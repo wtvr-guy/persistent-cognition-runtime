@@ -2,11 +2,13 @@
 from __future__ import annotations
 
 from contextlib import contextmanager
+import errno
 import os
 from pathlib import Path
 import shutil
 import stat
 import tempfile
+import time
 from typing import BinaryIO
 
 from persistent_cognition.resource_limits import (
@@ -84,6 +86,35 @@ def seek_lock_byte(handle: BinaryIO) -> None:
     handle.seek(0)
 
 
+WINDOWS_LOCK_TIMEOUT_SECONDS = 10.0
+WINDOWS_LOCK_RETRY_INTERVAL_SECONDS = 0.05
+
+
+def acquire_windows_lock(handle: BinaryIO) -> None:
+    """Acquire byte zero with bounded retries that promptly observe releases.
+
+    CRT LK_LOCK retries only once per second and can exhaust its ten attempts
+    when many short edits contend. Nonblocking attempts avoid that coarse wait;
+    the monotonic deadline retains the bounded, fail-closed edit policy. Windows
+    permits locking beyond EOF, so empty lock files need no unprotected write.
+    """
+    import msvcrt
+
+    deadline = time.monotonic() + WINDOWS_LOCK_TIMEOUT_SECONDS
+    while True:
+        seek_lock_byte(handle)
+        try:
+            msvcrt.locking(handle.fileno(), msvcrt.LK_NBLCK, 1)
+            return
+        except OSError as error:
+            if error.errno not in (errno.EACCES, errno.EAGAIN, errno.EDEADLK):
+                raise
+            remaining = deadline - time.monotonic()
+            if remaining <= 0:
+                raise
+            time.sleep(min(WINDOWS_LOCK_RETRY_INTERVAL_SECONDS, remaining))
+
+
 def _store_root() -> Path:
     configured = os.environ.get("PCR_ARTIFACT_ROOT", "").strip()
     return Path(configured) if configured else Path(".pcr") / "artifacts"
@@ -101,12 +132,7 @@ def storage_admission(additional_bytes: int):
     with regular_file(root / ".storage.lock", write=True, create=True) as lock:
         if os.name == "nt":
             import msvcrt
-            lock.seek(0, os.SEEK_END)
-            if not lock.tell():
-                lock.write(b"\0")
-                lock.flush()
-            seek_lock_byte(lock)
-            msvcrt.locking(lock.fileno(), msvcrt.LK_LOCK, 1)
+            acquire_windows_lock(lock)
         else:
             import fcntl
             fcntl.flock(lock.fileno(), fcntl.LOCK_EX)

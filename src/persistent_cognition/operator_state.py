@@ -4,7 +4,7 @@ import json
 import os
 from pathlib import Path
 from persistent_cognition.private_storage import (
-    atomic_private_write, private_directory, regular_file, seek_lock_byte,
+    acquire_windows_lock, atomic_private_write, private_directory, regular_file, seek_lock_byte,
 )
 
 
@@ -20,13 +20,7 @@ def policy_lock(path: Path):
     with regular_file(path.with_suffix(path.suffix + ".lock"), write=True, create=True) as handle:
         if os.name == "nt":
             import msvcrt
-            if not handle.seek(0, os.SEEK_END):
-                handle.write(b"\0")
-                handle.flush()
-            seek_lock_byte(handle)
-            # Windows retries a contended byte lock using its native bounded
-            # LK_LOCK behavior. Failure aborts the edit rather than losing it.
-            msvcrt.locking(handle.fileno(), msvcrt.LK_LOCK, 1)
+            acquire_windows_lock(handle)
             try:
                 yield
             finally:
