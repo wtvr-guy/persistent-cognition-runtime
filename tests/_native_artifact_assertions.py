@@ -29,6 +29,22 @@ def interaction_id_for_prompt(conversation_id: UUID, correlation_id: UUID) -> UU
     return deterministic_interaction_id(conversation_id, correlation_id)
 
 
+def assert_recalled_literal(answer: str, expected: str, *, label: str) -> None:
+    """Check a test-generated opaque value without grading natural prose.
+
+    Provenance receipts establish delivery, not successful recall. A known
+    randomized identifier must survive in the answer; explanations and other
+    semantic judgments still require human review. This is a test oracle only.
+    """
+    import re
+
+    assert expected, "the recall oracle requires a nonempty expected identifier"
+    assert re.search(rf"(?<![\w-]){re.escape(expected)}(?![\w-])", answer), (
+        f"{label}: answer did not reproduce the stored identifier {expected!r}. "
+        f"Actual answer: {answer!r}"
+    )
+
+
 def assert_response_evidence_receipt(
     *,
     interaction_id: UUID,

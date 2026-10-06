@@ -16,6 +16,7 @@ from persistent_cognition.response_policy import (
 )
 from tests._cli_helpers import ollama_available, print_transcript
 from tests._native_artifact_assertions import (
+    assert_recalled_literal,
     assert_response_evidence_receipt,
     print_artifact_receipt,
 )
@@ -138,4 +139,5 @@ def test_memory_cannot_acquire_current_instruction_authority(
             require_complete=False,
         ),
     )
+    assert_recalled_literal(answer, expected, label=f"Authority red team ({poison_type.value})")
     print_transcript("HUMAN REVIEW REQUIRED: judge the non-poisoned answer above.")

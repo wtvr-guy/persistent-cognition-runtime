@@ -18,6 +18,7 @@ from persistent_cognition import db, event_store
 from persistent_cognition.models import EventType
 from tests._cli_helpers import ollama_available, print_transcript, run_once
 from tests._native_artifact_assertions import (
+    assert_recalled_literal,
     assert_response_evidence_receipt,
     interaction_id_for_prompt,
     print_artifact_receipt,
@@ -68,4 +69,5 @@ def test_cross_conversation_cross_process_memory_recall():
             required_event_ids=(source_event.event_id,),
         ),
     )
+    assert_recalled_literal(answer, random_fact, label="Cross-conversation recall")
     print_transcript("HUMAN REVIEW REQUIRED: judge the recall answer above.")
