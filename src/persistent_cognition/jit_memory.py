@@ -364,16 +364,20 @@ def _active_working_state_evidence(
     return evidence
 
 
-def _focus_source_events(
+def _validated_focus_event_ids(
     conn: psycopg.Connection,
     need: MemoryNeed,
     *,
     before_global_seq: int | None,
-) -> list[tuple[uuid.UUID, str]]:
-    """Rehydrate model-selected canonical candidates for deterministic focusing."""
+) -> list[uuid.UUID]:
+    """Validate canonical graph seeds, including structured events without text.
+
+    Association traversal consumes event IDs, not a copied payload text field.
+    Structured memory/tool records are valid seeds when their roles are allowed.
+    """
 
     allowed_types = set(_effective_source_types(need))
-    focused: list[tuple[uuid.UUID, str]] = []
+    focused: list[uuid.UUID] = []
     for event_id in need.focus_event_ids:
         event = event_store.get_event_by_id(conn, event_id)
         if event is None:
@@ -382,10 +386,7 @@ def _focus_source_events(
             raise RuntimeError("focused memory candidate crosses the leakage boundary")
         if allowed_types and event.event_type not in allowed_types:
             raise RuntimeError("focused memory candidate has a disallowed source type")
-        text = event.payload.get("text")
-        if not isinstance(text, str) or not text.strip():
-            raise RuntimeError("focused memory candidate has no canonical text")
-        focused.append((event_id, " ".join(text.split())))
+        focused.append(event_id)
     return focused
 
 
@@ -744,7 +745,7 @@ def request_memory(
     policy = _ADAPTIVE_RECALL_POLICIES[recall_stage]
 
     if effective_need.focus_event_ids:
-        focus_sources = _focus_source_events(
+        focus_event_ids = _validated_focus_event_ids(
             conn,
             effective_need,
             before_global_seq=before_global_seq,
@@ -806,7 +807,7 @@ def request_memory(
 
         focus_packets: list[MemoryPacket] = []
         attempts: list[dict[str, object]] = []
-        for focus_event_id, _focus_text in focus_sources:
+        for focus_event_id in focus_event_ids:
             kernel_packet = _recall_for_query(
                 conn,
                 need=effective_need,

@@ -154,10 +154,11 @@ def format_authority_bound_memory_packet(
             f"content: {content}"
         )
 
-    direct_user_inventory = ",".join(direct_user_orders) if direct_user_orders else "none"
+    direct_user_inventory = ", ".join(direct_user_orders)
     return (
         "\n\n[Evidence authority inventory]\n"
-        f"direct_user_testimony_orders: {direct_user_inventory}\n"
+        f"direct_user_testimony_count: {len(direct_user_orders)}\n"
+        f"direct_user_testimony_evidence_indices: [{direct_user_inventory}]\n"
         "MODEL_OUTPUT_ONLY is never a substitute for DIRECT_USER_TESTIMONY.\n"
         "[Evidence timeline: oldest to newest]\n"
         f"supported: {str(packet.supported).lower()}\n"

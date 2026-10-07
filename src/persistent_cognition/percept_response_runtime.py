@@ -510,8 +510,8 @@ class PerceptSpecialists(PerceptLLM):
         masked_percept = _mask_verbatim_literals(percept, literal_to_placeholder)
         status_view = ("\n\n[Retrieval status]\n" + package.retrieval_policy
                        + ": " + package.stop_reason
-                       + ". Retrieval completion does not establish answerability. "
-                       "State uncertainty or lack of evidence when appropriate.")
+                       + ". This is route execution status, not an answerability verdict. "
+                       "Assess the admitted content below.")
         memory_view = format_authority_bound_memory_packet(
             admitted_packet,
             literal_to_placeholder=literal_to_placeholder,

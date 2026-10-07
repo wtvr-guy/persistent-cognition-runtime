@@ -48,7 +48,8 @@ def test_authority_inventory_keeps_user_and_model_roles_distinct():
 
     rendered = format_authority_bound_memory_packet(packet)
 
-    assert "direct_user_testimony_orders: 0" in rendered
+    assert "direct_user_testimony_count: 1" in rendered
+    assert "direct_user_testimony_evidence_indices: [0]" in rendered
     assert "authority_class: DIRECT_USER_TESTIMONY" in rendered
     assert "authority_class: MODEL_OUTPUT_ONLY" in rendered
     assert "MODEL_OUTPUT_ONLY is never a substitute for DIRECT_USER_TESTIMONY" in rendered

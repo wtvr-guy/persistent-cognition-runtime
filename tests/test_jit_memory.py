@@ -283,6 +283,50 @@ def test_associative_stage_keeps_current_semantics_for_guarded_association_edges
     assert f"event:{selected.event_id}" in cue_nodes
 
 
+@pytest.mark.parametrize("stage", [
+    jit_memory.AdaptiveRecallStage.ASSOCIATIVE,
+    jit_memory.AdaptiveRecallStage.RELATIONAL,
+    jit_memory.AdaptiveRecallStage.FOCUSED,
+])
+def test_focus_routes_accept_structured_memory_records_and_persist_receipts(conn, stage):
+    conversation_id = uuid.uuid4()
+    event_store.start_conversation(conn, conversation_id)
+    sources = [
+        event_store.record_event(
+            conn, conversation_id=conversation_id, correlation_id=uuid.uuid4(),
+            event_type=kind, source="structured-focus-test", payload=payload,
+        )
+        for kind, payload in [
+            (EventType.MEMORY_PACKET, {"packet": {"items": [], "supported": False}}),
+            (EventType.MEMORY_REQUEST, {"need": {"query_text": "Project Oriole codename"}}),
+        ]
+    ]
+    prompt = _record_text(conn, conversation_id, "Inspect the stored Oriole retrieval records.")
+    focus_ids = [source.event_id for source in sources]
+    if stage is jit_memory.AdaptiveRecallStage.FOCUSED:
+        focus_ids = focus_ids[:1]
+    packet = jit_memory.request_memory(
+        conn, conversation_id=conversation_id, correlation_id=prompt.correlation_id,
+        requesting_component="structured-focus-test",
+        need=jit_memory.build_memory_need(
+            prompt.payload["text"], focus_event_ids=focus_ids,
+            source_types=[EventType.MEMORY_PACKET, EventType.MEMORY_REQUEST],
+        ),
+        before_global_seq=prompt.global_seq, recall_stage=stage,
+    )
+
+    assert packet.retrieval_trace["focus_event_ids"] == [str(value) for value in focus_ids]
+    assert packet.retrieval_trace["adaptive_recall_stage"] == stage.value
+    assert all(item.event_type in {source.event_type for source in sources} for item in packet.items)
+    assert all(item.global_seq < prompt.global_seq for item in packet.items)
+    events = event_store.get_events_by_conversation(conn, conversation_id)
+    assert any(
+        stored.event_type is EventType.MEMORY_PACKET
+        and stored.payload.get("packet", {}).get("memory_request_id") == str(packet.memory_request_id)
+        for stored in events
+    )
+
+
 def test_memory_boundary_preserves_unknown_fact_abstention(conn):
     source_conversation = uuid.uuid4()
     request_conversation = uuid.uuid4()

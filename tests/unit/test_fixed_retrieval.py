@@ -135,3 +135,32 @@ def test_empty_historical_evidence_retains_explicit_abstention(monkeypatch):
         response_policy=ResponsePolicy(evidence_scope=HistoricalEvidenceScope.USER_AUTHORED,
                                        surface_mode=ResponseSurfaceMode.NATURAL_LANGUAGE))
     assert result == "Persisted evidence is insufficient."
+
+
+def test_natural_recall_restores_opaque_values_from_admitted_user_evidence(monkeypatch):
+    client = UserPromptLLM()
+    source = evidence(1, content="The codename for Project Oriole is 2FF0372B.")
+    original = source.model_dump_json()
+    received = []
+
+    def respond(kind, system, prompt, historical):
+        received.append((kind, system, prompt, historical))
+        assert "2FF0372B" not in historical
+        assert "content: The codename for Project Oriole is [[VERBATIM_0]]." in historical
+        assert "direct_user_testimony_count: 1" in historical
+        assert "direct_user_testimony_evidence_indices: [0]" in historical
+        assert "not missing or redacted evidence" in system
+        return "You gave Project Oriole the codename [[VERBATIM_0]]."
+
+    monkeypatch.setattr(client, "_text_with_evidence", respond)
+    result = client.generate_final_response(
+        "What codename did I give Project Oriole?",
+        runtime.ResponseMemoryPackage(memory_packet=packet(source)), (),
+        response_policy=ResponsePolicy(
+            evidence_scope=HistoricalEvidenceScope.USER_AUTHORED,
+            surface_mode=ResponseSurfaceMode.NATURAL_LANGUAGE,
+        ),
+    )
+    assert result == "You gave Project Oriole the codename 2FF0372B."
+    assert source.model_dump_json() == original
+    assert len(received) == 1
