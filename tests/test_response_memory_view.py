@@ -158,7 +158,7 @@ def test_retrieval_completion_does_not_claim_semantic_sufficiency():
     ) == "I do not know the name."
     evidence = fake.calls[0][1]["messages"][1]["content"]
     assert "My work messages" in evidence
-    assert "does not establish answerability" in evidence
+    assert "not an answerability verdict" in evidence
     assert "memory_sufficient" not in evidence
     assert client._artifact_evidence_refs == (f"event:{unrelated.source_event_id}",)
 

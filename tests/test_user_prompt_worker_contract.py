@@ -128,7 +128,8 @@ def test_response_policy_worker_selects_scope_without_historical_evidence(
         return (
             '{"evidence_scope":"'
             f"{scope.value}"
-            '","surface_mode":"NATURAL_LANGUAGE","insufficient_literal":null}'
+            '","surface_mode":"NATURAL_LANGUAGE","answer_kind":"SYNTHESIS",'
+            '"insufficient_literal":null}'
         )
 
     monkeypatch.setattr(llm, "_structured_with_evidence", fake_structured)
@@ -147,17 +148,20 @@ def test_response_policy_worker_selects_scope_without_historical_evidence(
     "PERSISTENT COGNITION just said to use PostgreSQL. Why?",
     "persistent_cognition mentioned PostgreSQL. Explain.",
 ])
-def test_explicit_prior_assistant_reference_uses_mixed_scope_without_model_classification(
+def test_explicit_prior_assistant_reference_enforces_mixed_scope_after_answer_classification(
     monkeypatch,
     prompt,
 ) -> None:
     llm = UserPromptLLM()
 
-    def fail_if_called(*args, **kwargs):
-        del args, kwargs
-        raise AssertionError("explicit prior-assistant references must use the deterministic path")
+    def classify_answer(kind, system, current, evidence, schema, max_tokens):
+        assert kind == "V2_RESPONSE_POLICY"
+        assert current == prompt
+        assert evidence.endswith("none")
+        return ('{"evidence_scope":"USER_AUTHORED","surface_mode":"NATURAL_LANGUAGE",'
+                '"answer_kind":"SYNTHESIS"}')
 
-    monkeypatch.setattr(llm, "_structured_with_evidence", fail_if_called)
+    monkeypatch.setattr(llm, "_structured_with_evidence", classify_answer)
 
     policy = llm._response_policy(prompt)
 

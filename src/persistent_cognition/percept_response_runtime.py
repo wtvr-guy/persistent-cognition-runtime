@@ -15,6 +15,7 @@ from persistent_cognition.prompt_registry import (
     _CURRENT_FALLBACK_SELECTION_PROMPT,
     _EXACT_SOURCE_SELECTION_PROMPT,
     _EXACT_SOURCE_COMPOSITION_PROMPT,
+    _SOURCE_VALUE_SELECTION_PROMPT,
 )
 
 from collections.abc import Callable
@@ -67,7 +68,9 @@ from persistent_cognition.capability_registry import (
     CapabilityRegistry,
 )
 from persistent_cognition.capability_runtime import CapabilityExecution, execute_registered_capability
-from persistent_cognition.epistemic_authority import format_authority_bound_memory_packet
+from persistent_cognition.epistemic_authority import (
+    authority_for_event_type, format_authority_bound_memory_packet,
+)
 from persistent_cognition.interaction_contracts import (
     DurableInteraction,
     MemoryContext,
@@ -113,6 +116,7 @@ from persistent_cognition.response_policy import (
     ExactSourceSelection,
     HistoricalEvidenceScope,
     ResponsePolicy,
+    ResponseAnswerKind,
     ResponseSurfaceMode,
     filter_memory_packet_for_scope,
     explicit_prior_assistant_reference,
@@ -121,6 +125,10 @@ from persistent_cognition.response_policy import (
     validate_current_literal,
     validate_exact_source_composition,
     validate_exact_source_selection,
+)
+from persistent_cognition.source_value_response import (
+    IndexedValueSource, SourceValuePlan, format_value_sources,
+    render_value_response, resolve_value_plan,
 )
 from persistent_cognition.worker_protocol import WorkerClaimEnvelope, WorkerEffectPolicy, deterministic_worker_step_id
 from persistent_cognition.worker_runtime import GuardedWorkerLauncher
@@ -271,16 +279,17 @@ class PerceptSpecialists(PerceptLLM):
         """Classify source and surface requirements from current authority only."""
 
         self._set_artifact_evidence_refs(())
-        if explicit_prior_assistant_reference(percept):
-            return ResponsePolicy(
-                evidence_scope=HistoricalEvidenceScope.MIXED_CONVERSATION,
-                surface_mode=ResponseSurfaceMode.NATURAL_LANGUAGE,
-            )
+        force_mixed_scope = explicit_prior_assistant_reference(percept)
 
         def validate_policy(content: str) -> ResponsePolicy:
             policy = ResponsePolicy.model_validate_json(content)
+            if "answer_kind" not in policy.model_fields_set:
+                raise ValueError("response-policy worker omitted answer_kind")
             validate_current_literal(percept, policy.insufficient_literal)
-            return policy.model_copy(update={"insufficient_literal": None})
+            updates: dict[str, Any] = {"insufficient_literal": None}
+            if force_mixed_scope:
+                updates["evidence_scope"] = HistoricalEvidenceScope.MIXED_CONVERSATION
+            return policy.model_copy(update=updates)
 
         last_error: Exception | None = None
         for token_cap in _retry_token_caps(_base_text_max_tokens()):
@@ -487,6 +496,13 @@ class PerceptSpecialists(PerceptLLM):
             )
 
         include_current = policy.evidence_scope is HistoricalEvidenceScope.GENERAL_OR_CURRENT
+        if (
+            policy.answer_kind is ResponseAnswerKind.EXTRACTIVE_VALUES
+            and policy.surface_mode is ResponseSurfaceMode.NATURAL_LANGUAGE
+        ):
+            return self._compose_source_values(
+                percept, admitted_packet, admitted_results, include_current=include_current,
+            )
         if policy.surface_mode is ResponseSurfaceMode.EXACT_SOURCE_SUBSTRING:
             return self._select_exact_source_substring(
                 percept,
@@ -534,6 +550,55 @@ class PerceptSpecialists(PerceptLLM):
             ),
         )
         return _restore_verbatim_literals(answer, placeholder_to_literal)
+
+    def _compose_source_values(
+        self,
+        percept: str,
+        packet: MemoryPacket | None,
+        work_results: tuple[dict[str, Any], ...],
+        *,
+        include_current: bool,
+    ) -> str:
+        """Select canonical ranges and render them without free-form generation."""
+
+        sources: list[IndexedValueSource] = []
+        if packet is not None:
+            for item in sorted(packet.items, key=lambda item: (
+                item.global_seq, item.conversation_seq, str(item.source_event_id),
+            )):
+                sources.append(IndexedValueSource.from_text(
+                    item.content, authority_for_event_type(item.event_type).authority_class,
+                ))
+        for text in _exact_source_texts(None, work_results):
+            sources.append(IndexedValueSource.from_text(text, "EXTERNAL_TOOL_EVIDENCE"))
+        if include_current:
+            sources.append(IndexedValueSource.from_text(percept, "CURRENT_USER_MESSAGE"))
+        indexed_sources = tuple(sources)
+        evidence = _quarantined_evidence(format_value_sources(indexed_sources))
+        validate_rendered_evidence((evidence,), budget=configured_model_evidence_budget())
+        self._set_artifact_evidence_refs(_memory_evidence_refs(packet))
+        last_error: Exception | None = None
+        for token_cap in _retry_token_caps(_base_text_max_tokens()):
+            try:
+                content = self._structured_with_evidence(
+                    "V2_SOURCE_VALUE_SELECTION", _SOURCE_VALUE_SELECTION_PROMPT, percept,
+                    evidence, SEMANTIC_CONTRACTS["V2_SOURCE_VALUE_SELECTION"].output_schema(),
+                    token_cap,
+                )
+                values = self._validated_model_output(
+                    kind="V2_SOURCE_VALUE_SELECTION", raw_output=content,
+                    validator=lambda: resolve_value_plan(
+                        indexed_sources, SourceValuePlan.model_validate_json(content),
+                    ),
+                )
+                if not values:
+                    return self._select_current_fallback_literal(percept) or (
+                        _GENERIC_INSUFFICIENT_RESPONSE
+                    )
+                return render_value_response(values)
+            except (ValidationError, ValueError) as exc:
+                last_error = exc
+        raise ValueError(f"source-value selection failed to validate: {last_error}")
 
 
 def _external_capability_catalog(registry: CapabilityRegistry) -> tuple[CapabilityDescriptor, ...]:

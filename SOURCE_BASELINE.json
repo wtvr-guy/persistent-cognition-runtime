@@ -613,7 +613,7 @@
     "src/prometheist/contract_registry.py": {
       "source_path": "src/prometheist/contract_registry.py",
       "source_sha256": "bfc5697cf0dc7a5dc66b57446fc0cf47572352322d4426e0dd8d05ccff27630d",
-      "extracted_sha256": "7ebf15ab85cd36868b21a15d54d2295564507c702b4042ef51f0cd23e1b99021",
+      "extracted_sha256": "de03a86a2c17bc3c582b521111b9fcc66f2c701cdff29f8df1c1102aa1551f0d",
       "extraction_path": "src/persistent_cognition/contract_registry.py",
       "status": "imported",
       "baseline_extracted_sha256": "4fc72b087fa6ca9f236ed3febb14eeea3c99d730432b5b5b6842c7aeb67f68ae"
@@ -905,7 +905,7 @@
     "src/prometheist/percept_response_runtime.py": {
       "source_path": "src/prometheist/percept_response_runtime.py",
       "source_sha256": "c726091b0395fab5722e422c6aa5b48b175b833b87ed590161728a2f84c754e8",
-      "extracted_sha256": "5164cdee5906ff054fd2f69445165de6ac6cd1e1aad7a86a90368e1d2cdcf0e2",
+      "extracted_sha256": "4d4e57dbe04c2e0d916b9bdf137bee71248edda2648128f7c16930048c2a525c",
       "extraction_path": "src/persistent_cognition/percept_response_runtime.py",
       "status": "imported",
       "baseline_extracted_sha256": "100d2a4a3f490ac1e264620cb36ff7a8099d56ee471ce5973e6e7ad006b9e7dd",
@@ -983,7 +983,7 @@
     "src/prometheist/prompt_registry.py": {
       "source_path": "src/prometheist/prompt_registry.py",
       "source_sha256": "5234360aa6191da6cd1acd177c0dab828a7164e5a61322fcf04b6eec4846c5a0",
-      "extracted_sha256": "1a40de52990ceef822fca1c3a38f94b7f460d4ab6c59a6c6665a9b49867881a4",
+      "extracted_sha256": "629530595cea00c37eda43f85ae494dc6381f3567e96a1f8004bea4a8d9e3d3d",
       "extraction_path": "src/persistent_cognition/prompt_registry.py",
       "status": "imported",
       "baseline_extracted_sha256": "5234360aa6191da6cd1acd177c0dab828a7164e5a61322fcf04b6eec4846c5a0"
@@ -999,7 +999,7 @@
     "src/prometheist/response_policy.py": {
       "source_path": "src/prometheist/response_policy.py",
       "source_sha256": "441bc9fad3b9db60058441b8522b726ed7946d8cfee8d5dfaafd0b76fcfa6adf",
-      "extracted_sha256": "129f2bf25808e24f86da153704382dc8e4d4a80508c7ba658d00acf656952515",
+      "extracted_sha256": "04432604f1c2e8fe386dabcdbb9b47d761773449360b798fbc2d75ce5bb314a8",
       "extraction_path": "src/persistent_cognition/response_policy.py",
       "status": "imported",
       "baseline_extracted_sha256": "441bc9fad3b9db60058441b8522b726ed7946d8cfee8d5dfaafd0b76fcfa6adf"
@@ -1166,7 +1166,7 @@
     "tests/_native_artifact_assertions.py": {
       "source_path": "tests/_native_artifact_assertions.py",
       "source_sha256": "e4034712260fdafa772103b2b470410f0cf5665c68f256c6c0f17d0855ce421a",
-      "extracted_sha256": "790d514354b6d129f25e2007d14a99e22aa9c2c6a3f655db3ad94b7b6f09bac3",
+      "extracted_sha256": "e3093bed94f7befa9fe5a336929ba120b49433f5d339c0968541505d163a8be6",
       "extraction_path": "tests/_native_artifact_assertions.py",
       "status": "imported",
       "baseline_extracted_sha256": "e4034712260fdafa772103b2b470410f0cf5665c68f256c6c0f17d0855ce421a"
@@ -1624,7 +1624,7 @@
     "tests/test_ollama_response_native.py": {
       "source_path": "tests/test_ollama_response_native.py",
       "source_sha256": "70730b6c5a047ed724ec8199614a85b0835b05c86cad53d11e37eb74ab3d0afd",
-      "extracted_sha256": "f7247bc0a1063a825625186036a35a5e7aa6edeff3f914b04d049044b3c140c4",
+      "extracted_sha256": "b45b4e76c43bfd50948a43a02d2324c664fe72928dc26b2f5ecff334e5ab4f4b",
       "extraction_path": "tests/test_ollama_response_native.py",
       "status": "imported",
       "baseline_extracted_sha256": "70730b6c5a047ed724ec8199614a85b0835b05c86cad53d11e37eb74ab3d0afd"
@@ -1781,7 +1781,7 @@
     "tests/test_response_memory_view.py": {
       "source_path": "tests/test_response_memory_view.py",
       "source_sha256": "4c0fb863ad6d7f01ce6ac1c9d1e70fb11f56fb303efdbf7444e8f547d3ded56e",
-      "extracted_sha256": "f135173cebe774ff97ebe1a233d6fce3f7f1f4841062775f5fe7178ec4e858e6",
+      "extracted_sha256": "020d9b6cba0bdc43f7ff30469e7375a6c51967c7be721d7440e238f33531720b",
       "extraction_path": "tests/test_response_memory_view.py",
       "status": "imported",
       "baseline_extracted_sha256": "4c0fb863ad6d7f01ce6ac1c9d1e70fb11f56fb303efdbf7444e8f547d3ded56e",
@@ -1882,7 +1882,7 @@
     "tests/test_user_prompt_worker_contract.py": {
       "source_path": "tests/test_user_prompt_worker_contract.py",
       "source_sha256": "cae56e829d8c663fa2a6735e69bca09de006badd12f0458b4678acadb82e4dcd",
-      "extracted_sha256": "c20fb440660ca9d58c053b09a2609cf69327c5d6b5e606bf74dfa01cec2fe731",
+      "extracted_sha256": "7bf7caa9ee41c97b8d7b44d8d8cf6fd09c216ce9231bfe649299c397b8cdc437",
       "extraction_path": "tests/test_user_prompt_worker_contract.py",
       "status": "imported",
       "baseline_extracted_sha256": "cae56e829d8c663fa2a6735e69bca09de006badd12f0458b4678acadb82e4dcd"
@@ -2181,6 +2181,22 @@
       "extracted_sha256": "5b9835b17ab78a73adfc21f446de0258c56714e5cb60db43cafedb3da24b398d",
       "status": "added",
       "reason": "Regression coverage for admitted structured graph seeds and native evidence handling."
+    },
+    "src/persistent_cognition/source_value_response.py": {
+      "source_path": null,
+      "source_sha256": null,
+      "extraction_path": "src/persistent_cognition/source_value_response.py",
+      "extracted_sha256": "bec1bd467430ec479304ca45d9487b47f24c672ea69222793e90a927dbcb0af4",
+      "status": "added",
+      "reason": "Source-extractive factual response protocol and regression coverage."
+    },
+    "tests/unit/test_source_value_response.py": {
+      "source_path": null,
+      "source_sha256": null,
+      "extraction_path": "tests/unit/test_source_value_response.py",
+      "extracted_sha256": "131e61d76044635167aa2893f4d486e77bc76391e9b1bc9f2f25ee07dce26a81",
+      "status": "added",
+      "reason": "Source-extractive factual response protocol and regression coverage."
     }
   },
   "manifest_version": 2

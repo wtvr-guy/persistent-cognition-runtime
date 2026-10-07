@@ -13,6 +13,26 @@ This extraction includes the v2 worker architecture and its later deterministic 
 
 Each stage has durable input/output artifacts and a guarded worker contract. Fixed retrieval replaced the former Composer loop upstream; restoring it would roll back a later engine change.
 
+For concrete value recall, the current-only response policy selects
+`EXTRACTIVE_VALUES` independently of whether the user requests natural prose or
+raw output. With natural output, `V2_SOURCE_VALUE_SELECTION` selects only a
+source index and an inclusive token range for each requested value. Python
+validates those pointers, copies the original characters (including internal
+whitespace), and assembles a fixed sentence. No free-form responder rewrites
+the selected values. Invalid pointers fail closed after bounded retries; an
+empty selection yields the supported current fallback or explicit abstention.
+See [source_value_response.py](../src/persistent_cognition/source_value_response.py).
+
+Explanations, comparisons and summaries use `SYNTHESIS` and retain the natural
+responder. Source-role filtering precedes both paths, and explicit references
+to prior assistant statements still enforce mixed dialogue scope. Their
+current-only classifier also chooses the answer kind; it cannot omit that
+decision and silently fall back to synthesis. Semantic classification and
+selection can still be wrong: deterministic copying guarantees source fidelity,
+not that the selected passage answers the question. Native acceptance and human
+review remain required. The selector's indexed input and output are journaled
+under a registered contract, with admitted source-event references.
+
 | Concern | Implementation |
 | --- | --- |
 | JIT memory and retrieval | [jit_memory.py](../src/persistent_cognition/jit_memory.py), [fixed_retrieval.py](../src/persistent_cognition/fixed_retrieval.py), [postgres_memory_kernel.py](../src/persistent_cognition/postgres_memory_kernel.py) |

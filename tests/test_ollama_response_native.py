@@ -13,6 +13,7 @@ from persistent_cognition.percept_response_worker import UserPromptLLM
 from persistent_cognition.response_policy import (
     HistoricalEvidenceScope,
     ResponsePolicy,
+    ResponseAnswerKind,
     ResponseSurfaceMode,
 )
 from tests._cli_helpers import ollama_available, print_transcript
@@ -117,6 +118,7 @@ def test_real_ollama_response_reconciles_recent_relational_evidence():
         response_policy=ResponsePolicy(
             evidence_scope=HistoricalEvidenceScope.MIXED_CONVERSATION,
             surface_mode=ResponseSurfaceMode.NATURAL_LANGUAGE,
+            answer_kind=ResponseAnswerKind.EXTRACTIVE_VALUES,
         ),
     )
     assert answer.strip()
@@ -134,25 +136,29 @@ def test_real_ollama_response_reconciles_recent_relational_evidence():
     print_transcript("HUMAN REVIEW REQUIRED: judge the relational response above.")
 
 
-@pytest.mark.parametrize(("prompt", "expected_scope"), [
+@pytest.mark.parametrize(("prompt", "expected_scope", "expected_kind"), [
     (
         "Tell me the codename for Project Oriole from persistent memory.",
         HistoricalEvidenceScope.USER_AUTHORED,
+        ResponseAnswerKind.EXTRACTIVE_VALUES,
     ),
     (
         "List the source event IDs in the last MEMORY_PACKET retrieval record.",
         HistoricalEvidenceScope.DERIVED_INTERNAL,
+        ResponseAnswerKind.EXTRACTIVE_VALUES,
     ),
     (
         "The codename for Project Oriole is 2FF0372B.",
         HistoricalEvidenceScope.GENERAL_OR_CURRENT,
+        ResponseAnswerKind.SYNTHESIS,
     ),
 ])
 def test_real_ollama_policy_distinguishes_stored_facts_from_internal_records(
-    prompt, expected_scope,
+    prompt, expected_scope, expected_kind,
 ):
     policy = UserPromptLLM()._response_policy(prompt)
     print_transcript(f"\nSource-policy regression — User:\n{prompt}")
     print_transcript(f"Source-policy regression — Scope: {policy.evidence_scope.value}")
     assert policy.evidence_scope is expected_scope
+    assert policy.answer_kind is expected_kind
     assert policy.surface_mode is ResponseSurfaceMode.NATURAL_LANGUAGE
