@@ -14,7 +14,7 @@ from pydantic import BaseModel, ConfigDict, model_validator
 from persistent_cognition.models import EventType, MemoryPacket
 
 
-RESPONSE_POLICY_VERSION = "response-source-authority-v7"
+RESPONSE_POLICY_VERSION = "response-source-authority-v8"
 
 _EXPLICIT_PRIOR_ASSISTANT_REFERENCE = re.compile(
     r"\b(?:you|assistant|persistent[_\s]+cognition)\s+"
@@ -47,7 +47,7 @@ class ResponseSurfaceMode(str, Enum):
 
 
 class ResponseAnswerKind(str, Enum):
-    """Separate exact factual value recall from open-ended language synthesis."""
+    """Separate deterministic factual evidence display from language synthesis."""
 
     EXTRACTIVE_VALUES = "EXTRACTIVE_VALUES"
     SYNTHESIS = "SYNTHESIS"

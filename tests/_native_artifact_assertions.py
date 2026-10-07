@@ -21,7 +21,6 @@ _RESPONSE_REALIZATION_KINDS = frozenset(
         "V2_CURRENT_FALLBACK_SELECTION",
         "V2_EXACT_SOURCE_COMPOSITION",
         "V2_EXACT_SOURCE_SELECTION",
-        "V2_SOURCE_VALUE_SELECTION",
     }
 )
 
@@ -52,6 +51,7 @@ def assert_response_evidence_receipt(
     required_event_ids: Iterable[UUID] = (),
     forbidden_event_ids: Iterable[UUID] = (),
     require_complete: bool = True,
+    require_deterministic: bool = False,
 ) -> dict[str, object]:
     """Verify the successful response realization's canonical evidence links."""
 
@@ -60,20 +60,36 @@ def assert_response_evidence_receipt(
     if require_complete:
         assert verification["complete"] is True, verification
 
+    artifacts = artifact_journal.interaction_artifacts(interaction_id)
     invocations = [
         artifact
-        for artifact in artifact_journal.interaction_artifacts(interaction_id)
+        for artifact in artifacts
         if artifact.get("artifact_type") == "LLM_INVOCATION"
         and artifact.get("stage") == "V2_RESPOND"
         and artifact.get("payload", {}).get("kind") in _RESPONSE_REALIZATION_KINDS
         and artifact.get("payload", {}).get("error_type") is None
         and artifact.get("payload", {}).get("output") is not None
     ]
-    assert invocations, (
-        "No successful response-realization invocation artifact was recorded for "
+    renders = [artifact for artifact in artifacts
+               if artifact.get("artifact_type") == "RESPONSE_RENDER"
+               and artifact.get("stage") == "V2_RESPOND"]
+    assert invocations or renders, (
+        "No successful response-realization artifact was recorded for "
         f"interaction {interaction_id}"
     )
-    realization = invocations[-1]
+    if renders:
+        # A deterministic response must not hide a semantic evidence-selection
+        # call in the same stage. Replay the immutable inputs against the renderer.
+        assert not [artifact for artifact in artifacts
+                    if artifact.get("artifact_type") == "LLM_INVOCATION"
+                    and artifact.get("stage") == "V2_RESPOND"]
+        realization = renders[-1]
+        _assert_deterministic_render(realization["payload"])
+    else:
+        assert not require_deterministic, (
+            "Factual evidence recall unexpectedly invoked a response model"
+        )
+        realization = invocations[-1]
     payload = realization["payload"]
     evidence_refs = set(payload.get("evidence_refs", []))
     required_refs = {f"event:{event_id}" for event_id in required_event_ids}
@@ -86,17 +102,59 @@ def assert_response_evidence_receipt(
         "forbidden_refs_admitted": sorted(evidence_refs & forbidden_refs),
         "recorded_evidence_refs": sorted(evidence_refs),
     }
-    assert isinstance(payload.get("evidence_prompt"), str)
+    if not renders:
+        assert isinstance(payload.get("evidence_prompt"), str)
 
     return {
         "artifact_chain_valid": True,
         "artifact_id": realization["artifact_id"],
         "evidence_refs": sorted(evidence_refs),
         "interaction_id": str(interaction_id),
-        "model": payload["model"],
+        "model": payload.get("model"),
         "response_kind": payload["kind"],
-        "transport_layout": payload.get("transport_layout"),
+        "transport_layout": ("application:canonical-evidence" if renders
+                             else payload.get("transport_layout")),
     }
+
+
+def _assert_deterministic_render(payload: dict) -> None:
+    from persistent_cognition.response_policy import (
+        ExactSourceComposition, ExactSourceSelection, ResponsePolicy, ResponseSurfaceMode,
+        validate_exact_source_composition,
+    )
+    from persistent_cognition.source_value_response import (
+        EVIDENCE_RENDERER_VERSION, ResponseEvidenceSource, SourceValueBinding,
+        render_source_evidence, render_value_response, resolve_bound_values,
+    )
+
+    assert payload["renderer_version"] == EVIDENCE_RENDERER_VERSION
+    sources = tuple(ResponseEvidenceSource(**source) for source in payload["sources"])
+    assert {source.source_ref for source in sources if source.source_ref.startswith("event:")} == (
+        set(payload["evidence_refs"])
+    )
+    bindings = tuple(SourceValueBinding.model_validate_json(json.dumps(binding))
+                     for binding in payload["bindings"])
+    if bindings:
+        assert payload["kind"] == "DETERMINISTIC_SOURCE_VALUES"
+        values = resolve_bound_values(sources, bindings)
+        policy = ResponsePolicy.model_validate(payload["response_policy"])
+        if policy.surface_mode is ResponseSurfaceMode.EXACT_SOURCE_SUBSTRING:
+            assert len(values) == 1
+            expected = values[0]
+        elif policy.surface_mode is ResponseSurfaceMode.EXACT_SOURCE_COMPOSITION:
+            expected = validate_exact_source_composition(
+                payload["current_user_prompt"], values, ExactSourceComposition(
+                    selections=[ExactSourceSelection(source_index=index, verbatim_value=value)
+                                for index, value in enumerate(values)],
+                    separator=payload["separator"],
+                ),
+            )
+        else:
+            expected = render_value_response(values)
+    else:
+        assert payload["kind"] == "DETERMINISTIC_EVIDENCE_DISPLAY"
+        expected = render_source_evidence(sources)
+    assert payload["output"] == expected
 
 
 def print_artifact_receipt(label: str, receipt: dict[str, object]) -> None:

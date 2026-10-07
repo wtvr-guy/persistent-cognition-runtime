@@ -57,6 +57,7 @@ def _review_response(
                 question_event.correlation_id,
             ),
             required_event_ids=(source_event_id,),
+            require_deterministic=True,
         ),
     )
     assert_recalled_literal(answer, expected_fact, label=label)

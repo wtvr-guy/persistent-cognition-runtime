@@ -101,6 +101,26 @@ bounded model selection
 
 The model does not write executor names, dependencies, durable IDs, or execution order.
 
+## Deterministic evidence responses
+
+Article 15 applies to evidence lookup and display as well as the executive control
+plane. First use practical deterministic code for the operation. A fresh model
+may interpret a natural-language request, but that interpretation is not a reason
+to send already retrieved records through another model to rediscover their values.
+
+For a trusted structured source/field binding, code performs direct field access.
+For factual recall over prose, code displays the admitted source records with
+attribution and exact quoted content. This avoids inventing a fact schema or a
+phrase-specific English parser. It also preserves conflicts rather than assigning
+truth to whichever record a small model happens to select. Evidence display does
+not promise semantic relevance or complete answerability; retrieval and intent
+classification remain separate obligations.
+
+The source renderer is model-free, versioned and replayable from `RESPONSE_RENDER`
+artifacts. An invalid binding fails without a model fallback. Requested free-form
+explanations and raw semantic extraction from unstructured prose may still need a
+model when no suitable deterministic contract exists.
+
 ## Memory determinism
 
 Memory retrieval may include model-assisted semantic mechanisms in future versions, but canonical evidence identity and provenance remain system-owned. The deterministic baseline should be used wherever it can satisfy the information need.

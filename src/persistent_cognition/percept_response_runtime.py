@@ -15,7 +15,6 @@ from persistent_cognition.prompt_registry import (
     _CURRENT_FALLBACK_SELECTION_PROMPT,
     _EXACT_SOURCE_SELECTION_PROMPT,
     _EXACT_SOURCE_COMPOSITION_PROMPT,
-    _SOURCE_VALUE_SELECTION_PROMPT,
 )
 
 from collections.abc import Callable
@@ -69,7 +68,7 @@ from persistent_cognition.capability_registry import (
 )
 from persistent_cognition.capability_runtime import CapabilityExecution, execute_registered_capability
 from persistent_cognition.epistemic_authority import (
-    authority_for_event_type, format_authority_bound_memory_packet,
+    format_authority_bound_memory_packet,
 )
 from persistent_cognition.interaction_contracts import (
     DurableInteraction,
@@ -127,9 +126,9 @@ from persistent_cognition.response_policy import (
     validate_exact_source_selection,
 )
 from persistent_cognition.source_value_response import (
-    IndexedValueSource, SourceValuePlan, format_value_sources,
-    render_value_response, resolve_value_plan,
-    structured_value_sources,
+    EVIDENCE_RENDERER_VERSION, SourceValueBinding,
+    response_evidence_sources, resolve_bound_values,
+    render_source_evidence, render_value_response,
 )
 from persistent_cognition.worker_protocol import WorkerClaimEnvelope, WorkerEffectPolicy, deterministic_worker_step_id
 from persistent_cognition.worker_runtime import GuardedWorkerLauncher
@@ -271,6 +270,11 @@ class PerceptLLM(OllamaClient):
         """Expose causal evidence refs to artifact-aware subclasses."""
 
         del refs
+
+    def _journal_deterministic_response(self, payload: dict[str, Any]) -> None:
+        """Expose model-free response receipts to artifact-aware subclasses."""
+
+        del payload
 
 
 class PerceptSpecialists(PerceptLLM):
@@ -470,6 +474,8 @@ class PerceptSpecialists(PerceptLLM):
         work_results: tuple[dict[str, Any], ...],
         *,
         response_policy: ResponsePolicy,
+        source_bindings: tuple[SourceValueBinding, ...] = (),
+        source_separator: str | None = None,
     ) -> str:
         packet = package.memory_packet
         budget = configured_model_evidence_budget()
@@ -486,6 +492,15 @@ class PerceptSpecialists(PerceptLLM):
         admitted_results = _admitted_capability_results(policy.evidence_scope, work_results)
         has_admitted_history = bool(admitted_packet and admitted_packet.items)
         has_admitted_result = bool(admitted_results)
+        include_current = policy.evidence_scope is HistoricalEvidenceScope.GENERAL_OR_CURRENT
+        if source_bindings:
+            # Explicit source/field bindings come from the application, never the
+            # current-only intent classifier or recalled instruction-shaped data.
+            return self._render_factual_evidence(
+                percept, admitted_packet, admitted_results, include_current=include_current,
+                source_bindings=source_bindings, policy=policy,
+                source_separator=source_separator,
+            )
         if (
             scope_requires_historical_support(policy.evidence_scope)
             and not has_admitted_history
@@ -496,13 +511,14 @@ class PerceptSpecialists(PerceptLLM):
                 _GENERIC_INSUFFICIENT_RESPONSE
             )
 
-        include_current = policy.evidence_scope is HistoricalEvidenceScope.GENERAL_OR_CURRENT
         if (
             policy.answer_kind is ResponseAnswerKind.EXTRACTIVE_VALUES
             and policy.surface_mode is ResponseSurfaceMode.NATURAL_LANGUAGE
         ):
-            return self._compose_source_values(
+            return self._render_factual_evidence(
                 percept, admitted_packet, admitted_results, include_current=include_current,
+                source_bindings=(), policy=policy,
+                source_separator=None,
             )
         if policy.surface_mode is ResponseSurfaceMode.EXACT_SOURCE_SUBSTRING:
             return self._select_exact_source_substring(
@@ -552,54 +568,56 @@ class PerceptSpecialists(PerceptLLM):
         )
         return _restore_verbatim_literals(answer, placeholder_to_literal)
 
-    def _compose_source_values(
+    def _render_factual_evidence(
         self,
         percept: str,
         packet: MemoryPacket | None,
         work_results: tuple[dict[str, Any], ...],
         *,
         include_current: bool,
+        source_bindings: tuple[SourceValueBinding, ...],
+        policy: ResponsePolicy,
+        source_separator: str | None,
     ) -> str:
-        """Select canonical ranges and render them without free-form generation."""
+        """Look up bound fields or display admitted records without a model."""
 
-        sources: list[IndexedValueSource] = []
-        if packet is not None:
-            for item in sorted(packet.items, key=lambda item: (
-                item.global_seq, item.conversation_seq, str(item.source_event_id),
-            )):
-                sources.append(IndexedValueSource.from_text(
-                    item.content, authority_for_event_type(item.event_type).authority_class,
-                ))
-        for result in work_results:
-            sources.extend(structured_value_sources(result))
-        if include_current:
-            sources.append(IndexedValueSource.from_text(percept, "CURRENT_USER_MESSAGE"))
-        indexed_sources = tuple(sources)
-        evidence = _quarantined_evidence(format_value_sources(indexed_sources))
-        validate_rendered_evidence((evidence,), budget=configured_model_evidence_budget())
-        self._set_artifact_evidence_refs(_memory_evidence_refs(packet))
-        last_error: Exception | None = None
-        for token_cap in _retry_token_caps(_base_text_max_tokens()):
-            try:
-                content = self._structured_with_evidence(
-                    "V2_SOURCE_VALUE_SELECTION", _SOURCE_VALUE_SELECTION_PROMPT, percept,
-                    evidence, SEMANTIC_CONTRACTS["V2_SOURCE_VALUE_SELECTION"].output_schema(),
-                    token_cap,
-                )
-                values = self._validated_model_output(
-                    kind="V2_SOURCE_VALUE_SELECTION", raw_output=content,
-                    validator=lambda: resolve_value_plan(
-                        indexed_sources, SourceValuePlan.model_validate_json(content),
+        sources = response_evidence_sources(
+            packet, work_results, current_percept=percept if include_current else None,
+        )
+        if source_bindings:
+            values = resolve_bound_values(sources, source_bindings)
+            if policy.surface_mode is ResponseSurfaceMode.EXACT_SOURCE_SUBSTRING:
+                if len(values) != 1:
+                    raise ValueError("raw source output requires exactly one field binding")
+                answer = values[0]
+            elif policy.surface_mode is ResponseSurfaceMode.EXACT_SOURCE_COMPOSITION:
+                if source_separator is None:
+                    raise ValueError("raw composition requires an application-owned separator")
+                answer = validate_exact_source_composition(
+                    percept, values, ExactSourceComposition(
+                        selections=[ExactSourceSelection(source_index=index, verbatim_value=value)
+                                    for index, value in enumerate(values)],
+                        separator=source_separator,
                     ),
                 )
-                if not values:
-                    return self._select_current_fallback_literal(percept) or (
-                        _GENERIC_INSUFFICIENT_RESPONSE
-                    )
-                return render_value_response(values)
-            except (ValidationError, ValueError) as exc:
-                last_error = exc
-        raise ValueError(f"source-value selection failed to validate: {last_error}")
+            else:
+                answer = render_value_response(values)
+            kind = "DETERMINISTIC_SOURCE_VALUES"
+        else:
+            answer = render_source_evidence(sources)
+            kind = "DETERMINISTIC_EVIDENCE_DISPLAY"
+        validate_rendered_evidence((answer,), budget=configured_model_evidence_budget())
+        self._set_artifact_evidence_refs(_memory_evidence_refs(packet))
+        self._journal_deterministic_response({
+            "kind": kind, "renderer_version": EVIDENCE_RENDERER_VERSION,
+            "current_user_prompt": percept,
+            "response_policy": policy.model_dump(mode="json"),
+            "sources": [source.receipt() for source in sources],
+            "bindings": [binding.model_dump(mode="json") for binding in source_bindings],
+            "separator": source_separator,
+            "evidence_refs": list(_memory_evidence_refs(packet)), "output": answer,
+        })
+        return answer
 
 
 def _external_capability_catalog(registry: CapabilityRegistry) -> tuple[CapabilityDescriptor, ...]:

@@ -176,6 +176,7 @@ def test_stateless_four_turn_continuity_survives_sessions_and_distractors():
     failure_trace = _trace(historical_conversation, active_conversation)
     assert answer2.strip(), failure_trace
     assert_recalled_literal(answer2, profile_token, label="Turn 2 constraint profile")
+    assert_recalled_literal(answer2, "Docker", label="Turn 2 excluded approach")
     assert historical_rule_event.event_id in turn2_sources, failure_trace
     assert turn1_event.event_id in turn2_sources, failure_trace
     print_artifact_receipt(
@@ -186,6 +187,7 @@ def test_stateless_four_turn_continuity_survives_sessions_and_distractors():
                 turn2_event.correlation_id,
             ),
             required_event_ids=(historical_rule_event.event_id, turn1_event.event_id),
+            require_deterministic=True,
         ),
     )
 
@@ -204,6 +206,7 @@ def test_stateless_four_turn_continuity_survives_sessions_and_distractors():
     failure_trace = _trace(historical_conversation, active_conversation)
     assert answer3.strip(), failure_trace
     assert_recalled_literal(answer3, plan_label, label="Turn 3 plan nickname")
+    assert_recalled_literal(answer3, "Docker", label="Turn 3 excluded approach")
     assert turn1_event.event_id in turn3_sources, failure_trace
     assert answer2_event.event_id in turn3_sources, failure_trace
     print_artifact_receipt(
@@ -214,6 +217,7 @@ def test_stateless_four_turn_continuity_survives_sessions_and_distractors():
                 turn3_event.correlation_id,
             ),
             required_event_ids=(turn1_event.event_id, answer2_event.event_id),
+            require_deterministic=True,
         ),
     )
 
@@ -230,6 +234,8 @@ def test_stateless_four_turn_continuity_survives_sessions_and_distractors():
     )
     failure_trace = _trace(historical_conversation, active_conversation)
     assert answer4.strip(), failure_trace
+    assert_recalled_literal(answer4, "Docker", label="Turn 4 excluded approach")
+    assert_recalled_literal(answer4, "virtualization is disabled", label="Turn 4 underlying reason")
     assert answer3_event.event_id in turn4_sources, failure_trace
     assert historical_rule_event.event_id in turn4_sources, failure_trace
     print_artifact_receipt(

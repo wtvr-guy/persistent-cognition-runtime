@@ -33,7 +33,6 @@ SEMANTIC_CONTRACTS = MappingProxyType({
     "V2_CURRENT_FALLBACK_SELECTION": SemanticContract("_CURRENT_FALLBACK_SELECTION_PROMPT", "response_policy:CurrentFallbackSelection"),
     "V2_EXACT_SOURCE_SELECTION": SemanticContract("_EXACT_SOURCE_SELECTION_PROMPT", "response_policy:ExactSourceSelection"),
     "V2_EXACT_SOURCE_COMPOSITION": SemanticContract("_EXACT_SOURCE_COMPOSITION_PROMPT", "response_policy:ExactSourceComposition"),
-    "V2_SOURCE_VALUE_SELECTION": SemanticContract("_SOURCE_VALUE_SELECTION_PROMPT", "source_value_response:SourceValuePlan"),
     "FINAL_RESPONSE_V2": SemanticContract("_FINAL_RESPONSE_PROMPT", "llm:_TextAnswer"),
     "PERCEPT_TRIAGE": SemanticContract("TRIAGE_PROMPT", "percept_triage:TriageDecision"),
 })
@@ -52,13 +51,13 @@ STAGE_CONTRACTS = MappingProxyType({
     "V2_PRECOGNITIVE": StageContract("interaction.precognitive_disposition", "work triage specialist", frozenset({"PRECOGNITIVE_USER_PROMPT_WORK"})),
     "V2_EXECUTE_WORK": StageContract("capability.execute", "deterministic capability executor"),
     "V3_RETRIEVE_MEMORY": StageContract("interaction.retrieve_memory", "deterministic evidence retriever"),
-    "V2_RESPOND": StageContract("interaction.respond", "final response specialist", frozenset({"V2_CURRENT_FALLBACK_SELECTION", "V2_EXACT_SOURCE_SELECTION", "V2_EXACT_SOURCE_COMPOSITION", "V2_SOURCE_VALUE_SELECTION", "FINAL_RESPONSE_V2"})),
+    "V2_RESPOND": StageContract("interaction.respond", "final response specialist", frozenset({"V2_CURRENT_FALLBACK_SELECTION", "V2_EXACT_SOURCE_SELECTION", "V2_EXACT_SOURCE_COMPOSITION", "FINAL_RESPONSE_V2"})),
     "V2_PERSIST_RESULT": StageContract("interaction.persist_result", "deterministic result persister"),
     "SITUATION_MEMORY": StageContract("situation.memory", "deterministic memory activation"),
     "SITUATION_TRIAGE": StageContract("situation.triage", "percept triage specialist", frozenset({"PERCEPT_TRIAGE"})),
     "SITUATION_EXECUTE": StageContract("situation.execute", "deterministic action executor"),
     "SITUATION_RETRIEVE_MEMORY": StageContract("situation.retrieve", "deterministic evidence retriever"),
-    "SITUATION_RESPOND": StageContract("situation.respond", "final response specialist", frozenset({"FINAL_RESPONSE_V2", "V2_CURRENT_FALLBACK_SELECTION", "V2_SOURCE_VALUE_SELECTION"})),
+    "SITUATION_RESPOND": StageContract("situation.respond", "final response specialist", frozenset({"FINAL_RESPONSE_V2", "V2_CURRENT_FALLBACK_SELECTION"})),
     "SITUATION_PERSIST": StageContract("situation.persist", "deterministic result persister"),
 })
 
@@ -71,6 +70,7 @@ SCHEMA_CONTRACTS = MappingProxyType({
     "task-plan/v1": "model_admission:TaskPlan",
     "network-consent/v1": "network_consent:NetworkConsent",
     "precognitive-disposition/v1": "percept_response_runtime:PreCognitiveDisposition",
+    "source-value-binding/v1": "source_value_response:SourceValueBinding",
     "response-memory/v3": "percept_response_runtime:ResponseMemoryPackage",
     "memory-packet/v1": "models:MemoryPacket",
     "percept/v1": "perception:Percept",

@@ -13,25 +13,38 @@ This extraction includes the v2 worker architecture and its later deterministic 
 
 Each stage has durable input/output artifacts and a guarded worker contract. Fixed retrieval replaced the former Composer loop upstream; restoring it would roll back a later engine change.
 
-For concrete value recall, the current-only response policy selects
-`EXTRACTIVE_VALUES` independently of whether the user requests natural prose or
-raw output. With natural output, `V2_SOURCE_VALUE_SELECTION` selects only a
-source index and an inclusive token range for each requested value. Python
-validates those pointers, copies the original characters (including internal
-whitespace), and assembles a fixed sentence. No free-form responder rewrites
-the selected values. Invalid pointers fail closed after bounded retries; an
-empty selection yields the supported current fallback or explicit abstention.
+For factual recall, the current-only intent classifier selects
+`EXTRACTIVE_VALUES`. With ordinary output, Python displays the admitted canonical
+source records as clearly attributed quotations. It makes no response-stage model
+call and does not select spans or infer which statement is true. Multiple or
+conflicting sources remain visible. A quotation is evidence, not a declaration
+that every requested fact was found. This preserves full wording and relationships
+when the source is prose, without an English phrase parser or a generated answer.
+
+A trusted caller with a known structured contract can supply `SourceValueBinding`
+objects to `generate_final_response(..., source_bindings=...)`. Each binding names
+an admitted canonical event, work result plan position, or permitted current
+message and a typed dictionary/list field path. Code reads that field directly
+and renders the value. Missing sources, missing fields, non-scalar fields, and
+inadmissible roles fail closed without invoking a model. Raw single-value output
+and multi-value output with a validated caller-supplied separator are deterministic
+as well. The intent model cannot author these bindings.
 See [source_value_response.py](../src/persistent_cognition/source_value_response.py).
 
-Explanations, comparisons and summaries use `SYNTHESIS` and retain the natural
-responder. Source-role filtering precedes both paths, and explicit references
-to prior assistant statements still enforce mixed dialogue scope. Their
-current-only classifier also chooses the answer kind; it cannot omit that
-decision and silently fall back to synthesis. Semantic classification and
-selection can still be wrong: deterministic copying guarantees source fidelity,
-not that the selected passage answers the question. Native acceptance and human
-review remain required. The selector's indexed input and output are journaled
-under a registered contract, with admitted source-event references.
+`SYNTHESIS` retains the model for explanations, comparisons, summaries and other
+requested free-form language. Explicit raw extraction from unstructured prose
+still requires semantic selection when no structured binding exists; it uses the
+existing validated exact-source contract. The runtime does not parse arbitrary
+English into an inferred fact database. Semantic intent can still be wrong, and
+retrieval can still miss evidence. Those limitations must remain visible in native
+acceptance rather than being mistaken for failures of deterministic copying.
+
+Code-generated responses persist `RESPONSE_RENDER` artifacts with renderer version,
+committed policy, exact canonical sources, field bindings, evidence references and
+output. Native receipts replay these inputs and reject any response-stage model
+invocation for a deterministic response. Model responses retain invocation and
+validation artifacts. The full natural-language pipeline still uses models for
+current-only intent and, when needed, semantic work selection.
 
 | Concern | Implementation |
 | --- | --- |

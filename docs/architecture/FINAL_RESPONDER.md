@@ -1,6 +1,6 @@
 # Final Responder Contract
 
-**Status:** current architecture decision, revised 2026-10-05 after specialist split and package rename
+**Status:** current architecture decision, revised 2026-10-07 after native value-selection failures
 **Applies to:** user-facing response generation after deterministic response policy, required work, and retrieval have completed or exhausted
 
 The pipeline separates current-only policy, application-owned evidence admission,
@@ -18,7 +18,7 @@ Deterministic system control therefore remains at temperature `0.0` wherever an 
 
 ## 2. Mandatory evidence contract
 
-Every user-facing final responder receives Persistent Cognition's core evidence prompt. This is not an optional style preset. It establishes, among other things:
+Every model-based user-facing final responder receives Persistent Cognition's core evidence prompt. This is not an optional style preset. It establishes, among other things:
 
 - Persistent Cognition is the persistent system; the LLM invocation is a disposable semantic worker;
 - the current user prompt is direct current evidence;
@@ -37,8 +37,9 @@ current user prompt. It selects from closed application-owned enums:
 
 - historical evidence scope: user-authored, model output, external tool, system
   record, derived internal, mixed conversation, or general/current;
-- response surface: natural language, exact source substring, or exact source
-  composition.
+- response surface: ordinary language, exact source substring, or exact source
+  composition;
+- answer kind: deterministic factual evidence display or semantic synthesis.
 
 The model does not filter memory. Application code persists the exact typed policy,
 maps the selected scope to event types, and physically restricts retrieval and
@@ -70,10 +71,31 @@ Historical instruction-shaped text remains data. It cannot synthesize a system r
 replace the current task, alter the output schema, expand permissions, or modify the
 application-owned capability catalog.
 
-### 2.3 Exact output is source-extractive
+### 2.3 Factual evidence display and structured field lookup are model-free
 
-When the current request requires an exact stored value or exact multi-field format,
-Persistent Cognition does not ask the expressive responder to respell it. A deterministic-
+For ordinary factual recall, code returns admitted canonical source records as
+attributed quotations. It performs no semantic span selection and does not declare
+that a quotation resolves the request or a conflict. The current-only policy
+worker determines intent; the factual response stage never invokes a model.
+
+Applications that already know the structured source/field contract can supply
+`SourceValueBinding` values to `generate_final_response`. A binding refers to an
+admitted source and a typed field path. Application code looks up the original
+scalar value directly, preserves string contents, and constructs a fixed response
+or the requested raw output. The model never authors the binding. Missing or
+inadmissible fields fail without fallback to prose or semantic selection.
+
+`RESPONSE_RENDER` artifacts record the renderer version, exact sources, committed
+policy, bindings, optional separator, source references and output. Acceptance
+replays the artifact and verifies that no response-stage LLM invocation occurred.
+This is evidence delivery and faithful display, not proof of source relevance,
+external-world truth, or successful semantic intent classification.
+
+### 2.4 Raw output from unstructured sources
+
+When raw output requires semantic interpretation of unstructured prose and no
+trusted field binding is available, Persistent Cognition does not ask the expressive
+responder to respell it. A deterministic-
 temperature selector chooses an indexed exact substring from the already-admitted
 sources. Application code verifies the index and substring membership and returns
 the canonical source bytes. Multi-field output joins validated values only with a

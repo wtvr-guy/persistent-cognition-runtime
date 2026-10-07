@@ -53,6 +53,7 @@ from persistent_cognition.percept_response_runtime import (
     _stage_result,
 )
 from persistent_cognition.response_policy import ResponsePolicy
+from persistent_cognition.source_value_response import SourceValueBinding
 from persistent_cognition.worker_store import (
     complete_worker_claim,
     load_worker_claim_envelope,
@@ -166,6 +167,22 @@ class UserPromptLLM(PerceptSpecialists):
 
     def _set_artifact_evidence_refs(self, refs: tuple[str, ...]) -> None:
         self._artifact_evidence_refs = tuple(refs)
+
+    def _journal_deterministic_response(self, payload: dict[str, Any]) -> None:
+        interaction = self._artifact_interaction
+        stage = self._artifact_stage
+        if interaction is None or stage is None:
+            return
+        if stage.value not in {"V2_RESPOND", "SITUATION_RESPOND"}:
+            raise RuntimeError("canonical response rendering requires a response stage")
+        artifact_journal.write_interaction_artifact(
+            artifact_key=f"response-render:{stage.value}", artifact_type="RESPONSE_RENDER",
+            interaction_id=interaction.interaction_id,
+            conversation_id=interaction.conversation_id,
+            correlation_id=interaction.correlation_id,
+            task_id=interaction.task_id, assignment_id=interaction.assignment_id,
+            stage=stage.value, producer="canonical_response_renderer", payload=payload,
+        )
 
     def _structured(
         self,
@@ -490,6 +507,8 @@ class UserPromptLLM(PerceptSpecialists):
         work_results: tuple[dict[str, Any], ...],
         *,
         response_policy: ResponsePolicy,
+        source_bindings: tuple[SourceValueBinding, ...] = (),
+        source_separator: str | None = None,
     ) -> str:
         visible_package = package.model_copy(
             update={"memory_packet": _cognitive_memory_packet(package.memory_packet)},
@@ -501,6 +520,8 @@ class UserPromptLLM(PerceptSpecialists):
             visible_package,
             work_results,
             response_policy=response_policy,
+            source_bindings=source_bindings,
+            source_separator=source_separator,
         )
 
 

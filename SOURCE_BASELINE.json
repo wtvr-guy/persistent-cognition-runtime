@@ -25,7 +25,8 @@
     "Neutral persistent_cognition Python namespace and PCR_* environment variables; historical upstream attribution URLs and source paths remain Prometheist.",
     "Retired operational identity/self-model/self-reflection schemas, stages, prompts, policies and tests; generic semantic facts and counterevidence retained.",
     "Completed always-on namespace-owned percept supervision, typed arbitrary-data intake, structured action receipts, finite outcome feedback, and trusted worker-command bootstrap for application callbacks.",
-    "Current extraction_path and extracted_sha256 distinguish moved/adapted files from preserved original source_path/source_sha256; additions and retirements are explicit."
+    "Current extraction_path and extracted_sha256 distinguish moved/adapted files from preserved original source_path/source_sha256; additions and retirements are explicit.",
+    "Require practical deterministic evidence display and trusted structured field lookup before model-based response realization; retire ordinary factual token-range selection, journal model-free render receipts and strengthen native factual acceptance."
   ],
   "files": {
     ".python-version": {
@@ -613,7 +614,7 @@
     "src/prometheist/contract_registry.py": {
       "source_path": "src/prometheist/contract_registry.py",
       "source_sha256": "bfc5697cf0dc7a5dc66b57446fc0cf47572352322d4426e0dd8d05ccff27630d",
-      "extracted_sha256": "de03a86a2c17bc3c582b521111b9fcc66f2c701cdff29f8df1c1102aa1551f0d",
+      "extracted_sha256": "6de8f36bbdf995fbd112361172d5c2cf7b59db8abe2b261b4d7ddb2e76556540",
       "extraction_path": "src/persistent_cognition/contract_registry.py",
       "status": "imported",
       "baseline_extracted_sha256": "4fc72b087fa6ca9f236ed3febb14eeea3c99d730432b5b5b6842c7aeb67f68ae"
@@ -905,7 +906,7 @@
     "src/prometheist/percept_response_runtime.py": {
       "source_path": "src/prometheist/percept_response_runtime.py",
       "source_sha256": "c726091b0395fab5722e422c6aa5b48b175b833b87ed590161728a2f84c754e8",
-      "extracted_sha256": "fa878f09d4534f70aa6efcda387af59681a14a572d77ae01cb9fcc98756de2d4",
+      "extracted_sha256": "f48975aaf19434eff15b2ee7301c64babacaed599463427147f55e805de5918b",
       "extraction_path": "src/persistent_cognition/percept_response_runtime.py",
       "status": "imported",
       "baseline_extracted_sha256": "100d2a4a3f490ac1e264620cb36ff7a8099d56ee471ce5973e6e7ad006b9e7dd",
@@ -914,7 +915,7 @@
     "src/prometheist/percept_response_worker.py": {
       "source_path": "src/prometheist/percept_response_worker.py",
       "source_sha256": "44343632dcd7ae9d33f1153c4547b28d096067b1c71c417ab2bedbf3781f1554",
-      "extracted_sha256": "afd8fb6891b382bd36a3cee0b0419364f495f5b9faccfd14c8469deaae480134",
+      "extracted_sha256": "09fb6f7a1073c2095cd059aa27b039d48f89a188e3cf7d97aa5445cdc7bc0ef7",
       "extraction_path": "src/persistent_cognition/percept_response_worker.py",
       "status": "imported",
       "baseline_extracted_sha256": "c28143a7f3ba0b5eced7a12830b6dd7f38a1539d8ce665f678613fc57f668e5e",
@@ -983,7 +984,7 @@
     "src/prometheist/prompt_registry.py": {
       "source_path": "src/prometheist/prompt_registry.py",
       "source_sha256": "5234360aa6191da6cd1acd177c0dab828a7164e5a61322fcf04b6eec4846c5a0",
-      "extracted_sha256": "629530595cea00c37eda43f85ae494dc6381f3567e96a1f8004bea4a8d9e3d3d",
+      "extracted_sha256": "02c9d9b9368bc8cd00db7aa3a0a75a2b78f1e761924a08cb950d56019ae275b7",
       "extraction_path": "src/persistent_cognition/prompt_registry.py",
       "status": "imported",
       "baseline_extracted_sha256": "5234360aa6191da6cd1acd177c0dab828a7164e5a61322fcf04b6eec4846c5a0"
@@ -999,7 +1000,7 @@
     "src/prometheist/response_policy.py": {
       "source_path": "src/prometheist/response_policy.py",
       "source_sha256": "441bc9fad3b9db60058441b8522b726ed7946d8cfee8d5dfaafd0b76fcfa6adf",
-      "extracted_sha256": "04432604f1c2e8fe386dabcdbb9b47d761773449360b798fbc2d75ce5bb314a8",
+      "extracted_sha256": "2c761eee0e968890972f0d1d79bd73dae5ea2b3367f8f5cabd2c22ca5904fe7b",
       "extraction_path": "src/persistent_cognition/response_policy.py",
       "status": "imported",
       "baseline_extracted_sha256": "441bc9fad3b9db60058441b8522b726ed7946d8cfee8d5dfaafd0b76fcfa6adf"
@@ -1166,7 +1167,7 @@
     "tests/_native_artifact_assertions.py": {
       "source_path": "tests/_native_artifact_assertions.py",
       "source_sha256": "e4034712260fdafa772103b2b470410f0cf5665c68f256c6c0f17d0855ce421a",
-      "extracted_sha256": "e3093bed94f7befa9fe5a336929ba120b49433f5d339c0968541505d163a8be6",
+      "extracted_sha256": "ab2bde724d69087ab351902c7e58b4218eaedc77864fca7bc79b88eb2ec1b334",
       "extraction_path": "tests/_native_artifact_assertions.py",
       "status": "imported",
       "baseline_extracted_sha256": "e4034712260fdafa772103b2b470410f0cf5665c68f256c6c0f17d0855ce421a"
@@ -1230,7 +1231,7 @@
     "tests/test_acceptance_conversation_continuity.py": {
       "source_path": "tests/test_acceptance_conversation_continuity.py",
       "source_sha256": "4b03dd35b09e46d99ae2d1e1a4c7e1eaafcd8cd193c5ba27c311c1149290b1f8",
-      "extracted_sha256": "d163adf7d9b6e6534f075c71c67f94e4773cea1c6f74ce87f311c8ae8902f70e",
+      "extracted_sha256": "138ccf02a04ab07f463cc8f245ef0d6e4729e62b03360887b37e26f822645249",
       "extraction_path": "tests/test_acceptance_conversation_continuity.py",
       "status": "imported",
       "baseline_extracted_sha256": "4b03dd35b09e46d99ae2d1e1a4c7e1eaafcd8cd193c5ba27c311c1149290b1f8"
@@ -1238,7 +1239,7 @@
     "tests/test_acceptance_restart.py": {
       "source_path": "tests/test_acceptance_restart.py",
       "source_sha256": "16dec6707974663a92eb43a56b7fa9125ee67a5b07b24f2ceda33d1daea6af63",
-      "extracted_sha256": "751ca71ecf389fde0de45c455d142c5a010afda6839e13b2aa1bb032c1f15c5e",
+      "extracted_sha256": "ae80df6745dc6c0a4f7935f2d94c4e8e69cdcb4f23bf28d5a155f5ad51dd5abd",
       "extraction_path": "tests/test_acceptance_restart.py",
       "status": "imported",
       "baseline_extracted_sha256": "16dec6707974663a92eb43a56b7fa9125ee67a5b07b24f2ceda33d1daea6af63"
@@ -1469,7 +1470,7 @@
     "tests/test_cross_conversation_memory.py": {
       "source_path": "tests/test_cross_conversation_memory.py",
       "source_sha256": "a0750eb8f5f0afca71b6bb8c7fcaef88d616862b4343c7c2ff53ceaa57013fc7",
-      "extracted_sha256": "38070fbe6c0dad7795367923229e99a9800801f744474a28057b743d8f8ddb2e",
+      "extracted_sha256": "53fc5e059c1925004fce4068dc7ed77f3636cbe10699300fa9a36ba61cebed70",
       "extraction_path": "tests/test_cross_conversation_memory.py",
       "status": "imported",
       "baseline_extracted_sha256": "a0750eb8f5f0afca71b6bb8c7fcaef88d616862b4343c7c2ff53ceaa57013fc7"
@@ -1624,7 +1625,7 @@
     "tests/test_ollama_response_native.py": {
       "source_path": "tests/test_ollama_response_native.py",
       "source_sha256": "70730b6c5a047ed724ec8199614a85b0835b05c86cad53d11e37eb74ab3d0afd",
-      "extracted_sha256": "b45b4e76c43bfd50948a43a02d2324c664fe72928dc26b2f5ecff334e5ab4f4b",
+      "extracted_sha256": "51a8273ae6a2fb68539c71ca22841d9b7af6ddd51d3e43b6a371fc131c52347d",
       "extraction_path": "tests/test_ollama_response_native.py",
       "status": "imported",
       "baseline_extracted_sha256": "70730b6c5a047ed724ec8199614a85b0835b05c86cad53d11e37eb74ab3d0afd"
@@ -2186,7 +2187,7 @@
       "source_path": null,
       "source_sha256": null,
       "extraction_path": "src/persistent_cognition/source_value_response.py",
-      "extracted_sha256": "e4f5ffb863eb552d705c3af75397421667543a780a8c7c4e773fbdb89d7eec29",
+      "extracted_sha256": "39e6db1c102a6c9ef9925e3f20c5443170b779412e830cd21675cddcf2b07f1e",
       "status": "added",
       "reason": "Source-extractive factual response protocol and regression coverage."
     },
@@ -2194,9 +2195,17 @@
       "source_path": null,
       "source_sha256": null,
       "extraction_path": "tests/unit/test_source_value_response.py",
-      "extracted_sha256": "2a25adccbc590f22a6166638bad6ab596133e0e712d15f10b19f834e2146cdbd",
+      "extracted_sha256": "511b86fc8bf3bad7f773c264eb0ef003724bdccc12b67e624c3a5bca70c1eecc",
       "status": "added",
       "reason": "Source-extractive factual response protocol and regression coverage."
+    },
+    "tests/unit/test_deterministic_relational_response.py": {
+      "source_path": null,
+      "source_sha256": null,
+      "extraction_path": "tests/unit/test_deterministic_relational_response.py",
+      "extracted_sha256": "49128d733001a264919a055b16b1ddabd83645cf16624fd6968cced38c0287a3",
+      "status": "added",
+      "reason": "Replace the native relational false pass with model-free evidence and both-value regression coverage."
     }
   },
   "manifest_version": 2

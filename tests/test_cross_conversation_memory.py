@@ -67,6 +67,7 @@ def test_cross_conversation_cross_process_memory_recall():
                 question_event.correlation_id,
             ),
             required_event_ids=(source_event.event_id,),
+            require_deterministic=True,
         ),
     )
     assert_recalled_literal(answer, random_fact, label="Cross-conversation recall")
