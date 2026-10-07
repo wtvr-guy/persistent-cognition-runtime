@@ -15,6 +15,7 @@ from persistent_cognition.response_policy import (
 from persistent_cognition.source_value_response import (
     IndexedValueSource, SourceValuePlan, SourceValueSelection, format_value_sources,
     render_value_response, resolve_value_plan,
+    structured_value_sources,
 )
 
 
@@ -157,3 +158,24 @@ def test_invalid_selection_never_falls_back_to_free_form_answer(monkeypatch):
                 surface_mode=ResponseSurfaceMode.NATURAL_LANGUAGE,
                 answer_kind=ResponseAnswerKind.EXTRACTIVE_VALUES),
         )
+
+
+def test_structured_executor_values_preserve_decoded_unicode_and_path_characters(monkeypatch):
+    result = {"capability_id": "inspection", "result_data": {
+        "identifier": "BlueHarbor-68C19B", "path": "C:\\Users\\Renée",
+    }}
+    sources = structured_value_sources(result)
+    path_index = next(i for i, item in enumerate(sources) if item.context == "result_data.path")
+    original = result["result_data"]["path"]
+    plan = SourceValuePlan(selections=[selection(path_index, 0, len(sources[path_index].tokens) - 1)])
+    assert resolve_value_plan(sources, plan) == (original,)
+    client = UserPromptLLM()
+    monkeypatch.setattr(client, "_structured_with_evidence", lambda *args: plan.model_dump_json())
+    monkeypatch.setattr(client, "_text_with_evidence", lambda *args: pytest.fail("prose bypass"))
+    packet = MemoryPacket(memory_request_id=uuid4(), need=MemoryNeed(), supported=False, items=[])
+    assert client.generate_final_response(
+        "What path did the inspection return?", ResponseMemoryPackage(memory_packet=packet),
+        (result,), response_policy=ResponsePolicy(evidence_scope=HistoricalEvidenceScope.EXTERNAL_TOOL,
+            surface_mode=ResponseSurfaceMode.NATURAL_LANGUAGE,
+            answer_kind=ResponseAnswerKind.EXTRACTIVE_VALUES),
+    ) == f"The requested value is {original}."

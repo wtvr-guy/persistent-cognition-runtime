@@ -129,6 +129,7 @@ from persistent_cognition.response_policy import (
 from persistent_cognition.source_value_response import (
     IndexedValueSource, SourceValuePlan, format_value_sources,
     render_value_response, resolve_value_plan,
+    structured_value_sources,
 )
 from persistent_cognition.worker_protocol import WorkerClaimEnvelope, WorkerEffectPolicy, deterministic_worker_step_id
 from persistent_cognition.worker_runtime import GuardedWorkerLauncher
@@ -569,8 +570,8 @@ class PerceptSpecialists(PerceptLLM):
                 sources.append(IndexedValueSource.from_text(
                     item.content, authority_for_event_type(item.event_type).authority_class,
                 ))
-        for text in _exact_source_texts(None, work_results):
-            sources.append(IndexedValueSource.from_text(text, "EXTERNAL_TOOL_EVIDENCE"))
+        for result in work_results:
+            sources.extend(structured_value_sources(result))
         if include_current:
             sources.append(IndexedValueSource.from_text(percept, "CURRENT_USER_MESSAGE"))
         indexed_sources = tuple(sources)

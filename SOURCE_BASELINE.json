@@ -905,7 +905,7 @@
     "src/prometheist/percept_response_runtime.py": {
       "source_path": "src/prometheist/percept_response_runtime.py",
       "source_sha256": "c726091b0395fab5722e422c6aa5b48b175b833b87ed590161728a2f84c754e8",
-      "extracted_sha256": "4d4e57dbe04c2e0d916b9bdf137bee71248edda2648128f7c16930048c2a525c",
+      "extracted_sha256": "fa878f09d4534f70aa6efcda387af59681a14a572d77ae01cb9fcc98756de2d4",
       "extraction_path": "src/persistent_cognition/percept_response_runtime.py",
       "status": "imported",
       "baseline_extracted_sha256": "100d2a4a3f490ac1e264620cb36ff7a8099d56ee471ce5973e6e7ad006b9e7dd",
@@ -2186,7 +2186,7 @@
       "source_path": null,
       "source_sha256": null,
       "extraction_path": "src/persistent_cognition/source_value_response.py",
-      "extracted_sha256": "bec1bd467430ec479304ca45d9487b47f24c672ea69222793e90a927dbcb0af4",
+      "extracted_sha256": "e4f5ffb863eb552d705c3af75397421667543a780a8c7c4e773fbdb89d7eec29",
       "status": "added",
       "reason": "Source-extractive factual response protocol and regression coverage."
     },
@@ -2194,7 +2194,7 @@
       "source_path": null,
       "source_sha256": null,
       "extraction_path": "tests/unit/test_source_value_response.py",
-      "extracted_sha256": "131e61d76044635167aa2893f4d486e77bc76391e9b1bc9f2f25ee07dce26a81",
+      "extracted_sha256": "2a25adccbc590f22a6166638bad6ab596133e0e712d15f10b19f834e2146cdbd",
       "status": "added",
       "reason": "Source-extractive factual response protocol and regression coverage."
     }

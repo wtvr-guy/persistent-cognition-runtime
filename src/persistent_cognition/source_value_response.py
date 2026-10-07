@@ -35,10 +35,42 @@ class IndexedValueSource:
     text: str
     authority_class: str
     tokens: tuple[tuple[int, int], ...]
+    context: str = ""
 
     @classmethod
-    def from_text(cls, text: str, authority_class: str) -> IndexedValueSource:
-        return cls(text, authority_class, tuple(match.span() for match in _TOKEN.finditer(text)))
+    def from_text(
+        cls, text: str, authority_class: str, *, context: str = "",
+    ) -> IndexedValueSource:
+        return cls(text, authority_class,
+                   tuple(match.span() for match in _TOKEN.finditer(text)), context)
+
+
+def structured_value_sources(result: dict) -> tuple[IndexedValueSource, ...]:
+    """Expose executor-owned scalar values without JSON string escaping.
+
+    Field paths supply context only; they never become selectable value text.
+    Input/result admission has already bounded and validated the result object.
+    """
+
+    sources = []
+
+    def visit(value, path):
+        if isinstance(value, dict):
+            for key in sorted(value):
+                visit(value[key], (*path, str(key)))
+        elif isinstance(value, (list, tuple)):
+            for index, item in enumerate(value):
+                visit(item, (*path, str(index)))
+        else:
+            text = value if isinstance(value, str) else json.dumps(
+                value, ensure_ascii=False, default=str,
+            )
+            sources.append(IndexedValueSource.from_text(
+                text, "EXTERNAL_TOOL_EVIDENCE", context=".".join(path),
+            ))
+
+    visit(result, ())
+    return tuple(sources)
 
 
 def format_value_sources(sources: tuple[IndexedValueSource, ...]) -> str:
@@ -50,6 +82,7 @@ def format_value_sources(sources: tuple[IndexedValueSource, ...]) -> str:
         )
         blocks.append(
             f"source_index: {index}\nauthority_class: {source.authority_class}\n"
+            f"source_context: {json.dumps(source.context, ensure_ascii=False)}\n"
             f"token_index: canonical_token\n{tokens}"
         )
     return "\n\n[Admitted sources: oldest historical event first]\n" + "\n\n".join(blocks)
