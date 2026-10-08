@@ -51,16 +51,16 @@ try {
         tests/test_percept_response_contract.py `
         tests/test_user_prompt_worker_contract.py `
         tests/test_percept_response_failures.py `
-        tests/test_artifact_journal.py
+        tests/unit/test_artifact_journal.py
     if ($LASTEXITCODE -ne 0) { throw "v2 worker/runtime acceptance failed" }
 
     # Run the complete deterministic regression suite before the expensive
     # native Ollama gate. This catches policy/contract regressions in seconds
     # instead of allowing them to surface only after multi-minute model runs.
-    uv run --locked pytest -q -m "not ollama"
+    uv run --locked pytest -q -ra -m "not ollama"
     if ($LASTEXITCODE -ne 0) { throw "deterministic regression suite failed" }
 
-    uv run --locked pytest -vv -s -m ollama
+    uv run --locked pytest -vv -s -ra -m ollama
     $exitCode = $LASTEXITCODE
     if ($exitCode -ne 0) { throw "Ollama continuity acceptance failed" }
     Write-Host (
@@ -68,7 +68,7 @@ try {
         "clean=true"
     )
     Write-Host (
-        "HUMAN REVIEW REQUIRED: judge every printed native Prometheist response " +
+        "HUMAN REVIEW REQUIRED: judge every printed native Persistent Cognition response " +
         "before accepting this SHA."
     )
 }

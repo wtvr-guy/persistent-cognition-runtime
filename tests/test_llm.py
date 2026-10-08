@@ -1,4 +1,6 @@
 from __future__ import annotations
+from contextlib import contextmanager
+import httpx
 
 from datetime import datetime, timezone
 import hashlib
@@ -6,12 +8,12 @@ from uuid import uuid4
 
 import pytest
 
-from prometheist import llm
-from prometheist.llm import _strip_thinking
-from prometheist.models import EventType, MemoryEvidence, MemoryNeed, MemoryPacket
-from prometheist.percept_response_runtime import ResponseMemoryPackage, _FINAL_RESPONSE_PROMPT
-from prometheist.percept_response_worker import UserPromptLLM
-from prometheist.response_policy import (
+from persistent_cognition import llm
+from persistent_cognition.llm import _strip_thinking
+from persistent_cognition.models import EventType, MemoryEvidence, MemoryNeed, MemoryPacket
+from persistent_cognition.percept_response_runtime import ResponseMemoryPackage, _FINAL_RESPONSE_PROMPT
+from persistent_cognition.percept_response_worker import UserPromptLLM
+from persistent_cognition.response_policy import (
     HistoricalEvidenceScope,
     ResponsePolicy,
     ResponseSurfaceMode,
@@ -37,6 +39,17 @@ class _FakeHTTPClient:
     def post(self, path, *, json):
         self.calls.append((path, json))
         return _FakeResponse(next(self._contents))
+
+    @contextmanager
+    def stream(self, method, path, *, json, headers=None):
+        assert method == "POST"
+        self.calls.append((path, json))
+        response = httpx.Response(200, json={"message": {"content": next(self._contents)}},
+                                  request=httpx.Request(method, "http://localhost:11434" + path))
+        try:
+            yield response
+        finally:
+            response.close()
 
 
 def _evidence(event_type: EventType, content: str, seq: int) -> MemoryEvidence:
@@ -132,8 +145,8 @@ def test_response_prompt_does_not_leak_acceptance_scenario_facts():
 def test_user_facing_answers_use_expressive_temperature_with_structured_envelope(
     monkeypatch,
 ):
-    monkeypatch.delenv("PROMETHEIST_RESPONSE_TEMPERATURE", raising=False)
-    client = UserPromptLLM(base_url="http://ollama.test", model="model:test")
+    monkeypatch.delenv("PCR_RESPONSE_TEMPERATURE", raising=False)
+    client = UserPromptLLM(base_url="https://ollama.test", model="model:test")
     fake_http = _FakeHTTPClient(['{"answer":"Final answer only."}'])
     client._client = fake_http
 
@@ -151,8 +164,8 @@ def test_user_facing_answers_use_expressive_temperature_with_structured_envelope
 def test_explicit_ollama_keep_alive_is_sent_without_changing_default(
     monkeypatch,
 ):
-    monkeypatch.setenv("PROMETHEIST_OLLAMA_KEEP_ALIVE", "30m")
-    client = llm.OllamaClient(base_url="http://ollama.test", model="model:test")
+    monkeypatch.setenv("PCR_OLLAMA_KEEP_ALIVE", "30m")
+    client = llm.OllamaClient(base_url="https://ollama.test", model="model:test")
     fake_http = _FakeHTTPClient(['{"ok":true}'])
     client._client = fake_http
 
@@ -170,8 +183,8 @@ def test_explicit_ollama_keep_alive_is_sent_without_changing_default(
 def test_control_llm_kinds_remain_deterministic_when_response_temperature_is_high(
     monkeypatch,
 ):
-    monkeypatch.setenv("PROMETHEIST_RESPONSE_TEMPERATURE", "1.25")
-    client = llm.OllamaClient(base_url="http://ollama.test", model="model:test")
+    monkeypatch.setenv("PCR_RESPONSE_TEMPERATURE", "1.25")
+    client = llm.OllamaClient(base_url="https://ollama.test", model="model:test")
     fake_http = _FakeHTTPClient(['{"ok":true}'])
     client._client = fake_http
     client._structured(
@@ -188,7 +201,7 @@ def test_control_llm_kinds_remain_deterministic_when_response_temperature_is_hig
 
 
 def test_user_facing_answer_retries_invalid_structured_output():
-    client = llm.OllamaClient(base_url="http://ollama.test", model="model:test")
+    client = llm.OllamaClient(base_url="https://ollama.test", model="model:test")
     fake_http = _FakeHTTPClient(["not-json", '{"answer":"Recovered answer."}'])
     client._client = fake_http
     assert client._text("FINAL_RESPONSE_V2", "system", "Question") == "Recovered answer."
@@ -196,7 +209,7 @@ def test_user_facing_answer_retries_invalid_structured_output():
 
 
 def test_user_facing_answer_fails_closed_after_two_invalid_outputs():
-    client = llm.OllamaClient(base_url="http://ollama.test", model="model:test")
+    client = llm.OllamaClient(base_url="https://ollama.test", model="model:test")
     client._client = _FakeHTTPClient(["not-json", '{"answer":"   "}'])
     with pytest.raises(ValueError, match="model answer failed to validate"):
         client._text("FINAL_RESPONSE_V2", "system", "Question")
@@ -213,7 +226,7 @@ def test_history_dependent_response_fails_closed_without_admissible_evidence():
         memory_packet=packet,
         adaptive_recall_rounds=1,
     )
-    client = UserPromptLLM(base_url="http://ollama.test", model="model:test")
+    client = UserPromptLLM(base_url="https://ollama.test", model="model:test")
     fake_http = _FakeHTTPClient(['{"verbatim_value":null}'])
     client._client = fake_http
 
@@ -243,7 +256,7 @@ def test_verbatim_placeholders_prevent_model_from_respelling_opaque_literals():
             )
         ],
     )
-    client = UserPromptLLM(base_url="http://ollama.test", model="model:test")
+    client = UserPromptLLM(base_url="https://ollama.test", model="model:test")
     fake_http = _FakeHTTPClient(
         [
             '{"answer":"The codename is [[VERBATIM_0]]."}',

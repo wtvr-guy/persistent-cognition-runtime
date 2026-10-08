@@ -1,6 +1,6 @@
 import pytest
 
-from prometheist.attention_ordering import AttentionWorkItem, deterministic_dependency_order
+from persistent_cognition.attention_ordering import AttentionWorkItem, deterministic_dependency_order
 
 
 def test_attention_ordering_is_topological_priority_stable_and_input_order_independent():

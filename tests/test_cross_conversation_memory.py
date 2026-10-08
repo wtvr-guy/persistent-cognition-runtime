@@ -14,10 +14,11 @@ import uuid
 
 import pytest
 
-from prometheist import db, event_store
-from prometheist.models import EventType
+from persistent_cognition import db, event_store
+from persistent_cognition.models import EventType
 from tests._cli_helpers import ollama_available, print_transcript, run_once
 from tests._native_artifact_assertions import (
+    assert_recalled_literal,
     assert_response_evidence_receipt,
     interaction_id_for_prompt,
     print_artifact_receipt,
@@ -57,7 +58,7 @@ def test_cross_conversation_cross_process_memory_recall():
     assert answer.strip()
     question_event = _prompt_event(conversation_b, prompt)
     print_transcript(f"\nCross-conversation recall — User:\n{prompt}")
-    print_transcript(f"\nCross-conversation recall — Prometheist:\n{answer}")
+    print_transcript(f"\nCross-conversation recall — Persistent Cognition:\n{answer}")
     print_artifact_receipt(
         "Cross-conversation recall",
         assert_response_evidence_receipt(
@@ -66,6 +67,8 @@ def test_cross_conversation_cross_process_memory_recall():
                 question_event.correlation_id,
             ),
             required_event_ids=(source_event.event_id,),
+            require_deterministic=True,
         ),
     )
+    assert_recalled_literal(answer, random_fact, label="Cross-conversation recall")
     print_transcript("HUMAN REVIEW REQUIRED: judge the recall answer above.")

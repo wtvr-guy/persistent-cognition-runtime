@@ -539,7 +539,9 @@
         "prediction_error_bins",
         "heartbeat_suspicion_seconds",
         "worker_lifetimes",
-        "triage_output_tokens"
+        "triage_output_tokens",
+        "service_idle_and_error_backoff",
+        "service_backoff_exponent_cap"
       ],
       "scenario_families": [
         "four_inputs_one_situation",
@@ -551,7 +553,12 @@
         "restart_at_each_handoff",
         "scheduled_consolidation_with_counterevidence",
         "media_checksum_quarantine",
-        "resource_denial_under_high_salience"
+        "resource_denial_under_high_salience",
+        "idle_and_failure_backoff",
+        "namespace_ownership_and_cursor_isolation",
+        "fresh_worker_trusted_bootstrap",
+        "structured_exceptions_and_async_tool_results",
+        "graceful_stop_and_connection_loss"
       ],
       "hard_invariants": [
         "canonical bytes never rewritten",
@@ -560,7 +567,10 @@
         "every explicit user prompt receives a response",
         "all execution retains resource admission",
         "deterministic retries never duplicate actions",
-        "no unbounded feedback loop"
+        "no unbounded feedback loop",
+        "observed data never supplies executable imports or commands",
+        "no silent tick failures or work after ownership session loss",
+        "external callbacks deduplicate with their stable execution ID"
       ],
       "quality_order": [
         "hard_invariant_pass_rate",
@@ -819,6 +829,87 @@
         "host resource cost"
       ],
       "search": "Sweep chunk/preview/listing limits and deadlines against large local folders, slow disks, model sizes, context lengths and native Windows. Report truncated search coverage and interrupted copies explicitly. Expand any winning boundary before calibration. Defaults remain provisional."
+    },
+    "AUDIT-RESOURCE-BOUNDS-001": {
+      "title": "Exact intake, transport, inspection and storage resource boundaries",
+      "environment": "deterministic_ci_then_target_host_memory_disk_and_windows_acceptance",
+      "parameters": [
+        "intake_bytes",
+        "json_depth",
+        "json_nodes",
+        "http_response_bytes",
+        "blob_bytes",
+        "journal_bytes",
+        "journal_entry_bytes",
+        "journal_records",
+        "artifact_quota_bytes",
+        "disk_reserve_bytes",
+        "diagnostic_chars",
+        "executor_revision_length",
+        "journal_page_size"
+      ],
+      "scenario_families": [
+        "below_at_above_utf8_bounds",
+        "wide_deep_cyclic_json",
+        "nonstring_object_keys",
+        "oversized_chunked_http",
+        "compressed_response_refusal",
+        "path_traversal_symlink_fifo",
+        "journal_torn_tail_and_pagination",
+        "quota_and_disk_exhaustion",
+        "private_file_creation_under_022_umask",
+        "credential_and_pydantic_input_redaction",
+        "temporary_worker_pressure_then_recovery"
+      ],
+      "hard_invariants": [
+        "reject before canonical intake persistence",
+        "never silently truncate canonical evidence",
+        "no out-of-root blob reads",
+        "no process started after admission denial",
+        "no external effect before bootstrap revision validation",
+        "quarantine ambiguous effects until reconciliation",
+        "keep prior records intact after rejected writes"
+      ],
+      "quality_order": [
+        "hard_invariant_pass_rate",
+        "peak_memory",
+        "quota_scan_cost",
+        "latency",
+        "valid_input_rejection_rate"
+      ],
+      "search": "Boundary regressions in tests/unit/test_audit_hardening.py and test_binding_and_admission_regressions.py verify mechanics only. Sweep deployment limits against frozen representative workloads on the target machine, including peak RSS and disk scans; expand winning boundaries. No optimum or native Windows/live-provider acceptance is claimed."
+    },
+    "WINDOWS-STORAGE-001": {
+      "title": "Bounded Windows byte-lock contention and durable storage edits",
+      "environment": "deterministic_ci_then_native_windows_target_disk",
+      "parameters": [
+        "WINDOWS_LOCK_TIMEOUT_SECONDS",
+        "WINDOWS_LOCK_RETRY_INTERVAL_SECONDS"
+      ],
+      "scenario_families": [
+        "simultaneous grant and revocation",
+        "thirteen contending threads",
+        "multiple processes",
+        "empty lock file",
+        "partial buffered reads",
+        "permanent contention",
+        "invalid descriptors",
+        "slow durable writes"
+      ],
+      "hard_invariants": [
+        "No edit before acquiring the OS lock",
+        "No lost updates or restored revocations",
+        "Timeout and non-contention errors abort the edit",
+        "Unlock precisely the owned byte range",
+        "No unprotected seed writes to lock files"
+      ],
+      "quality_order": [
+        "hard_invariant_pass_rate",
+        "contention_failure_rate",
+        "completion_latency",
+        "retry_CPU_cost"
+      ],
+      "search": "Compare retry intervals 0.01, 0.05, 0.1, 0.25 and 1.0 seconds under 1, 4, 13 and 32 concurrent edits on the target Windows disk, including slow fsync and separate processes. Retain the prior ten-second deadline provisionally. Expand a winning boundary before accepting calibration. Unit and CI regressions verify correctness and fail-closed bounds; they do not establish optimal host performance."
     }
   }
 }

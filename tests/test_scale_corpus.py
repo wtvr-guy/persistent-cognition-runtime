@@ -3,7 +3,7 @@ from pathlib import Path
 
 import pytest
 
-from prometheist.scale_corpus import build_scaled_document, load_document
+from persistent_cognition.scale_corpus import build_scaled_document, load_document
 
 
 ROOT = Path(__file__).resolve().parent.parent

@@ -2,8 +2,8 @@ from pathlib import Path
 
 import pytest
 
-from prometheist.scale_benchmark import run_scale_document
-from prometheist.scale_corpus import load_document
+from persistent_cognition.scale_benchmark import run_scale_document
+from persistent_cognition.scale_corpus import load_document
 
 
 ROOT = Path(__file__).resolve().parent.parent

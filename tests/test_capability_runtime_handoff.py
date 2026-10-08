@@ -4,8 +4,8 @@ import uuid
 
 import pytest
 
-from prometheist import capability_runtime
-from prometheist.capability_registry import (
+from persistent_cognition import capability_runtime
+from persistent_cognition.capability_registry import (
     CapabilityDescriptor,
     CapabilityKind,
     RegisteredCapability,

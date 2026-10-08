@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from uuid import UUID
 
-from prometheist import db
-from prometheist.attention import (
+from persistent_cognition import db
+from persistent_cognition.attention import (
     AttentionTask,
     FocusAction,
     InterruptionPolicy,
@@ -13,7 +13,7 @@ from prometheist.attention import (
     TaskStatus,
     deterministic_task_id,
 )
-from prometheist.attention_store import (
+from persistent_cognition.attention_store import (
     allocate_created_seq,
     load_scheduler,
     load_transition_count,

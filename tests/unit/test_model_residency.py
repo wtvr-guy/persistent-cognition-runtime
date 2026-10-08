@@ -4,17 +4,17 @@ import json
 import httpx
 import pytest
 
-from prometheist import model_residency as residency
-from prometheist.runtime_settings import AppSettings, GUI_CONFIG_ENV, ModelSelection
-from prometheist.llm import OllamaClient
+from persistent_cognition import model_residency as residency
+from persistent_cognition.runtime_settings import AppSettings, GUI_CONFIG_ENV, ModelSelection
+from persistent_cognition.llm import OllamaClient
 
 
 @pytest.fixture
 def managed(monkeypatch, tmp_path):
     settings = AppSettings(selection=ModelSelection(model="general"))
     monkeypatch.setenv(GUI_CONFIG_ENV, settings.model_dump_json())
-    monkeypatch.delenv("PROMETHEIST_GUI_CONFIG_FILE", raising=False)
-    monkeypatch.setenv("PROMETHEIST_ARTIFACT_ROOT", str(tmp_path))
+    monkeypatch.delenv("PCR_GUI_CONFIG_FILE", raising=False)
+    monkeypatch.setenv("PCR_ARTIFACT_ROOT", str(tmp_path))
     monkeypatch.setattr(residency.time, "sleep", lambda seconds: None)
     return settings
 
@@ -150,8 +150,8 @@ def test_preview_forecast_is_read_only_and_not_execution_authority(managed, monk
 
 
 def cold_plan():
-    from prometheist.attention_observation import HostResourceMetrics, build_resource_observation, discover_local_execution_resources
-    from prometheist.model_admission import plan_task, resource_policy
+    from persistent_cognition.attention_observation import HostResourceMetrics, build_resource_observation, discover_local_execution_resources
+    from persistent_cognition.model_admission import plan_task, resource_policy
     settings = AppSettings(selection=ModelSelection(model="general"), task_routing={"enabled": False})
     policy = resource_policy(settings)
     at = datetime.now(timezone.utc)
@@ -169,9 +169,18 @@ def cold_plan():
 
 
 def test_actual_job_unloads_then_rechecks_without_preview_credit(managed, monkeypatch, tmp_path):
-    from prometheist import runtime_job, model_admission
+    from contextlib import contextmanager, nullcontext
+    from persistent_cognition import advisory_lock, db, runtime_job, model_admission
     settings, plan, _ = cold_plan()
     order = []
+    connection = object()
+    monkeypatch.setattr(db, "get_connection", lambda: nullcontext(connection))
+    @contextmanager
+    def own_namespace(conn, scheduler_key):
+        assert conn is connection and scheduler_key == "gui-chat"
+        order.append("ownership")
+        yield
+    monkeypatch.setattr(advisory_lock, "scheduler_ownership", own_namespace)
     monkeypatch.setattr(runtime_job, "job_settings", lambda: settings)
     monkeypatch.setattr(residency, "prepare_local_models", lambda settings: order.append("unload") or {"verified_empty": True})
     def actual_plan(*args, **kwargs):
@@ -182,7 +191,7 @@ def test_actual_job_unloads_then_rechecks_without_preview_credit(managed, monkey
     (tmp_path / "job.json").write_text(json.dumps({"action": "chat", "payload": {"text": "hello"}}))
     with pytest.raises(ValueError, match="CPU/RAM"):
         runtime_job.run(tmp_path)
-    assert order == ["unload", "measure"]
+    assert order == ["ownership", "unload", "measure"]
     recorded = json.loads((tmp_path / "admission.json").read_text())
     assert recorded["status"] == "temporarily_blocked"
     assert recorded["capacity_basis"] == "measured"

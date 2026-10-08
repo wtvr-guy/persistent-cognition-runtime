@@ -3,8 +3,8 @@ from uuid import uuid4
 
 import pytest
 
-from prometheist import db
-from prometheist.semantic_memory import (
+from persistent_cognition import db
+from persistent_cognition.semantic_memory import (
     EvidenceRelation,
     EvidenceSourceKind,
     ResolutionStatus,

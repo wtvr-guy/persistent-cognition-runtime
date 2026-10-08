@@ -5,8 +5,8 @@ import uuid
 
 import pytest
 
-from prometheist import db, event_store
-from prometheist.capability_registry import (
+from persistent_cognition import db, event_store
+from persistent_cognition.capability_registry import (
     CapabilityDescriptor,
     CapabilityKind,
     CapabilityNeed,
@@ -15,7 +15,7 @@ from prometheist.capability_registry import (
     deterministic_capability_request_id,
     request_capability,
 )
-from prometheist.models import EventType
+from persistent_cognition.models import EventType
 
 
 def _registration(
@@ -162,7 +162,7 @@ def test_work_plan_ignores_model_order_and_expands_dependencies():
     catalog = registry.capability_catalog()
     index = {item.capability_id: position for position, item in enumerate(catalog)}
 
-    # The model deliberately returns a non-execution order. Prometheist owns the plan.
+    # The model deliberately returns a non-execution order. Persistent Cognition owns the plan.
     plan = registry.plan_execution(
         catalog,
         [index["reconcile_evidence"], index["independent_check"]]

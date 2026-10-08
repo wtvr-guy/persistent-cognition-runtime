@@ -3,9 +3,9 @@ from datetime import datetime, timedelta, timezone
 import httpx
 import pytest
 
-from prometheist.attention_observation import HostResourceMetrics, build_resource_observation, discover_local_execution_resources
-from prometheist.runtime_settings import AppSettings, ModelSelection, SpecialistModel, TaskRoutingSettings
-from prometheist.model_admission import assess_model, classify_task, plan_task, read_model_evidence, resource_policy
+from persistent_cognition.attention_observation import HostResourceMetrics, build_resource_observation, discover_local_execution_resources
+from persistent_cognition.runtime_settings import AppSettings, ModelSelection, SpecialistModel, TaskRoutingSettings
+from persistent_cognition.model_admission import assess_model, classify_task, plan_task, read_model_evidence, resource_policy
 
 AT = datetime(2026, 1, 1, tzinfo=timezone.utc)
 
@@ -172,7 +172,7 @@ def test_remote_host_is_not_measured_as_local_and_never_selected_implicitly():
 
 
 def test_missing_model_discovery_never_downloads(monkeypatch):
-    from prometheist import model_catalog
+    from persistent_cognition import model_catalog
     requests = []
     monkeypatch.setattr(model_catalog, "ollama_request", lambda *args, **kwargs: requests.append((args, kwargs)) or {"models": []})
     result = read_model_evidence(AppSettings(), [ModelSelection(model="not-installed")])
@@ -181,10 +181,10 @@ def test_missing_model_discovery_never_downloads(monkeypatch):
 
 
 def test_specialist_catalog_is_fixed_bounded_sorted_and_consent_gated(monkeypatch, tmp_path):
-    from prometheist import model_catalog
-    from prometheist.network_consent import NetworkPurpose, consent_proposal, grant_consent
-    from prometheist.content_digest import content_digest
-    monkeypatch.setenv("PROMETHEIST_ARTIFACT_ROOT", str(tmp_path))
+    from persistent_cognition import model_catalog
+    from persistent_cognition.network_consent import NetworkPurpose, consent_proposal, grant_consent
+    from persistent_cognition.content_digest import content_digest
+    monkeypatch.setenv("PCR_ARTIFACT_ROOT", str(tmp_path))
     page = '''<a href="/library/zeta"><p>Coding assistant</p><span class="rounded-md">3b</span></a>
               <a href="/library/alpha"><p>Code generation</p><span class="rounded-md">1.5b</span></a>
               <a href="/library/remote"><p>Coder</p><span class="rounded-md">cloud</span></a>
@@ -241,7 +241,7 @@ def test_specialist_catalog_is_fixed_bounded_sorted_and_consent_gated(monkeypatc
 
 
 def test_capacity_filter_is_dynamic_and_never_excludes_on_missing_evidence(monkeypatch):
-    from prometheist import model_catalog
+    from persistent_cognition import model_catalog
     settings = AppSettings(selection=ModelSelection(model="default"))
     records = [
         {"name": "small", "advertised_sizes": ["1b"], "advertised_capabilities": []},
@@ -262,7 +262,7 @@ def test_capacity_filter_is_dynamic_and_never_excludes_on_missing_evidence(monke
     monkeypatch.setattr(model_catalog, "installed_models", lambda url: [
         {"name": "calibrator", "size": 1024 * 1024 * 1024, "details": {"parameter_size": "1.0B"}},
     ])
-    monkeypatch.setattr("prometheist.model_admission.capture_observation", lambda settings: observation(settings, free=8192, total=16384))
+    monkeypatch.setattr("persistent_cognition.model_admission.capture_observation", lambda settings: observation(settings, free=8192, total=16384))
     kept, info = model_catalog._apply_capacity_filter([dict(r) for r in records], settings)
     assert info["calibration_sample_count"] == 1
     assert info["calibration_mib_per_billion_parameters"] == pytest.approx(1024, rel=0.01)
@@ -273,7 +273,7 @@ def test_capacity_filter_is_dynamic_and_never_excludes_on_missing_evidence(monke
 
 
 def test_installed_weight_ratio_ignores_architecture_and_capability(monkeypatch):
-    from prometheist import model_catalog
+    from persistent_cognition import model_catalog
     monkeypatch.setattr(model_catalog, "installed_models", lambda url: [
         {"name": "a", "size": 500 * 1024 * 1024, "details": {"parameter_size": "0.5B"}},  # unrecognized arch/capability irrelevant here
         {"name": "b", "size": None, "details": {"parameter_size": "3B"}},  # no size: ignored, not a zero
@@ -286,7 +286,8 @@ def test_installed_weight_ratio_ignores_architecture_and_capability(monkeypatch)
 
 def test_worker_records_choice_without_starting_cognition(monkeypatch, tmp_path):
     import json
-    from prometheist import db, runtime_job, model_admission, model_residency
+    from contextlib import contextmanager, nullcontext
+    from persistent_cognition import advisory_lock, db, runtime_job, model_admission, model_residency
     settings = configured()
     plan = plan_task(settings, "code task", "coding", {"default:latest": evidence()}, observation(), at=AT)
     assert plan.status == "needs_choice"
@@ -294,17 +295,30 @@ def test_worker_records_choice_without_starting_cognition(monkeypatch, tmp_path)
     monkeypatch.setattr(runtime_job, "job_settings", lambda: settings)
     monkeypatch.setattr(model_residency, "prepare_local_models", lambda settings: {})
     monkeypatch.setattr(model_admission, "prepare_task", lambda *args, **kwargs: plan)
-    def forbidden():
-        raise AssertionError("No cognitive transaction may start while a fallback choice is required")
-    monkeypatch.setattr(db, "get_connection", forbidden)
+    connection = object()
+    ownership = []
+    monkeypatch.setattr(db, "get_connection", lambda: nullcontext(connection))
+    @contextmanager
+    def own_namespace(conn, scheduler_key):
+        assert conn is connection and scheduler_key == "gui-chat"
+        ownership.append("acquired")
+        try:
+            yield
+        finally:
+            ownership.append("released")
+    monkeypatch.setattr(advisory_lock, "scheduler_ownership", own_namespace)
+    def forbidden(*_args, **_kwargs):
+        raise AssertionError("No cognitive work may start while a fallback choice is required")
+    monkeypatch.setattr(runtime_job, "_run_chat_job", forbidden)
     with pytest.raises(ValueError, match="Choose a fallback"):
         runtime_job.run(tmp_path)
+    assert ownership == ["acquired", "released"]
     assert json.loads((tmp_path / "admission.json").read_text())["status"] == "needs_choice"
     assert not (tmp_path / "effective-settings.json").exists()
 
 
 def test_inventory_outage_yields_reviewable_fallback_instead_of_download(monkeypatch):
-    from prometheist import model_catalog
+    from persistent_cognition import model_catalog
     def unavailable(endpoint):
         raise httpx.ConnectError("offline")
     monkeypatch.setattr(model_catalog, "installed_models", unavailable)

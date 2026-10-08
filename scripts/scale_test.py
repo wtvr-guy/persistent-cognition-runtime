@@ -20,9 +20,9 @@ import random
 import time
 import uuid
 
-from prometheist import db, event_store
-from prometheist.percept_response_runtime import handle_percept_in_worker_processes
-from prometheist.models import EventType
+from persistent_cognition import db, event_store
+from persistent_cognition.percept_response_runtime import handle_percept_in_worker_processes
+from persistent_cognition.models import EventType
 
 _SUBJECTS = ["my neighbor", "the team", "our cat", "the intern", "my sister", "the vendor"]
 _VERBS = ["mentioned", "forgot about", "asked about", "complained about", "joked about"]

@@ -5,11 +5,11 @@ import uuid
 
 import pytest
 
-from prometheist.interaction_contracts import DurableInteraction
-from prometheist.models import EventType
-from prometheist.percept_response_runtime import PerceptStage
-from prometheist import percept_response_runtime as runtime
-from prometheist import percept_response_worker as worker
+from persistent_cognition.interaction_contracts import DurableInteraction
+from persistent_cognition.models import EventType
+from persistent_cognition.percept_response_runtime import PerceptStage
+from persistent_cognition import percept_response_runtime as runtime
+from persistent_cognition import percept_response_worker as worker
 
 
 def test_final_response_event_failure_records_error_and_releases_claim(monkeypatch):
@@ -88,7 +88,7 @@ def test_final_response_event_failure_records_error_and_releases_claim(monkeypat
     assert recorded_errors[-1]["payload"] == {
         "stage": PerceptStage.PERSIST_RESULT.value,
         "error_type": "RuntimeError",
-        "message": "final interaction event write failed",
+        "message": "RuntimeError",
     }
     assert released == [
         {

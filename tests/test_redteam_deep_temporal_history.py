@@ -4,10 +4,10 @@ import uuid
 
 import pytest
 
-from prometheist import db, event_store, postgres_memory_kernel
-from prometheist.jit_memory import ATTENTION_ACTIVATION_CANDIDATE_LIMIT
-from prometheist.memory_kernel import CueState
-from prometheist.models import EventType
+from persistent_cognition import db, event_store, postgres_memory_kernel
+from persistent_cognition.jit_memory import ATTENTION_ACTIVATION_CANDIDATE_LIMIT
+from persistent_cognition.memory_kernel import CueState
+from persistent_cognition.models import EventType
 
 
 @pytest.fixture

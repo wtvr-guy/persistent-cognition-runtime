@@ -6,11 +6,11 @@ from uuid import uuid4
 
 import pytest
 
-from prometheist import artifact_journal, journal_signing
+from persistent_cognition import artifact_journal, journal_signing
 
 
 def _finalized_interaction(tmp_path, monkeypatch) -> tuple:
-    monkeypatch.setenv("PROMETHEIST_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
+    monkeypatch.setenv("PCR_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
     interaction_id = uuid4()
     artifact_journal.write_percept_artifact(
         interaction_id=interaction_id, conversation_id=uuid4(), correlation_id=uuid4(),
@@ -24,7 +24,7 @@ def _finalized_interaction(tmp_path, monkeypatch) -> tuple:
 
 
 def test_ensure_signing_key_generates_once_and_is_idempotent(tmp_path, monkeypatch) -> None:
-    monkeypatch.setenv("PROMETHEIST_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
+    monkeypatch.setenv("PCR_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
     first = journal_signing.ensure_signing_key()
     second = journal_signing.ensure_signing_key()
     assert first == second
@@ -33,7 +33,7 @@ def test_ensure_signing_key_generates_once_and_is_idempotent(tmp_path, monkeypat
 
 
 def test_sign_journal_head_refuses_an_incomplete_interaction(tmp_path, monkeypatch) -> None:
-    monkeypatch.setenv("PROMETHEIST_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
+    monkeypatch.setenv("PCR_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
     interaction_id = uuid4()
     artifact_journal.write_percept_artifact(
         interaction_id=interaction_id, conversation_id=uuid4(), correlation_id=uuid4(),

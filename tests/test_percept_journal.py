@@ -8,16 +8,16 @@ from uuid import uuid4, uuid5
 
 import pytest
 
-from prometheist import artifact_journal, event_artifact_store, journal_signing, percept_journal
-from prometheist.llm import OllamaClient
-from prometheist.model_evidence_budget import (
+from persistent_cognition import artifact_journal, event_artifact_store, journal_signing, percept_journal
+from persistent_cognition.llm import OllamaClient
+from persistent_cognition.model_evidence_budget import (
     ModelEvidenceBudgetExceeded,
     validate_model_input,
 )
 
 
 def test_events_receipts_and_worker_checkpoints_share_one_percept_file(tmp_path, monkeypatch):
-    monkeypatch.setenv("PROMETHEIST_ARTIFACT_ROOT", str(tmp_path))
+    monkeypatch.setenv("PCR_ARTIFACT_ROOT", str(tmp_path))
     conversation_id, correlation_id = uuid4(), uuid4()
     interaction_id = uuid5(conversation_id, f"interaction:{correlation_id}")
     event_id = uuid4()
@@ -77,7 +77,7 @@ def test_events_receipts_and_worker_checkpoints_share_one_percept_file(tmp_path,
 
 
 def test_concurrent_worker_appends_keep_one_valid_chain(tmp_path, monkeypatch):
-    monkeypatch.setenv("PROMETHEIST_ARTIFACT_ROOT", str(tmp_path))
+    monkeypatch.setenv("PCR_ARTIFACT_ROOT", str(tmp_path))
     interaction_id, conversation_id, correlation_id = uuid4(), uuid4(), uuid4()
     def append(index):
         return artifact_journal.write_interaction_artifact(
@@ -93,7 +93,7 @@ def test_concurrent_worker_appends_keep_one_valid_chain(tmp_path, monkeypatch):
 
 
 def test_torn_tail_blocks_retries_and_recovery(tmp_path, monkeypatch):
-    monkeypatch.setenv("PROMETHEIST_ARTIFACT_ROOT", str(tmp_path))
+    monkeypatch.setenv("PCR_ARTIFACT_ROOT", str(tmp_path))
     interaction_id, conversation_id, correlation_id = uuid4(), uuid4(), uuid4()
     artifact_journal.write_interaction_artifact(
         artifact_key="start", artifact_type="PERCEPT", interaction_id=interaction_id,
@@ -114,7 +114,7 @@ def test_torn_tail_blocks_retries_and_recovery(tmp_path, monkeypatch):
 
 
 def test_retry_repairs_only_matching_partial_database_receipt(tmp_path, monkeypatch):
-    monkeypatch.setenv("PROMETHEIST_ARTIFACT_ROOT", str(tmp_path))
+    monkeypatch.setenv("PCR_ARTIFACT_ROOT", str(tmp_path))
     conversation_id, correlation_id, event_id = uuid4(), uuid4(), uuid4()
     interaction_id = uuid5(conversation_id, f"interaction:{correlation_id}")
     arguments = dict(
@@ -146,20 +146,20 @@ def test_retry_repairs_only_matching_partial_database_receipt(tmp_path, monkeypa
 
 
 def test_complete_input_budget_counts_current_prompt_and_schema(monkeypatch):
-    monkeypatch.setenv("PROMETHEIST_MAX_MODEL_INPUT_BYTES", "100")
+    monkeypatch.setenv("PCR_MAX_MODEL_INPUT_BYTES", "100")
     with pytest.raises(ModelEvidenceBudgetExceeded, match="complete model input"):
         validate_model_input({
             "messages": [{"role": "system", "content": "policy"},
                          {"role": "user", "content": "x" * 90}],
             "format": {"type": "object"},
         })
-    monkeypatch.setenv("PROMETHEIST_MAX_MODEL_INPUT_BYTES", "1000")
+    monkeypatch.setenv("PCR_MAX_MODEL_INPUT_BYTES", "1000")
     validate_model_input({"prompt": "small", "format": {"type": "object"}})
 
 
 def test_full_prompt_budget_blocks_transport(monkeypatch):
-    monkeypatch.setenv("PROMETHEIST_MAX_MODEL_INPUT_BYTES", "100")
-    client = OllamaClient(base_url="http://ollama.test", model="model:test")
+    monkeypatch.setenv("PCR_MAX_MODEL_INPUT_BYTES", "100")
+    client = OllamaClient(base_url="https://ollama.test", model="model:test")
     attempted = []
     monkeypatch.setattr(client._client, "post", lambda *args, **kwargs: attempted.append(args))
     with pytest.raises(ModelEvidenceBudgetExceeded, match="complete model input"):
@@ -169,7 +169,7 @@ def test_full_prompt_budget_blocks_transport(monkeypatch):
 
 
 def test_signed_percept_covers_event_records_as_well_as_worker_chain(tmp_path, monkeypatch):
-    monkeypatch.setenv("PROMETHEIST_ARTIFACT_ROOT", str(tmp_path))
+    monkeypatch.setenv("PCR_ARTIFACT_ROOT", str(tmp_path))
     conversation_id, correlation_id, event_id = uuid4(), uuid4(), uuid4()
     interaction_id = uuid5(conversation_id, f"interaction:{correlation_id}")
     event_artifact_store.write_event_record(

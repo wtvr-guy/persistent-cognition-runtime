@@ -5,11 +5,11 @@ from datetime import datetime, timezone
 
 import pytest
 
-from prometheist import artifact_journal, db
-from prometheist.attention_store import load_scheduler
-from prometheist.interaction_contracts import DurableInteraction
-from prometheist.interaction_store import load_interaction, save_interaction
-from prometheist.perception import (
+from persistent_cognition import artifact_journal, db
+from persistent_cognition.attention_store import load_scheduler
+from persistent_cognition.interaction_contracts import DurableInteraction
+from persistent_cognition.interaction_store import load_interaction, save_interaction
+from persistent_cognition.perception import (
     AdvisorySemanticClassification,
     PerceptKind,
     PerceptModality,
@@ -21,10 +21,10 @@ from prometheist.perception import (
     normalize_scheduled_percept,
     normalize_user_interaction_percept,
 )
-from prometheist.percept_response_runtime import PerceptStage, begin_percept
-from prometheist.percept_response_worker import UserPromptLLM, _execute_claimed_user_prompt_step
-from prometheist.worker_protocol import deterministic_worker_step_id
-from prometheist.worker_store import guarded_claim_worker_step, load_worker_result
+from persistent_cognition.percept_response_runtime import PerceptStage, begin_percept
+from persistent_cognition.percept_response_worker import UserPromptLLM, _execute_claimed_user_prompt_step
+from persistent_cognition.worker_protocol import deterministic_worker_step_id
+from persistent_cognition.worker_store import guarded_claim_worker_step, load_worker_result
 
 
 NOW = datetime(2026, 9, 10, 17, 0, tzinfo=timezone.utc)
@@ -32,7 +32,7 @@ NOW = datetime(2026, 9, 10, 17, 0, tzinfo=timezone.utc)
 
 class FixedProbe:
     def capture(self):
-        from prometheist.attention_observation import HostResourceMetrics
+        from persistent_cognition.attention_observation import HostResourceMetrics
 
         return HostResourceMetrics(
             platform="test",

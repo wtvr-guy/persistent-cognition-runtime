@@ -4,9 +4,9 @@ import pytest
 
 import httpx
 
-from prometheist.attention_observation import HostResourceMetrics
-from prometheist.native_policy import native_resource_safety_policy
-from prometheist.ollama_runtime import OllamaClaimHostResourceProbe, OllamaRuntimeProbe
+from persistent_cognition.attention_observation import HostResourceMetrics
+from persistent_cognition.native_policy import native_resource_safety_policy
+from persistent_cognition.ollama_runtime import OllamaClaimHostResourceProbe, OllamaRuntimeProbe
 
 
 _MIB = 1024 * 1024
@@ -18,7 +18,7 @@ def _client(payload: dict, *, status_code: int = 200) -> httpx.Client:
         return httpx.Response(status_code, json=payload, request=request)
 
     return httpx.Client(
-        base_url="http://ollama.test",
+        base_url="https://ollama.test",
         transport=httpx.MockTransport(handler),
     )
 

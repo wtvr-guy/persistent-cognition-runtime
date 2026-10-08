@@ -6,15 +6,15 @@ import sys
 import time
 from uuid import UUID
 
-from prometheist import db
-from prometheist.attention import (
+from persistent_cognition import db
+from persistent_cognition.attention import (
     AttentionTask,
     SchedulingMetadata,
     ServiceClass,
     TaskCriticality,
     deterministic_task_id,
 )
-from prometheist.attention_store import allocate_created_seq, load_scheduler, save_scheduler
+from persistent_cognition.attention_store import allocate_created_seq, load_scheduler, save_scheduler
 
 
 NAMESPACE = UUID("33333333-3333-3333-3333-333333333333")

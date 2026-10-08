@@ -24,9 +24,9 @@ import time
 import uuid
 from dataclasses import dataclass, field
 
-from prometheist import db, event_store
-from prometheist.percept_response_runtime import handle_percept_in_worker_processes
-from prometheist.models import EventType
+from persistent_cognition import db, event_store
+from persistent_cognition.percept_response_runtime import handle_percept_in_worker_processes
+from persistent_cognition.models import EventType
 
 _SENTENCE_SPLIT_RE = re.compile(r"(?<=[.!?])\s+")
 

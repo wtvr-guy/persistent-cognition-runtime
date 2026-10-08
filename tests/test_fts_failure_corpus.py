@@ -14,8 +14,8 @@ import uuid
 
 import pytest
 
-from prometheist import db, event_store, retrieval
-from prometheist.models import EventType, RetrievalRequest
+from persistent_cognition import db, event_store, retrieval
+from persistent_cognition.models import EventType, RetrievalRequest
 
 
 @pytest.fixture

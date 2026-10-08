@@ -1,9 +1,9 @@
-# Prometheist Memory Kernel v0.3 — Associative Recall Experiment
+# Persistent Cognition Memory Kernel v0.3 — Associative Recall Experiment
 
 > **Historical milestone record.** This freezes the v0.3 associative-recall experiment
 > and its deliberately curated fixture. Its "what comes next" section has since been
 > acted on: deterministic derived association extraction exists in
-> [`association_projection.py`](https://github.com/wtvr-guy/prometheist/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/src/jit_agent/association_projection.py) and is
+> [`association_projection.py`](https://github.com/wtvr-guy/prometheist/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/src/prometheist/association_projection.py) and is
 > measured by `derived_associative_benchmark.py`, and v0.5 accepted the
 > specificity-aware candidate router on held-out scale corpora. Retained as milestone
 > evidence, not as current architecture.
@@ -90,7 +90,7 @@ The three associative-recall baseline failures remain:
 - `RESOLVED_BY`: the outstanding-deposit event can activate the later returned-deposit event when a resolution cue is present;
 - `CONCEPT_INSTANCE`: the term `vehicle` can activate the Toyota Corolla purchase event.
 
-This fixture is **curated**. It demonstrates that the retrieval mechanism can use associations correctly. It does not demonstrate that Prometheist can yet derive those associations automatically from arbitrary lifetime data.
+This fixture is **curated**. It demonstrates that the retrieval mechanism can use associations correctly. It does not demonstrate that Persistent Cognition can yet derive those associations automatically from arbitrary lifetime data.
 
 That distinction is deliberate. Extraction and retrieval are separate research problems and should not be entangled before the retrieval mechanism earns its place.
 
@@ -99,7 +99,7 @@ That distinction is deliberate. Extraction and retrieval are separate research p
 Run:
 
 ```powershell
-uv run python -m jit_agent.associative_benchmark
+uv run python -m persistent_cognition.associative_benchmark
 ```
 
 The command prints the v0.2 algorithmic control and the v0.3 associative result side by side.

@@ -1,6 +1,6 @@
 # Validation
 
-`scripts/verify_source_baseline.py` verifies the extracted file digests and reports unchanged versus adapted paths. This checks source fidelity; behavior requires the tests too.
+`scripts/verify_source_baseline.py` preserves original upstream paths/hashes, verifies current extraction paths/digests, checks explicit additions/retirements, and rejects unrecorded Python code. This checks provenance and intentional adaptations; behavior requires the tests too.
 
 ## PostgreSQL regression gate
 
@@ -14,6 +14,9 @@ uv run python scripts/audit_registries.py
 uv run python scripts/audit_constraints.py --fail-unregistered
 uv run python benchmarks/run_deterministic_constraints.py
 uv run pytest -q -ra
+uv build
+uv run pcr --help
+uv run pcr-percept --help
 ```
 
 This exercises real persistence, process restart, bounded memory, temporal/source authority, compact journals, recovery, and scripted specialist contracts. Hosted CI provisions PostgreSQL 16 and retains the JUnit report. The pure policy subset can also run without PostgreSQL:
@@ -21,6 +24,10 @@ This exercises real persistence, process restart, bounded memory, temporal/sourc
 ```sh
 uv run pytest -q tests/unit --confcutdir=tests/unit
 ```
+
+`test_percept_service.py` covers namespace/cursor propagation, shared CLI/tick/service ownership, rollback and lost-session boundaries, graceful stop/restart, fresh-process trusted executor bootstrap, structured non-chat completions, callback/storage failures, and finite action feedback. It uses unreachable Ollama endpoints for model-free reaction tests rather than silently depending on a live model. The media-corruption unit test isolates its artifact store so repeat runs cannot corrupt normal runtime data.
+
+The service backoff bounds remain provisional under `SITUATION-PIPELINE-001`; deterministic invariants are not workload-specific latency calibration. Likewise, the deterministic calibration runner reports `INSUFFICIENT_DISCRIMINATION` for its four retained families, not a claim of uniquely optimal settings.
 
 Frozen retrieval fixtures originally discovered during upstream application benchmarks remain under `tests/fixtures`. They test delivery of required canonical sources; application fidelity benchmark runners and subjective scoring are excluded.
 
@@ -36,9 +43,9 @@ It requires the actual stack and prints native response artifacts for human revi
 
 Current extraction results and the planned laptop run are recorded in [EXTRACTION.md](EXTRACTION.md). Historical benchmark files retain their original date and are not new measurements.
 
-## Historical evidence in Prometheist
+## Historical upstream evidence
 
-[Prometheist](https://github.com/wtvr-guy/prometheist) is the upstream record of the engine's development and prior validation, including successful local tests with real PostgreSQL and live Ollama. The links below pin the evidence archive at extraction source `106bb22be4ad60f2455ece8bc8c4e2806225d0fe`; each result applies to the revision and environment identified in its own record, rather than automatically validating that archive commit or this extraction.
+The pinned upstream evidence archive records the engine's development and prior validation, including successful local tests with real PostgreSQL and live Ollama. The links below pin the evidence archive at extraction source `106bb22be4ad60f2455ece8bc8c4e2806225d0fe`; each result applies to the revision and environment identified in its own record, rather than automatically validating that archive commit or this extraction.
 
 | Evidence | What the record establishes |
 | --- | --- |

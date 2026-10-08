@@ -5,7 +5,7 @@ from uuid import UUID
 
 import pytest
 
-from prometheist.attention import (
+from persistent_cognition.attention import (
     AttentionTask,
     FocusAction,
     InterruptionPolicy,

@@ -4,8 +4,8 @@ from uuid import UUID
 
 import pytest
 
-from prometheist import attention_store, db
-from prometheist.attention import (
+from persistent_cognition import attention_store, db
+from persistent_cognition.attention import (
     AttentionTask,
     InterruptionPolicy,
     JITAttentionScheduler,
@@ -14,13 +14,13 @@ from prometheist.attention import (
     TaskCriticality,
     deterministic_task_id,
 )
-from prometheist.attention_preemption import PreemptionEventType
-from prometheist.attention_resources import (
+from persistent_cognition.attention_preemption import PreemptionEventType
+from persistent_cognition.attention_resources import (
     ExecutionResource,
     ExecutionResourceClass,
     ResourceRequirement,
 )
-from prometheist.attention_store import (
+from persistent_cognition.attention_store import (
     load_preemption_event_count,
     load_scheduler,
     save_scheduler,

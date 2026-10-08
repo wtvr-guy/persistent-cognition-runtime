@@ -2,11 +2,11 @@ from __future__ import annotations
 
 import pytest
 
-from prometheist import blob_store
+from persistent_cognition import blob_store
 
 
 def test_put_blob_is_content_addressed_and_idempotent(tmp_path, monkeypatch) -> None:
-    monkeypatch.setenv("PROMETHEIST_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
+    monkeypatch.setenv("PCR_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
     data = b"exact stateless llm generation payload"
 
     first = blob_store.put_blob(data, media_type="text/plain")
@@ -22,7 +22,7 @@ def test_put_blob_is_content_addressed_and_idempotent(tmp_path, monkeypatch) -> 
 
 
 def test_different_bytes_produce_different_digests(tmp_path, monkeypatch) -> None:
-    monkeypatch.setenv("PROMETHEIST_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
+    monkeypatch.setenv("PCR_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
 
     first = blob_store.put_blob(b"payload one", media_type="text/plain")
     second = blob_store.put_blob(b"payload two", media_type="text/plain")
@@ -33,7 +33,7 @@ def test_different_bytes_produce_different_digests(tmp_path, monkeypatch) -> Non
 
 
 def test_blob_path_uses_sha256_two_character_shard(tmp_path, monkeypatch) -> None:
-    monkeypatch.setenv("PROMETHEIST_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
+    monkeypatch.setenv("PCR_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
     descriptor = blob_store.put_blob(b"shard me", media_type="text/plain")
     hex_digest = descriptor.digest.split(":", 1)[1]
 
@@ -46,7 +46,7 @@ def test_blob_path_uses_sha256_two_character_shard(tmp_path, monkeypatch) -> Non
 
 
 def test_get_blob_missing_raises_file_not_found(tmp_path, monkeypatch) -> None:
-    monkeypatch.setenv("PROMETHEIST_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
+    monkeypatch.setenv("PCR_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
     missing_digest = "sha256:" + "0" * 64
 
     with pytest.raises(FileNotFoundError):
@@ -56,7 +56,7 @@ def test_get_blob_missing_raises_file_not_found(tmp_path, monkeypatch) -> None:
 
 
 def test_get_blob_detects_corrupted_bytes(tmp_path, monkeypatch) -> None:
-    monkeypatch.setenv("PROMETHEIST_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
+    monkeypatch.setenv("PCR_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
     descriptor = blob_store.put_blob(b"original bytes", media_type="text/plain")
 
     path = blob_store.blob_path(descriptor.digest)
@@ -69,7 +69,7 @@ def test_get_blob_detects_corrupted_bytes(tmp_path, monkeypatch) -> None:
 
 
 def test_verify_descriptor_rejects_size_mismatch(tmp_path, monkeypatch) -> None:
-    monkeypatch.setenv("PROMETHEIST_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
+    monkeypatch.setenv("PCR_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
     descriptor = blob_store.put_blob(b"some content", media_type="text/plain")
     wrong_size = blob_store.BlobDescriptor(
         media_type=descriptor.media_type,
@@ -81,7 +81,7 @@ def test_verify_descriptor_rejects_size_mismatch(tmp_path, monkeypatch) -> None:
 
 
 def test_put_blob_rejects_path_collision_with_mismatched_size(tmp_path, monkeypatch) -> None:
-    monkeypatch.setenv("PROMETHEIST_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
+    monkeypatch.setenv("PCR_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
     data = b"legitimate content"
     descriptor = blob_store.put_blob(data, media_type="text/plain")
 
@@ -98,7 +98,7 @@ def test_put_blob_rejects_path_collision_with_mismatched_size(tmp_path, monkeypa
     ["not-a-digest", "md5:deadbeef", "sha256:tooshort", "sha256:"],
 )
 def test_blob_path_rejects_malformed_digest(malformed, tmp_path, monkeypatch) -> None:
-    monkeypatch.setenv("PROMETHEIST_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
+    monkeypatch.setenv("PCR_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
 
     with pytest.raises(ValueError):
         blob_store.blob_path(malformed)

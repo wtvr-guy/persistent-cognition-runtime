@@ -1,7 +1,7 @@
 import pytest
 
-from prometheist import db
-from prometheist.cognitive_store import get_record, put_record, record_history
+from persistent_cognition import db
+from persistent_cognition.cognitive_store import get_record, put_record, record_history
 
 
 @pytest.fixture

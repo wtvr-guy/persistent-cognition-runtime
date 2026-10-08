@@ -2,7 +2,7 @@
 
 **Persistent memory. Stateless inference. Durable execution.**
 
-The runnable cognitive engine extracted from [Prometheist](https://github.com/wtvr-guy/prometheist), including the v2 worker architecture and subsequent engine improvements through [106bb22](https://github.com/wtvr-guy/prometheist/commit/106bb22be4ad60f2455ece8bc8c4e2806225d0fe).
+The runnable cognitive engine extracted from the pinned upstream source revision, including the v2 worker architecture and subsequent engine improvements through `106bb22be4ad60f2455ece8bc8c4e2806225d0fe`.
 
 Exact history lives outside the model. Fresh specialist workers receive bounded evidence just in time; deterministic software owns scheduling, resources, execution authority, and recovery. The goal is useful continuous cognition on modest local hardware.
 
@@ -17,7 +17,9 @@ Exact history lives outside the model. Fresh specialist workers receive bounded 
 - Stateless Ollama transport, optional explicit remote-provider routing, governed model parameters, and sequential local-model residency.
 - Terminal and headless job interfaces, SQL schema, synthetic retrieval fixtures, and regression tests.
 
-Android, device nodes, tunnel/sync services, sensor discovery, OS administration, desktop/web UI, private imprint deployment, and application philosophy are excluded.
+Android, device nodes, tunnel/sync services, sensor discovery, OS administration, desktop/web UI, deployment-only application setup, and application philosophy are excluded.
+
+The runtime has no operational identity, persona, imprinting, self-model stage, or self-reflection memory. Generic semantic facts, situations, expectations, and provenance remain. Applications supply observations and authority; model prompts describe bounded worker roles, not a personality.
 
 ## Install
 
@@ -58,7 +60,14 @@ uv run pcr recover --latest
 uv run pcr restore-events
 ```
 
-Inspection and verification do not require a live model. Recovery requires the relevant database and any model work that remains incomplete. `pcr-percept` exposes generic intake and bounded scheduler ticks without collecting device sensors.
+Inspection and verification do not require a live model. Recovery requires the relevant database and any model work that remains incomplete. `pcr-percept` exposes generic intake, bounded scheduler ticks, and `pcr-percept serve` for a continuous governed percept loop without collecting device sensors.
+
+```sh
+uv run pcr-percept serve --scheduler-key automation
+uv run pcr-percept tick --scheduler-key automation
+```
+
+Run only one owner per namespace: chat, one-shot chat, recovery, ticks, and the service share ownership locks. Install application source policies and ingest text, arbitrary JSON, metrics, bounded event streams, or verified local media references. Scheduled tasks, sensor redflags, exceptions, and asynchronous tool results are explicit inputs, not automatic device discovery. Non-chat work produces durable structured actions even when no prose response is requested. [Setup](docs/SETUP.md#continuous-percept-service-and-embedding) explains trusted callbacks in fresh workers.
 
 ## Validate
 
@@ -74,20 +83,27 @@ uv run pytest -q -ra
 
 See [TESTING.md](docs/TESTING.md) for PostgreSQL CI, live-model acceptance, and interpretation of skipped tests. [EXTRACTION.md](docs/EXTRACTION.md) records what was copied, adapted, and verified.
 
-### Historical validation in Prometheist
+### Historical upstream validation
 
-[Prometheist](https://github.com/wtvr-guy/prometheist) preserves this architecture's development, benchmarks, test definitions, and local acceptance history. Its [2026-09-11 v2 validation record](https://github.com/wtvr-guy/prometheist/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/audits/V07_EPISTEMIC_RETRIEVAL_SCOPING_2026-09-11.md#3-verification--results) reports successful local Windows/PostgreSQL/live-Ollama tests for four-turn stateless continuity and epistemic memory. The [v0.7 closure record](https://github.com/wtvr-guy/prometheist/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/milestones/v0.7/CLOSURE_STATUS.md) records maintainer acceptance and closure on 2026-09-12.
+The pinned upstream evidence archive preserves this architecture's development, benchmarks, test definitions, and local acceptance history. Its [2026-09-11 v2 validation record](https://github.com/wtvr-guy/prometheist/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/audits/V07_EPISTEMIC_RETRIEVAL_SCOPING_2026-09-11.md#3-verification--results) reports successful local Windows/PostgreSQL/live-Ollama tests for four-turn stateless continuity and epistemic memory. The [v0.7 closure record](https://github.com/wtvr-guy/prometheist/blob/106bb22be4ad60f2455ece8bc8c4e2806225d0fe/docs/milestones/v0.7/CLOSURE_STATUS.md) records maintainer acceptance and closure on 2026-09-12.
 
-See the [historical evidence index](docs/TESTING.md#historical-evidence-in-prometheist) for benchmark results, native test records, and earlier failures and repairs. Those results establish behavior of the recorded upstream revisions and environments; live Ollama acceptance of this extracted repository remains pending a fresh laptop run.
+See the [historical evidence index](docs/TESTING.md#historical-upstream-evidence) for benchmark results, native test records, and earlier failures and repairs. Those results establish behavior of the recorded upstream revisions and environments; live Ollama acceptance of this extracted repository remains pending a fresh laptop run.
 
 ## Compatibility
 
-The installed distribution is `persistent-cognition-runtime`. The source package remains `prometheist`; existing configuration names, durable IDs, model prompts, and protocol labels are retained to avoid unnecessary changes to engine behavior. Some terminal labels still show the original project name. Use a separate virtual environment, database and artifact directory from your Prometheist application.
+Applications use the versioned [embedding API](docs/EMBEDDING.md). PostgreSQL and
+Ollama/OpenAI remain the supported storage/provider contracts; arbitrary backend
+interchangeability is not claimed. [Deployment and private storage](docs/SECURITY_AND_STORAGE.md)
+documents owner-only files, intake/response limits, quotas, TLS, and isolation.
 
-This is a copy with explicit provenance, not a GitHub fork carrying the source application's full history. [SOURCE_BASELINE.json](SOURCE_BASELINE.json) distinguishes byte-identical source files from the small extraction adaptations.
+The installed distribution is `persistent-cognition-runtime`. The source package is `persistent_cognition`; console commands remain `pcr` and `pcr-percept`. Use a separate virtual environment, database, and artifact directory from any upstream source application.
+
+This is a copy with explicit provenance, not a GitHub fork carrying the source application's full history. [SOURCE_BASELINE.json](SOURCE_BASELINE.json) preserves original source paths/hashes and records current extraction paths, intentional adaptations, additions, and retirements.
 
 ## Documentation and license
 
 [Architecture](docs/ARCHITECTURE.md) · [Setup](docs/SETUP.md) · [Testing](docs/TESTING.md) · [Model routing](docs/MODEL_ROUTING.md) · [Engineering constitution](CONSTITUTION.md)
 
-[PolyForm Noncommercial License 1.0.0](LICENSE), copied exactly from Prometheist, including its project-specific commercial-licensing notice.
+[PolyForm Noncommercial License 1.0.0](LICENSE), copied exactly from the upstream source project, including its project-specific commercial-licensing notice.
+
+Commercial embedding requires a separate license.

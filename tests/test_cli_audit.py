@@ -6,7 +6,7 @@ from uuid import uuid4
 
 import pytest
 
-from prometheist import artifact_journal, blob_store, cli, db, semantic_memory
+from persistent_cognition import artifact_journal, blob_store, cli, db, semantic_memory
 
 
 @pytest.fixture(autouse=True)
@@ -21,7 +21,7 @@ def _no_stream_reconfiguration(monkeypatch):
 
 
 def _write_percept(tmp_path, monkeypatch) -> tuple:
-    monkeypatch.setenv("PROMETHEIST_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
+    monkeypatch.setenv("PCR_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
     interaction_id = uuid4()
     artifact_journal.write_percept_artifact(
         interaction_id=interaction_id,
@@ -52,7 +52,7 @@ def test_audit_command_prints_rendered_report_for_interaction_id(
     tmp_path, monkeypatch, capsys
 ) -> None:
     interaction_id = _write_percept(tmp_path, monkeypatch)
-    monkeypatch.setattr(sys, "argv", ["prometheist", "audit", "--interaction-id", str(interaction_id)])
+    monkeypatch.setattr(sys, "argv", ["persistent_cognition", "audit", "--interaction-id", str(interaction_id)])
 
     cli.main()
 
@@ -64,7 +64,7 @@ def test_audit_command_prints_rendered_report_for_interaction_id(
 
 def test_audit_command_supports_latest(tmp_path, monkeypatch, capsys) -> None:
     interaction_id = _write_percept(tmp_path, monkeypatch)
-    monkeypatch.setattr(sys, "argv", ["prometheist", "audit", "--latest"])
+    monkeypatch.setattr(sys, "argv", ["persistent_cognition", "audit", "--latest"])
 
     cli.main()
 
@@ -73,9 +73,9 @@ def test_audit_command_supports_latest(tmp_path, monkeypatch, capsys) -> None:
 
 
 def test_audit_command_rejects_once(tmp_path, monkeypatch) -> None:
-    monkeypatch.setenv("PROMETHEIST_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
+    monkeypatch.setenv("PCR_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
     monkeypatch.setattr(
-        sys, "argv", ["prometheist", "audit", "--latest", "--once", "hi"]
+        sys, "argv", ["persistent_cognition", "audit", "--latest", "--once", "hi"]
     )
 
     with pytest.raises(SystemExit):
@@ -83,9 +83,9 @@ def test_audit_command_rejects_once(tmp_path, monkeypatch) -> None:
 
 
 def test_blob_verify_command_reports_valid_blob(tmp_path, monkeypatch, capsys) -> None:
-    monkeypatch.setenv("PROMETHEIST_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
+    monkeypatch.setenv("PCR_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
     descriptor = blob_store.put_blob(b"exact bytes", media_type="text/plain")
-    monkeypatch.setattr(sys, "argv", ["prometheist", "blob-verify", "--digest", descriptor.digest])
+    monkeypatch.setattr(sys, "argv", ["persistent_cognition", "blob-verify", "--digest", descriptor.digest])
 
     cli.main()
 
@@ -95,9 +95,9 @@ def test_blob_verify_command_reports_valid_blob(tmp_path, monkeypatch, capsys) -
 
 
 def test_blob_verify_command_fails_closed_for_missing_blob(tmp_path, monkeypatch, capsys) -> None:
-    monkeypatch.setenv("PROMETHEIST_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
+    monkeypatch.setenv("PCR_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
     missing_digest = "sha256:" + "ee" * 32
-    monkeypatch.setattr(sys, "argv", ["prometheist", "blob-verify", "--digest", missing_digest])
+    monkeypatch.setattr(sys, "argv", ["persistent_cognition", "blob-verify", "--digest", missing_digest])
 
     with pytest.raises(RuntimeError):
         cli.main()
@@ -107,17 +107,17 @@ def test_blob_verify_command_fails_closed_for_missing_blob(tmp_path, monkeypatch
 
 
 def test_blob_verify_requires_digest(tmp_path, monkeypatch) -> None:
-    monkeypatch.setenv("PROMETHEIST_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
-    monkeypatch.setattr(sys, "argv", ["prometheist", "blob-verify"])
+    monkeypatch.setenv("PCR_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
+    monkeypatch.setattr(sys, "argv", ["persistent_cognition", "blob-verify"])
 
     with pytest.raises(SystemExit):
         cli.main()
 
 
 def test_blob_verify_rejects_interaction_selector(tmp_path, monkeypatch) -> None:
-    monkeypatch.setenv("PROMETHEIST_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
+    monkeypatch.setenv("PCR_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
     monkeypatch.setattr(
-        sys, "argv", ["prometheist", "blob-verify", "--interaction-id", str(uuid4())]
+        sys, "argv", ["persistent_cognition", "blob-verify", "--interaction-id", str(uuid4())]
     )
 
     with pytest.raises(SystemExit):
@@ -125,9 +125,9 @@ def test_blob_verify_rejects_interaction_selector(tmp_path, monkeypatch) -> None
 
 
 def test_digest_rejected_with_verify_command(tmp_path, monkeypatch) -> None:
-    monkeypatch.setenv("PROMETHEIST_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
+    monkeypatch.setenv("PCR_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
     monkeypatch.setattr(
-        sys, "argv", ["prometheist", "verify", "--latest", "--digest", "sha256:" + "aa" * 32]
+        sys, "argv", ["persistent_cognition", "verify", "--latest", "--digest", "sha256:" + "aa" * 32]
     )
 
     with pytest.raises(SystemExit):
@@ -135,9 +135,9 @@ def test_digest_rejected_with_verify_command(tmp_path, monkeypatch) -> None:
 
 
 def test_digest_rejected_with_chat_command(tmp_path, monkeypatch) -> None:
-    monkeypatch.setenv("PROMETHEIST_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
+    monkeypatch.setenv("PCR_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
     monkeypatch.setattr(
-        sys, "argv", ["prometheist", "chat", "--digest", "sha256:" + "aa" * 32]
+        sys, "argv", ["persistent_cognition", "chat", "--digest", "sha256:" + "aa" * 32]
     )
 
     with pytest.raises(SystemExit):
@@ -147,7 +147,7 @@ def test_digest_rejected_with_chat_command(tmp_path, monkeypatch) -> None:
 def test_memory_fact_command_prints_resolution_assertions_and_evidence(
     tmp_path, monkeypatch, capsys
 ) -> None:
-    monkeypatch.setenv("PROMETHEIST_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
+    monkeypatch.setenv("PCR_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
     now = datetime.now(timezone.utc)
     with db.get_connection() as conn:
         semantic_memory.record_semantic_evidence(
@@ -166,7 +166,7 @@ def test_memory_fact_command_prints_resolution_assertions_and_evidence(
         sys,
         "argv",
         [
-            "prometheist",
+            "persistent_cognition",
             "memory-fact",
             "--subject",
             "person:mike",
@@ -189,12 +189,12 @@ def test_memory_fact_command_prints_resolution_assertions_and_evidence(
 def test_memory_fact_command_reports_empty_semantic_state_for_unknown_subject(
     tmp_path, monkeypatch, capsys
 ) -> None:
-    monkeypatch.setenv("PROMETHEIST_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
+    monkeypatch.setenv("PCR_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
     monkeypatch.setattr(
         sys,
         "argv",
         [
-            "prometheist",
+            "persistent_cognition",
             "memory-fact",
             "--subject",
             "person:unknown",
@@ -214,18 +214,18 @@ def test_memory_fact_command_reports_empty_semantic_state_for_unknown_subject(
 
 
 def test_memory_fact_requires_subject_and_property(tmp_path, monkeypatch) -> None:
-    monkeypatch.setenv("PROMETHEIST_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
-    monkeypatch.setattr(sys, "argv", ["prometheist", "memory-fact", "--subject", "person:mike"])
+    monkeypatch.setenv("PCR_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
+    monkeypatch.setattr(sys, "argv", ["persistent_cognition", "memory-fact", "--subject", "person:mike"])
 
     with pytest.raises(SystemExit):
         cli.main()
 
 
 def test_memory_fact_rejects_interaction_selector(tmp_path, monkeypatch) -> None:
-    monkeypatch.setenv("PROMETHEIST_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
+    monkeypatch.setenv("PCR_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
     monkeypatch.setattr(
         sys, "argv",
-        ["prometheist", "memory-fact", "--subject", "person:mike", "--property", "x", "--latest"],
+        ["persistent_cognition", "memory-fact", "--subject", "person:mike", "--property", "x", "--latest"],
     )
 
     with pytest.raises(SystemExit):
@@ -233,8 +233,8 @@ def test_memory_fact_rejects_interaction_selector(tmp_path, monkeypatch) -> None
 
 
 def test_subject_rejected_with_chat_command(tmp_path, monkeypatch) -> None:
-    monkeypatch.setenv("PROMETHEIST_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
-    monkeypatch.setattr(sys, "argv", ["prometheist", "chat", "--subject", "person:mike"])
+    monkeypatch.setenv("PCR_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
+    monkeypatch.setattr(sys, "argv", ["persistent_cognition", "chat", "--subject", "person:mike"])
 
     with pytest.raises(SystemExit):
         cli.main()
@@ -242,7 +242,7 @@ def test_subject_rejected_with_chat_command(tmp_path, monkeypatch) -> None:
 
 def test_sign_command_writes_a_signed_anchor(tmp_path, monkeypatch, capsys) -> None:
     interaction_id = _write_finalized_interaction(tmp_path, monkeypatch)
-    monkeypatch.setattr(sys, "argv", ["prometheist", "sign", "--interaction-id", str(interaction_id)])
+    monkeypatch.setattr(sys, "argv", ["persistent_cognition", "sign", "--interaction-id", str(interaction_id)])
 
     cli.main()
 
@@ -253,7 +253,7 @@ def test_sign_command_writes_a_signed_anchor(tmp_path, monkeypatch, capsys) -> N
 
 def test_sign_command_fails_closed_for_an_incomplete_interaction(tmp_path, monkeypatch) -> None:
     interaction_id = _write_percept(tmp_path, monkeypatch)
-    monkeypatch.setattr(sys, "argv", ["prometheist", "sign", "--interaction-id", str(interaction_id)])
+    monkeypatch.setattr(sys, "argv", ["persistent_cognition", "sign", "--interaction-id", str(interaction_id)])
 
     with pytest.raises(ValueError, match="FINAL_DISPOSITION"):
         cli.main()
@@ -263,11 +263,11 @@ def test_verify_signature_command_reports_valid_for_a_freshly_signed_interaction
     tmp_path, monkeypatch, capsys
 ) -> None:
     interaction_id = _write_finalized_interaction(tmp_path, monkeypatch)
-    monkeypatch.setattr(sys, "argv", ["prometheist", "sign", "--interaction-id", str(interaction_id)])
+    monkeypatch.setattr(sys, "argv", ["persistent_cognition", "sign", "--interaction-id", str(interaction_id)])
     cli.main()
     capsys.readouterr()
     monkeypatch.setattr(
-        sys, "argv", ["prometheist", "verify-signature", "--interaction-id", str(interaction_id)]
+        sys, "argv", ["persistent_cognition", "verify-signature", "--interaction-id", str(interaction_id)]
     )
 
     cli.main()
@@ -280,7 +280,7 @@ def test_verify_signature_command_reports_valid_for_a_freshly_signed_interaction
 def test_verify_signature_command_fails_closed_when_never_signed(tmp_path, monkeypatch, capsys) -> None:
     interaction_id = _write_finalized_interaction(tmp_path, monkeypatch)
     monkeypatch.setattr(
-        sys, "argv", ["prometheist", "verify-signature", "--interaction-id", str(interaction_id)]
+        sys, "argv", ["persistent_cognition", "verify-signature", "--interaction-id", str(interaction_id)]
     )
 
     with pytest.raises(RuntimeError, match="signature verification failed"):
@@ -291,9 +291,9 @@ def test_verify_signature_command_fails_closed_when_never_signed(tmp_path, monke
 
 
 def test_digest_rejected_with_sign_command(tmp_path, monkeypatch) -> None:
-    monkeypatch.setenv("PROMETHEIST_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
+    monkeypatch.setenv("PCR_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
     monkeypatch.setattr(
-        sys, "argv", ["prometheist", "sign", "--latest", "--digest", "sha256:" + "aa" * 32]
+        sys, "argv", ["persistent_cognition", "sign", "--latest", "--digest", "sha256:" + "aa" * 32]
     )
 
     with pytest.raises(SystemExit):

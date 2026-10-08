@@ -7,12 +7,12 @@ import time
 from datetime import datetime, timedelta, timezone
 from uuid import UUID, uuid5
 
-from prometheist import db, event_store
-from prometheist.attention_observation import HostResourceMetrics, LocalResourceAdmissionController
-from prometheist.attention_store import load_scheduler, save_scheduler
-from prometheist.models import EventType
-from prometheist.worker_protocol import WorkerEffectPolicy
-from prometheist.worker_store import (
+from persistent_cognition import db, event_store
+from persistent_cognition.attention_observation import HostResourceMetrics, LocalResourceAdmissionController
+from persistent_cognition.attention_store import load_scheduler, save_scheduler
+from persistent_cognition.models import EventType
+from persistent_cognition.worker_protocol import WorkerEffectPolicy
+from persistent_cognition.worker_store import (
     checkpoint_worker_claim,
     complete_worker_claim,
     guarded_claim_worker_step,
