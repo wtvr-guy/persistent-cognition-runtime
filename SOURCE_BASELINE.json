@@ -55,7 +55,7 @@
     "benchmarks/constraint_registry.json": {
       "source_path": "benchmarks/constraint_registry.json",
       "source_sha256": "fbab7d594002d6e23a05dada6ceac76ac7055139fa292c8aec5bd9599981ad6e",
-      "extracted_sha256": "d67a2be39348d239bd756fb625487efec4d5f5b38b5e7bcf35101a315232bade",
+      "extracted_sha256": "b95a5de7913327bf7a0f6f399b9b4943ab103c3572b56f73872779b9f1ae31d3",
       "extraction_path": "benchmarks/constraint_registry.json",
       "status": "imported",
       "baseline_extracted_sha256": "7958368d60f3cdb09f5af9d25bc8d8cec5a635685f2dd899033f83618a9341f2",
