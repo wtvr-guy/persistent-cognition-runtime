@@ -1,10 +1,17 @@
 from __future__ import annotations
 
+from datetime import datetime, timezone
+
 import pytest
 
 import httpx
 
-from persistent_cognition.attention_observation import HostResourceMetrics
+from persistent_cognition.attention_observation import (
+    HOST_MEMORY_RESOURCE_ID,
+    HostResourceMetrics,
+    build_resource_observation,
+    discover_local_execution_resources,
+)
 from persistent_cognition.native_policy import native_resource_safety_policy
 from persistent_cognition.ollama_runtime import OllamaClaimHostResourceProbe, OllamaRuntimeProbe
 
@@ -172,6 +179,66 @@ def test_warm_reservation_that_turns_cold_is_debited_before_claim_gate():
     assert probe.last_memory_credit_mib == 0
     assert probe.last_memory_debit_mib == 2_695
     assert effective.memory_available_mib == 1_451
+
+
+def _memory_admission_capacity(
+    probe: OllamaClaimHostResourceProbe,
+) -> int:
+    policy = native_resource_safety_policy()
+    metrics = probe.capture()
+    observation = build_resource_observation(
+        scheduler_cycle=1,
+        captured_at=datetime.now(timezone.utc),
+        resources=discover_local_execution_resources(metrics, policy=policy),
+        reservations=[],
+        policy=policy,
+        metrics=metrics,
+    )
+    return observation.capacity_by_resource_id()[HOST_MEMORY_RESOURCE_ID].admission_capacity
+
+
+def test_logged_cold_memory_snapshot_fits_with_fixed_one_gib_headroom():
+    # October 8 acceptance log: 4,744 MiB free, 3,072 MiB cold-load claim.
+    policy = native_resource_safety_policy()
+    probe = OllamaClaimHostResourceProbe(
+        base_probe=FixedHostProbe(available_mib=4_744),
+        runtime_probe=_cold_runtime_probe(),
+        policy=policy,
+        scheduled_memory_mib=3_072,
+    )
+    assert _memory_admission_capacity(probe) == 3_534
+    assert probe.last_effective_required_memory_mib == 3_072
+
+
+def test_verified_warm_model_uses_only_incremental_worker_budget():
+    policy = native_resource_safety_policy()
+    probe = OllamaClaimHostResourceProbe(
+        base_probe=FixedHostProbe(available_mib=2_150),
+        runtime_probe=_warm_runtime_probe(),
+        policy=policy,
+        scheduled_memory_mib=512,
+    )
+    assert _memory_admission_capacity(probe) >= 512
+    assert probe.last_effective_required_memory_mib == 512
+    assert probe.last_memory_credit_mib == 0
+
+
+def test_unverified_model_cannot_borrow_warm_memory_budget():
+    policy = native_resource_safety_policy()
+    failed_runtime = OllamaRuntimeProbe(
+        model="qwen3:4b",
+        client=_client({}, status_code=503),
+    )
+    probe = OllamaClaimHostResourceProbe(
+        base_probe=FixedHostProbe(available_mib=2_150),
+        runtime_probe=failed_runtime,
+        policy=policy,
+        scheduled_memory_mib=3_072,
+    )
+    assert _memory_admission_capacity(probe) < 3_072
+    assert probe.last_runtime_state is not None
+    assert probe.last_runtime_state.probe_ok is False
+    assert probe.last_effective_required_memory_mib == 3_072
 
 
 pytestmark = pytest.mark.usefixtures("consented_mock_ollama")
