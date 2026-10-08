@@ -26,7 +26,8 @@
     "Retired operational identity/self-model/self-reflection schemas, stages, prompts, policies and tests; generic semantic facts and counterevidence retained.",
     "Completed always-on namespace-owned percept supervision, typed arbitrary-data intake, structured action receipts, finite outcome feedback, and trusted worker-command bootstrap for application callbacks.",
     "Current extraction_path and extracted_sha256 distinguish moved/adapted files from preserved original source_path/source_sha256; additions and retirements are explicit.",
-    "Require practical deterministic evidence display and trusted structured field lookup before model-based response realization; retire ordinary factual token-range selection, journal model-free render receipts and strengthen native factual acceptance."
+    "Require practical deterministic evidence display and trusted structured field lookup before model-based response realization; retire ordinary factual token-range selection, journal model-free render receipts and strengthen native factual acceptance.",
+    "Calibrated native Windows RAM admission to a fixed 1 GiB system reserve, preserved verified warm-model incremental accounting and cold fallback, prewarmed the native acceptance model, and added resource regression tests."
   ],
   "files": {
     ".python-version": {
@@ -376,7 +377,7 @@
     "scripts/run_v07_acceptance.ps1": {
       "source_path": "scripts/run_v07_acceptance.ps1",
       "source_sha256": "43812a1812391e99255f3d629c106e5ae7b8fa6f9e97a52199e2b1f9cfddf5f6",
-      "extracted_sha256": "1e5c5ca74486e0da5811085ba521c45ea1dc89fa9e4866e1996e92653bac34c0",
+      "extracted_sha256": "c90839421049b191b9f5a385fe2ec2781f7c6cc49b95b277fe257254df7aa0c0",
       "extraction_path": "scripts/run_v07_acceptance.ps1",
       "status": "imported",
       "baseline_extracted_sha256": "43812a1812391e99255f3d629c106e5ae7b8fa6f9e97a52199e2b1f9cfddf5f6"
@@ -819,7 +820,7 @@
     "src/prometheist/native_policy.py": {
       "source_path": "src/prometheist/native_policy.py",
       "source_sha256": "297cef370c312dc3899a8fb0d12a27c59ac04dac6a40c1f1eac4b2e9c0781717",
-      "extracted_sha256": "c56aa8692b57429aa2f95c989723995f83399dfa7bfe9c9b47da5efb133b5b98",
+      "extracted_sha256": "3e99f8e84b496e70c17465366200c5d92cad8cc14b8f7ab227a95efe6fd030d3",
       "extraction_path": "src/persistent_cognition/native_policy.py",
       "status": "imported",
       "baseline_extracted_sha256": "027dd4bc755ae90501c5dfff4c1cab1d72cccc805b5913ed8e1cc7c63c003b47"
@@ -1025,7 +1026,7 @@
     "src/prometheist/runtime_settings.py": {
       "source_path": "src/prometheist/gui_config.py",
       "source_sha256": "4e6c9dcfdab51709bba7b955916f558c34ebe24ec6f57dd6b9a2446e2310115a",
-      "extracted_sha256": "5ae664155ddc42e60937779c804e170899655fb352bd7521d516b43320206983",
+      "extracted_sha256": "4bc821f6be2a85d08b7a129b9abebefd4b2902c09760bd7b04445eb91d6b64b8",
       "extraction_path": "src/persistent_cognition/runtime_settings.py",
       "status": "imported",
       "baseline_extracted_sha256": "ebb656ae77d5f05e86eaaf9f6c23ffe6035ea44c6d348d01c0ac05c3ffe6e340",
@@ -1608,7 +1609,7 @@
     "tests/test_native_policy.py": {
       "source_path": "tests/test_native_policy.py",
       "source_sha256": "d41a878e681f7983f3319c751f58d910611e4c70b19d821fcde6258eb27c8759",
-      "extracted_sha256": "3656bf420730bb925c6b955505b9c34864e270f77bbceb56f9469bdce2b9e0d7",
+      "extracted_sha256": "bea4553d1ae89c6f89a5d3943b61f1310266abb12ace6e2181b831b95a773af0",
       "extraction_path": "tests/test_native_policy.py",
       "status": "imported",
       "baseline_extracted_sha256": "d41a878e681f7983f3319c751f58d910611e4c70b19d821fcde6258eb27c8759"
@@ -1641,7 +1642,7 @@
     "tests/test_ollama_runtime.py": {
       "source_path": "tests/test_ollama_runtime.py",
       "source_sha256": "09579a97b87bc4be89f36e2fab0967fb19d2e306bb9e51df921709cbf882b772",
-      "extracted_sha256": "1ea6a252f1bfc8103f6742ef6ac1f0ec92a28ad2a754f5a09433af3d17bb21ed",
+      "extracted_sha256": "00c4c352ea2460235449027d912eee2aee5a4a4bf08bd56fc61d338f02d549d6",
       "extraction_path": "tests/test_ollama_runtime.py",
       "status": "imported",
       "baseline_extracted_sha256": "09579a97b87bc4be89f36e2fab0967fb19d2e306bb9e51df921709cbf882b772",
