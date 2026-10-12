@@ -157,3 +157,28 @@ def test_trial_files_are_not_overwritten(tmp_path: Path):
     with pytest.raises(FileExistsError):
         run_trial(audit, "unique", "x", {}, lambda: {"passed": True}, sample_seconds=.05)
     audit.close()
+
+
+def test_complete_deterministic_runner_smoke(tmp_path: Path, monkeypatch):
+    """Run the real CLI path without Ollama, PostgreSQL, git or external network."""
+    from argparse import Namespace
+    from benchmarks.cognitive_effort import runner
+
+    monkeypatch.setattr(runner, "_versioned_environment", lambda _allow_dirty: {
+        "commit": "a" * 40, "branch": "test", "clean": True,
+    })
+    args = Namespace(
+        with_native=False, with_ollama=False, cold_repeats=0, warm_repeats=1,
+        deterministic_iterations=2, deterministic_repeats=1, retrieval_repeats=1,
+        sample_ms=50, idle_seconds=0.05, timeout_seconds=1.0,
+        native_timeout_seconds=1.0, expected_commit=None, allow_dirty=False,
+        model=None, ollama_url="http://127.0.0.1:11434", output_root=tmp_path,
+    )
+    assert runner._run(args) == 0
+    (run_dir,) = tuple(tmp_path.iterdir())
+    audit = verify_audit(run_dir)
+    assert audit["valid"], audit["errors"]
+    summary = json.loads((run_dir / "summary.json").read_text(encoding="utf-8"))
+    assert summary["overall_pass"]
+    assert summary["phases"]["deterministic_classifier"]["trial_count"] == 16
+    assert summary["phases"]["associative_retrieval"]["passes"] == 1
