@@ -2253,7 +2253,7 @@
     "benchmarks/cognitive_effort/runner.py": {
       "source_path": null,
       "source_sha256": null,
-      "extracted_sha256": "0075ffe6548f9c6d42458d22e522110166bd4c3b2b3bdabb635788afa3797dcf",
+      "extracted_sha256": "153c1222142055f958c18740dc1c353c2cee47ab062cc5c7cfba0bbfcfe43dcf",
       "extraction_path": "benchmarks/cognitive_effort/runner.py",
       "status": "added",
       "reason": "COG-EFFORT-001: independent auditable cognitive-effort measurement, reproducible local runner and operator guidance."
@@ -2261,7 +2261,7 @@
     "tests/test_cognitive_effort_benchmark.py": {
       "source_path": null,
       "source_sha256": null,
-      "extracted_sha256": "9c1a811bf3bf7f949b5d5973841296b939880b154b76a76ef1bb7b0250098533",
+      "extracted_sha256": "7711af1ec62ab1f55b390dd5e1a0a888adc92d4f457b5aa71bed2c59d7dfd348",
       "extraction_path": "tests/test_cognitive_effort_benchmark.py",
       "status": "added",
       "reason": "COG-EFFORT-001: independent auditable cognitive-effort measurement, reproducible local runner and operator guidance."
