@@ -139,7 +139,10 @@ class Sampler:
             pass
         own_cpu = own_rss = ollama_cpu = ollama_rss = 0.0
         own_count = ollama_count = 0
-        for process in psutil.process_iter(["pid", "name", "memory_info", "cpu_times"]):
+        # Enumerate only cheap process identity fields first. Asking Windows for
+        # memory and CPU times of EVERY unrelated process is disproportionately
+        # expensive and distorted the initial 250 ms sampling cadence.
+        for process in psutil.process_iter(["pid", "name"]):
             try:
                 info = process.info
                 name = str(info["name"] or "").casefold()
@@ -147,8 +150,9 @@ class Sampler:
                 is_ollama = not is_own and "ollama" in name
                 if not is_own and not is_ollama:
                     continue
-                mem = info["memory_info"]
-                cpu = info["cpu_times"]
+                with process.oneshot():
+                    mem = process.memory_info()
+                    cpu = process.cpu_times()
                 cpu_total = float(cpu.user + cpu.system) if cpu else 0.0
                 rss = float(mem.rss) if mem else 0.0
                 if is_own:
