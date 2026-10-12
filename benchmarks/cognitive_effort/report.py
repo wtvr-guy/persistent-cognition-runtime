@@ -2,10 +2,10 @@
 from __future__ import annotations
 
 import csv
+import hashlib
 import json
 import math
 from pathlib import Path
-import statistics
 from typing import Any
 
 from benchmarks.cognitive_effort.energy import energy_joules, read_power_samples
@@ -37,6 +37,8 @@ def report(
         raise ValueError("meter_scope must be wall, cpu_package, or device")
     power = read_power_samples(power_csv) if power_csv else None
     cases = sorted((root / "cases").glob("*.json"))
+    if verification["completed_trials"] != len(cases):
+        raise ValueError("case artifact count disagrees with completed trial count")
     groups: dict[str, list[dict[str, Any]]] = {}
     rows = []
     for case_path in cases:
@@ -119,6 +121,7 @@ def report(
         "electric_energy": {
             "status": "EXTERNAL_METER" if power is not None else "NOT_MEASURED",
             "source_csv": str(power_csv) if power_csv else None,
+            "source_sha256": hashlib.sha256(power_csv.read_bytes()).hexdigest() if power_csv else None,
             "scope": meter_scope if power_csv else None,
             "idle_watts": idle_watts,
             "note": (
@@ -128,7 +131,9 @@ def report(
             ),
         },
         "phases": phases,
-        "overall_pass": all(row["status"] == "PASS" for row in rows),
+        "overall_pass": (bool(rows) and all(row["status"] == "PASS" for row in rows)
+                         and (power is None or all(row["power_status"] == "MEASURED"
+                                                   for row in rows))),
     }
     (root / "summary.json").write_text(
         json.dumps(result, indent=2, ensure_ascii=False, allow_nan=False) + "\n",
