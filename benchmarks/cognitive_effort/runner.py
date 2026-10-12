@@ -457,39 +457,39 @@ def _run(args: argparse.Namespace) -> int:
                         )
                         if output["status"] != "PASS":
                             issues.append({"trial": trial_id, "status": output["status"]})
-            if args.with_production:
-                from persistent_cognition.percept_response_worker import UserPromptLLM
-                for case in PRODUCTION_POLICY_CASES:
-                    resident, observations = _resident(client, model)
-                    if not resident:
-                        raise RuntimeError("production policy benchmark model is not resident")
-                    audit.append("residency_observation", phase="production_response_policy",
-                                 case_id=case.case_id, resident=True, models=observations)
-                    def action(case=case) -> dict:
-                        # This is the actual production PCR semantic policy implementation,
-                        # including its existing validation/retry semantics.
-                        policy = UserPromptLLM(base_url=url, model=model)._response_policy(case.prompt)
-                        actual = policy.model_dump(mode="json")
-                        expected = {"evidence_scope": case.expected_scope,
-                                    "answer_kind": case.expected_kind,
-                                    "surface_mode": "NATURAL_LANGUAGE"}
-                        return {
-                            "passed": all(actual.get(key) == val for key, val in expected.items()),
-                            "expected": expected, "actual": actual,
-                            "worker": "UserPromptLLM._response_policy",
-                            "model_metrics": {},
-                            "note": "Worker contract returns validated policy; raw transport metrics "
-                                    "are not available at this caller boundary.",
-                        }
-                    output = run_trial(
-                        audit, f"production_{case.case_id}", "production_response_policy",
-                        {"case_id": case.case_id, "prompt": case.prompt,
-                         "expected_scope": case.expected_scope,
-                         "expected_kind": case.expected_kind},
-                        action, sample_seconds=sample_seconds,
-                    )
-                    if output["status"] != "PASS":
-                        issues.append({"trial": output["trial_id"], "status": output["status"]})
+                if args.with_production:
+                    from persistent_cognition.percept_response_worker import UserPromptLLM
+                    for case in PRODUCTION_POLICY_CASES:
+                        resident, observations = _resident(client, model)
+                        if not resident:
+                            raise RuntimeError("production policy benchmark model is not resident")
+                        audit.append("residency_observation", phase="production_response_policy",
+                                     case_id=case.case_id, resident=True, models=observations)
+                        def action(case=case) -> dict:
+                            # This is the actual production PCR semantic policy implementation,
+                            # including its existing validation/retry semantics.
+                            policy = UserPromptLLM(base_url=url, model=model)._response_policy(case.prompt)
+                            actual = policy.model_dump(mode="json")
+                            expected = {"evidence_scope": case.expected_scope,
+                                        "answer_kind": case.expected_kind,
+                                        "surface_mode": "NATURAL_LANGUAGE"}
+                            return {
+                                "passed": all(actual.get(key) == val for key, val in expected.items()),
+                                "expected": expected, "actual": actual,
+                                "worker": "UserPromptLLM._response_policy",
+                                "model_metrics": {},
+                                "note": "Worker contract returns validated policy; raw transport metrics "
+                                        "are not available at this caller boundary.",
+                            }
+                        output = run_trial(
+                            audit, f"production_{case.case_id}", "production_response_policy",
+                            {"case_id": case.case_id, "prompt": case.prompt,
+                             "expected_scope": case.expected_scope,
+                             "expected_kind": case.expected_kind},
+                            action, sample_seconds=sample_seconds,
+                        )
+                        if output["status"] != "PASS":
+                            issues.append({"trial": output["trial_id"], "status": output["status"]})
             if args.with_native:
                 output = _native_gate(audit, sample_seconds,
                                       args.native_timeout_seconds, model, sampler)
