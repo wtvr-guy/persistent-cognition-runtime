@@ -1,6 +1,7 @@
 param(
     [switch]$WithOllama,
     [switch]$WithNative,
+    [switch]$SkipProduction,
     [ValidateRange(0, 20)][int]$ColdRepeats = 0,
     [ValidateRange(1, 1000)][int]$WarmRepeats = 2,
     [ValidateRange(50, 5000)][int]$SampleMs = 250,
@@ -17,7 +18,10 @@ try {
         "--sample-ms", "$SampleMs",
         "--warm-repeats", "$WarmRepeats"
     )
-    if ($WithOllama) { $argsForBenchmark += "--with-ollama" }
+    if ($WithOllama) {
+        $argsForBenchmark += "--with-ollama"
+        if (-not $SkipProduction) { $argsForBenchmark += "--with-production" }
+    }
     if ($WithNative) { $argsForBenchmark += "--with-native" }
     if ($ColdRepeats -gt 0) {
         $argsForBenchmark += @("--cold-repeats", "$ColdRepeats")
@@ -31,7 +35,7 @@ try {
     if ($code -ne 0) {
         throw "cognitive-effort benchmark returned exit code $code; inspect the run artifacts"
     }
-    Write-Host "Cognitive-effort benchmark complete. Inspect summary.json and events.jsonl."
+    Write-Host "Cognitive-effort benchmark complete. Upload evidence.zip from the printed run directory."
 }
 finally {
     if ($locationPushed) { Pop-Location }
