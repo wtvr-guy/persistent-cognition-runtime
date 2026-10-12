@@ -7,6 +7,7 @@ confirmed disposable TEST_DATABASE_URL and is intentionally explicit.
 from __future__ import annotations
 
 import argparse
+from functools import partial
 from dataclasses import asdict
 from datetime import datetime, timezone
 import hashlib
@@ -25,12 +26,13 @@ import httpx
 import psutil
 
 from benchmarks.cognitive_effort.measurement import (
-    AUDIT_VERSION, AuditTrail, run_trial, verify_audit, utc_now,
+    AUDIT_VERSION, AuditTrail, Sampler, run_trial as measure_trial, verify_audit, utc_now,
 )
+from benchmarks.cognitive_effort.bundle import package_run, verify_bundle
 from benchmarks.cognitive_effort.report import report
 from benchmarks.cognitive_effort.spec import (
-    CASES, CLASSIFICATION_SCHEMA, SUITE_VERSION, classification_instruction,
-    fixture_digest, vars_case,
+    CASES, CLASSIFICATION_SCHEMA, SUITE_VERSION, PRODUCTION_POLICY_CASES,
+    classification_instruction, fixture_digest, vars_case,
 )
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -156,6 +158,10 @@ def _model_call(client: httpx.Client, model: str, text: str) -> dict:
         "model_metrics": {key: response.get(key) for key in metric_keys},
         "reported_model": response.get("model"),
         "hidden_thinking_not_persisted": True,
+        "prompt_contract_sha256": hashlib.sha256(
+            classification_instruction().encode("utf-8")).hexdigest(),
+        "schema_sha256": hashlib.sha256(
+            json.dumps(CLASSIFICATION_SCHEMA, sort_keys=True).encode("utf-8")).hexdigest(),
     }
 
 
@@ -181,7 +187,8 @@ def _disposable_test_database() -> dict:
     return {"name": db_name, "url_sha256": hashlib.sha256(raw.encode()).hexdigest()}
 
 
-def _native_gate(audit: AuditTrail, sample_seconds: float, timeout: float, model: str) -> dict:
+def _native_gate(audit: AuditTrail, sample_seconds: float, timeout: float,
+                 model: str, sampler: Sampler) -> dict:
     db = _disposable_test_database()
     environment = dict(os.environ)
     environment["REQUIRE_OLLAMA_ACCEPTANCE"] = "1"
@@ -209,15 +216,18 @@ def _native_gate(audit: AuditTrail, sample_seconds: float, timeout: float, model
             "output_artifact": "native_output.json",
             "note": "Pytest exit zero is structural, not proof of natural-language correctness.",
         }
-    return run_trial(
+    return measure_trial(
         audit, "native_ollama_acceptance", "native_ollama_acceptance",
         {"database": db, "command": command}, action, sample_seconds=sample_seconds,
+        sampler=sampler,
     )
 
 
 def _run(args: argparse.Namespace) -> int:
     if args.with_native and not args.with_ollama:
         raise ValueError("--with-native requires --with-ollama")
+    if args.with_production and not args.with_ollama:
+        raise ValueError("--with-production requires --with-ollama")
     if args.cold_repeats and not args.with_ollama:
         raise ValueError("--cold-repeats requires --with-ollama")
     if not 50 <= args.sample_ms <= 5000:
@@ -248,6 +258,11 @@ def _run(args: argparse.Namespace) -> int:
     summary_path = audit.root / "summary.json"
     issues: list[dict] = []
     sample_seconds = args.sample_ms / 1000
+    sampler = Sampler(sample_seconds)
+    sampler.start()
+    # All normal trials use ONE background monitoring thread. Audit fsync and
+    # sampler startup are outside the measured operation's perf_counter window.
+    run_trial = partial(measure_trial, sampler=sampler)
     try:
         manifest = {
             "suite": SUITE_VERSION, "audit_version": AUDIT_VERSION,
@@ -267,6 +282,7 @@ def _run(args: argparse.Namespace) -> int:
                 "cold_repeats": args.cold_repeats,
                 "sample_ms": args.sample_ms, "idle_seconds": args.idle_seconds,
                 "with_ollama": args.with_ollama, "with_native": args.with_native,
+                "with_production": args.with_production,
                 "model": model if args.with_ollama else None,
                 "ollama_url": url if args.with_ollama else None,
                 "native_database": native_db,
@@ -275,7 +291,8 @@ def _run(args: argparse.Namespace) -> int:
                 "No electricity measurement without an external timestamped power meter",
                 "Named Ollama process RSS/CPU are heuristic and may miss runner processes",
                 "Microbenchmarks do not replace end-to-end PCR native acceptance",
-                "Model calls here use synthetic local classifier tasks, not production policy routing",
+                "Simple classifier calls use synthetic inputs; a separate optional phase "
+                "measures the actual PCR response-policy worker",
                 "Measurements include sampler interference, external load and timing noise",
             ],
         }
@@ -419,8 +436,42 @@ def _run(args: argparse.Namespace) -> int:
                         )
                         if output["status"] != "PASS":
                             issues.append({"trial": trial_id, "status": output["status"]})
+            if args.with_production:
+                from persistent_cognition.percept_response_worker import UserPromptLLM
+                for case in PRODUCTION_POLICY_CASES:
+                    resident, observations = _resident(client, model)
+                    if not resident:
+                        raise RuntimeError("production policy benchmark model is not resident")
+                    audit.append("residency_observation", phase="production_response_policy",
+                                 case_id=case.case_id, resident=True, models=observations)
+                    def action(case=case) -> dict:
+                        # This is the actual production PCR semantic policy implementation,
+                        # including its existing validation/retry semantics.
+                        policy = UserPromptLLM(base_url=url, model=model)._response_policy(case.prompt)
+                        actual = policy.model_dump(mode="json")
+                        expected = {"evidence_scope": case.expected_scope,
+                                    "answer_kind": case.expected_kind,
+                                    "surface_mode": "NATURAL_LANGUAGE"}
+                        return {
+                            "passed": all(actual.get(key) == val for key, val in expected.items()),
+                            "expected": expected, "actual": actual,
+                            "worker": "UserPromptLLM._response_policy",
+                            "model_metrics": {},
+                            "note": "Worker contract returns validated policy; raw transport metrics "
+                                    "are not available at this caller boundary.",
+                        }
+                    output = run_trial(
+                        audit, f"production_{case.case_id}", "production_response_policy",
+                        {"case_id": case.case_id, "prompt": case.prompt,
+                         "expected_scope": case.expected_scope,
+                         "expected_kind": case.expected_kind},
+                        action, sample_seconds=sample_seconds,
+                    )
+                    if output["status"] != "PASS":
+                        issues.append({"trial": output["trial_id"], "status": output["status"]})
             if args.with_native:
-                output = _native_gate(audit, sample_seconds, args.native_timeout_seconds, model)
+                output = _native_gate(audit, sample_seconds,
+                                      args.native_timeout_seconds, model, sampler)
                 if output["status"] != "PASS":
                     issues.append({"trial": "native_ollama_acceptance", "status": output["status"]})
         run_trial(
@@ -437,9 +488,24 @@ def _run(args: argparse.Namespace) -> int:
         )
         raise
     finally:
+        sampler.stop()
+        audit.artifact("host_samples.json", {
+            "sampling_interval_seconds": sample_seconds, "samples": sampler.samples,
+            "errors": sampler.errors, "mode": "one_shared_background_monitor",
+        })
         audit.close()
+        if sys.exc_info()[0] is not None:
+            # Even a crashed run must have a ready-to-upload ZIP.
+            try:
+                print(f"Incomplete evidence bundle: {package_run(audit.root)}", flush=True)
+            except Exception as pack_exc:
+                print(f"Evidence packaging failed: {pack_exc}", file=sys.stderr)
         print(f"Benchmark artifacts: {audit.root}", flush=True)
-    final = report(audit.root)
+    try:
+        final = report(audit.root)
+    finally:
+        # A normal benchmark with failed cases is still a complete audit.
+        print(f"Evidence bundle: {package_run(audit.root)}", flush=True)
     print(f"Audit integrity: {final['audit']['valid']}; all passed: {final['overall_pass']}")
     for phase, result in final["phases"].items():
         print(
@@ -456,6 +522,7 @@ def main() -> int:
     run = commands.add_parser("run", help="Run fresh local benchmarks")
     run.add_argument("--with-ollama", action="store_true")
     run.add_argument("--with-native", action="store_true")
+    run.add_argument("--with-production", action="store_true")
     run.add_argument("--model")
     run.add_argument("--ollama-url", default=os.environ.get(
         "OLLAMA_BASE_URL", "http://127.0.0.1:11434"))
@@ -473,6 +540,8 @@ def main() -> int:
     run.add_argument("--output-root", type=Path)
     check = commands.add_parser("verify", help="Verify audit chain and trial artifacts")
     check.add_argument("--run-dir", type=Path, required=True)
+    bundle_check = commands.add_parser("verify-zip", help="Verify included evidence bundle digests")
+    bundle_check.add_argument("--zip", type=Path, required=True)
     summarize = commands.add_parser("report", help="Recompute report from verified trial artifacts")
     summarize.add_argument("--run-dir", type=Path, required=True)
     summarize.add_argument("--power-csv", type=Path)
@@ -483,6 +552,9 @@ def main() -> int:
     args = parser.parse_args()
     if args.command == "run":
         return _run(args)
+    if args.command == "verify-zip":
+        print(json.dumps(verify_bundle(args.zip), indent=2))
+        return 0
     if args.command == "verify":
         outcome = verify_audit(args.run_dir)
         print(json.dumps(outcome, indent=2))
