@@ -7,6 +7,7 @@ from pathlib import Path
 import pytest
 
 from benchmarks.cognitive_effort.energy import energy_joules, read_power_samples
+from benchmarks.cognitive_effort.bundle import package_run, verify_bundle
 from benchmarks.cognitive_effort.measurement import AuditTrail, run_trial, verify_audit
 from benchmarks.cognitive_effort.report import report
 from benchmarks.cognitive_effort.runner import _local_base_url, _model_call
@@ -168,7 +169,8 @@ def test_complete_deterministic_runner_smoke(tmp_path: Path, monkeypatch):
         "commit": "a" * 40, "branch": "test", "clean": True,
     })
     args = Namespace(
-        with_native=False, with_ollama=False, cold_repeats=0, warm_repeats=1,
+        with_native=False, with_ollama=False, with_production=False,
+        cold_repeats=0, warm_repeats=1,
         deterministic_iterations=2, deterministic_repeats=1, retrieval_repeats=1,
         sample_ms=50, idle_seconds=0.05, timeout_seconds=1.0,
         native_timeout_seconds=1.0, expected_commit=None, allow_dirty=False,
@@ -182,3 +184,59 @@ def test_complete_deterministic_runner_smoke(tmp_path: Path, monkeypatch):
     assert summary["overall_pass"]
     assert summary["phases"]["deterministic_classifier"]["trial_count"] == 16
     assert summary["phases"]["associative_retrieval"]["passes"] == 1
+    assert summary["phases"]["production_precheck"]["passes"] == 5
+    assert "process_cpu_ms_median" in summary["phases"]["deterministic_classifier"]
+    assert summary["monitor_diagnostics"]["sampling_mode"] == "one_shared_background_monitor"
+    bundle = run_dir / "evidence.zip"
+    assert bundle.exists()
+    assert verify_bundle(bundle)["valid"]
+    import zipfile
+    with zipfile.ZipFile(bundle) as z:
+        assert "events.jsonl" in z.namelist()
+        assert "summary.json" in z.namelist()
+        assert "cases/det_000_C03.json" in z.namelist()
+        assert "host_samples.json" in z.namelist()
+
+def test_bundle_uses_exact_source_bytes_and_rejects_changed_member(tmp_path: Path):
+    import zipfile
+    root = tmp_path / "bundle_run"
+    audit = AuditTrail(root)
+    audit.artifact("manifest.json", {"source": "test"})
+    audit.append("run_start", run_id="pack")
+    trial = run_trial(audit, "fail_case", "benchmark", {"text": "/code."},
+                      lambda: {"passed": False, "expected": "coding", "actual": "general"},
+                      sample_seconds=.05)
+    audit.append("run_end", issue_count=1, completed=True)
+    audit.close()
+    report(root)
+    bundle = package_run(root)
+    assert verify_bundle(bundle)["valid"]
+    with zipfile.ZipFile(bundle) as z:
+        assert json.loads(z.read("cases/fail_case.json"))["status"] == "FAIL"
+        assert z.read("manifest.json") == (root / "manifest.json").read_bytes()
+    # Changing the original file doesn't retroactively mutate the published archive.
+    (root / "manifest.json").write_text("corrupted", encoding="utf-8")
+    assert verify_bundle(bundle)["valid"]
+    assert not verify_audit(root)["valid"]
+
+def test_model_failure_is_promoted_to_summary(tmp_path: Path):
+    root = tmp_path / "failure_run"
+    audit = AuditTrail(root)
+    audit.artifact("manifest.json", {"source": "test"})
+    audit.append("run_start", run_id="model")
+    run_trial(audit, "wrong_label", "ollama_warm_classifier",
+              {"case_id": "C03", "expected": "coding"},
+              lambda: {"passed": False, "expected": "coding", "label": "general",
+                       "exact_message_content": '{"task":"general"}',
+                       "model_metrics": {"prompt_eval_count": 113, "eval_count": 10}},
+              sample_seconds=.05)
+    audit.append("run_end", issue_count=1, completed=True)
+    audit.close()
+    result = report(root)
+    failed = result["phases"]["ollama_warm_classifier"]["failures"][0]
+    assert failed["expected"] == "coding"
+    assert failed["actual"] == "general"
+    assert failed["model_metrics"]["prompt_eval_count"] == 113
+    assert failed["raw_model_output"] == '{"task":"general"}'
+    assert not result["overall_pass"]
+
