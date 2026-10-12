@@ -102,3 +102,23 @@ PRODUCTION_POLICY_CASES: tuple[ProductionPolicyCase, ...] = (
         "GENERAL_OR_CURRENT", "SYNTHESIS",
     ),
 )
+
+
+@dataclass(frozen=True, slots=True)
+class DeterministicPrecheckCase:
+    case_id: str
+    prompt: str
+    expected_explicit_reference: bool
+
+
+# Independent lexical-regex oracle. Important: P04 below may require semantic
+# MIXED_CONVERSATION even though the *narrow regex* correctly returns False.
+# This is not a quality failure of a method that never promised full scope.
+PRECHECK_CASES: tuple[DeterministicPrecheckCase, ...] = (
+    DeterministicPrecheckCase("D01", "What did you just recommend?", True),
+    DeterministicPrecheckCase("D02", "You ruled out the earlier approach.", True),
+    DeterministicPrecheckCase("D03", "Show me the previous response.", True),
+    DeterministicPrecheckCase("D04", "Tell me the codename for Project Oriole.", False),
+    DeterministicPrecheckCase("D05", "What nickname are we using, and which "
+                              "approach did you just rule out?", False),
+)
