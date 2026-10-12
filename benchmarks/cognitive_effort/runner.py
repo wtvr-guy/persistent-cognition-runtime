@@ -17,6 +17,7 @@ import platform
 import random
 import subprocess
 import sys
+import time
 from urllib.parse import urlparse
 from uuid import uuid4
 
@@ -227,6 +228,8 @@ def _run(args: argparse.Namespace) -> int:
             raise ValueError(f"{name} must be in 1..100000")
     if not 0 <= args.cold_repeats <= 20:
         raise ValueError("cold_repeats must be in 0..20")
+    if not 0 < args.idle_seconds <= 120:
+        raise ValueError("idle_seconds must be in (0, 120]")
     if args.timeout_seconds <= 0 or args.native_timeout_seconds <= 0:
         raise ValueError("timeouts must be positive")
     environment = _versioned_environment(args.allow_dirty)
@@ -262,7 +265,7 @@ def _run(args: argparse.Namespace) -> int:
                 "retrieval_repeats": args.retrieval_repeats,
                 "warm_repeats": args.warm_repeats,
                 "cold_repeats": args.cold_repeats,
-                "sample_ms": args.sample_ms,
+                "sample_ms": args.sample_ms, "idle_seconds": args.idle_seconds,
                 "with_ollama": args.with_ollama, "with_native": args.with_native,
                 "model": model if args.with_ollama else None,
                 "ollama_url": url if args.with_ollama else None,
@@ -278,6 +281,11 @@ def _run(args: argparse.Namespace) -> int:
         }
         audit.artifact("manifest.json", manifest)
         audit.append("run_start", run_id=run_id, fixture_sha256=fixture_digest())
+        run_trial(
+            audit, "idle_start", "idle_baseline", {"requested_seconds": args.idle_seconds},
+            lambda: (time.sleep(args.idle_seconds) or {"passed": True}),
+            sample_seconds=sample_seconds,
+        )
         from persistent_cognition.model_admission import classify_task
         from persistent_cognition.associative_benchmark import run_associative_benchmark
         from persistent_cognition.synthetic_benchmark import run_benchmark
@@ -415,6 +423,11 @@ def _run(args: argparse.Namespace) -> int:
                 output = _native_gate(audit, sample_seconds, args.native_timeout_seconds, model)
                 if output["status"] != "PASS":
                     issues.append({"trial": "native_ollama_acceptance", "status": output["status"]})
+        run_trial(
+            audit, "idle_end", "idle_baseline", {"requested_seconds": args.idle_seconds},
+            lambda: (time.sleep(args.idle_seconds) or {"passed": True}),
+            sample_seconds=sample_seconds,
+        )
         audit.append("run_end", issue_count=len(issues), completed=True)
     except BaseException as exc:
         import traceback
@@ -452,6 +465,7 @@ def main() -> int:
     run.add_argument("--deterministic-repeats", type=int, default=3)
     run.add_argument("--retrieval-repeats", type=int, default=3)
     run.add_argument("--sample-ms", type=int, default=250)
+    run.add_argument("--idle-seconds", type=float, default=5.0)
     run.add_argument("--timeout-seconds", type=float, default=300)
     run.add_argument("--native-timeout-seconds", type=float, default=1800)
     run.add_argument("--expected-commit")
