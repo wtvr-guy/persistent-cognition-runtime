@@ -110,7 +110,10 @@ class Sampler:
     def _loop(self) -> None:
         while True:
             try:
-                self.samples.append(self._capture())
+                sample_tick = time.perf_counter_ns()
+                sample = self._capture()
+                sample["capture_elapsed_ns"] = time.perf_counter_ns() - sample_tick
+                self.samples.append(sample)
             except Exception as exc:
                 self.errors.append(f"{type(exc).__name__}: {exc}")
             if len(self.samples) >= 10000:
@@ -118,7 +121,10 @@ class Sampler:
                 return
             if self.stop_signal.wait(self.interval):
                 try:
-                    self.samples.append(self._capture())
+                    sample_tick = time.perf_counter_ns()
+                    sample = self._capture()
+                    sample["capture_elapsed_ns"] = time.perf_counter_ns() - sample_tick
+                    self.samples.append(sample)
                 except Exception as exc:
                     self.errors.append(f"final: {type(exc).__name__}: {exc}")
                 return
@@ -178,6 +184,9 @@ def measurement_summary(samples: list[dict[str, Any]]) -> dict[str, Any]:
 
     return {
         "sample_count": len(samples),
+        "sampled_capture_overhead_ms": round(
+            sum(s.get("capture_elapsed_ns", 0) for s in samples) / 1_000_000, 6),
+        "process_cpu_boundary_resolution": "time.process_time_ns",
         "host_cpu_average_percent": (
             round(sum(s["host_cpu_percent"] for s in samples) / len(samples), 3)
             if samples else None
