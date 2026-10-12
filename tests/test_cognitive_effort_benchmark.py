@@ -203,7 +203,7 @@ def test_bundle_uses_exact_source_bytes_and_rejects_changed_member(tmp_path: Pat
     audit = AuditTrail(root)
     audit.artifact("manifest.json", {"source": "test"})
     audit.append("run_start", run_id="pack")
-    trial = run_trial(audit, "fail_case", "benchmark", {"text": "/code."},
+    run_trial(audit, "fail_case", "benchmark", {"text": "/code."},
                       lambda: {"passed": False, "expected": "coding", "actual": "general"},
                       sample_seconds=.05)
     audit.append("run_end", issue_count=1, completed=True)
