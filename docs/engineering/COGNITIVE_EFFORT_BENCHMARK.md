@@ -211,7 +211,8 @@ a cost-aware cognitive governor.
 The deterministic baseline runs without Ollama or PostgreSQL and adds a
 production_precheck phase using PCR's real
 response_policy.explicit_prior_assistant_reference function. Its five frozen
-cases are copied from existing native response-policy acceptance tests.
+lexical cases are independent of the semantic worker cases, because the
+rule intentionally does not handle every mixed-conversation request.
 This tests only the deterministic forced-mixed-scope fast path. It is **not**
 a substitute for the full semantic source-policy specialist.
 
