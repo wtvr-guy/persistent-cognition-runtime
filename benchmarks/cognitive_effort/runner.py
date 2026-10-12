@@ -31,7 +31,7 @@ from benchmarks.cognitive_effort.measurement import (
 from benchmarks.cognitive_effort.bundle import package_run, verify_bundle
 from benchmarks.cognitive_effort.report import report
 from benchmarks.cognitive_effort.spec import (
-    CASES, CLASSIFICATION_SCHEMA, SUITE_VERSION, PRODUCTION_POLICY_CASES,
+    CASES, CLASSIFICATION_SCHEMA, SUITE_VERSION, PRODUCTION_POLICY_CASES, PRECHECK_CASES,
     classification_instruction, fixture_digest, vars_case,
 )
 
@@ -359,19 +359,18 @@ def _run(args: argparse.Namespace) -> int:
         # A production deterministic fast path is measurable separately from
         # full semantic source-policy selection; these are NOT equivalent jobs.
         from persistent_cognition.response_policy import explicit_prior_assistant_reference
-        for case in PRODUCTION_POLICY_CASES:
+        for case in PRECHECK_CASES:
             def precheck(case=case) -> dict:
-                expected = case.expected_scope == "MIXED_CONVERSATION"
                 actual = explicit_prior_assistant_reference(case.prompt)
                 return {
-                    "passed": actual == expected,
-                    "expected": expected, "actual": actual,
-                    "scope": "narrow explicit-prior-assistant-reference fast path only",
+                    "passed": actual == case.expected_explicit_reference,
+                    "expected": case.expected_explicit_reference, "actual": actual,
+                    "scope": "exact lexical prior-assistant-reference recognition only",
                 }
             output = run_trial(
                 audit, f"precheck_{case.case_id}", "production_precheck",
                 {"case_id": case.case_id, "prompt": case.prompt,
-                 "expected_force_mixed": case.expected_scope == "MIXED_CONVERSATION"},
+                 "expected_explicit_reference": case.expected_explicit_reference},
                 precheck, sample_seconds=sample_seconds,
             )
             if output["status"] != "PASS":
