@@ -1,6 +1,6 @@
 # Cognitive effort and energy benchmark (COG-EFFORT-001)
 
-**Status:** v1 experimental, local-host measurement; no production cognition is changed.
+**Status:** v1.1 experimental, local-host measurement; no production cognition is changed.
 
 This benchmark asks how much wall time, CPU work, memory pressure, local-model
 work, and *if an external electrical meter is available*, actual energy are
@@ -204,3 +204,69 @@ benchmark revision should add equivalent *production worker* tasks under
 the same resource probe and exact oracle, optionally including trained
 tiny classifiers against existing specialist decisions, before introducing
 a cost-aware cognitive governor.
+
+
+## v1.1: production policy, shared monitoring, automatic evidence ZIP
+
+The deterministic baseline runs without Ollama or PostgreSQL and adds a
+production_precheck phase using PCR's real
+response_policy.explicit_prior_assistant_reference function. Its five frozen
+cases are copied from existing native response-policy acceptance tests.
+This tests only the deterministic forced-mixed-scope fast path. It is **not**
+a substitute for the full semantic source-policy specialist.
+
+The Windows -WithOllama invocation now runs --with-production by default
+(unless -SkipProduction is specified). That calls PCR's actual
+UserPromptLLM._response_policy, including validation and retry semantics.
+The same five frozen cases have explicitly specified evidence_scope,
+answer_kind and surface_mode expectations. The public worker interface
+returns a validated policy, not the underlying model transport response;
+therefore raw token statistics are unavailable for this phase, not invented.
+
+Unlike v1, the run uses **one background sampler** instead of creating and
+joining a monitoring thread on every case. Python process_time_ns and
+perf_counter_ns are recorded around each workload. Host-wide and named-Ollama
+CPU/RSS remain approximate sampled observations, and sub-millisecond cases
+often have no in-window sample. Those intervals are reported as uncovered,
+not zero. A new host_samples.json artifact retains the full series and the
+sampler's own scan wall-time overhead.
+
+The summary now includes actual versus expected classifications, actual
+structured model output and token counts when available, and trial artifact
+locations. This makes it easier to diagnose the recurring C03, C10, C12 and
+C15 wrong-enum failures identified from the first run.
+
+### Automatic ZIP packaging
+
+After every complete run, even one containing model classification failures,
+the runner automatically creates:
+
+    benchmarks/generated/cognitive_effort/RUN_ID/evidence.zip
+
+The ZIP includes the full cases subdirectory, the audit chain, run manifest,
+host observation series, summary JSON/CSV, and any native output. An interrupted
+run also attempts to produce a diagnostic ZIP of available evidence. Member
+hashes are recorded in BUNDLE_MANIFEST.json, independently verifiable with:
+
+~~~powershell
+uv run --locked python -m benchmarks.cognitive_effort.runner verify-zip --zip "benchmarks/generated/cognitive_effort/RUN_ID/evidence.zip"
+~~~
+
+Upload **only evidence.zip** to supply the complete run. No manual compression
+or separate cases upload is necessary. Note that raw native stdout, model
+inputs and case artifacts can include sensitive operational data.
+
+### Windows rerun
+
+~~~powershell
+git fetch origin bench/cognitive-effort-energy-v1
+git switch bench/cognitive-effort-energy-v1
+uv sync --frozen
+uv run --locked pytest -q tests/test_cognitive_effort_benchmark.py
+.\scripts\run_cognitive_effort.ps1
+.\scripts\run_cognitive_effort.ps1 -WithOllama -ColdRepeats 2 -WarmRepeats 2
+~~~
+
+Use -SkipProduction to omit actual PCR source-policy worker comparisons.
+This remains an exploratory suite: the five native policy oracle cases
+are not a sufficient held-out corpus for production strategy selection.
