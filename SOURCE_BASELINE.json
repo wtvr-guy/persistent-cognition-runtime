@@ -2221,7 +2221,7 @@
     "benchmarks/cognitive_effort/spec.py": {
       "source_path": null,
       "source_sha256": null,
-      "extracted_sha256": "033cdc9fa963ce01474c3d804e88ac8ab17f5f6f0bf75d93e28a51778a7ce237",
+      "extracted_sha256": "e06b18706c0b7a8157557f509db781e936592c5ff24ba2f02787b5513bc44511",
       "extraction_path": "benchmarks/cognitive_effort/spec.py",
       "status": "added",
       "reason": "COG-EFFORT-001: independent auditable cognitive-effort measurement, reproducible local runner and operator guidance."
@@ -2253,7 +2253,7 @@
     "benchmarks/cognitive_effort/runner.py": {
       "source_path": null,
       "source_sha256": null,
-      "extracted_sha256": "ef9b459867f1963d0cd2a4158d0ee90473105ac8ecc9b83a03c0b67f5f1dde10",
+      "extracted_sha256": "0075ffe6548f9c6d42458d22e522110166bd4c3b2b3bdabb635788afa3797dcf",
       "extraction_path": "benchmarks/cognitive_effort/runner.py",
       "status": "added",
       "reason": "COG-EFFORT-001: independent auditable cognitive-effort measurement, reproducible local runner and operator guidance."
@@ -2261,7 +2261,7 @@
     "tests/test_cognitive_effort_benchmark.py": {
       "source_path": null,
       "source_sha256": null,
-      "extracted_sha256": "eaaa0d56cb7d24c0b5ee9ce3242db6d4f95ffe82a5233eb4487adad65c0bcd46",
+      "extracted_sha256": "9c1a811bf3bf7f949b5d5973841296b939880b154b76a76ef1bb7b0250098533",
       "extraction_path": "tests/test_cognitive_effort_benchmark.py",
       "status": "added",
       "reason": "COG-EFFORT-001: independent auditable cognitive-effort measurement, reproducible local runner and operator guidance."
@@ -2277,7 +2277,7 @@
     "docs/engineering/COGNITIVE_EFFORT_BENCHMARK.md": {
       "source_path": null,
       "source_sha256": null,
-      "extracted_sha256": "948d2cff3d790ab4d0ba20565f04485f9306b315205570cce2da0ae35602c281",
+      "extracted_sha256": "314e91086c7f686d06255a342f856b09a37448717191b1221303ee68a425fa8a",
       "extraction_path": "docs/engineering/COGNITIVE_EFFORT_BENCHMARK.md",
       "status": "added",
       "reason": "COG-EFFORT-001: independent auditable cognitive-effort measurement, reproducible local runner and operator guidance."
