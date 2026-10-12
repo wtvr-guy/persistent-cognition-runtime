@@ -27,7 +27,8 @@
     "Completed always-on namespace-owned percept supervision, typed arbitrary-data intake, structured action receipts, finite outcome feedback, and trusted worker-command bootstrap for application callbacks.",
     "Current extraction_path and extracted_sha256 distinguish moved/adapted files from preserved original source_path/source_sha256; additions and retirements are explicit.",
     "Require practical deterministic evidence display and trusted structured field lookup before model-based response realization; retire ordinary factual token-range selection, journal model-free render receipts and strengthen native factual acceptance.",
-    "Calibrated native Windows RAM admission to a fixed 1 GiB system reserve, preserved verified warm-model incremental accounting and cold fallback, prewarmed the native acceptance model, and added resource regression tests."
+    "Calibrated native Windows RAM admission to a fixed 1 GiB system reserve, preserved verified warm-model incremental accounting and cold fallback, prewarmed the native acceptance model, and added resource regression tests.",
+    "COG-EFFORT-001 adds isolated cognition/energy measurements, append-only trace artifacts, fixed synthetic oracles and optional native benchmark without modifying production engine authority."
   ],
   "files": {
     ".python-version": {
@@ -2207,6 +2208,78 @@
       "extracted_sha256": "49128d733001a264919a055b16b1ddabd83645cf16624fd6968cced38c0287a3",
       "status": "added",
       "reason": "Replace the native relational false pass with model-free evidence and both-value regression coverage."
+    },
+    "benchmarks/cognitive_effort/__init__.py": {
+      "source_path": null,
+      "source_sha256": null,
+      "extracted_sha256": "27a1b24ba9e39c75de18e230c17b474f6690cb6ff26b1a3871af011a135c6141",
+      "extraction_path": "benchmarks/cognitive_effort/__init__.py",
+      "status": "added",
+      "reason": "COG-EFFORT-001: independent auditable cognitive-effort measurement, reproducible local runner and operator guidance."
+    },
+    "benchmarks/cognitive_effort/spec.py": {
+      "source_path": null,
+      "source_sha256": null,
+      "extracted_sha256": "c3d2e6bd76d25d7fc81da2ce5054b5b7c30a222bc1e7b28e09ed7a2227a5fa64",
+      "extraction_path": "benchmarks/cognitive_effort/spec.py",
+      "status": "added",
+      "reason": "COG-EFFORT-001: independent auditable cognitive-effort measurement, reproducible local runner and operator guidance."
+    },
+    "benchmarks/cognitive_effort/measurement.py": {
+      "source_path": null,
+      "source_sha256": null,
+      "extracted_sha256": "1bcba4f6cb1e645c1f7103758113a96edc7d6c74e597e13b9025f1ce3324aafd",
+      "extraction_path": "benchmarks/cognitive_effort/measurement.py",
+      "status": "added",
+      "reason": "COG-EFFORT-001: independent auditable cognitive-effort measurement, reproducible local runner and operator guidance."
+    },
+    "benchmarks/cognitive_effort/energy.py": {
+      "source_path": null,
+      "source_sha256": null,
+      "extracted_sha256": "8b0261037b1072065fa577ecf5436ce0e475b90d39a0a8bec18e8796e8789e4a",
+      "extraction_path": "benchmarks/cognitive_effort/energy.py",
+      "status": "added",
+      "reason": "COG-EFFORT-001: independent auditable cognitive-effort measurement, reproducible local runner and operator guidance."
+    },
+    "benchmarks/cognitive_effort/report.py": {
+      "source_path": null,
+      "source_sha256": null,
+      "extracted_sha256": "58a15089d3ecc597e8363f138b70ffe5e3a932cdae4b39c44fae4a36bc0c374c",
+      "extraction_path": "benchmarks/cognitive_effort/report.py",
+      "status": "added",
+      "reason": "COG-EFFORT-001: independent auditable cognitive-effort measurement, reproducible local runner and operator guidance."
+    },
+    "benchmarks/cognitive_effort/runner.py": {
+      "source_path": null,
+      "source_sha256": null,
+      "extracted_sha256": "78433b1f25812732d204488f641407c2bf19e9b78543139796f1ac2057c2ecad",
+      "extraction_path": "benchmarks/cognitive_effort/runner.py",
+      "status": "added",
+      "reason": "COG-EFFORT-001: independent auditable cognitive-effort measurement, reproducible local runner and operator guidance."
+    },
+    "tests/test_cognitive_effort_benchmark.py": {
+      "source_path": null,
+      "source_sha256": null,
+      "extracted_sha256": "1bd413579d0f063ce2aa693c9899fa23f8f55731a14364fa1a35f548cf91daf4",
+      "extraction_path": "tests/test_cognitive_effort_benchmark.py",
+      "status": "added",
+      "reason": "COG-EFFORT-001: independent auditable cognitive-effort measurement, reproducible local runner and operator guidance."
+    },
+    "scripts/run_cognitive_effort.ps1": {
+      "source_path": null,
+      "source_sha256": null,
+      "extracted_sha256": "b3339911a72bce77d7b004dd5c7dc08822f5deff16f6baa951e7739978873ab4",
+      "extraction_path": "scripts/run_cognitive_effort.ps1",
+      "status": "added",
+      "reason": "COG-EFFORT-001: independent auditable cognitive-effort measurement, reproducible local runner and operator guidance."
+    },
+    "docs/engineering/COGNITIVE_EFFORT_BENCHMARK.md": {
+      "source_path": null,
+      "source_sha256": null,
+      "extracted_sha256": "9d5ca56ecf285dd54dc8bef8a84861fd9ea00ce3e27f79dfc9eca24d8f9da1b8",
+      "extraction_path": "docs/engineering/COGNITIVE_EFFORT_BENCHMARK.md",
+      "status": "added",
+      "reason": "COG-EFFORT-001: independent auditable cognitive-effort measurement, reproducible local runner and operator guidance."
     }
   },
   "manifest_version": 2
