@@ -250,6 +250,20 @@ def _run(args: argparse.Namespace) -> int:
         )
     model = args.model or os.environ.get("OLLAMA_MODEL", "qwen3:4b-instruct-2507-q4_K_M")
     url = _local_base_url(args.ollama_url)
+    if args.with_production:
+        from persistent_cognition.runtime_settings import job_settings
+        settings = job_settings()
+        if settings is not None:
+            selection = settings.selection_for("V2_EVIDENCE_POLICY")
+            source_port = urlparse(_local_base_url(settings.ollama_url)).port or 80
+            selected_port = urlparse(url).port or 80
+            if (selection.provider != "ollama" or
+                _canonical_model(selection.model) != _canonical_model(model) or
+                source_port != selected_port):
+                raise ValueError(
+                    "production policy worker route differs from local benchmark model/port; "
+                    "refusing to benchmark a different or remote provider"
+                )
     native_db = _disposable_test_database() if args.with_native else None
     output_root = args.output_root.resolve() if args.output_root else RESULT_ROOT
     output_root.mkdir(parents=True, exist_ok=True)
@@ -458,6 +472,7 @@ def _run(args: argparse.Namespace) -> int:
                             issues.append({"trial": trial_id, "status": output["status"]})
                 if args.with_production:
                     from persistent_cognition.percept_response_worker import UserPromptLLM
+                    from persistent_cognition.percept_response_runtime import PerceptStage
                     for case in PRODUCTION_POLICY_CASES:
                         resident, observations = _resident(client, model)
                         if not resident:
@@ -467,7 +482,8 @@ def _run(args: argparse.Namespace) -> int:
                         def action(case=case) -> dict:
                             # This is the actual production PCR semantic policy implementation,
                             # including its existing validation/retry semantics.
-                            policy = UserPromptLLM(base_url=url, model=model)._response_policy(case.prompt)
+                            policy = UserPromptLLM(base_url=url, model=model,
+                                               stage=PerceptStage.EVIDENCE_POLICY)._response_policy(case.prompt)
                             actual = policy.model_dump(mode="json")
                             expected = {"evidence_scope": case.expected_scope,
                                         "answer_kind": case.expected_kind,
