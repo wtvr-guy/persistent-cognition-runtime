@@ -250,3 +250,31 @@ def test_precheck_oracle_is_distinct_from_full_semantic_scope_oracle():
     assert not explicit_prior_assistant_reference(
         "What nickname are we using, and which approach did you just rule out?"
     )
+
+
+def test_production_policy_refuses_remote_configured_specialist(tmp_path: Path, monkeypatch):
+    """Benchmark must never silently route a 'local' comparison to a cloud LLM."""
+    from argparse import Namespace
+    from types import SimpleNamespace
+    from benchmarks.cognitive_effort import runner
+    from persistent_cognition import runtime_settings
+    monkeypatch.setattr(runner, "_versioned_environment", lambda _: {
+        "commit": "f" * 40, "branch": "test", "clean": True,
+    })
+    selection = SimpleNamespace(provider="openai", model="other-model")
+    settings = SimpleNamespace(
+        selection_for=lambda _stage: selection,
+        ollama_url="http://127.0.0.1:11434",
+    )
+    monkeypatch.setattr(runtime_settings, "job_settings", lambda: settings)
+    args = Namespace(
+        with_native=False, with_ollama=True, with_production=True,
+        cold_repeats=0, warm_repeats=1, deterministic_iterations=2,
+        deterministic_repeats=1, retrieval_repeats=1, sample_ms=50,
+        idle_seconds=0.05, timeout_seconds=1.0, native_timeout_seconds=1.0,
+        expected_commit=None, allow_dirty=False, model=None,
+        ollama_url="http://127.0.0.1:11434", output_root=tmp_path,
+    )
+    with pytest.raises(ValueError, match="different or remote provider"):
+        runner._run(args)
+    assert not tuple(tmp_path.glob("**/events.jsonl"))
