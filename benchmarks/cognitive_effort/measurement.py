@@ -206,14 +206,17 @@ def run_trial(
     action: Callable[[], dict[str, Any]],
     *,
     sample_seconds: float,
+    sampler: Sampler | None = None,
 ) -> dict[str, Any]:
     if not SAFE_ID.fullmatch(trial_id):
         raise ValueError("unsafe trial identifier")
     audit.append("trial_start", trial_id=trial_id, phase=phase)
-    sampler = Sampler(sample_seconds)
+    # One background sampler is shared across the whole run, not restarted for
+    # each operation. In particular, do not let slow process scans contaminate
+    # sub-millisecond classification workloads.
     started_utc = utc_now()
     started_epoch = time.time()
-    sampler.start()
+    cpu_tick = time.process_time_ns()
     tick = time.perf_counter_ns()
     result: dict[str, Any] = {}
     failure: dict[str, Any] | None = None
@@ -226,9 +229,15 @@ def run_trial(
             "traceback": traceback.format_exc(),
         }
     elapsed_ns = time.perf_counter_ns() - tick
+    process_cpu_ns = time.process_time_ns() - cpu_tick
     ended_epoch = time.time()
     ended_utc = utc_now()
-    sampler.stop()
+    captured = (
+        [item for item in sampler.samples
+         if started_epoch <= item["epoch_seconds"] <= ended_epoch]
+        if sampler is not None else []
+    )
+    sampler_errors = list(sampler.errors) if sampler is not None else []
     status = "ERROR" if failure else ("PASS" if result.get("passed") else "FAIL")
     payload = {
         "trial_id": trial_id,
@@ -242,15 +251,22 @@ def run_trial(
         "start_epoch_seconds": started_epoch,
         "end_epoch_seconds": ended_epoch,
         "elapsed_ns": elapsed_ns,
-        "samples": sampler.samples,
-        "sample_errors": sampler.errors,
-        "measurements": measurement_summary(sampler.samples),
+        "process_cpu_ns": process_cpu_ns,
+        "sampling_mode": "shared_background" if sampler is not None else "disabled",
+        "sample_coverage": "sampled" if captured else "no_samples_in_interval",
+        "samples": captured,
+        "sample_errors": sampler_errors,
+        "measurements": measurement_summary(captured),
     }
+    artifact_started = time.perf_counter_ns()
     audit.artifact(f"cases/{trial_id}.json", payload)
     audit.append(
         "trial_end", trial_id=trial_id, phase=phase, status=status,
         elapsed_ns=elapsed_ns, artifact_path=f"cases/{trial_id}.json",
+        process_cpu_ns=process_cpu_ns,
     )
+    # Diagnostic only; not included in workload latency or the immutable case.
+    payload["audit_overhead_ns"] = time.perf_counter_ns() - artifact_started
     return payload
 
 
