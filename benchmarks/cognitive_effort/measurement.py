@@ -260,6 +260,10 @@ def verify_audit(root: Path) -> dict[str, Any]:
     starts: set[str] = set()
     ends: set[str] = set()
     sequence = 0
+    run_started = False
+    run_ended = False
+    run_error = False
+    referenced_artifacts: set[str] = set()
     source = root / "events.jsonl"
     if not source.is_file():
         return {"valid": False, "errors": ["events.jsonl is missing"], "events": 0}
@@ -273,8 +277,15 @@ def verify_audit(root: Path) -> dict[str, Any]:
                 raise ValueError("audit entry hash mismatch")
             previous = digest
             sequence += 1
+            if event["kind"] == "run_start":
+                run_started = True
+            if event["kind"] == "run_end":
+                run_ended = True
+            if event["kind"] == "run_error":
+                run_error = True
             if event["kind"] == "artifact":
                 relative = event["fields"]["path"]
+                referenced_artifacts.add(relative)
                 path = Path(relative)
                 if path.is_absolute() or ".." in path.parts:
                     raise ValueError("unsafe artifact path")
@@ -290,6 +301,11 @@ def verify_audit(root: Path) -> dict[str, Any]:
             break
     if starts != ends:
         errors.append(f"incomplete trials: {sorted(starts - ends)}")
+    if not run_started or not run_ended or run_error:
+        errors.append("run incomplete or failed: inspect run_error and any pending trials")
+    for candidate in (root / "cases").glob("*.json"):
+        if f"cases/{candidate.name}" not in referenced_artifacts:
+            errors.append(f"unreferenced trial artifact: {candidate.name}")
     return {
         "valid": not errors, "errors": errors, "events": sequence,
         "completed_trials": len(ends), "chain_head_sha256": previous,
