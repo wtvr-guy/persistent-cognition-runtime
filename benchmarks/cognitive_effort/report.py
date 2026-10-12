@@ -74,6 +74,14 @@ def report(
             "trial_id": trial["trial_id"], "phase": phase, "status": trial["status"],
             "elapsed_ms": round(duration_s * 1000, 6),
             "own_cpu_seconds": metric["own_cpu_delta_seconds"],
+            "process_cpu_ns_exact": trial.get("process_cpu_ns"),
+            "sample_coverage": trial.get("sample_coverage"),
+            "model_expected": trial["result"].get("expected", trial["case"].get("expected")),
+            "model_actual": trial["result"].get("actual", trial["result"].get("label")),
+            "model_done_reason": trial["result"].get("model_metrics", {}).get("done_reason"),
+            "model_prompt_tokens": trial["result"].get("model_metrics", {}).get("prompt_eval_count"),
+            "model_load_duration_ns": trial["result"].get("model_metrics", {}).get("load_duration"),
+            "model_total_duration_ns": trial["result"].get("model_metrics", {}).get("total_duration"),
             "ollama_cpu_seconds": metric["ollama_named_cpu_delta_seconds"],
             "peak_own_rss_bytes": metric["peak_own_rss_bytes"],
             "peak_ollama_named_rss_bytes": metric["peak_ollama_named_rss_bytes"],
@@ -95,11 +103,26 @@ def report(
             "failures": [
                 {"trial_id": v["trial"]["trial_id"],
                  "status": v["trial"]["status"], "artifact": v["path"],
-                 "error": (v["trial"]["failure"] or {}).get("message")}
+                 "error": (v["trial"]["failure"] or {}).get("message"),
+                 "expected": v["trial"]["result"].get(
+                     "expected", v["trial"]["case"].get("expected")),
+                 "actual": v["trial"]["result"].get(
+                     "actual", v["trial"]["result"].get("label")),
+                 "raw_model_output": v["trial"]["result"].get("exact_message_content"),
+                 "model_metrics": v["trial"]["result"].get("model_metrics"),
+                 "exception_type": (v["trial"]["failure"] or {}).get("type")}
                 for v in items if v["trial"]["status"] != "PASS"
             ],
             "duration_ms_median": _percentile(all_times, .5),
             "duration_ms_p95": _percentile(all_times, .95),
+            "process_cpu_ms_median": _percentile([
+                v["trial"].get("process_cpu_ns", 0) / 1_000_000 for v in items
+                if v["trial"].get("process_cpu_ns") is not None
+            ], .5),
+            "missing_sample_intervals": sum(
+                v["trial"].get("sample_coverage") == "no_samples_in_interval"
+                for v in items
+            ),
             "sample_warnings": [
                 {"trial_id": v["trial"]["trial_id"],
                  "messages": v["trial"]["sample_errors"]}
@@ -113,11 +136,24 @@ def report(
         }
 
     manifest = json.loads((root / "manifest.json").read_text(encoding="utf-8"))
+    host_samples_path = root / "host_samples.json"
+    host_monitor = json.loads(host_samples_path.read_text(encoding="utf-8")) if (
+        host_samples_path.exists()) else {}
+    overhead_ns = sum(s.get("capture_elapsed_ns", 0)
+                      for s in host_monitor.get("samples", []))
+    monitor_diagnostics = {
+        "sampling_mode": host_monitor.get("mode", "unknown"),
+        "sample_count": len(host_monitor.get("samples", [])),
+        "sample_scan_wall_time_ms": round(overhead_ns / 1_000_000, 6),
+        "scan_wall_time_not_cpu_energy": True,
+        "monitor_errors": host_monitor.get("errors", []),
+    }
     result = {
         "schema_version": "cognitive-effort-summary/v1",
         "generated_utc": utc_now(),
         "manifest": manifest,
         "audit": verification,
+        "monitor_diagnostics": monitor_diagnostics,
         "electric_energy": {
             "status": "EXTERNAL_METER" if power is not None else "NOT_MEASURED",
             "source_csv": str(power_csv) if power_csv else None,
