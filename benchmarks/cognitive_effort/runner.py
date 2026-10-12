@@ -172,7 +172,8 @@ def _disposable_test_database() -> dict:
     if production:
         prod = urlparse(production)
         if (
-            prod.hostname == parsed.hostname and prod.port == parsed.port
+            (prod.hostname or "").casefold() == (parsed.hostname or "").casefold()
+            and (prod.port or 5432) == (parsed.port or 5432)
             and prod.path == parsed.path
         ):
             raise ValueError("TEST_DATABASE_URL and DATABASE_URL point to the same database")
@@ -250,6 +251,11 @@ def _run(args: argparse.Namespace) -> int:
             "created_utc": utc_now(), "run_id": run_id,
             "environment": environment, "fixture_sha256": fixture_digest(),
             "case_count": len(CASES), "seed": BENCHMARK_SEED,
+            "retrieval_fixture_sha256": hashlib.sha256(
+                (ROOT / "benchmarks" / "jordan_vale_v1.json").read_bytes()).hexdigest(),
+            "association_fixture_sha256": hashlib.sha256(
+                (ROOT / "benchmarks" / "jordan_vale_associations_v1.json").read_bytes()
+            ).hexdigest(),
             "options": {
                 "deterministic_iterations": args.deterministic_iterations,
                 "deterministic_repeats": args.deterministic_repeats,
@@ -316,6 +322,8 @@ def _run(args: argparse.Namespace) -> int:
                 output = run_trial(
                     audit, trial_id, phase,
                     {"synthetic_fixture_sha256": fixture_digest(),
+                     "fixture_sha256": hashlib.sha256(fixture_path.read_bytes()).hexdigest(),
+                     "association_sha256": hashlib.sha256(association_path.read_bytes()).hexdigest(),
                      "fixture_files": [str(fixture_path.relative_to(ROOT)),
                                        str(association_path.relative_to(ROOT))]},
                     action, sample_seconds=sample_seconds,
