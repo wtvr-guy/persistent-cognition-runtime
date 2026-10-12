@@ -1,7 +1,6 @@
 """Database-free unit tests for the auditable cognitive-effort suite."""
 from __future__ import annotations
 
-import csv
 import json
 from pathlib import Path
 
@@ -47,6 +46,7 @@ def test_audit_roundtrip_tracks_exact_input_and_success(tmp_path: Path):
 
 def test_exception_traceback_is_retained_in_trial_artifact(tmp_path: Path):
     audit = AuditTrail(tmp_path / "run")
+    audit.artifact("manifest.json", {"fixed": "failure-fixture"})
     audit.append("run_start", run_id="fault")
     def explode() -> dict:
         raise RuntimeError("synthetic-failure-123")
