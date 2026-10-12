@@ -11,7 +11,7 @@ from benchmarks.cognitive_effort.bundle import package_run, verify_bundle
 from benchmarks.cognitive_effort.measurement import AuditTrail, run_trial, verify_audit
 from benchmarks.cognitive_effort.report import report
 from benchmarks.cognitive_effort.runner import _local_base_url, _model_call
-from benchmarks.cognitive_effort.spec import CASES, fixture_digest
+from benchmarks.cognitive_effort.spec import CASES, PRECHECK_CASES, fixture_digest
 from persistent_cognition.model_admission import classify_task
 
 
@@ -240,3 +240,13 @@ def test_model_failure_is_promoted_to_summary(tmp_path: Path):
     assert failed["raw_model_output"] == '{"task":"general"}'
     assert not result["overall_pass"]
 
+
+
+def test_precheck_oracle_is_distinct_from_full_semantic_scope_oracle():
+    from persistent_cognition.response_policy import explicit_prior_assistant_reference
+    assert len(PRECHECK_CASES) == 5
+    for case in PRECHECK_CASES:
+        assert explicit_prior_assistant_reference(case.prompt) is case.expected_explicit_reference
+    assert not explicit_prior_assistant_reference(
+        "What nickname are we using, and which approach did you just rule out?"
+    )
