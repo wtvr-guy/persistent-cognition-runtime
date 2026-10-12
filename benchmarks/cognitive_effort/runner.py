@@ -356,6 +356,27 @@ def _run(args: argparse.Namespace) -> int:
                 if output["status"] != "PASS":
                     issues.append({"trial": trial_id, "status": output["status"]})
 
+        # A production deterministic fast path is measurable separately from
+        # full semantic source-policy selection; these are NOT equivalent jobs.
+        from persistent_cognition.response_policy import explicit_prior_assistant_reference
+        for case in PRODUCTION_POLICY_CASES:
+            def precheck(case=case) -> dict:
+                expected = case.expected_scope == "MIXED_CONVERSATION"
+                actual = explicit_prior_assistant_reference(case.prompt)
+                return {
+                    "passed": actual == expected,
+                    "expected": expected, "actual": actual,
+                    "scope": "narrow explicit-prior-assistant-reference fast path only",
+                }
+            output = run_trial(
+                audit, f"precheck_{case.case_id}", "production_precheck",
+                {"case_id": case.case_id, "prompt": case.prompt,
+                 "expected_force_mixed": case.expected_scope == "MIXED_CONVERSATION"},
+                precheck, sample_seconds=sample_seconds,
+            )
+            if output["status"] != "PASS":
+                issues.append({"trial": output["trial_id"], "status": output["status"]})
+
         if args.with_ollama:
             with httpx.Client(base_url=url, timeout=args.timeout_seconds, trust_env=False) as client:
                 version = _request(client, "GET", "/api/version")
