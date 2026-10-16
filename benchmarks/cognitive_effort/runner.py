@@ -196,15 +196,19 @@ def _native_gate(audit: AuditTrail, sample_seconds: float, timeout: float,
     environment["PYTHONUTF8"] = "1"
     environment["PCR_OLLAMA_KEEP_ALIVE"] = "1h"
     environment["OLLAMA_MODEL"] = model
-    environment["PCR_ARTIFACT_ROOT"] = str(audit.root / "native_artifacts")
+    environment["PCR_ARTIFACT_ROOT"] = str(audit.root.resolve() / "native_artifacts")
+    environment["PCR_TEST_ARTIFACT_ROOT"] = environment["PCR_ARTIFACT_ROOT"]
     (audit.root / "native_artifacts").mkdir()
     command = [sys.executable, "-m", "pytest", "-vv", "-s", "-ra", "-m", "ollama"]
     def action() -> dict:
-        completed = subprocess.run(
-            command, cwd=ROOT, env=environment, text=True,
-            stdout=subprocess.PIPE, stderr=subprocess.PIPE,
-            errors="replace", timeout=timeout, check=False,
-        )
+        try:
+            completed = subprocess.run(
+                command, cwd=ROOT, env=environment, text=True,
+                stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                errors="replace", timeout=timeout, check=False,
+            )
+        finally:
+            audit.register_tree("native_artifacts")
         audit.artifact("native_output.json", {
             "argv": command, "stdout": completed.stdout, "stderr": completed.stderr,
             "exit_code": completed.returncode,
@@ -249,7 +253,7 @@ def _run(args: argparse.Namespace) -> int:
             f"but found {environment['commit']}"
         )
     model = args.model or os.environ.get("OLLAMA_MODEL", "qwen3:4b-instruct-2507-q4_K_M")
-    url = _local_base_url(args.ollama_url)
+    url = _local_base_url(args.ollama_url) if args.with_ollama else None
     if args.with_production:
         from persistent_cognition.runtime_settings import job_settings
         settings = job_settings()

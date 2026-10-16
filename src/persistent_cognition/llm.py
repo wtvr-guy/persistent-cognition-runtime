@@ -369,6 +369,10 @@ class OllamaClient:
                         request_json[name] = value
                 elif kind in _RESPONSE_KINDS or OLLAMA_PARAMETERS[name].scope == "all":
                     request_json["options"][name] = value
+        # Explicit operator override takes precedence over effective selection.
+        # Managed production calls still enforce their cold boundary below.
+        if self.keep_alive is not None:
+            request_json["keep_alive"] = self.keep_alive
         started_at = datetime.now(timezone.utc).isoformat()
         t0 = time.monotonic()
         diagnostics: dict[str, Any] = {

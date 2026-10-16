@@ -6,8 +6,7 @@ evidence boundary used by deterministic Adaptive Recall.
 
 Adaptive Recall never asks a model to write a query or canonical event ID.
 Application code selects bounded canonical focus events and advances through
-the fixed association stages. The current percept remains the semantic cue;
-already learned self-context may supply additional navigation hints.
+the fixed association stages. The current percept supplies the semantic cue.
 """
 from __future__ import annotations
 

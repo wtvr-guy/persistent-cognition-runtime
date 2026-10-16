@@ -11,6 +11,8 @@ from persistent_cognition.llm import OllamaClient
 
 @pytest.fixture
 def managed(monkeypatch, tmp_path):
+    monkeypatch.delenv("REQUIRE_OLLAMA_ACCEPTANCE", raising=False)
+    monkeypatch.delenv("PCR_OLLAMA_KEEP_ALIVE", raising=False)
     settings = AppSettings(selection=ModelSelection(model="general"))
     monkeypatch.setenv(GUI_CONFIG_ENV, settings.model_dump_json())
     monkeypatch.delenv("PCR_GUI_CONFIG_FILE", raising=False)
@@ -195,3 +197,61 @@ def test_actual_job_unloads_then_rechecks_without_preview_credit(managed, monkey
     recorded = json.loads((tmp_path / "admission.json").read_text())
     assert recorded["status"] == "temporarily_blocked"
     assert recorded["capacity_basis"] == "measured"
+
+
+def test_native_acceptance_override_survives_effective_selection_and_fresh_clients(managed, monkeypatch):
+    monkeypatch.setenv("REQUIRE_OLLAMA_ACCEPTANCE", "1")
+    monkeypatch.setenv("PCR_OLLAMA_KEEP_ALIVE", "1h")
+    monkeypatch.setenv("OLLAMA_MODEL", "general")
+    calls = []
+
+    def handler(request):
+        calls.append(request.url.path)
+        if request.url.path == "/api/ps":
+            return httpx.Response(200, json={"models": [{"name": "general:latest"}]})
+        body = json.loads(request.content)
+        assert request.url.path == "/api/chat"
+        assert body["keep_alive"] == "1h"
+        return httpx.Response(200, json={"message": {"content": '{"answer":"ok"}'}})
+
+    real_client = httpx.Client
+    monkeypatch.setattr(residency.httpx, "Client", lambda **kw: real_client(
+        transport=httpx.MockTransport(handler), **kw))
+    assert residency.prepare_local_models(managed)["verified_resident"]
+    for _ in range(2):
+        client = OllamaClient(selection=ModelSelection(model="general", parameters={"keep_alive": 0}))
+        try:
+            client._structured("FINAL_RESPONSE_V2", "system", "request", {}, 256)
+            receipt = client._consume_invocation_diagnostics()["model_residency"]
+            assert receipt["mode"] == "native_fixed_warm"
+            assert receipt["before"]["verified_resident"]
+            assert receipt["after"]["verified_resident"]
+        finally:
+            client._client.close()
+    assert calls.count("/api/chat") == 2
+    assert "/api/generate" not in calls
+
+
+def test_warm_acceptance_refuses_model_switch_and_missing_residency(managed, monkeypatch):
+    monkeypatch.setenv("REQUIRE_OLLAMA_ACCEPTANCE", "1")
+    monkeypatch.setenv("PCR_OLLAMA_KEEP_ALIVE", "1h")
+    monkeypatch.setenv("OLLAMA_MODEL", "general")
+    with pytest.raises(residency.ModelResidencyError, match="cannot switch"):
+        with residency.managed_inference(None, {"model": "coder"}, {}):
+            pytest.fail("must reject a model switch")
+    settings = managed.model_copy(update={"routes": {"V2_RESPOND": ModelSelection(model="coder")}})
+    with pytest.raises(residency.ModelResidencyError, match="one fixed"):
+        residency.acceptance_keep_alive(settings)
+    def handler(request):
+        return httpx.Response(200, json={"models": []})
+    with httpx.Client(base_url="http://localhost:11434", transport=httpx.MockTransport(handler)) as client:
+        with pytest.raises(residency.ModelResidencyError, match="prewarmed"):
+            with residency.managed_inference(client, {"model": "general"}, {}):
+                pytest.fail("missing residency must not authorize inference")
+
+
+def test_keep_alive_environment_alone_does_not_bypass_managed_cold_policy(managed, monkeypatch):
+    monkeypatch.delenv("REQUIRE_OLLAMA_ACCEPTANCE", raising=False)
+    monkeypatch.setenv("PCR_OLLAMA_KEEP_ALIVE", "1h")
+    assert residency.acceptance_keep_alive(managed) is None
+    test_general_unloads_before_coder_loads_and_receipts_survive(managed)

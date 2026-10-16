@@ -9,6 +9,7 @@ from persistent_cognition.resource_limits import bounded_http_request
 
 from contextlib import contextmanager
 import hashlib
+import os
 import time
 
 import httpx
@@ -17,7 +18,7 @@ from persistent_cognition.runtime_settings import job_settings, local_ollama
 from persistent_cognition.model_catalog import MODEL_HTTP_TIMEOUT_SECONDS
 from persistent_cognition.ollama_runtime import _canonical_model_name
 
-RESIDENCY_VERSION = "sequential-cold-models/v1"
+RESIDENCY_VERSION = "sequential-cold-models/v2"
 UNLOAD_TIMEOUT_SECONDS = 10
 UNLOAD_POLL_SECONDS = 0.1
 
@@ -92,8 +93,35 @@ def residency_lock(base_url):
         yield
 
 
+def acceptance_keep_alive(settings):
+    """Allow an explicit native gate to retain only its one fixed model."""
+    override = os.environ.get("PCR_OLLAMA_KEEP_ALIVE", "").strip()
+    if os.environ.get("REQUIRE_OLLAMA_ACCEPTANCE") != "1" or override in {"", "0", "0s"}:
+        return None
+    from persistent_cognition.contract_registry import STAGE_CONTRACTS
+    from persistent_cognition.ollama_runtime import configured_ollama_model
+    target = _canonical_model_name(configured_ollama_model())
+    for stage, contract in STAGE_CONTRACTS.items():
+        if contract.kinds and stage.startswith("V2_"):
+            selected = settings.selection_for(stage)
+            if selected.provider != "ollama" or _canonical_model_name(selected.model) != target:
+                raise ModelResidencyError("Native warm acceptance requires one fixed local model")
+    return override
+
+
+def verify_retained_model(client, model, receipt):
+    observed = running_models(client)
+    receipt["running_models"] = [item["name"] for item in observed]
+    receipt["verified_resident"] = (
+        [_canonical_model_name(item["name"]) for item in observed]
+        == [_canonical_model_name(model)]
+    )
+    if not receipt["verified_resident"]:
+        raise ModelResidencyError("Native warm acceptance requires its exact prewarmed model")
+
+
 def prepare_local_models(settings):
-    """At actual job start, unload first; admission then measures real free RAM."""
+    """Verify native fixed-model warmth, or unload before ordinary admission."""
     from persistent_cognition.contract_registry import STAGE_CONTRACTS
     if not local_ollama(settings) or not any(
         settings.selection_for(stage).provider == "ollama"
@@ -105,7 +133,12 @@ def prepare_local_models(settings):
         base_url=settings.ollama_url, trust_env=False, follow_redirects=False,
         timeout=MODEL_HTTP_TIMEOUT_SECONDS,
     ) as client:
-        unload_and_verify(client, receipt)
+        if acceptance_keep_alive(settings) is not None:
+            from persistent_cognition.ollama_runtime import configured_ollama_model
+            receipt["mode"] = "native_fixed_warm"
+            verify_retained_model(client, configured_ollama_model(), receipt)
+        else:
+            unload_and_verify(client, receipt)
     return receipt
 
 
@@ -155,6 +188,23 @@ def managed_inference(client, request, diagnostics):
     settings = job_settings()
     if settings is None or not local_ollama(settings):
         yield
+        return
+    override = acceptance_keep_alive(settings)
+    if override is not None:
+        from persistent_cognition.ollama_runtime import configured_ollama_model
+        target = configured_ollama_model()
+        if _canonical_model_name(request.get("model", "")) != _canonical_model_name(target):
+            raise ModelResidencyError("Native warm acceptance cannot switch models")
+        request["keep_alive"] = override
+        receipt = {"policy": RESIDENCY_VERSION, "mode": "native_fixed_warm",
+                   "before": {}, "after": {}}
+        diagnostics["model_residency"] = receipt
+        with residency_lock(client.base_url):
+            verify_retained_model(client, target, receipt["before"])
+            try:
+                yield
+            finally:
+                verify_retained_model(client, target, receipt["after"])
         return
     # Apply after model/environment overrides. A retained general model would
     # invalidate the sequential cold-memory budget for the next worker.

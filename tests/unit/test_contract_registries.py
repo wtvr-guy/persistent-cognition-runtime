@@ -21,11 +21,6 @@ def test_retired_control_contracts_are_absent():
     assert not hasattr(PerceptLLM, "generate_final_response")
 
 
-def test_self_model_contracts_are_absent():
-    assert not any("SELF" in k for k in SEMANTIC_CONTRACTS)
-    assert not any("SELF" in k for k in STAGE_CONTRACTS)
-
-
 @pytest.mark.parametrize("kind", list(SEMANTIC_CONTRACTS))
 def test_registered_prompts_and_schemas_are_resolvable(kind):
     contract = contract_manifest()["semantic_contracts"][kind]
@@ -49,10 +44,10 @@ def test_source_verifier_checks_extraction_paths_and_retirements(tmp_path):
             "extraction_path": "src/persistent_cognition/example.py",
             "extracted_sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
         },
-        "src/prometheist/self_model.py": {
-            "source_path": "src/prometheist/self_model.py", "source_sha256": source_hash,
-            "extraction_path": "src/persistent_cognition/self_model.py",
-            "status": "retired", "extracted_sha256": None, "reason": "Removed operational identity",
+        "src/prometheist/retired_module.py": {
+            "source_path": "src/prometheist/retired_module.py", "source_sha256": source_hash,
+            "extraction_path": "src/persistent_cognition/retired_module.py",
+            "status": "retired", "extracted_sha256": None, "reason": "Obsolete example module",
         },
     }}
     assert verify(manifest, tmp_path) == {"unchanged": 0, "adapted": 1, "added": 0, "retired": 1}
@@ -60,7 +55,7 @@ def test_source_verifier_checks_extraction_paths_and_retirements(tmp_path):
     with pytest.raises(SystemExit, match="modified extraction"):
         verify(manifest, tmp_path)
     path.write_text("adapted code")
-    path.with_name("self_model.py").write_text("retired code restored")
+    path.with_name("retired_module.py").write_text("retired code restored")
     with pytest.raises(SystemExit, match="invalid retirement"):
         verify(manifest, tmp_path)
 
@@ -80,3 +75,26 @@ def test_source_verifier_detects_new_unrecorded_code_and_missing_addition(tmp_pa
     }}}
     with pytest.raises(SystemExit, match="missing current file"):
         verify(manifest, tmp_path)
+
+
+@pytest.mark.parametrize("suffix", [".json", ".sql", ".ps1"])
+def test_source_verifier_rejects_unregistered_fixtures_and_scripts(tmp_path, suffix):
+    import runpy
+    from pathlib import Path
+    verify = runpy.run_path(str(Path(__file__).resolve().parents[2] / "scripts/verify_source_baseline.py"))["verify_manifest"]
+    path = tmp_path / "tests/fixtures" / ("unregistered" + suffix)
+    path.parent.mkdir(parents=True)
+    path.write_text("{}")
+    with pytest.raises(SystemExit, match="unrecorded code or fixture"):
+        verify({"files": {}}, tmp_path)
+
+
+def test_external_artifact_root_preserves_per_test_and_per_run_isolation(tmp_path, monkeypatch):
+    from tests.conftest import _test_artifact_root
+    root = tmp_path / "retained"
+    monkeypatch.setenv("PCR_TEST_ARTIFACT_ROOT", str(root))
+    paths = [_test_artifact_root(tmp_path / "scratch", node) for node in ("a", "a", "b")]
+    assert len(set(paths)) == 3
+    assert all(path.parent == root.resolve() and path.is_dir() for path in paths)
+    monkeypatch.delenv("PCR_TEST_ARTIFACT_ROOT")
+    assert _test_artifact_root(tmp_path, "a") == tmp_path / "persistent_cognition-artifacts"

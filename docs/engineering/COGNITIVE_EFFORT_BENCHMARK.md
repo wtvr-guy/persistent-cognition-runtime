@@ -271,3 +271,18 @@ uv run --locked pytest -q tests/test_cognitive_effort_benchmark.py
 Use -SkipProduction to omit actual PCR source-policy worker comparisons.
 This remains an exploratory suite: the five native policy oracle cases
 are not a sufficient held-out corpus for production strategy selection.
+
+## Review corrections
+
+The sampler captures its baseline synchronously before benchmark work begins.
+Its CPU ledger keys each process by PID and creation time, retains observed
+work after a child exits, and does not charge the lifetime CPU of an already
+running process when it first appears. Processes that start and exit between
+samples can still be missed; short trial windows can remain uncovered.
+
+Operator interrupts propagate to the run error handler, which records the
+interruption and packages incomplete evidence. The native subprocess passes
+`PCR_TEST_ARTIFACT_ROOT` to pytest; each test gets a separate retained directory
+under `native_artifacts`. All completed native files are hashed into the audit
+even when the subprocess fails. The Ollama URL is validated only for runs that
+enable Ollama.
