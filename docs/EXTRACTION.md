@@ -17,19 +17,19 @@ The source application is unchanged. This repository has its own history and the
 - Extracted model settings/catalog/probe/locking into headless modules. The headless chat job retains model admission and verified sequential residency.
 - Removed CLI application-profile commands, automatic sensor startup, GUI/file/firewall job actions, and deployment-only SQL binding.
 - Removed Android/node/tunnel services, sensor discovery, OS-security controls, web assets, GUI servers, deployment-only setup, and application mission documents.
-- Retained source-grounded learned-memory structures because they supply canonical retrieval evidence; application-fidelity runners and subjective scoring are excluded.
-- Preserved frozen synthetic retrieval fixtures and their assertions. Test-only fixture loaders are separated from production code.
+- Retained source-grounded learned-memory structures because they supply canonical retrieval evidence.
+- Canonical-neighborhood tests use generic maintenance and order-history records with exact evidence assertions.
 - Removed only schema/constraint registrations belonging to excluded modules; all remaining numerical bounds are still audited.
 - Kept current technical specs and engineering rules, with absent historical references linked to the pinned upstream source.
 - Completed namespace-owned continuous perception, arbitrary structured source inputs, deterministic scheduled/sensor/error/tool reactions, observable failures, graceful worker-boundary stop/restart, and trusted application callback startup in fresh workers.
 - Isolated action feedback from pending entity reactions, quarantined failed situations with explicit reconciled recovery while healthy siblings continue, and based model admission only on actual model-using stages.
 - Corrected historical upstream links to the real `wtvr-guy/prometheist` repository; current imports/commands remain neutral.
 
-The current `SOURCE_BASELINE.json` records **44 byte-identical source files, 197 adapted files, 5 explicit additions, and 7 retirements**. Original `source_path`/`source_sha256` are preserved independently of current `extraction_path`/`extracted_sha256`; earlier extraction digests are retained when adapted or retired. The verifier also rejects unrecorded Python code. Runtime behavior is tested with retained and strengthened regressions; source parity alone is not a functional acceptance result.
+The current `SOURCE_BASELINE.json` records the retained runtime, tests, and tools. Run `scripts/verify_source_baseline.py` for current file counts. Original `source_path`/`source_sha256` are preserved for retained files independently of current `extraction_path`/`extracted_sha256`. The verifier also rejects unrecorded Python code. Runtime behavior is tested with retained and strengthened regressions; source parity alone is not a functional acceptance result.
 
 ## Verification
 
-Current completion checks (2026-10-06 working tree based on `360ce54`; Python 3.14.8, PostgreSQL 16, Linux):
+Historical completion checks (2026-10-06 working tree based on `360ce54`; Python 3.14.8, PostgreSQL 16, Linux):
 
 - `uv sync --frozen` restored the existing lockfile without adding project dependencies.
 - `uv run ruff check .` and `git diff --check` passed.
@@ -44,7 +44,7 @@ Current completion checks (2026-10-06 working tree based on `360ce54`; Python 3.
 
 Live Ollama and native Windows acceptance remain unverified. These working-tree results are not an assertion about an untested future commit or live-model quality.
 
-Historical local extraction checks (2026-10-05, before the identity removal/service completion):
+Historical local extraction checks (2026-10-05):
 
 - Locked Python 3.14.7 environment installed successfully.
 - Ruff passed.

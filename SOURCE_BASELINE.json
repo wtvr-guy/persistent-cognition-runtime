@@ -9,9 +9,7 @@
     "sensor and host discovery",
     "OS security administration",
     "web/desktop app",
-    "imprint deployment",
-    "application philosophy",
-    "person-fidelity benchmark runners"
+    "application philosophy"
   ],
   "adaptations": [
     "Distribution/commands and current Python namespace/environment branding neutralized; original upstream source paths and hashes retained.",
@@ -19,9 +17,7 @@
     "Headless chat job retains admission and model residency; UI, profile, file and firewall actions removed.",
     "CLI profile/UI/environment entry points and automatic sensor hooks removed.",
     "Registry excludes schemas and numeric constraints for removed application modules.",
-    "SQL excludes the deployment-only imprint_identity table.",
     "Canonical digest primitive extracted from environment contracts.",
-    "Frozen retrieval fixture helpers moved to tests; original synthetic fixture bytes retained.",
     "Neutral persistent_cognition Python namespace and PCR_* environment variables; historical upstream attribution URLs and source paths remain Prometheist.",
     "Completed always-on namespace-owned percept supervision, typed arbitrary-data intake, structured action receipts, finite outcome feedback, and trusted worker-command bootstrap for application callbacks.",
     "Current extraction_path and extracted_sha256 distinguish moved/adapted files from preserved original source_path/source_sha256; additions and retirements are explicit.",
@@ -48,7 +44,7 @@
     "benchmarks/constraint_experiments.json": {
       "source_path": "benchmarks/constraint_experiments.json",
       "source_sha256": "0924e0934d963f84b0345e0c87e6e0b27a754e2bf7a36767a22b0e32601b670b",
-      "extracted_sha256": "39cdfe36229bae47f9edb584314455e7a093575d852e9250f3c1a93e0405cfa9",
+      "extracted_sha256": "e8e0efe0a1340dc3f3c62ebb202fc9e414457896ed314728558c9110481b75a2",
       "extraction_path": "benchmarks/constraint_experiments.json",
       "status": "imported",
       "reason": "remaining audit remediation: deterministic bounds, private storage, safe diagnostics and embedding contracts"
@@ -1147,14 +1143,6 @@
       "status": "imported",
       "baseline_extracted_sha256": "e4034712260fdafa772103b2b470410f0cf5665c68f256c6c0f17d0855ce421a"
     },
-    "tests/_retrieval_fixtures.py": {
-      "source_path": "src/prometheist/person_fidelity_benchmark.py",
-      "source_sha256": "4c4ba4a34df915c4f95e666dd1d3c3447f8b27338709a001b702af2107b52b7b",
-      "extracted_sha256": "0b02a52d2949b25ad1125a74a5e7d308b8920f9ad36d25965b01c653cb371add",
-      "extraction_path": "tests/_retrieval_fixtures.py",
-      "status": "imported",
-      "baseline_extracted_sha256": "4d2a1c87e8f1e7da89abfa97ea872e28eb9f6fbe6e82ed2af58103d285c2d415"
-    },
     "tests/_v07_restart_process.py": {
       "source_path": "tests/_v07_restart_process.py",
       "source_sha256": "96cff74916d7221389901136a8bbfde55e323f2ceea149b9e4e2571d5a3aedfe",
@@ -1179,13 +1167,6 @@
       "status": "imported",
       "baseline_extracted_sha256": "4ba829368855eca06de8edb48c8935a3fa2bbea852ebb1e4a9a96f9bb35d4a75",
       "reason": "remaining audit remediation: deterministic bounds, private storage, safe diagnostics and embedding contracts"
-    },
-    "tests/fixtures/retrieval_corpus.json": {
-      "source_path": "benchmarks/person_fidelity_public_v1.json",
-      "source_sha256": "1aee1b5af4f190204637a6569bf77064edc1cab09e43525b39d22e1dd424c109",
-      "extracted_sha256": "1aee1b5af4f190204637a6569bf77064edc1cab09e43525b39d22e1dd424c109",
-      "extraction_path": "tests/fixtures/retrieval_corpus.json",
-      "status": "imported"
     },
     "tests/test_acceptance_contract.py": {
       "source_path": "tests/test_acceptance_contract.py",
@@ -1357,7 +1338,7 @@
     "tests/test_canonical_neighborhood.py": {
       "source_path": "tests/test_canonical_neighborhood.py",
       "source_sha256": "60972681dea6f9dc5c271a3423ec8fd81c7571d9855401677a9c7d6c2127a1a5",
-      "extracted_sha256": "275842fcc780af4c1ff4e30709118573e541d110c54f4ec3d36e636f47cbfd74",
+      "extracted_sha256": "a7db627fd3d5ec139e31ff23feb970e413d1fe52fadc0bb8cf572152be95c4e6",
       "extraction_path": "tests/test_canonical_neighborhood.py",
       "status": "imported",
       "baseline_extracted_sha256": "2600578fe9707f995b3bc8dc7657e0875c5ffa54576d29d1076995f70f934683"

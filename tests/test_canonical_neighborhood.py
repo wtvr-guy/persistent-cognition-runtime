@@ -1,5 +1,4 @@
 from types import SimpleNamespace
-from pathlib import Path
 from uuid import uuid4
 
 import pytest
@@ -13,7 +12,6 @@ from persistent_cognition.models import EventType, MemoryEvidence, MemoryNeed, M
 from persistent_cognition.percept_response_runtime import (
     retrieve_memory_package,
 )
-from tests._retrieval_fixtures import load_person_fidelity_corpus
 
 
 @pytest.fixture
@@ -157,29 +155,27 @@ def test_empty_full_and_invalid_budgets_do_not_query():
         expand(None, packet, 1, limit=0)
 
 
-@pytest.mark.parametrize("probe_id,seed_id", [
-    ("pf-q001", "pf-e002"),
-    ("pf-q002", "pf-e004"),
-])
-def test_frozen_failed_probe_seed_recovers_all_required_canonical_evidence(conn, probe_id, seed_id):
-    # Freeze the retrieved seed for the canonical-neighborhood regression.
-    # Oracle labels below are used only for assertions, never for navigation.
-    corpus = load_person_fidelity_corpus(
-        Path(__file__).resolve().parents[1] / "tests/fixtures/retrieval_corpus.json"
-    )
-    conversations = {}
-    events = {}
-    for fixture in corpus.life_events:
-        if fixture.conversation_id not in conversations:
-            conversations[fixture.conversation_id] = event_store.start_conversation(conn)
-        events[fixture.event_id] = record(
-            conn, conversations[fixture.conversation_id], fixture.text, fixture.event_type,
-        )
-    probe = next(p for p in corpus.probes if p.probe_id == probe_id)
-    packet = packet_for(events[seed_id])
-    packet.need.query_text = probe.prompt
-    cutoff = max(e.global_seq for e in events.values()) + 1
+@pytest.mark.parametrize("selected", [0, 1], ids=["maintenance", "order-change"])
+def test_seed_recovers_canonical_context_without_cross_conversation_leakage(conn, selected):
+    # Expected records are used only in assertions, never supplied to navigation.
+    cases = [
+        ("Pump A failed its pressure check.", "That failure postponed maintenance.",
+         "Why was maintenance postponed?"),
+        ("Order B changed from pickup to delivery.", "That change requires a new dispatch slot.",
+         "Why does the order need a new dispatch slot?"),
+    ]
+    pairs = []
+    for root_text, seed_text, _ in cases:
+        conversation = event_store.start_conversation(conn)
+        root = record(conn, conversation, root_text)
+        record(conn, conversation, "internal processing receipt", EventType.MEMORY_PACKET)
+        seed = record(conn, conversation, seed_text)
+        pairs.append((root, seed))
+    root, seed = pairs[selected]
+    packet = packet_for(seed)
+    packet.need.query_text = cases[selected][2]
+    cutoff = max(pair[1].global_seq for pair in pairs) + 1
     result = expand(conn, packet, cutoff)
-    required = {events[event_id].event_id for event_id in probe.required_event_ids}
-    assert not required.issubset({i.source_event_id for i in packet.items})
-    assert required == {i.source_event_id for i in result.items}
+    assert [item.source_event_id for item in packet.items] == [seed.event_id]
+    assert [item.source_event_id for item in result.items] == [seed.event_id, root.event_id]
+    assert [item.content for item in result.items] == [seed.payload["text"], root.payload["text"]]

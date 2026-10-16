@@ -19,7 +19,7 @@ Exact history lives outside the model. Fresh specialist workers receive bounded 
 
 Android, device nodes, tunnel/sync services, sensor discovery, OS administration, desktop/web UI, deployment-only application setup, and application philosophy are excluded.
 
-The runtime provides generic semantic facts, situations, expectations, and provenance. Applications supply observations and authority; model prompts describe bounded worker roles, not a personality.
+The runtime provides generic semantic facts, situations, expectations, and provenance. Applications supply observations and authority; model prompts describe bounded worker roles. Application-specific semantics belong in the embedding application.
 
 ## Install
 

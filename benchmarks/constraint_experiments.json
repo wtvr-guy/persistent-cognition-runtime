@@ -455,43 +455,6 @@
       ],
       "search": "Calculate the birthday bound over supported object counts, then verify generated large corpora. This is a risk proof, not a retrieval-quality benchmark."
     },
-    "PERSON-FIDELITY-001": {
-      "title": "Public longitudinal person-fidelity baseline",
-      "environment": "fixture_validation_in_ci_then_target_windows_postgresql_ollama_and_human_review",
-      "parameters": [],
-      "scenario_families": [
-        "autobiographical_meaning",
-        "relational_judgment",
-        "temporal_belief_change",
-        "self_report_behavior_contradiction",
-        "context_dependent_preference",
-        "novel_decision",
-        "characteristic_expression",
-        "identity_integrity",
-        "legitimate_unknown"
-      ],
-      "hard_invariants": [
-        "human oracle never enters canonical memory or model context",
-        "each probe starts from the same life record without prior probe history",
-        "every model stage remains a fresh stateless worker",
-        "required canonical evidence refs reach the response realization",
-        "unknown personal facts are not fabricated from unrelated life evidence",
-        "structural provenance and human semantic verdicts remain separate",
-        "every native event stage and model invocation artifact remains permanently retained and content-addressed",
-        "raw preserved output remains training-ineligible until explicit review labels its role",
-        "no result is interpreted as identity maturity consciousness or personal continuity"
-      ],
-      "quality_order": [
-        "hard_invariant_pass_rate",
-        "worst_dimension_human_fidelity",
-        "identity_integrity_human_fidelity",
-        "legitimate_unknown_human_fidelity",
-        "per_dimension_human_fidelity",
-        "structural_evidence_recall",
-        "latency"
-      ],
-      "search": "The v1 fixture characterizes the null architecture and selects no parameters. Compare one mechanism at a time on the unchanged public fixture and a prospectively frozen holdout person; report insufficient discrimination rather than accepting complexity that does not repair a measured failure."
-    },
     "SITUATION-PIPELINE-001": {
       "title": "Isolated predictive situation and guarded non-user mechanisms",
       "environment": "pure_policy_and_postgresql_ci_then_target_windows_ollama",
