@@ -9,9 +9,7 @@
     "sensor and host discovery",
     "OS security administration",
     "web/desktop app",
-    "imprint deployment",
-    "application philosophy",
-    "person-fidelity benchmark runners"
+    "application philosophy"
   ],
   "adaptations": [
     "Distribution/commands and current Python namespace/environment branding neutralized; original upstream source paths and hashes retained.",
@@ -19,14 +17,14 @@
     "Headless chat job retains admission and model residency; UI, profile, file and firewall actions removed.",
     "CLI profile/UI/environment entry points and automatic sensor hooks removed.",
     "Registry excludes schemas and numeric constraints for removed application modules.",
-    "SQL excludes the deployment-only imprint_identity table.",
     "Canonical digest primitive extracted from environment contracts.",
-    "Frozen retrieval fixture helpers moved to tests; original synthetic fixture bytes retained.",
     "Neutral persistent_cognition Python namespace and PCR_* environment variables; historical upstream attribution URLs and source paths remain Prometheist.",
-    "Retired operational identity/self-model/self-reflection schemas, stages, prompts, policies and tests; generic semantic facts and counterevidence retained.",
     "Completed always-on namespace-owned percept supervision, typed arbitrary-data intake, structured action receipts, finite outcome feedback, and trusted worker-command bootstrap for application callbacks.",
     "Current extraction_path and extracted_sha256 distinguish moved/adapted files from preserved original source_path/source_sha256; additions and retirements are explicit.",
-    "Require practical deterministic evidence display and trusted structured field lookup before model-based response realization; retire ordinary factual token-range selection, journal model-free render receipts and strengthen native factual acceptance."
+    "Require practical deterministic evidence display and trusted structured field lookup before model-based response realization; retire ordinary factual token-range selection, journal model-free render receipts and strengthen native factual acceptance.",
+    "Calibrated native Windows RAM admission to a fixed 1 GiB system reserve, preserved verified warm-model incremental accounting and cold fallback, prewarmed the native acceptance model, and added resource regression tests.",
+    "COG-EFFORT-001 adds isolated cognition/energy measurements, append-only trace artifacts, fixed synthetic oracles and optional native benchmark without modifying production engine authority.",
+    "COG-EFFORT-001 v1.1: persistent background resource monitoring, production response-policy microbenchmarks, deterministic precheck, diagnostic summaries, complete SHA-256 verified ZIP bundles."
   ],
   "files": {
     ".python-version": {
@@ -46,7 +44,7 @@
     "benchmarks/constraint_experiments.json": {
       "source_path": "benchmarks/constraint_experiments.json",
       "source_sha256": "0924e0934d963f84b0345e0c87e6e0b27a754e2bf7a36767a22b0e32601b670b",
-      "extracted_sha256": "4c0f3b08decd0eea13676afb00d1069c2b72102c79129bfcf03fa13896dbd840",
+      "extracted_sha256": "e8e0efe0a1340dc3f3c62ebb202fc9e414457896ed314728558c9110481b75a2",
       "extraction_path": "benchmarks/constraint_experiments.json",
       "status": "imported",
       "reason": "remaining audit remediation: deterministic bounds, private storage, safe diagnostics and embedding contracts"
@@ -54,7 +52,7 @@
     "benchmarks/constraint_registry.json": {
       "source_path": "benchmarks/constraint_registry.json",
       "source_sha256": "fbab7d594002d6e23a05dada6ceac76ac7055139fa292c8aec5bd9599981ad6e",
-      "extracted_sha256": "d67a2be39348d239bd756fb625487efec4d5f5b38b5e7bcf35101a315232bade",
+      "extracted_sha256": "b95a5de7913327bf7a0f6f399b9b4943ab103c3572b56f73872779b9f1ae31d3",
       "extraction_path": "benchmarks/constraint_registry.json",
       "status": "imported",
       "baseline_extracted_sha256": "7958368d60f3cdb09f5af9d25bc8d8cec5a635685f2dd899033f83618a9341f2",
@@ -376,7 +374,7 @@
     "scripts/run_v07_acceptance.ps1": {
       "source_path": "scripts/run_v07_acceptance.ps1",
       "source_sha256": "43812a1812391e99255f3d629c106e5ae7b8fa6f9e97a52199e2b1f9cfddf5f6",
-      "extracted_sha256": "1e5c5ca74486e0da5811085ba521c45ea1dc89fa9e4866e1996e92653bac34c0",
+      "extracted_sha256": "c90839421049b191b9f5a385fe2ec2781f7c6cc49b95b277fe257254df7aa0c0",
       "extraction_path": "scripts/run_v07_acceptance.ps1",
       "status": "imported",
       "baseline_extracted_sha256": "43812a1812391e99255f3d629c106e5ae7b8fa6f9e97a52199e2b1f9cfddf5f6"
@@ -703,7 +701,7 @@
     "src/prometheist/jit_memory.py": {
       "source_path": "src/prometheist/jit_memory.py",
       "source_sha256": "4e5f123cfa84447b93a95dda2b24734215f9fe58abad2cd2dc217fb3890accda",
-      "extracted_sha256": "6b26febcd95326a0d6278f8054c823a31bc51fb25a3340686dde74900c8ce38e",
+      "extracted_sha256": "a15f93025806b174874639f04e81f190c629fd8dd1e782fc921188f76ecc0975",
       "extraction_path": "src/persistent_cognition/jit_memory.py",
       "status": "imported",
       "baseline_extracted_sha256": "4e5f123cfa84447b93a95dda2b24734215f9fe58abad2cd2dc217fb3890accda"
@@ -720,7 +718,7 @@
     "src/prometheist/llm.py": {
       "source_path": "src/prometheist/llm.py",
       "source_sha256": "e6b524a72ec492932f0554f6f7e7c1f89b22b590003b6a30379cad1ff9babae1",
-      "extracted_sha256": "427fbec0e513fc0f8480f38db55451c99a75319aaaf91042d7356644faa52848",
+      "extracted_sha256": "6ff9d20491bb306ce8941d8aa6d8d16e0c06a92ecdf95da16c607cc6d8be04d7",
       "extraction_path": "src/persistent_cognition/llm.py",
       "status": "imported",
       "baseline_extracted_sha256": "e6b524a72ec492932f0554f6f7e7c1f89b22b590003b6a30379cad1ff9babae1",
@@ -795,7 +793,7 @@
     "src/prometheist/model_residency.py": {
       "source_path": "src/prometheist/model_residency.py",
       "source_sha256": "d83d9aa47592b5a44dae8bd3d97cd34a4039964c81da14084ebebed15911e7c5",
-      "extracted_sha256": "483b08d96251ef16f097d76af065a6c288423eef3960afbb3e8acf3f5fe50370",
+      "extracted_sha256": "86ebdc86431bbf95a22f56e802ea4865cb04c88a0dc110a26062e9034150f6de",
       "extraction_path": "src/persistent_cognition/model_residency.py",
       "status": "imported",
       "baseline_extracted_sha256": "d5819a2edc47607bcec9f05f9c757b12d8b33508f2e0be3600acb66bfbd58ebe",
@@ -819,7 +817,7 @@
     "src/prometheist/native_policy.py": {
       "source_path": "src/prometheist/native_policy.py",
       "source_sha256": "297cef370c312dc3899a8fb0d12a27c59ac04dac6a40c1f1eac4b2e9c0781717",
-      "extracted_sha256": "c56aa8692b57429aa2f95c989723995f83399dfa7bfe9c9b47da5efb133b5b98",
+      "extracted_sha256": "3e99f8e84b496e70c17465366200c5d92cad8cc14b8f7ab227a95efe6fd030d3",
       "extraction_path": "src/persistent_cognition/native_policy.py",
       "status": "imported",
       "baseline_extracted_sha256": "027dd4bc755ae90501c5dfff4c1cab1d72cccc805b5913ed8e1cc7c63c003b47"
@@ -1025,7 +1023,7 @@
     "src/prometheist/runtime_settings.py": {
       "source_path": "src/prometheist/gui_config.py",
       "source_sha256": "4e6c9dcfdab51709bba7b955916f558c34ebe24ec6f57dd6b9a2446e2310115a",
-      "extracted_sha256": "5ae664155ddc42e60937779c804e170899655fb352bd7521d516b43320206983",
+      "extracted_sha256": "4bc821f6be2a85d08b7a129b9abebefd4b2902c09760bd7b04445eb91d6b64b8",
       "extraction_path": "src/persistent_cognition/runtime_settings.py",
       "status": "imported",
       "baseline_extracted_sha256": "ebb656ae77d5f05e86eaaf9f6c23ffe6035ea44c6d348d01c0ac05c3ffe6e340",
@@ -1045,33 +1043,6 @@
       "extracted_sha256": "b545c28d8c0078db76e2a9efd824ffdd04ea8fc1d1ec8e69f53400a9e7bfa498",
       "extraction_path": "src/persistent_cognition/scale_corpus.py",
       "status": "imported"
-    },
-    "src/prometheist/self_memory.py": {
-      "source_path": "src/prometheist/self_memory.py",
-      "source_sha256": "cbbf370a74e30b002b83256c171b5f0177a77e9de0964e500fdbadc4d9342b35",
-      "extracted_sha256": null,
-      "extraction_path": "src/persistent_cognition/self_memory.py",
-      "status": "retired",
-      "baseline_extracted_sha256": "cbbf370a74e30b002b83256c171b5f0177a77e9de0964e500fdbadc4d9342b35",
-      "reason": "Operational identity/self-model/self-reflection feature retired; generic semantic evidence remains."
-    },
-    "src/prometheist/self_memory_navigation.py": {
-      "source_path": "src/prometheist/self_memory_navigation.py",
-      "source_sha256": "5f651ae41408acadc725ebc8c10f17617e1c31433f1ef9b8c80b041ef82a9f67",
-      "extracted_sha256": null,
-      "extraction_path": "src/persistent_cognition/self_memory_navigation.py",
-      "status": "retired",
-      "baseline_extracted_sha256": "5f651ae41408acadc725ebc8c10f17617e1c31433f1ef9b8c80b041ef82a9f67",
-      "reason": "Operational identity/self-model/self-reflection feature retired; generic semantic evidence remains."
-    },
-    "src/prometheist/self_reflection.py": {
-      "source_path": "src/prometheist/self_reflection.py",
-      "source_sha256": "0cd4199c960f9f4a0fd885a18f95bf477cc91c2e45663647145e8b8f554b7e58",
-      "extracted_sha256": null,
-      "extraction_path": "src/persistent_cognition/self_reflection.py",
-      "status": "retired",
-      "baseline_extracted_sha256": "0cd4199c960f9f4a0fd885a18f95bf477cc91c2e45663647145e8b8f554b7e58",
-      "reason": "Operational identity/self-model/self-reflection feature retired; generic semantic evidence remains."
     },
     "src/prometheist/semantic_memory.py": {
       "source_path": "src/prometheist/semantic_memory.py",
@@ -1172,14 +1143,6 @@
       "status": "imported",
       "baseline_extracted_sha256": "e4034712260fdafa772103b2b470410f0cf5665c68f256c6c0f17d0855ce421a"
     },
-    "tests/_retrieval_fixtures.py": {
-      "source_path": "src/prometheist/person_fidelity_benchmark.py",
-      "source_sha256": "4c4ba4a34df915c4f95e666dd1d3c3447f8b27338709a001b702af2107b52b7b",
-      "extracted_sha256": "0b02a52d2949b25ad1125a74a5e7d308b8920f9ad36d25965b01c653cb371add",
-      "extraction_path": "tests/_retrieval_fixtures.py",
-      "status": "imported",
-      "baseline_extracted_sha256": "4d2a1c87e8f1e7da89abfa97ea872e28eb9f6fbe6e82ed2af58103d285c2d415"
-    },
     "tests/_v07_restart_process.py": {
       "source_path": "tests/_v07_restart_process.py",
       "source_sha256": "96cff74916d7221389901136a8bbfde55e323f2ceea149b9e4e2571d5a3aedfe",
@@ -1199,27 +1162,11 @@
     "tests/conftest.py": {
       "source_path": "tests/conftest.py",
       "source_sha256": "77f20459ab0511bff297a0c3da0da89401f3f96113f0a3e31f7b43b7be65fd48",
-      "extracted_sha256": "a5302bb87aee29a0269f52693ecc2f1f80532046e571c27eb522c37c72bae69f",
+      "extracted_sha256": "7b211873cc1be41938b96171fc2e81ec24a3ad52f08d56dc8116bfa24a97fbab",
       "extraction_path": "tests/conftest.py",
       "status": "imported",
       "baseline_extracted_sha256": "4ba829368855eca06de8edb48c8935a3fa2bbea852ebb1e4a9a96f9bb35d4a75",
       "reason": "remaining audit remediation: deterministic bounds, private storage, safe diagnostics and embedding contracts"
-    },
-    "tests/fixtures/retrieval_corpus.json": {
-      "source_path": "benchmarks/person_fidelity_public_v1.json",
-      "source_sha256": "1aee1b5af4f190204637a6569bf77064edc1cab09e43525b39d22e1dd424c109",
-      "extracted_sha256": "1aee1b5af4f190204637a6569bf77064edc1cab09e43525b39d22e1dd424c109",
-      "extraction_path": "tests/fixtures/retrieval_corpus.json",
-      "status": "imported"
-    },
-    "tests/fixtures/self_memory_navigation_snapshot.json": {
-      "source_path": "tests/fixtures/self_memory_navigation_snapshot.json",
-      "source_sha256": "271572addab5b7e6505fe12328b3e402b3f9c0df8849ceeabc6eeab2a32ee069",
-      "extracted_sha256": null,
-      "extraction_path": "tests/fixtures/self_memory_navigation_snapshot.json",
-      "status": "retired",
-      "baseline_extracted_sha256": "271572addab5b7e6505fe12328b3e402b3f9c0df8849ceeabc6eeab2a32ee069",
-      "reason": "Operational identity/self-model/self-reflection feature retired; generic semantic evidence remains."
     },
     "tests/test_acceptance_contract.py": {
       "source_path": "tests/test_acceptance_contract.py",
@@ -1391,7 +1338,7 @@
     "tests/test_canonical_neighborhood.py": {
       "source_path": "tests/test_canonical_neighborhood.py",
       "source_sha256": "60972681dea6f9dc5c271a3423ec8fd81c7571d9855401677a9c7d6c2127a1a5",
-      "extracted_sha256": "b2ae3305b4db6339ee041adff72ad81bd1ff49daaef2618e930f87b6371e765a",
+      "extracted_sha256": "a7db627fd3d5ec139e31ff23feb970e413d1fe52fadc0bb8cf572152be95c4e6",
       "extraction_path": "tests/test_canonical_neighborhood.py",
       "status": "imported",
       "baseline_extracted_sha256": "2600578fe9707f995b3bc8dc7657e0875c5ffa54576d29d1076995f70f934683"
@@ -1608,7 +1555,7 @@
     "tests/test_native_policy.py": {
       "source_path": "tests/test_native_policy.py",
       "source_sha256": "d41a878e681f7983f3319c751f58d910611e4c70b19d821fcde6258eb27c8759",
-      "extracted_sha256": "3656bf420730bb925c6b955505b9c34864e270f77bbceb56f9469bdce2b9e0d7",
+      "extracted_sha256": "bea4553d1ae89c6f89a5d3943b61f1310266abb12ace6e2181b831b95a773af0",
       "extraction_path": "tests/test_native_policy.py",
       "status": "imported",
       "baseline_extracted_sha256": "d41a878e681f7983f3319c751f58d910611e4c70b19d821fcde6258eb27c8759"
@@ -1641,7 +1588,7 @@
     "tests/test_ollama_runtime.py": {
       "source_path": "tests/test_ollama_runtime.py",
       "source_sha256": "09579a97b87bc4be89f36e2fab0967fb19d2e306bb9e51df921709cbf882b772",
-      "extracted_sha256": "1ea6a252f1bfc8103f6742ef6ac1f0ec92a28ad2a754f5a09433af3d17bb21ed",
+      "extracted_sha256": "00c4c352ea2460235449027d912eee2aee5a4a4bf08bd56fc61d338f02d549d6",
       "extraction_path": "tests/test_ollama_runtime.py",
       "status": "imported",
       "baseline_extracted_sha256": "09579a97b87bc4be89f36e2fab0967fb19d2e306bb9e51df921709cbf882b772",
@@ -1820,33 +1767,6 @@
       "status": "imported",
       "baseline_extracted_sha256": "2c7793ecf740ddf8f6c36d976254399e8c5fbddd5869f2d90cb3edd82991dc3a"
     },
-    "tests/test_self_memory.py": {
-      "source_path": "tests/test_self_memory.py",
-      "source_sha256": "9bd07d010b7ca8f4f4d27f57f11c2362deba76a0f9876b10ba3517cf0ad04fa8",
-      "extracted_sha256": null,
-      "extraction_path": "tests/test_self_memory.py",
-      "status": "retired",
-      "baseline_extracted_sha256": "9bd07d010b7ca8f4f4d27f57f11c2362deba76a0f9876b10ba3517cf0ad04fa8",
-      "reason": "Operational identity/self-model/self-reflection feature retired; generic semantic evidence remains."
-    },
-    "tests/test_self_memory_navigation.py": {
-      "source_path": "tests/test_self_memory_navigation.py",
-      "source_sha256": "3cae8ecf49695d795c131d2b9599da47aabcb0de6f6a1f4e4403ccac4e10dadf",
-      "extracted_sha256": null,
-      "extraction_path": "tests/test_self_memory_navigation.py",
-      "status": "retired",
-      "baseline_extracted_sha256": "340c56fc8c6f95a8c05406be58fd74a19ebe257f5595af106fa5c4701269e104",
-      "reason": "Operational identity/self-model/self-reflection feature retired; generic semantic evidence remains."
-    },
-    "tests/test_self_reflection.py": {
-      "source_path": "tests/test_self_reflection.py",
-      "source_sha256": "d0d79d0fa70d70fa9314471491275762a80259536babc3875ad12da8ef22438e",
-      "extracted_sha256": null,
-      "extraction_path": "tests/test_self_reflection.py",
-      "status": "retired",
-      "baseline_extracted_sha256": "d0d79d0fa70d70fa9314471491275762a80259536babc3875ad12da8ef22438e",
-      "reason": "Operational identity/self-model/self-reflection feature retired; generic semantic evidence remains."
-    },
     "tests/test_semantic_memory.py": {
       "source_path": "tests/test_semantic_memory.py",
       "source_sha256": "d8e15577aa96fd2971f7e0b0fb41bc56f6cad82199e76ae7844f8ca460eda4bd",
@@ -1946,7 +1866,7 @@
     "tests/unit/test_contract_registries.py": {
       "source_path": "tests/unit/test_contract_registries.py",
       "source_sha256": "d9b5449a70b69e430989b073da936baf62e038854dd55de5e8d14a1f1c569c14",
-      "extracted_sha256": "5b48aa547ddd9c798616b11f1f5a83cf49e6d53ea3a873e0d06e6f4d5ea4b301",
+      "extracted_sha256": "82af24311ff975e5ecbba9391c41b281702584a73178a3a596159a804c9eab73",
       "extraction_path": "tests/unit/test_contract_registries.py",
       "status": "imported",
       "baseline_extracted_sha256": "d9b5449a70b69e430989b073da936baf62e038854dd55de5e8d14a1f1c569c14"
@@ -1986,7 +1906,7 @@
     "tests/unit/test_model_residency.py": {
       "source_path": "tests/unit/test_model_residency.py",
       "source_sha256": "cff5c8ea02dc599681b3d9d739900f88d1a4cce26c03be1f8604d9f29fd4256e",
-      "extracted_sha256": "05e2c6f698868461c85306110452f8902e9434023d46576de2bb2b4f15fec964",
+      "extracted_sha256": "2a59516b44025a54b200f76c8438bc4e9a3bd05ed8e9968675df7c4424640e39",
       "extraction_path": "tests/unit/test_model_residency.py",
       "status": "imported",
       "baseline_extracted_sha256": "15c633952d6fb1dfab0927a79b384862aab921245f645a987122fa5a7c0dcf8d"
@@ -2060,7 +1980,7 @@
       "source_path": null,
       "source_sha256": null,
       "extraction_path": "scripts/verify_source_baseline.py",
-      "extracted_sha256": "6daacbe3b41bf68d385ac0c5fcb280c212603299ccdbe24baf3fa19293cd619a",
+      "extracted_sha256": "0781eca597984ca7912343c1724abf24d807f6bea2c0523bb540ae321c47b32d",
       "reason": "Extraction provenance verifier for imported/adapted files, additions, retirements and unrecorded code.; remaining audit remediation: deterministic bounds, private storage, safe diagnostics and embedding contracts"
     },
     "src/persistent_cognition/resource_limits.py": {
@@ -2206,6 +2126,86 @@
       "extracted_sha256": "49128d733001a264919a055b16b1ddabd83645cf16624fd6968cced38c0287a3",
       "status": "added",
       "reason": "Replace the native relational false pass with model-free evidence and both-value regression coverage."
+    },
+    "benchmarks/cognitive_effort/__init__.py": {
+      "source_path": null,
+      "source_sha256": null,
+      "extracted_sha256": "27a1b24ba9e39c75de18e230c17b474f6690cb6ff26b1a3871af011a135c6141",
+      "extraction_path": "benchmarks/cognitive_effort/__init__.py",
+      "status": "added",
+      "reason": "COG-EFFORT-001: independent auditable cognitive-effort measurement, reproducible local runner and operator guidance."
+    },
+    "benchmarks/cognitive_effort/spec.py": {
+      "source_path": null,
+      "source_sha256": null,
+      "extracted_sha256": "e06b18706c0b7a8157557f509db781e936592c5ff24ba2f02787b5513bc44511",
+      "extraction_path": "benchmarks/cognitive_effort/spec.py",
+      "status": "added",
+      "reason": "COG-EFFORT-001: independent auditable cognitive-effort measurement, reproducible local runner and operator guidance."
+    },
+    "benchmarks/cognitive_effort/measurement.py": {
+      "source_path": null,
+      "source_sha256": null,
+      "extracted_sha256": "cfc9df37f808f9f4978522e12251c58a5fe3346e6579280fab4a29806bb8d402",
+      "extraction_path": "benchmarks/cognitive_effort/measurement.py",
+      "status": "added",
+      "reason": "COG-EFFORT-001: independent auditable cognitive-effort measurement, reproducible local runner and operator guidance."
+    },
+    "benchmarks/cognitive_effort/energy.py": {
+      "source_path": null,
+      "source_sha256": null,
+      "extracted_sha256": "8b0261037b1072065fa577ecf5436ce0e475b90d39a0a8bec18e8796e8789e4a",
+      "extraction_path": "benchmarks/cognitive_effort/energy.py",
+      "status": "added",
+      "reason": "COG-EFFORT-001: independent auditable cognitive-effort measurement, reproducible local runner and operator guidance."
+    },
+    "benchmarks/cognitive_effort/report.py": {
+      "source_path": null,
+      "source_sha256": null,
+      "extracted_sha256": "e70b3e8bff40da2ced5baeb091301eac295c54a4eb9c9f3756e3f85731b52a58",
+      "extraction_path": "benchmarks/cognitive_effort/report.py",
+      "status": "added",
+      "reason": "COG-EFFORT-001: independent auditable cognitive-effort measurement, reproducible local runner and operator guidance."
+    },
+    "benchmarks/cognitive_effort/runner.py": {
+      "source_path": null,
+      "source_sha256": null,
+      "extracted_sha256": "89476af100711a2546926864c17a8b3b98bf3e08cc034f0440688d542e3ec84e",
+      "extraction_path": "benchmarks/cognitive_effort/runner.py",
+      "status": "added",
+      "reason": "COG-EFFORT-001: independent auditable cognitive-effort measurement, reproducible local runner and operator guidance."
+    },
+    "tests/test_cognitive_effort_benchmark.py": {
+      "source_path": null,
+      "source_sha256": null,
+      "extracted_sha256": "746fe480c11b384c6ce2cc22a02a0e799886a18681fdb05de69b6f1a0add96cf",
+      "extraction_path": "tests/test_cognitive_effort_benchmark.py",
+      "status": "added",
+      "reason": "COG-EFFORT-001: independent auditable cognitive-effort measurement, reproducible local runner and operator guidance."
+    },
+    "scripts/run_cognitive_effort.ps1": {
+      "source_path": null,
+      "source_sha256": null,
+      "extracted_sha256": "5f4bc71f09ed0db3a0deacde9ad7d977da79fdf21a26391410db023d9fe1222a",
+      "extraction_path": "scripts/run_cognitive_effort.ps1",
+      "status": "added",
+      "reason": "COG-EFFORT-001: independent auditable cognitive-effort measurement, reproducible local runner and operator guidance."
+    },
+    "docs/engineering/COGNITIVE_EFFORT_BENCHMARK.md": {
+      "source_path": null,
+      "source_sha256": null,
+      "extracted_sha256": "76fd77cbbe1bd23f49e18d8e49e7a892e20378a9b909980ae4911535b9ab9dc8",
+      "extraction_path": "docs/engineering/COGNITIVE_EFFORT_BENCHMARK.md",
+      "status": "added",
+      "reason": "COG-EFFORT-001: independent auditable cognitive-effort measurement, reproducible local runner and operator guidance."
+    },
+    "benchmarks/cognitive_effort/bundle.py": {
+      "source_path": null,
+      "source_sha256": null,
+      "extracted_sha256": "683e6392c4ba7a46f7fcf4c0782d4bd0434c5523593f981c96f82ccb660426f1",
+      "extraction_path": "benchmarks/cognitive_effort/bundle.py",
+      "status": "added",
+      "reason": "COG-EFFORT-001 auditable benchmarking module."
     }
   },
   "manifest_version": 2

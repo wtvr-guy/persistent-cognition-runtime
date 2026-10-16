@@ -9,7 +9,7 @@ from __future__ import annotations
 from persistent_cognition.attention_observation import ResourceSafetyPolicy
 
 
-NATIVE_RESOURCE_POLICY_VERSION = "v0.7-native-calibration-v1"
+NATIVE_RESOURCE_POLICY_VERSION = "v0.7-native-calibration-v2"
 
 
 def native_resource_safety_policy() -> ResourceSafetyPolicy:
@@ -18,7 +18,9 @@ def native_resource_safety_policy() -> ResourceSafetyPolicy:
     policy = ResourceSafetyPolicy(
         policy_version=NATIVE_RESOURCE_POLICY_VERSION,
         cpu_system_headroom_percent=10,
-        memory_system_headroom_percent=10,
+        # Fixed 1 GiB system reserve on the 16 GiB native target; the separate
+        # 5% uncertainty allowance still applies to new RAM admissions.
+        memory_system_headroom_percent=0,
         memory_system_headroom_min_mib=1024,
         uncertainty_headroom_percent=5,
         default_llm_process_memory_mib=3072,

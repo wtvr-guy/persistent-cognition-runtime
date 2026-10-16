@@ -56,7 +56,8 @@ class MemorySettings(SettingsRecord):
 
 class ResourceSettings(SettingsRecord):
     cpu_system_headroom_percent: int = Field(default=10, ge=1, le=90)
-    memory_system_headroom_percent: int = Field(default=10, ge=1, le=90)
+    # Allow a fixed MiB system reserve without a proportional RAM deduction.
+    memory_system_headroom_percent: int = Field(default=0, ge=0, le=90)
     memory_system_headroom_min_mib: int = Field(default=1024, ge=256, le=1048576)
     uncertainty_headroom_percent: int = Field(default=5, ge=1, le=90)
     max_cpu_pressure_percent: int = Field(default=85, ge=10, le=99)

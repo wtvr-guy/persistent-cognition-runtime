@@ -49,10 +49,14 @@ def verify_manifest(manifest, root=ROOT):
             kind = "unchanged" if record["source_sha256"] == record["extracted_sha256"] else "adapted"
         counts[kind] += 1
     for directory in ("src", "tests", "scripts", "benchmarks"):
-        for path in (root / directory).rglob("*.py"):
+        for path in (root / directory).rglob("*"):
+            if not path.is_file() or path.suffix not in {".py", ".json", ".sql", ".ps1"}:
+                continue
             relative = path.relative_to(root).as_posix()
+            if relative.startswith("benchmarks/generated/"):
+                continue  # Operator-generated corpora are not repository source.
             if relative not in extraction_paths:
-                failures.append(f"unrecorded code: {relative}")
+                failures.append(f"unrecorded code or fixture: {relative}")
     if failures:
         raise SystemExit("Extraction drift: " + ", ".join(failures))
     return counts

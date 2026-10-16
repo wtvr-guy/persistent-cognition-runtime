@@ -190,9 +190,9 @@
       "status": "PROVISIONAL"
     },
     "src/persistent_cognition/runtime_settings.py::ResourceSettings::memory_system_headroom_percent.default": {
-      "expected_value": 10,
+      "expected_value": 0,
       "classification": "SAFETY_TUNABLE",
-      "rationale": "Local app input, preview, listing, model-generation, polling and resource bounds are explicit provisional controls. Existing evidence/admission defaults are preserved; host and model-specific calibration is required. See docs/experiments/LOCAL_APP_001.md.",
+      "rationale": "Fixed 1 GiB native Windows host reserve with the separate uncertainty allowance; application defaults follow this calibration. Operator-persisted overrides remain explicit. See native acceptance and docs/experiments/LOCAL_APP_001.md.",
       "benchmark_id": "LOCAL-APP-001",
       "status": "PROVISIONAL"
     },
@@ -394,7 +394,7 @@
       "status": "PROVISIONAL"
     },
     "src/persistent_cognition/openai_transport.py::perform_response::Client.timeout": {
-      "expected_value": 300.0,
+      "expected_value": 300,
       "classification": "SAFETY_TUNABLE",
       "rationale": "Local app input, preview, listing, model-generation, polling and resource bounds are explicit provisional controls. Existing evidence/admission defaults are preserved; host and model-specific calibration is required. See docs/experiments/LOCAL_APP_001.md.",
       "benchmark_id": "LOCAL-APP-001",
@@ -1060,7 +1060,7 @@
       "rationale": "A running resource counter starts at zero and counts exactly the bytes or nodes admitted; this initialization is not a policy budget."
     },
     "src/persistent_cognition/private_storage.py::<module>::WINDOWS_LOCK_TIMEOUT_SECONDS": {
-      "expected_value": 10.0,
+      "expected_value": 10,
       "classification": "SAFETY_TUNABLE",
       "benchmark_id": "WINDOWS-STORAGE-001",
       "status": "PROVISIONAL",
@@ -1277,10 +1277,10 @@
       "status": "PROVISIONAL",
       "rationale": "Idle polling cadence, geometric backoff ceiling, exponent cap and post-error cooldown bound the always-on supervisor, not its execution authority. The SITUATION-PIPELINE-001 specification in benchmarks/constraint_experiments.json covers deterministic backoff/ownership invariants; host/workload tuning remains provisional.",
       "members": {
-        "src/persistent_cognition/percept_service.py::<module>::SERVICE_IDLE_BACKOFF_BASE_SECONDS": 1.0,
-        "src/persistent_cognition/percept_service.py::<module>::SERVICE_MAX_BACKOFF_SECONDS": 30.0,
+        "src/persistent_cognition/percept_service.py::<module>::SERVICE_IDLE_BACKOFF_BASE_SECONDS": 1,
+        "src/persistent_cognition/percept_service.py::<module>::SERVICE_MAX_BACKOFF_SECONDS": 30,
         "src/persistent_cognition/percept_service.py::<module>::SERVICE_MAX_BACKOFF_EXPONENT": 5,
-        "src/persistent_cognition/percept_service.py::<module>::SERVICE_ERROR_BACKOFF_SECONDS": 5.0
+        "src/persistent_cognition/percept_service.py::<module>::SERVICE_ERROR_BACKOFF_SECONDS": 5
       }
     },
     "resource_native": {
@@ -1304,7 +1304,7 @@
         "src/persistent_cognition/attention_observation.py::SystemHostResourceProbe._darwin_memory_mib::run.timeout#2": 2,
         "src/persistent_cognition/percept_response_runtime.py::<module>::PERCEPT_LLM_SLOTS": 1,
         "src/persistent_cognition/native_policy.py::native_resource_safety_policy::ResourceSafetyPolicy.cpu_system_headroom_percent": 10,
-        "src/persistent_cognition/native_policy.py::native_resource_safety_policy::ResourceSafetyPolicy.memory_system_headroom_percent": 10,
+        "src/persistent_cognition/native_policy.py::native_resource_safety_policy::ResourceSafetyPolicy.memory_system_headroom_percent": 0,
         "src/persistent_cognition/native_policy.py::native_resource_safety_policy::ResourceSafetyPolicy.memory_system_headroom_min_mib": 1024,
         "src/persistent_cognition/native_policy.py::native_resource_safety_policy::ResourceSafetyPolicy.uncertainty_headroom_percent": 5,
         "src/persistent_cognition/native_policy.py::native_resource_safety_policy::ResourceSafetyPolicy.default_llm_process_memory_mib": 3072,

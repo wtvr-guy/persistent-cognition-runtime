@@ -14,6 +14,7 @@ $previousRequireOllama = [Environment]::GetEnvironmentVariable(
     "Process"
 )
 $previousPythonUtf8 = [Environment]::GetEnvironmentVariable("PYTHONUTF8", "Process")
+$previousOllamaKeepAlive = [Environment]::GetEnvironmentVariable("PCR_OLLAMA_KEEP_ALIVE", "Process")
 $exitCode = 1
 $locationPushed = $false
 
@@ -60,6 +61,43 @@ try {
     uv run --locked pytest -q -ra -m "not ollama"
     if ($LASTEXITCODE -ne 0) { throw "deterministic regression suite failed" }
 
+    # This native gate uses one fixed local model. Load it before the first
+    # admission check, then retain it across fresh model-worker processes.
+    # This does not bypass the Ollama /api/ps residency recheck or RAM guard.
+    $env:PCR_OLLAMA_KEEP_ALIVE = "1h"
+    $ollamaModel = if ($env:OLLAMA_MODEL) {
+        $env:OLLAMA_MODEL
+    } else {
+        "qwen3:4b-instruct-2507-q4_K_M"
+    }
+    $ollamaBaseUrl = if ($env:OLLAMA_BASE_URL) {
+        $env:OLLAMA_BASE_URL.TrimEnd("/")
+    } else {
+        "http://localhost:11434"
+    }
+    $ollamaEndpoint = [Uri]$ollamaBaseUrl
+    if ($ollamaEndpoint.Scheme -ne "http" -or
+        $ollamaEndpoint.Host -notin @("localhost", "127.0.0.1", "::1")) {
+        throw "native acceptance prewarm requires a local HTTP Ollama endpoint"
+    }
+    $prewarmJson = @{
+        model = $ollamaModel
+        prompt = ""
+        stream = $false
+        keep_alive = "1h"
+    } | ConvertTo-Json -Compress
+    Invoke-RestMethod -Method Post -Uri "$ollamaBaseUrl/api/generate" `
+        -Body $prewarmJson -ContentType "application/json" -TimeoutSec 900 | Out-Null
+    $runningModels = Invoke-RestMethod -Method Get `
+        -Uri "$ollamaBaseUrl/api/ps" -TimeoutSec 30
+    $residentMatches = @($runningModels.models | Where-Object {
+        $_.name -eq $ollamaModel -or $_.model -eq $ollamaModel
+    })
+    if ($residentMatches.Count -ne 1) {
+        throw "Ollama prewarm did not verify exact resident model $ollamaModel"
+    }
+    Write-Host "Ollama native gate: model=$ollamaModel verified-resident=true keep_alive=1h"
+
     uv run --locked pytest -vv -s -ra -m ollama
     $exitCode = $LASTEXITCODE
     if ($exitCode -ne 0) { throw "Ollama continuity acceptance failed" }
@@ -84,6 +122,7 @@ finally {
         "Process"
     )
     [Environment]::SetEnvironmentVariable("PYTHONUTF8", $previousPythonUtf8, "Process")
+    [Environment]::SetEnvironmentVariable("PCR_OLLAMA_KEEP_ALIVE", $previousOllamaKeepAlive, "Process")
     if ($locationPushed) {
         Pop-Location
     }

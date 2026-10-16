@@ -29,7 +29,7 @@ uv run pytest -q tests/unit --confcutdir=tests/unit
 
 The service backoff bounds remain provisional under `SITUATION-PIPELINE-001`; deterministic invariants are not workload-specific latency calibration. Likewise, the deterministic calibration runner reports `INSUFFICIENT_DISCRIMINATION` for its four retained families, not a claim of uniquely optimal settings.
 
-Frozen retrieval fixtures originally discovered during upstream application benchmarks remain under `tests/fixtures`. They test delivery of required canonical sources; application fidelity benchmark runners and subjective scoring are excluded.
+Canonical-neighborhood regressions use generic maintenance and order-history records to test delivery of exact source text, source filtering, and conversation boundaries.
 
 ## Live-model gate
 
