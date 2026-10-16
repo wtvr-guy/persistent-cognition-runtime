@@ -2,13 +2,13 @@ import uuid
 
 import pytest
 
-from prometheist import db, event_store, jit_memory
-from prometheist.interaction_working_state import (
+from persistent_cognition import db, event_store, jit_memory
+from persistent_cognition.interaction_working_state import (
     InteractionWorkingState,
     activate_working_state,
     load_working_state,
 )
-from prometheist.models import EventType
+from persistent_cognition.models import EventType
 
 
 @pytest.fixture

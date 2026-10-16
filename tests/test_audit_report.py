@@ -6,7 +6,7 @@ from uuid import uuid4
 
 import pytest
 
-from prometheist import artifact_journal, audit_report, blob_store, llm_artifact_store
+from persistent_cognition import artifact_journal, audit_report, blob_store, llm_artifact_store
 
 
 def _write_full_chain(*, response_text: str = "done") -> tuple:
@@ -71,7 +71,7 @@ def _write_full_chain(*, response_text: str = "done") -> tuple:
 def test_render_interaction_audit_reports_full_timeline_and_disposition(
     tmp_path, monkeypatch
 ) -> None:
-    monkeypatch.setenv("PROMETHEIST_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
+    monkeypatch.setenv("PCR_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
     interaction_id, *_ = _write_full_chain()
 
     report = audit_report.render_interaction_audit(interaction_id)
@@ -99,7 +99,7 @@ def test_render_interaction_audit_reports_full_timeline_and_disposition(
 
 
 def test_render_interaction_audit_reports_incomplete_interaction(tmp_path, monkeypatch) -> None:
-    monkeypatch.setenv("PROMETHEIST_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
+    monkeypatch.setenv("PCR_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
     interaction_id = uuid4()
     artifact_journal.write_percept_artifact(
         interaction_id=interaction_id,
@@ -118,7 +118,7 @@ def test_render_interaction_audit_reports_incomplete_interaction(tmp_path, monke
 
 
 def test_render_interaction_audit_reports_stage_error(tmp_path, monkeypatch) -> None:
-    monkeypatch.setenv("PROMETHEIST_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
+    monkeypatch.setenv("PCR_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
     interaction_id = uuid4()
     artifact_journal.write_percept_artifact(
         interaction_id=interaction_id,
@@ -149,7 +149,7 @@ def test_render_interaction_audit_reports_stage_error(tmp_path, monkeypatch) -> 
 
 
 def test_render_interaction_audit_reports_broken_hash_chain(tmp_path, monkeypatch) -> None:
-    monkeypatch.setenv("PROMETHEIST_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
+    monkeypatch.setenv("PCR_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
     interaction_id, *_ = _write_full_chain()
     percept_path = Path(
         artifact_journal.interaction_artifacts(interaction_id)[0]["_path"]
@@ -167,7 +167,7 @@ def test_render_interaction_audit_reports_broken_hash_chain(tmp_path, monkeypatc
 
 
 def test_render_interaction_audit_counts_referenced_blobs(tmp_path, monkeypatch) -> None:
-    monkeypatch.setenv("PROMETHEIST_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
+    monkeypatch.setenv("PCR_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
     interaction_id = uuid4()
     descriptor = blob_store.put_blob(b"a large exact model generation", media_type="text/plain")
     artifact_journal.write_percept_artifact(
@@ -195,7 +195,7 @@ def test_render_interaction_audit_counts_referenced_blobs(tmp_path, monkeypatch)
 
 
 def test_render_interaction_audit_reports_unverifiable_missing_blob(tmp_path, monkeypatch) -> None:
-    monkeypatch.setenv("PROMETHEIST_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
+    monkeypatch.setenv("PCR_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
     interaction_id = uuid4()
     missing_descriptor = blob_store.BlobDescriptor(
         media_type="text/plain", digest="sha256:" + "ab" * 32, size=4
@@ -225,7 +225,7 @@ def test_render_interaction_audit_reports_unverifiable_missing_blob(tmp_path, mo
 
 
 def test_render_interaction_audit_raises_for_unknown_interaction(tmp_path, monkeypatch) -> None:
-    monkeypatch.setenv("PROMETHEIST_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
+    monkeypatch.setenv("PCR_ARTIFACT_ROOT", str(tmp_path / "artifacts"))
 
     with pytest.raises(ValueError):
         audit_report.render_interaction_audit(uuid4())

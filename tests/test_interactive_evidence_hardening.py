@@ -3,13 +3,13 @@ from __future__ import annotations
 from datetime import datetime, timezone
 import uuid
 
-from prometheist.models import EventType, MemoryEvidence, MemoryNeed, MemoryPacket
-from prometheist.percept_response_runtime import ResponseMemoryPackage
-from prometheist.percept_response_worker import (
+from persistent_cognition.models import EventType, MemoryEvidence, MemoryNeed, MemoryPacket
+from persistent_cognition.percept_response_runtime import ResponseMemoryPackage
+from persistent_cognition.percept_response_worker import (
     UserPromptLLM,
     _cognitive_memory_packet,
 )
-from prometheist.response_policy import (
+from persistent_cognition.response_policy import (
     HistoricalEvidenceScope,
     ResponsePolicy,
     ResponseSurfaceMode,
@@ -85,7 +85,6 @@ def test_recursive_response_trace_is_not_model_visible() -> None:
 
 
 def test_final_responder_gets_user_evidence_authority_and_no_trace(monkeypatch) -> None:
-    monkeypatch.delenv("PROMETHEIST_PERSONALITY_PROMPT", raising=False)
     llm = UserPromptLLM()
     captured: dict[str, str] = {}
 

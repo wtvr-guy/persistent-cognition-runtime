@@ -4,8 +4,8 @@ import stat
 
 import pytest
 
-from prometheist.content_digest import content_digest
-from prometheist.network_consent import (
+from persistent_cognition.content_digest import content_digest
+from persistent_cognition.network_consent import (
     NetworkPurpose, consent_path, consent_proposal, grant_consent,
     normalize_destination, require_database_destination, require_destination, revoke_consent,
 )
@@ -13,7 +13,7 @@ from prometheist.network_consent import (
 
 @pytest.fixture(autouse=True)
 def private_root(tmp_path, monkeypatch):
-    monkeypatch.setenv("PROMETHEIST_ARTIFACT_ROOT", str(tmp_path))
+    monkeypatch.setenv("PCR_ARTIFACT_ROOT", str(tmp_path))
     for key in ("PGHOST", "PGHOSTADDR", "PGPORT", "PGSERVICE"):
         monkeypatch.delenv(key, raising=False)
     return tmp_path
@@ -69,6 +69,20 @@ def test_database_environment_route_checked(monkeypatch):
         require_database_destination("host=localhost dbname=private")
 
 
+def test_remote_consent_does_not_bypass_transport_encryption():
+    url = "http://model.example:11434"
+    grant_consent(url, NetworkPurpose.MODEL,
+                  accepted_digest=content_digest(consent_proposal(url, NetworkPurpose.MODEL)))
+    with pytest.raises(PermissionError, match="HTTPS"):
+        require_destination(url, NetworkPurpose.MODEL)
+    database = "postgresql://database.example:5432"
+    grant_consent(database, NetworkPurpose.DATABASE,
+                  accepted_digest=content_digest(consent_proposal(database, NetworkPurpose.DATABASE)))
+    with pytest.raises(PermissionError, match="verify-full"):
+        require_database_destination("host=database.example dbname=test sslmode=require")
+    require_database_destination("host=database.example dbname=test sslmode=verify-full")
+
+
 def test_active_connectivity_requires_exact_https_url():
     url, purpose = "https://example.test/health?scope=network", NetworkPurpose.CONNECTIVITY
     with pytest.raises(ValueError):
@@ -83,8 +97,8 @@ def test_active_connectivity_requires_exact_https_url():
 
 def test_all_model_transports_check_actual_destination_before_io(monkeypatch):
     import httpx
-    from prometheist.llm import OllamaClient
-    from prometheist.ollama_runtime import OllamaRuntimeProbe
+    from persistent_cognition.llm import OllamaClient
+    from persistent_cognition.ollama_runtime import OllamaRuntimeProbe
     calls = []
     transport = httpx.MockTransport(lambda request: calls.append(request) or httpx.Response(200, json={}))
     with httpx.Client(base_url="https://remote.example", transport=transport) as http:
@@ -100,7 +114,7 @@ def test_all_model_transports_check_actual_destination_before_io(monkeypatch):
 
 def test_connectivity_does_not_follow_redirects_or_send_inventory(monkeypatch):
     import httpx
-    from prometheist.network_consent import check_connectivity
+    from persistent_cognition.network_consent import check_connectivity
     purpose, url = NetworkPurpose.CONNECTIVITY, "https://endpoint.example/health"
     grant_consent(url, purpose, accepted_digest=content_digest(consent_proposal(url, purpose)))
     client_type = httpx.Client
@@ -119,14 +133,21 @@ def test_connectivity_does_not_follow_redirects_or_send_inventory(monkeypatch):
 
 def test_concurrent_grant_and_revocation_cannot_restore_an_old_grant():
     from concurrent.futures import ThreadPoolExecutor
+    from threading import Barrier
     purpose = NetworkPurpose.MODEL
     old = "https://revoked.example"
     grant_consent(old, purpose, accepted_digest=content_digest(consent_proposal(old, purpose)))
     urls = [f"https://destination-{i}.example" for i in range(12)]
-    with ThreadPoolExecutor() as pool:
-        futures = [pool.submit(grant_consent, url, purpose,
+    start = Barrier(len(urls) + 1)
+
+    def edit(operation, url, **kwargs):
+        start.wait(timeout=30)
+        operation(url, purpose, **kwargs)
+
+    with ThreadPoolExecutor(max_workers=len(urls) + 1) as pool:
+        futures = [pool.submit(edit, grant_consent, url,
                    accepted_digest=content_digest(consent_proposal(url, purpose))) for url in urls]
-        futures.append(pool.submit(revoke_consent, old, purpose))
+        futures.append(pool.submit(edit, revoke_consent, old))
         for future in futures:
             future.result()
     with pytest.raises(PermissionError):

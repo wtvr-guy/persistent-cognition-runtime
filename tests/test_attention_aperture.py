@@ -2,23 +2,23 @@ import uuid
 
 import pytest
 
-from prometheist import db, event_store
-from prometheist.attention_aperture import (
+from persistent_cognition import db, event_store
+from persistent_cognition.attention_aperture import (
     ATTENTION_APERTURE_VERSION,
     DEFAULT_ATTENTION_APERTURE_LIMIT,
     MAX_ATTENTION_APERTURE_ITEMS,
     open_attention_aperture,
 )
-from prometheist.interaction_contracts import (
+from persistent_cognition.interaction_contracts import (
     deterministic_interaction_event_id,
     deterministic_interaction_id,
 )
-from prometheist.interaction_working_state import (
+from persistent_cognition.interaction_working_state import (
     MAX_ACTIVE_EVENT_IDS,
     activate_working_state,
     load_working_state,
 )
-from prometheist.models import EventType
+from persistent_cognition.models import EventType
 
 
 @pytest.fixture

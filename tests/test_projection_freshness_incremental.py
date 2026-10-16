@@ -4,11 +4,11 @@ import uuid
 
 import pytest
 
-from prometheist import db, event_store, jit_memory, postgres_memory_kernel
-from prometheist.association_feature_projection import AssociationFeatureProjection
-from prometheist.models import EventType
-from prometheist.postgres_association_projection import load_associations
-from prometheist.projection_freshness import committed_projection_high_waters
+from persistent_cognition import db, event_store, jit_memory, postgres_memory_kernel
+from persistent_cognition.association_feature_projection import AssociationFeatureProjection
+from persistent_cognition.models import EventType
+from persistent_cognition.postgres_association_projection import load_associations
+from persistent_cognition.projection_freshness import committed_projection_high_waters
 
 
 @pytest.fixture

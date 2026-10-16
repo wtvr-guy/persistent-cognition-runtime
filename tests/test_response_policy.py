@@ -5,8 +5,8 @@ from uuid import uuid4
 
 import pytest
 
-from prometheist.models import EventType, MemoryEvidence, MemoryNeed, MemoryPacket
-from prometheist.response_policy import (
+from persistent_cognition.models import EventType, MemoryEvidence, MemoryNeed, MemoryPacket
+from persistent_cognition.response_policy import (
     ExactSourceComposition,
     ExactSourceSelection,
     HistoricalEvidenceScope,

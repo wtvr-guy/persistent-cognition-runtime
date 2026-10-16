@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 
-from prometheist.synthetic_benchmark import run_benchmark
+from persistent_cognition.synthetic_benchmark import run_benchmark
 
 
 BENCHMARK_PATH = Path(__file__).resolve().parents[1] / "benchmarks" / "jordan_vale_v1.json"

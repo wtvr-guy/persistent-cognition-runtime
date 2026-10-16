@@ -2,10 +2,10 @@ import uuid
 
 import pytest
 
-from prometheist import db, event_store
-from prometheist.models import EventType
-from prometheist.postgres_association_projection import load_associations
-from prometheist.postgres_memory_kernel import rebuild
+from persistent_cognition import db, event_store
+from persistent_cognition.models import EventType
+from persistent_cognition.postgres_association_projection import load_associations
+from persistent_cognition.postgres_memory_kernel import rebuild
 
 
 @pytest.fixture

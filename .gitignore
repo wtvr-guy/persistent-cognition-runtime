@@ -10,4 +10,4 @@ dist/
 *.egg-info/
 test-results.xml
 benchmarks/generated/
-.prometheist/
+.pcr/

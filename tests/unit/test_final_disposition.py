@@ -2,7 +2,7 @@ from uuid import uuid4
 
 import pytest
 
-from prometheist import artifact_journal
+from persistent_cognition import artifact_journal
 
 
 def _completed_stage():

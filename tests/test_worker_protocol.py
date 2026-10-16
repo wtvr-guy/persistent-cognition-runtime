@@ -8,8 +8,8 @@ from uuid import UUID
 
 import pytest
 
-from prometheist import db
-from prometheist.attention import (
+from persistent_cognition import db
+from persistent_cognition.attention import (
     AttentionTask,
     JITAttentionScheduler,
     SchedulingMetadata,
@@ -17,18 +17,18 @@ from prometheist.attention import (
     TaskCriticality,
     deterministic_task_id,
 )
-from prometheist.attention_observation import (
+from persistent_cognition.attention_observation import (
     HostResourceMetrics,
     LocalResourceAdmissionController,
     ResourceSafetyPolicy,
 )
-from prometheist.attention_resources import (
+from persistent_cognition.attention_resources import (
     ExecutionResourceClass,
     ProcessResourceEstimate,
     ResourceEstimateSource,
 )
-from prometheist.attention_store import save_scheduler
-from prometheist.worker_protocol import (
+from persistent_cognition.attention_store import save_scheduler
+from persistent_cognition.worker_protocol import (
     WorkerClaimDecision,
     WorkerClaimStatus,
     WorkerEffectPolicy,
@@ -37,8 +37,8 @@ from prometheist.worker_protocol import (
     deterministic_worker_idempotency_key,
     deterministic_worker_step_id,
 )
-from prometheist.worker_runtime import GuardedWorkerLauncher, WorkerLaunchDenied
-from prometheist.worker_store import (
+from persistent_cognition.worker_runtime import GuardedWorkerLauncher, WorkerLaunchDenied
+from persistent_cognition.worker_store import (
     WorkerProtocolError,
     checkpoint_worker_claim,
     complete_worker_claim,
@@ -629,11 +629,11 @@ def test_guarded_launcher_never_spawns_when_claim_is_denied():
         env={},
     )
     assert len(calls) == 1
-    assert calls[0][1]["PROMETHEIST_WORKER_CLAIM_ID"] == str(
+    assert calls[0][1]["PCR_WORKER_CLAIM_ID"] == str(
         launched.envelope.claim.claim_id
     )
-    assert calls[0][1]["PROMETHEIST_WORKER_ID"] == "worker-a"
-    assert calls[0][1]["PROMETHEIST_WORKER_SCHEDULER_KEY"] == "default"
+    assert calls[0][1]["PCR_WORKER_ID"] == "worker-a"
+    assert calls[0][1]["PCR_WORKER_SCHEDULER_KEY"] == "default"
 
     with pytest.raises(WorkerLaunchDenied, match="live claim"):
         launcher.launch(

@@ -2,9 +2,9 @@ from __future__ import annotations
 
 import uuid
 
-from prometheist import capability_runtime, jit_memory
-from prometheist.capability_registry import DEFAULT_REGISTRY
-from prometheist.models import MemoryPacket
+from persistent_cognition import capability_runtime, jit_memory
+from persistent_cognition.capability_registry import DEFAULT_REGISTRY
+from persistent_cognition.models import MemoryPacket
 
 
 def test_internal_memory_service_is_not_walled_by_conversation(monkeypatch):

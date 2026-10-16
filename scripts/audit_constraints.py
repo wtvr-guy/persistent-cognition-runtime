@@ -23,7 +23,7 @@ import re
 from typing import Iterable
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_SCAN_ROOTS = (ROOT / "src" / "prometheist", ROOT / "scripts")
+DEFAULT_SCAN_ROOTS = (ROOT / "src" / "persistent_cognition", ROOT / "scripts")
 DEFAULT_REGISTRY = ROOT / "benchmarks" / "constraint_registry.json"
 DEFAULT_EXPERIMENTS = ROOT / "benchmarks" / "constraint_experiments.json"
 

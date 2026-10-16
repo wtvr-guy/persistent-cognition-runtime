@@ -4,8 +4,8 @@ from uuid import UUID
 
 import pytest
 
-from prometheist import db
-from prometheist.attention import (
+from persistent_cognition import db
+from persistent_cognition.attention import (
     AttentionTask,
     JITAttentionScheduler,
     SchedulingMetadata,
@@ -13,12 +13,12 @@ from prometheist.attention import (
     TaskCriticality,
     deterministic_task_id,
 )
-from prometheist.attention_resources import (
+from persistent_cognition.attention_resources import (
     ExecutionResource,
     ExecutionResourceClass,
     ResourceRequirement,
 )
-from prometheist.attention_store import load_scheduler, save_scheduler
+from persistent_cognition.attention_store import load_scheduler, save_scheduler
 
 
 NAMESPACE = UUID("88888888-8888-8888-8888-888888888888")

@@ -17,10 +17,11 @@ import uuid
 
 import pytest
 
-from prometheist import db, event_store
-from prometheist.models import EventType
+from persistent_cognition import db, event_store
+from persistent_cognition.models import EventType
 from tests._cli_helpers import ollama_available, print_transcript, run_once
 from tests._native_artifact_assertions import (
+    assert_recalled_literal,
     assert_response_evidence_receipt,
     interaction_id_for_prompt,
     print_artifact_receipt,
@@ -110,7 +111,7 @@ def _seed_distractors(count: int = 12) -> None:
 
 def _print_turn(number: int, prompt: str, answer: str) -> None:
     print_transcript(f"\nTurn {number} — User:\n{prompt}")
-    print_transcript(f"\nTurn {number} — Prometheist:\n{answer}")
+    print_transcript(f"\nTurn {number} — Persistent Cognition:\n{answer}")
 
 
 def test_stateless_four_turn_continuity_survives_sessions_and_distractors():
@@ -125,7 +126,7 @@ def test_stateless_four_turn_continuity_survives_sessions_and_distractors():
     )
     historical_answer = run_once(historical_rule, historical_conversation)
     print_transcript(f"\nHistorical seed — User:\n{historical_rule}")
-    print_transcript(f"\nHistorical seed — Prometheist:\n{historical_answer}")
+    print_transcript(f"\nHistorical seed — Persistent Cognition:\n{historical_answer}")
     historical_rule_event = _event_for_text(
         historical_conversation,
         EventType.USER_PROMPT,
@@ -174,6 +175,8 @@ def test_stateless_four_turn_continuity_survives_sessions_and_distractors():
     )
     failure_trace = _trace(historical_conversation, active_conversation)
     assert answer2.strip(), failure_trace
+    assert_recalled_literal(answer2, profile_token, label="Turn 2 constraint profile")
+    assert_recalled_literal(answer2, "Docker", label="Turn 2 excluded approach")
     assert historical_rule_event.event_id in turn2_sources, failure_trace
     assert turn1_event.event_id in turn2_sources, failure_trace
     print_artifact_receipt(
@@ -184,6 +187,7 @@ def test_stateless_four_turn_continuity_survives_sessions_and_distractors():
                 turn2_event.correlation_id,
             ),
             required_event_ids=(historical_rule_event.event_id, turn1_event.event_id),
+            require_deterministic=True,
         ),
     )
 
@@ -201,6 +205,8 @@ def test_stateless_four_turn_continuity_survives_sessions_and_distractors():
     )
     failure_trace = _trace(historical_conversation, active_conversation)
     assert answer3.strip(), failure_trace
+    assert_recalled_literal(answer3, plan_label, label="Turn 3 plan nickname")
+    assert_recalled_literal(answer3, "Docker", label="Turn 3 excluded approach")
     assert turn1_event.event_id in turn3_sources, failure_trace
     assert answer2_event.event_id in turn3_sources, failure_trace
     print_artifact_receipt(
@@ -211,6 +217,7 @@ def test_stateless_four_turn_continuity_survives_sessions_and_distractors():
                 turn3_event.correlation_id,
             ),
             required_event_ids=(turn1_event.event_id, answer2_event.event_id),
+            require_deterministic=True,
         ),
     )
 
@@ -227,6 +234,8 @@ def test_stateless_four_turn_continuity_survives_sessions_and_distractors():
     )
     failure_trace = _trace(historical_conversation, active_conversation)
     assert answer4.strip(), failure_trace
+    assert_recalled_literal(answer4, "Docker", label="Turn 4 excluded approach")
+    assert_recalled_literal(answer4, "virtualization is disabled", label="Turn 4 underlying reason")
     assert answer3_event.event_id in turn4_sources, failure_trace
     assert historical_rule_event.event_id in turn4_sources, failure_trace
     print_artifact_receipt(
@@ -254,4 +263,4 @@ def test_stateless_four_turn_continuity_survives_sessions_and_distractors():
         "\nSTRUCTURAL PASS: v0.7 task/worker continuity delivered recent and older "
         "canonical evidence to each fresh responder."
     )
-    print("HUMAN REVIEW REQUIRED: judge the four printed Prometheist answers above.")
+    print("HUMAN REVIEW REQUIRED: judge the four printed Persistent Cognition answers above.")

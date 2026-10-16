@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import subprocess
+import os
 import sys
 import uuid
 
@@ -30,7 +31,7 @@ def run_once(prompt: str, conversation_id: uuid.UUID, timeout: int = 900) -> str
         [
             sys.executable,
             "-m",
-            "prometheist.cli",
+            "persistent_cognition.cli",
             "--once",
             prompt,
             "--conversation-id",
@@ -42,5 +43,7 @@ def run_once(prompt: str, conversation_id: uuid.UUID, timeout: int = 900) -> str
         errors="replace",
         timeout=timeout,
     )
-    assert result.returncode == 0, result.stderr
+    assert result.returncode == 0, (
+        result.stderr + "\nTest artifact root: " + os.environ.get("PCR_ARTIFACT_ROOT", "unset")
+    )
     return result.stdout.strip()

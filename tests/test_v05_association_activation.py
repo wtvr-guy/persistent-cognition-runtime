@@ -1,7 +1,7 @@
 from datetime import datetime, timezone
 
-from prometheist.associative_memory import Association, associative_recall
-from prometheist.memory_kernel import CueState, MemoryEvent
+from persistent_cognition.associative_memory import Association, associative_recall
+from persistent_cognition.memory_kernel import CueState, MemoryEvent
 
 
 def _event(event_id: str, seq: int, text: str) -> MemoryEvent:

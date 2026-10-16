@@ -4,7 +4,7 @@ import subprocess
 import sys
 import textwrap
 
-from prometheist import cli
+from persistent_cognition import cli
 
 
 class _StreamProbe:
@@ -55,9 +55,9 @@ def test_module_entrypoint_configures_utf8_before_argument_parsing():
         stderr = Probe(sys.stderr)
         sys.stdout = stdout
         sys.stderr = stderr
-        sys.argv = ["prometheist.cli", "--help"]
+        sys.argv = ["persistent_cognition.cli", "--help"]
         try:
-            runpy.run_module("prometheist.cli", run_name="__main__")
+            runpy.run_module("persistent_cognition.cli", run_name="__main__")
         except SystemExit as exc:
             if exc.code not in (0, None):
                 raise

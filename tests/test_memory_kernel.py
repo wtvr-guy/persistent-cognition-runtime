@@ -1,6 +1,6 @@
 from datetime import datetime, timezone
 
-from prometheist.memory_kernel import CueState, MemoryEvent, recall
+from persistent_cognition.memory_kernel import CueState, MemoryEvent, recall
 
 
 def ev(event_id: str, seq: int, text: str, *, entities=()):

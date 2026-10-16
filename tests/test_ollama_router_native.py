@@ -6,10 +6,10 @@ from uuid import uuid4
 
 import pytest
 
-from prometheist.capability_registry import CapabilityDescriptor, CapabilityKind
-from prometheist.models import EventType, MemoryEvidence, MemoryNeed, MemoryPacket
-from prometheist.percept_response_runtime import PreCognitiveDisposition
-from prometheist.percept_response_worker import UserPromptLLM
+from persistent_cognition.capability_registry import CapabilityDescriptor, CapabilityKind
+from persistent_cognition.models import EventType, MemoryEvidence, MemoryNeed, MemoryPacket
+from persistent_cognition.percept_response_runtime import PreCognitiveDisposition
+from persistent_cognition.percept_response_worker import UserPromptLLM
 from tests._cli_helpers import ollama_available, print_transcript
 
 

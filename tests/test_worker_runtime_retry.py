@@ -1,8 +1,8 @@
 from types import SimpleNamespace
 from uuid import uuid4
 
-from prometheist import worker_runtime
-from prometheist.worker_protocol import WorkerClaimDecision
+from persistent_cognition import worker_runtime
+from persistent_cognition.worker_protocol import WorkerClaimDecision
 
 
 class FakeCursor:

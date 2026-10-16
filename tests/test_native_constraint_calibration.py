@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from benchmarks import native_constraint_calibration as calibration
-from prometheist.admission_diagnostics import RESOURCE_ADMISSION_DIAGNOSTIC_PREFIX
+from persistent_cognition.admission_diagnostics import RESOURCE_ADMISSION_DIAGNOSTIC_PREFIX
 
 
 def test_extract_admission_diagnostics_returns_structured_payload():

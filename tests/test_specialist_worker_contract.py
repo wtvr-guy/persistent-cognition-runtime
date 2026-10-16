@@ -5,21 +5,21 @@ from uuid import uuid4
 
 import pytest
 
-from prometheist.capability_registry import DEFAULT_REGISTRY
-from prometheist.interaction_contracts import DurableInteraction
-from prometheist.models import MemoryNeed, MemoryPacket
-from prometheist.percept_response_runtime import (
+from persistent_cognition.capability_registry import DEFAULT_REGISTRY
+from persistent_cognition.interaction_contracts import DurableInteraction
+from persistent_cognition.models import MemoryNeed, MemoryPacket
+from persistent_cognition.percept_response_runtime import (
     PerceptStage,
     ResponseMemoryPackage,
     _execute_stage,
     _validated_response_policy,
 )
-from prometheist.percept_response_worker import (
+from persistent_cognition.percept_response_worker import (
     USER_PROMPT_STAGE_SPECIALIST_ROLES,
     UserPromptLLM,
     _ALLOWED_LLM_KINDS_BY_STAGE,
 )
-from prometheist.response_policy import (
+from persistent_cognition.response_policy import (
     RESPONSE_POLICY_VERSION,
     HistoricalEvidenceScope,
     ResponsePolicy,
@@ -75,9 +75,16 @@ def test_guarded_worker_rejects_another_specialists_llm_role() -> None:
         worker._require_stage_specialization("FINAL_RESPONSE_V2")
 
 
-def test_evidence_policy_is_a_separate_durable_stage() -> None:
+def test_evidence_policy_is_a_separate_durable_stage(monkeypatch) -> None:
     policy = _policy()
     llm = SimpleNamespace(_response_policy=lambda _percept: policy)
+
+    def bootstrap(_conn, _interaction, stage, scheduler_key):
+        assert stage is PerceptStage.RESOLVE_REFERENCES
+        assert scheduler_key == "test"
+        return {"capability_snapshot": DEFAULT_REGISTRY.snapshot()}
+
+    monkeypatch.setattr("persistent_cognition.percept_response_runtime._stage_result", bootstrap)
 
     output, refs = _execute_stage(
         None,
@@ -111,6 +118,7 @@ def test_response_stage_inherits_exact_policy_without_reclassification(monkeypat
         adaptive_recall_rounds=0,
     )
     results = {
+        PerceptStage.RESOLVE_REFERENCES: {"capability_snapshot": DEFAULT_REGISTRY.snapshot()},
         PerceptStage.EVIDENCE_POLICY: {
             "response_policy_version": RESPONSE_POLICY_VERSION,
             "response_policy": policy.model_dump(mode="json"),
@@ -128,8 +136,8 @@ def test_response_stage_inherits_exact_policy_without_reclassification(monkeypat
         PerceptStage.EXECUTE_WORK: {"work_results": []},
     }
     monkeypatch.setattr(
-        "prometheist.percept_response_runtime._stage_result",
-        lambda _conn, _interaction, stage, _scheduler_key: results[stage],
+        "persistent_cognition.percept_response_runtime._stage_result",
+        lambda _conn, _interaction, stage, scheduler_key: results[stage],
     )
     received: list[ResponsePolicy] = []
 

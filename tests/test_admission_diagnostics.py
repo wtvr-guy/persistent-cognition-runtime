@@ -3,8 +3,8 @@ from __future__ import annotations
 from datetime import datetime, timezone
 import uuid
 
-from prometheist.admission_diagnostics import build_resource_admission_diagnostics
-from prometheist.attention import (
+from persistent_cognition.admission_diagnostics import build_resource_admission_diagnostics
+from persistent_cognition.attention import (
     AttentionTask,
     InterruptionPolicy,
     JITAttentionScheduler,
@@ -12,11 +12,11 @@ from prometheist.attention import (
     ServiceClass,
     TaskCriticality,
 )
-from prometheist.attention_observation import (
+from persistent_cognition.attention_observation import (
     HostResourceMetrics,
     LocalResourceAdmissionController,
 )
-from prometheist.attention_resources import ProcessResourceEstimate, ResourceEstimateSource
+from persistent_cognition.attention_resources import ProcessResourceEstimate, ResourceEstimateSource
 
 
 NOW = datetime(2026, 8, 27, 8, 0, tzinfo=timezone.utc)

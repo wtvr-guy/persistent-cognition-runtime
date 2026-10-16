@@ -7,8 +7,8 @@ import uuid
 from datetime import timedelta
 from uuid import UUID
 
-from prometheist import db, event_store
-from prometheist.attention import (
+from persistent_cognition import db, event_store
+from persistent_cognition.attention import (
     AttentionTask,
     InterruptionPolicy,
     SchedulingMetadata,
@@ -16,11 +16,11 @@ from prometheist.attention import (
     TaskCriticality,
     deterministic_task_id,
 )
-from prometheist.attention_observation import HostResourceMetrics, LocalResourceAdmissionController
-from prometheist.attention_resources import ProcessResourceEstimate, ResourceEstimateSource
-from prometheist.attention_store import allocate_created_seq, load_scheduler, save_scheduler
-from prometheist.worker_protocol import WorkerEffectPolicy
-from prometheist.worker_store import register_worker_step
+from persistent_cognition.attention_observation import HostResourceMetrics, LocalResourceAdmissionController
+from persistent_cognition.attention_resources import ProcessResourceEstimate, ResourceEstimateSource
+from persistent_cognition.attention_store import allocate_created_seq, load_scheduler, save_scheduler
+from persistent_cognition.worker_protocol import WorkerEffectPolicy
+from persistent_cognition.worker_store import register_worker_step
 from tests._v07_restart_process import BASE_TIME
 
 

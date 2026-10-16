@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from tests.http_fakes import StreamingHTTPFake
+
 import pytest
 
 from datetime import datetime, timezone
@@ -8,12 +10,12 @@ import json
 from types import SimpleNamespace
 from uuid import uuid4
 
-from prometheist import artifact_journal
-from prometheist.llm import _render_qwen_evidence_bound_prompt
-from prometheist.models import EventType, MemoryEvidence, MemoryNeed, MemoryPacket
-from prometheist.percept_response_runtime import PerceptStage, ResponseMemoryPackage
-from prometheist.percept_response_worker import UserPromptLLM
-from prometheist.response_policy import (
+from persistent_cognition import artifact_journal
+from persistent_cognition.llm import _render_qwen_evidence_bound_prompt
+from persistent_cognition.models import EventType, MemoryEvidence, MemoryNeed, MemoryPacket
+from persistent_cognition.percept_response_runtime import PerceptStage, ResponseMemoryPackage
+from persistent_cognition.percept_response_worker import UserPromptLLM
+from persistent_cognition.response_policy import (
     HistoricalEvidenceScope,
     ResponsePolicy,
     ResponseSurfaceMode,
@@ -39,7 +41,7 @@ class _FakeResponse:
         return self._payload
 
 
-class _FakeHTTPClient:
+class _FakeHTTPClient(StreamingHTTPFake):
     def __init__(self, contents: list[str]) -> None:
         self._contents = iter(contents)
         self.calls: list[tuple[str, dict]] = []
@@ -97,7 +99,7 @@ def test_response_policy_sees_only_current_then_exact_selector_sees_filtered_evi
         assignment_id=uuid4(),
     )
     client = UserPromptLLM(
-        base_url="http://ollama.test",
+        base_url="https://ollama.test",
         model="model:test",
         interaction=interaction,
         stage=PerceptStage.RESPOND,

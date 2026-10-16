@@ -1,6 +1,6 @@
 [project]
 name = "persistent-cognition-runtime"
-# Internal package/release metadata is intentionally independent of Prometheist's
+# Internal package/release metadata is intentionally independent of the project's
 # architectural milestone labels (v0.5, v0.6, ...). See README.md#versioning.
 version = "0.8.0"
 description = "Local-first persistent cognitive architecture with stateless workers and JIT memory"
@@ -16,15 +16,15 @@ dependencies = [
 ]
 
 [project.scripts]
-pcr = "prometheist:main"
-pcr-percept = "prometheist.percept_cli:main"
+pcr = "persistent_cognition:main"
+pcr-percept = "persistent_cognition.percept_cli:cli_entry"
 
 [build-system]
 requires = ["uv_build>=0.12.5,<0.13.0"]
 build-backend = "uv_build"
 
 [tool.uv.build-backend]
-module-name = "prometheist"
+module-name = "persistent_cognition"
 
 [dependency-groups]
 dev = [

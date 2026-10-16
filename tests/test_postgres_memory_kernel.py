@@ -2,10 +2,10 @@ import uuid
 
 import pytest
 
-from prometheist import db, event_store
-from prometheist.memory_kernel import CueState
-from prometheist.models import EventType
-from prometheist.postgres_memory_kernel import (
+from persistent_cognition import db, event_store
+from persistent_cognition.memory_kernel import CueState
+from persistent_cognition.models import EventType
+from persistent_cognition.postgres_memory_kernel import (
     associative_recall_from_postgres,
     rebuild,
     recall_from_postgres,

@@ -1,7 +1,7 @@
 from datetime import datetime, timezone
 
-from prometheist.memory_kernel import MemoryEvent
-from prometheist.memory_projection import LexicalProjection, build_projection, projection_digest
+from persistent_cognition.memory_kernel import MemoryEvent
+from persistent_cognition.memory_projection import LexicalProjection, build_projection, projection_digest
 
 
 def test_projection_is_disposable_and_rebuilds_identically():

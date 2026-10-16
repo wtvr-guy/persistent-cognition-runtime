@@ -4,21 +4,21 @@ import uuid
 
 import pytest
 
-from prometheist import jit_memory
-from prometheist.capability_registry import (
+from persistent_cognition import jit_memory
+from persistent_cognition.capability_registry import (
     DEFAULT_REGISTRY,
     CapabilityDescriptor,
     CapabilityKind,
     CapabilityRegistry,
     RegisteredCapability,
 )
-from prometheist.models import MemoryNeed, MemoryPacket
-from prometheist.percept_response_runtime import (
+from persistent_cognition.models import MemoryNeed, MemoryPacket
+from persistent_cognition.percept_response_runtime import (
     PreCognitiveDisposition,
     _effective_adaptive_stage,
     _external_capability_catalog,
 )
-from prometheist.percept_response_worker import UserPromptWorkSelection
+from persistent_cognition.percept_response_worker import UserPromptWorkSelection
 
 
 def test_user_prompt_work_selection_has_no_response_choice() -> None:
