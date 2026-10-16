@@ -162,7 +162,7 @@ def test_empty_full_and_invalid_budgets_do_not_query():
     ("pf-q002", "pf-e004"),
 ])
 def test_frozen_failed_probe_seed_recovers_all_required_canonical_evidence(conn, probe_id, seed_id):
-    # Freeze the retrieved seed from SELF-MEMORY-001_2026-09-27_000808.
+    # Freeze the retrieved seed for the canonical-neighborhood regression.
     # Oracle labels below are used only for assertions, never for navigation.
     corpus = load_person_fidelity_corpus(
         Path(__file__).resolve().parents[1] / "tests/fixtures/retrieval_corpus.json"

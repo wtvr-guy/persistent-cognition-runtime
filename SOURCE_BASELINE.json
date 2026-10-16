@@ -23,7 +23,6 @@
     "Canonical digest primitive extracted from environment contracts.",
     "Frozen retrieval fixture helpers moved to tests; original synthetic fixture bytes retained.",
     "Neutral persistent_cognition Python namespace and PCR_* environment variables; historical upstream attribution URLs and source paths remain Prometheist.",
-    "Retired operational identity/self-model/self-reflection schemas, stages, prompts, policies and tests; generic semantic facts and counterevidence retained.",
     "Completed always-on namespace-owned percept supervision, typed arbitrary-data intake, structured action receipts, finite outcome feedback, and trusted worker-command bootstrap for application callbacks.",
     "Current extraction_path and extracted_sha256 distinguish moved/adapted files from preserved original source_path/source_sha256; additions and retirements are explicit.",
     "Require practical deterministic evidence display and trusted structured field lookup before model-based response realization; retire ordinary factual token-range selection, journal model-free render receipts and strengthen native factual acceptance.",
@@ -49,7 +48,7 @@
     "benchmarks/constraint_experiments.json": {
       "source_path": "benchmarks/constraint_experiments.json",
       "source_sha256": "0924e0934d963f84b0345e0c87e6e0b27a754e2bf7a36767a22b0e32601b670b",
-      "extracted_sha256": "4c0f3b08decd0eea13676afb00d1069c2b72102c79129bfcf03fa13896dbd840",
+      "extracted_sha256": "39cdfe36229bae47f9edb584314455e7a093575d852e9250f3c1a93e0405cfa9",
       "extraction_path": "benchmarks/constraint_experiments.json",
       "status": "imported",
       "reason": "remaining audit remediation: deterministic bounds, private storage, safe diagnostics and embedding contracts"
@@ -706,7 +705,7 @@
     "src/prometheist/jit_memory.py": {
       "source_path": "src/prometheist/jit_memory.py",
       "source_sha256": "4e5f123cfa84447b93a95dda2b24734215f9fe58abad2cd2dc217fb3890accda",
-      "extracted_sha256": "6b26febcd95326a0d6278f8054c823a31bc51fb25a3340686dde74900c8ce38e",
+      "extracted_sha256": "a15f93025806b174874639f04e81f190c629fd8dd1e782fc921188f76ecc0975",
       "extraction_path": "src/persistent_cognition/jit_memory.py",
       "status": "imported",
       "baseline_extracted_sha256": "4e5f123cfa84447b93a95dda2b24734215f9fe58abad2cd2dc217fb3890accda"
@@ -1049,33 +1048,6 @@
       "extraction_path": "src/persistent_cognition/scale_corpus.py",
       "status": "imported"
     },
-    "src/prometheist/self_memory.py": {
-      "source_path": "src/prometheist/self_memory.py",
-      "source_sha256": "cbbf370a74e30b002b83256c171b5f0177a77e9de0964e500fdbadc4d9342b35",
-      "extracted_sha256": null,
-      "extraction_path": "src/persistent_cognition/self_memory.py",
-      "status": "retired",
-      "baseline_extracted_sha256": "cbbf370a74e30b002b83256c171b5f0177a77e9de0964e500fdbadc4d9342b35",
-      "reason": "Operational identity/self-model/self-reflection feature retired; generic semantic evidence remains."
-    },
-    "src/prometheist/self_memory_navigation.py": {
-      "source_path": "src/prometheist/self_memory_navigation.py",
-      "source_sha256": "5f651ae41408acadc725ebc8c10f17617e1c31433f1ef9b8c80b041ef82a9f67",
-      "extracted_sha256": null,
-      "extraction_path": "src/persistent_cognition/self_memory_navigation.py",
-      "status": "retired",
-      "baseline_extracted_sha256": "5f651ae41408acadc725ebc8c10f17617e1c31433f1ef9b8c80b041ef82a9f67",
-      "reason": "Operational identity/self-model/self-reflection feature retired; generic semantic evidence remains."
-    },
-    "src/prometheist/self_reflection.py": {
-      "source_path": "src/prometheist/self_reflection.py",
-      "source_sha256": "0cd4199c960f9f4a0fd885a18f95bf477cc91c2e45663647145e8b8f554b7e58",
-      "extracted_sha256": null,
-      "extraction_path": "src/persistent_cognition/self_reflection.py",
-      "status": "retired",
-      "baseline_extracted_sha256": "0cd4199c960f9f4a0fd885a18f95bf477cc91c2e45663647145e8b8f554b7e58",
-      "reason": "Operational identity/self-model/self-reflection feature retired; generic semantic evidence remains."
-    },
     "src/prometheist/semantic_memory.py": {
       "source_path": "src/prometheist/semantic_memory.py",
       "source_sha256": "4547e4388e6f1d80864ffe71d7f0e66abf4e15d12d8fd43bcc9a2ce7e61096cb",
@@ -1214,15 +1186,6 @@
       "extracted_sha256": "1aee1b5af4f190204637a6569bf77064edc1cab09e43525b39d22e1dd424c109",
       "extraction_path": "tests/fixtures/retrieval_corpus.json",
       "status": "imported"
-    },
-    "tests/fixtures/self_memory_navigation_snapshot.json": {
-      "source_path": "tests/fixtures/self_memory_navigation_snapshot.json",
-      "source_sha256": "271572addab5b7e6505fe12328b3e402b3f9c0df8849ceeabc6eeab2a32ee069",
-      "extracted_sha256": null,
-      "extraction_path": "tests/fixtures/self_memory_navigation_snapshot.json",
-      "status": "retired",
-      "baseline_extracted_sha256": "271572addab5b7e6505fe12328b3e402b3f9c0df8849ceeabc6eeab2a32ee069",
-      "reason": "Operational identity/self-model/self-reflection feature retired; generic semantic evidence remains."
     },
     "tests/test_acceptance_contract.py": {
       "source_path": "tests/test_acceptance_contract.py",
@@ -1394,7 +1357,7 @@
     "tests/test_canonical_neighborhood.py": {
       "source_path": "tests/test_canonical_neighborhood.py",
       "source_sha256": "60972681dea6f9dc5c271a3423ec8fd81c7571d9855401677a9c7d6c2127a1a5",
-      "extracted_sha256": "b2ae3305b4db6339ee041adff72ad81bd1ff49daaef2618e930f87b6371e765a",
+      "extracted_sha256": "275842fcc780af4c1ff4e30709118573e541d110c54f4ec3d36e636f47cbfd74",
       "extraction_path": "tests/test_canonical_neighborhood.py",
       "status": "imported",
       "baseline_extracted_sha256": "2600578fe9707f995b3bc8dc7657e0875c5ffa54576d29d1076995f70f934683"
@@ -1823,33 +1786,6 @@
       "status": "imported",
       "baseline_extracted_sha256": "2c7793ecf740ddf8f6c36d976254399e8c5fbddd5869f2d90cb3edd82991dc3a"
     },
-    "tests/test_self_memory.py": {
-      "source_path": "tests/test_self_memory.py",
-      "source_sha256": "9bd07d010b7ca8f4f4d27f57f11c2362deba76a0f9876b10ba3517cf0ad04fa8",
-      "extracted_sha256": null,
-      "extraction_path": "tests/test_self_memory.py",
-      "status": "retired",
-      "baseline_extracted_sha256": "9bd07d010b7ca8f4f4d27f57f11c2362deba76a0f9876b10ba3517cf0ad04fa8",
-      "reason": "Operational identity/self-model/self-reflection feature retired; generic semantic evidence remains."
-    },
-    "tests/test_self_memory_navigation.py": {
-      "source_path": "tests/test_self_memory_navigation.py",
-      "source_sha256": "3cae8ecf49695d795c131d2b9599da47aabcb0de6f6a1f4e4403ccac4e10dadf",
-      "extracted_sha256": null,
-      "extraction_path": "tests/test_self_memory_navigation.py",
-      "status": "retired",
-      "baseline_extracted_sha256": "340c56fc8c6f95a8c05406be58fd74a19ebe257f5595af106fa5c4701269e104",
-      "reason": "Operational identity/self-model/self-reflection feature retired; generic semantic evidence remains."
-    },
-    "tests/test_self_reflection.py": {
-      "source_path": "tests/test_self_reflection.py",
-      "source_sha256": "d0d79d0fa70d70fa9314471491275762a80259536babc3875ad12da8ef22438e",
-      "extracted_sha256": null,
-      "extraction_path": "tests/test_self_reflection.py",
-      "status": "retired",
-      "baseline_extracted_sha256": "d0d79d0fa70d70fa9314471491275762a80259536babc3875ad12da8ef22438e",
-      "reason": "Operational identity/self-model/self-reflection feature retired; generic semantic evidence remains."
-    },
     "tests/test_semantic_memory.py": {
       "source_path": "tests/test_semantic_memory.py",
       "source_sha256": "d8e15577aa96fd2971f7e0b0fb41bc56f6cad82199e76ae7844f8ca460eda4bd",
@@ -1949,7 +1885,7 @@
     "tests/unit/test_contract_registries.py": {
       "source_path": "tests/unit/test_contract_registries.py",
       "source_sha256": "d9b5449a70b69e430989b073da936baf62e038854dd55de5e8d14a1f1c569c14",
-      "extracted_sha256": "5b48aa547ddd9c798616b11f1f5a83cf49e6d53ea3a873e0d06e6f4d5ea4b301",
+      "extracted_sha256": "a24932452c2b7a38ac8a821d85cb150dd4ebdf588032884f04b09797932f74bc",
       "extraction_path": "tests/unit/test_contract_registries.py",
       "status": "imported",
       "baseline_extracted_sha256": "d9b5449a70b69e430989b073da936baf62e038854dd55de5e8d14a1f1c569c14"

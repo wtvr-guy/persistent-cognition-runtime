@@ -51,7 +51,7 @@ Only use a disposable database: its tables are cleared before tests. See [TESTIN
 
 ## Continuous percept service and embedding
 
-Ollama is optional for deterministic structured reactions. It is required when a source policy enables semantic triage or natural-language responses. The runtime installs no persona, imprint, or self-model.
+Ollama is optional for deterministic structured reactions. It is required when a source policy enables semantic triage or natural-language responses.
 
 Application startup installs a `SourcePolicy` with its source ID, kind, modalities, evidence scope, and allowed work. Adapters call `ingest_percept` with a stable `delivery_id`, timezone-aware observation time, and arbitrary JSON-compatible payload. Supply `PerceptContext.observations`/expectation references for measured discrepancies; install an explicit `deterministic_task` for scheduled work, sensor redflags, exceptions, and asynchronous tool results that must trigger a reaction. Payload text cannot install policy or select an executor.
 

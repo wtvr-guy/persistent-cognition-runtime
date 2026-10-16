@@ -21,11 +21,6 @@ def test_retired_control_contracts_are_absent():
     assert not hasattr(PerceptLLM, "generate_final_response")
 
 
-def test_self_model_contracts_are_absent():
-    assert not any("SELF" in k for k in SEMANTIC_CONTRACTS)
-    assert not any("SELF" in k for k in STAGE_CONTRACTS)
-
-
 @pytest.mark.parametrize("kind", list(SEMANTIC_CONTRACTS))
 def test_registered_prompts_and_schemas_are_resolvable(kind):
     contract = contract_manifest()["semantic_contracts"][kind]
@@ -49,10 +44,10 @@ def test_source_verifier_checks_extraction_paths_and_retirements(tmp_path):
             "extraction_path": "src/persistent_cognition/example.py",
             "extracted_sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
         },
-        "src/prometheist/self_model.py": {
-            "source_path": "src/prometheist/self_model.py", "source_sha256": source_hash,
-            "extraction_path": "src/persistent_cognition/self_model.py",
-            "status": "retired", "extracted_sha256": None, "reason": "Removed operational identity",
+        "src/prometheist/retired_module.py": {
+            "source_path": "src/prometheist/retired_module.py", "source_sha256": source_hash,
+            "extraction_path": "src/persistent_cognition/retired_module.py",
+            "status": "retired", "extracted_sha256": None, "reason": "Obsolete example module",
         },
     }}
     assert verify(manifest, tmp_path) == {"unchanged": 0, "adapted": 1, "added": 0, "retired": 1}
@@ -60,7 +55,7 @@ def test_source_verifier_checks_extraction_paths_and_retirements(tmp_path):
     with pytest.raises(SystemExit, match="modified extraction"):
         verify(manifest, tmp_path)
     path.write_text("adapted code")
-    path.with_name("self_model.py").write_text("retired code restored")
+    path.with_name("retired_module.py").write_text("retired code restored")
     with pytest.raises(SystemExit, match="invalid retirement"):
         verify(manifest, tmp_path)
 

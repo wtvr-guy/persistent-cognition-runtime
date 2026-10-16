@@ -21,7 +21,6 @@ The source application is unchanged. This repository has its own history and the
 - Preserved frozen synthetic retrieval fixtures and their assertions. Test-only fixture loaders are separated from production code.
 - Removed only schema/constraint registrations belonging to excluded modules; all remaining numerical bounds are still audited.
 - Kept current technical specs and engineering rules, with absent historical references linked to the pinned upstream source.
-- Retired operational identity/personality/imprinting and self-model/reflection contracts, not generic semantic evidence or counterevidence. Retired identity-specific tests remain retired.
 - Completed namespace-owned continuous perception, arbitrary structured source inputs, deterministic scheduled/sensor/error/tool reactions, observable failures, graceful worker-boundary stop/restart, and trusted application callback startup in fresh workers.
 - Isolated action feedback from pending entity reactions, quarantined failed situations with explicit reconciled recovery while healthy siblings continue, and based model admission only on actual model-using stages.
 - Corrected historical upstream links to the real `wtvr-guy/prometheist` repository; current imports/commands remain neutral.
@@ -35,7 +34,7 @@ Current completion checks (2026-10-06 working tree based on `360ce54`; Python 3.
 - `uv sync --frozen` restored the existing lockfile without adding project dependencies.
 - `uv run ruff check .` and `git diff --check` passed.
 - Source verifier passed: 44 unchanged, 197 adapted, 5 added, 7 retired; all 248 original source paths and source hashes were preserved.
-- `uv run python scripts/audit_registries.py` resolved all active prompts, schemas, and stages; no operational self-model contract remains.
+- `uv run python scripts/audit_registries.py` resolved all active prompts, schemas, and stages.
 - `uv run python scripts/audit_constraints.py --fail-unregistered`: 306 discovered/registered; zero uncovered, stale, mismatched, or invalid entries.
 - `uv run python benchmarks/run_deterministic_constraints.py` completed all four retained families with `INSUFFICIENT_DISCRIMINATION`, not claimed optimality.
 - `uv run pytest -q tests/unit --confcutdir=tests/unit`: 97 passed.

@@ -40,4 +40,4 @@ The default model and optional stage routes must fit actual CPU/RAM admission. T
 
 The source namespace and versioned settings type names are compatibility details. No web-server framework or browser automation dependency is installed by this package.
 
-The `persistent_cognition` runtime has no persona or self-model prompt/schema/stage. Structured non-user reactions can be entirely model-free. Semantic triage and natural-language responses retain guarded, stateless model calls only when their application source policy requires them. Trusted application reactions use explicitly injected worker startup, not model-selected import paths; see [Setup](SETUP.md#trusted-application-callbacks).
+Structured non-user reactions can be entirely model-free. Semantic triage and natural-language responses retain guarded, stateless model calls only when their application source policy requires them. Trusted application reactions use explicitly injected worker startup, not model-selected import paths; see [Setup](SETUP.md#trusted-application-callbacks).
