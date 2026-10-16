@@ -79,6 +79,16 @@ class AuditTrail:
         digest = write_artifact(path, value)
         self.append("artifact", path=relative, sha256=digest)
 
+    def register_tree(self, relative: str) -> None:
+        """Hash completed subprocess artifacts without rewriting their bytes."""
+        root = self.root / relative
+        for path in sorted(root.rglob("*")):
+            if path.is_symlink():
+                raise ValueError("native artifact tree contains a symbolic link")
+            if path.is_file():
+                self.append("artifact", path=path.relative_to(self.root).as_posix(),
+                            sha256=sha256(path.read_bytes()))
+
     def close(self) -> None:
         self.stream.close()
 
@@ -94,11 +104,17 @@ class Sampler:
         self.interval = interval_seconds
         self.samples: list[dict[str, Any]] = []
         self.errors: list[str] = []
+        self.cpu_seen: dict[str, float] = {}
+        self.cpu_totals = {"own": 0.0, "ollama": 0.0}
+        self.started_epoch = 0.0
         self.stop_signal = threading.Event()
         self.thread = threading.Thread(target=self._loop, name="cognitive-effort-sampler", daemon=True)
 
     def start(self) -> None:
+        self.started_epoch = time.time()
         psutil.cpu_percent(interval=None)
+        # Complete the baseline before the caller is allowed to start work.
+        self._sample()
         self.thread.start()
 
     def stop(self) -> None:
@@ -107,27 +123,32 @@ class Sampler:
         if self.thread.is_alive():
             self.errors.append("sampler thread did not terminate before deadline")
 
+    def _sample(self) -> None:
+        try:
+            sample_tick = time.perf_counter_ns()
+            sample = self._capture()
+            for group in ("own", "ollama"):
+                for key, record in sample.get(group + "_process_cpu", {}).items():
+                    total = record["seconds"]
+                    previous = self.cpu_seen.get(key)
+                    if previous is None:
+                        previous = 0.0 if record["created_epoch"] >= self.started_epoch else total
+                    self.cpu_totals[group] += max(0.0, total - previous)
+                    # Keep exited-process counters; dropping them loses their work.
+                    self.cpu_seen[key] = total
+                sample[group + "_cpu_cumulative_seconds"] = round(self.cpu_totals[group], 6)
+            sample["capture_elapsed_ns"] = time.perf_counter_ns() - sample_tick
+            self.samples.append(sample)
+        except Exception as exc:
+            self.errors.append(f"{type(exc).__name__}: {exc}")
+
     def _loop(self) -> None:
-        while True:
-            try:
-                sample_tick = time.perf_counter_ns()
-                sample = self._capture()
-                sample["capture_elapsed_ns"] = time.perf_counter_ns() - sample_tick
-                self.samples.append(sample)
-            except Exception as exc:
-                self.errors.append(f"{type(exc).__name__}: {exc}")
+        while not self.stop_signal.wait(self.interval):
             if len(self.samples) >= 10000:
                 self.errors.append("sample bound reached (10000); later samples omitted")
                 return
-            if self.stop_signal.wait(self.interval):
-                try:
-                    sample_tick = time.perf_counter_ns()
-                    sample = self._capture()
-                    sample["capture_elapsed_ns"] = time.perf_counter_ns() - sample_tick
-                    self.samples.append(sample)
-                except Exception as exc:
-                    self.errors.append(f"final: {type(exc).__name__}: {exc}")
-                return
+            self._sample()
+        self._sample()
 
     @staticmethod
     def _capture() -> dict[str, Any]:
@@ -139,6 +160,7 @@ class Sampler:
             pass
         own_cpu = own_rss = ollama_cpu = ollama_rss = 0.0
         own_count = ollama_count = 0
+        cpu_records = {"own": {}, "ollama": {}}
         # Enumerate only cheap process identity fields first. Asking Windows for
         # memory and CPU times of EVERY unrelated process is disproportionately
         # expensive and distorted the initial 250 ms sampling cadence.
@@ -153,8 +175,13 @@ class Sampler:
                 with process.oneshot():
                     mem = process.memory_info()
                     cpu = process.cpu_times()
+                    created = process.create_time()
                 cpu_total = float(cpu.user + cpu.system) if cpu else 0.0
                 rss = float(mem.rss) if mem else 0.0
+                group = "own" if is_own else "ollama"
+                cpu_records[group][f"{info['pid']}:{created}"] = {
+                    "seconds": cpu_total, "created_epoch": created,
+                }
                 if is_own:
                     own_cpu += cpu_total
                     own_rss += rss
@@ -174,6 +201,8 @@ class Sampler:
             "own_rss_bytes": int(own_rss),
             "own_cpu_cumulative_seconds": round(own_cpu, 6),
             "own_process_count": own_count,
+            "own_process_cpu": cpu_records["own"],
+            "ollama_process_cpu": cpu_records["ollama"],
             "ollama_rss_bytes": int(ollama_rss),
             "ollama_cpu_cumulative_seconds": round(ollama_cpu, 6),
             "ollama_named_process_count": ollama_count,
@@ -206,7 +235,9 @@ def measurement_summary(samples: list[dict[str, Any]]) -> dict[str, Any]:
         "ollama_named_cpu_delta_seconds": delta("ollama_cpu_cumulative_seconds"),
         "caution": (
             "Named Ollama process identification is best-effort; RSS may count "
-            "shared pages more than once; CPU percentage is not energy."
+            "shared pages more than once; CPU percentage is not energy. "
+            "CPU totals retain observed exited processes, but processes that "
+            "start and exit between samples can be missed."
         ),
     }
 
@@ -235,7 +266,7 @@ def run_trial(
     failure: dict[str, Any] | None = None
     try:
         result = action()
-    except BaseException as exc:
+    except Exception as exc:
         failure = {
             "type": type(exc).__name__,
             "message": str(exc),

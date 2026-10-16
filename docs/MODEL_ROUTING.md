@@ -41,3 +41,10 @@ The default model and optional stage routes must fit actual CPU/RAM admission. T
 The source namespace and versioned settings type names are compatibility details. No web-server framework or browser automation dependency is installed by this package.
 
 Structured non-user reactions can be entirely model-free. Semantic triage and natural-language responses retain guarded, stateless model calls only when their application source policy requires them. Trusted application reactions use explicitly injected worker startup, not model-selected import paths; see [Setup](SETUP.md#trusted-application-callbacks).
+
+Native acceptance can retain one explicitly prewarmed local model when
+`REQUIRE_OLLAMA_ACCEPTANCE=1` and `PCR_OLLAMA_KEEP_ALIVE` are set. The override
+takes precedence over effective model selection parameters, requires every
+model-powered user stage to target that same model, and verifies exact residency
+before and after managed calls. Ordinary managed jobs retain sequential unload
+boundaries.

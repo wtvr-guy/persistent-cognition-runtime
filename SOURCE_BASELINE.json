@@ -718,7 +718,7 @@
     "src/prometheist/llm.py": {
       "source_path": "src/prometheist/llm.py",
       "source_sha256": "e6b524a72ec492932f0554f6f7e7c1f89b22b590003b6a30379cad1ff9babae1",
-      "extracted_sha256": "427fbec0e513fc0f8480f38db55451c99a75319aaaf91042d7356644faa52848",
+      "extracted_sha256": "6ff9d20491bb306ce8941d8aa6d8d16e0c06a92ecdf95da16c607cc6d8be04d7",
       "extraction_path": "src/persistent_cognition/llm.py",
       "status": "imported",
       "baseline_extracted_sha256": "e6b524a72ec492932f0554f6f7e7c1f89b22b590003b6a30379cad1ff9babae1",
@@ -793,7 +793,7 @@
     "src/prometheist/model_residency.py": {
       "source_path": "src/prometheist/model_residency.py",
       "source_sha256": "d83d9aa47592b5a44dae8bd3d97cd34a4039964c81da14084ebebed15911e7c5",
-      "extracted_sha256": "483b08d96251ef16f097d76af065a6c288423eef3960afbb3e8acf3f5fe50370",
+      "extracted_sha256": "86ebdc86431bbf95a22f56e802ea4865cb04c88a0dc110a26062e9034150f6de",
       "extraction_path": "src/persistent_cognition/model_residency.py",
       "status": "imported",
       "baseline_extracted_sha256": "d5819a2edc47607bcec9f05f9c757b12d8b33508f2e0be3600acb66bfbd58ebe",
@@ -1162,7 +1162,7 @@
     "tests/conftest.py": {
       "source_path": "tests/conftest.py",
       "source_sha256": "77f20459ab0511bff297a0c3da0da89401f3f96113f0a3e31f7b43b7be65fd48",
-      "extracted_sha256": "a5302bb87aee29a0269f52693ecc2f1f80532046e571c27eb522c37c72bae69f",
+      "extracted_sha256": "7b211873cc1be41938b96171fc2e81ec24a3ad52f08d56dc8116bfa24a97fbab",
       "extraction_path": "tests/conftest.py",
       "status": "imported",
       "baseline_extracted_sha256": "4ba829368855eca06de8edb48c8935a3fa2bbea852ebb1e4a9a96f9bb35d4a75",
@@ -1866,7 +1866,7 @@
     "tests/unit/test_contract_registries.py": {
       "source_path": "tests/unit/test_contract_registries.py",
       "source_sha256": "d9b5449a70b69e430989b073da936baf62e038854dd55de5e8d14a1f1c569c14",
-      "extracted_sha256": "a24932452c2b7a38ac8a821d85cb150dd4ebdf588032884f04b09797932f74bc",
+      "extracted_sha256": "82af24311ff975e5ecbba9391c41b281702584a73178a3a596159a804c9eab73",
       "extraction_path": "tests/unit/test_contract_registries.py",
       "status": "imported",
       "baseline_extracted_sha256": "d9b5449a70b69e430989b073da936baf62e038854dd55de5e8d14a1f1c569c14"
@@ -1906,7 +1906,7 @@
     "tests/unit/test_model_residency.py": {
       "source_path": "tests/unit/test_model_residency.py",
       "source_sha256": "cff5c8ea02dc599681b3d9d739900f88d1a4cce26c03be1f8604d9f29fd4256e",
-      "extracted_sha256": "05e2c6f698868461c85306110452f8902e9434023d46576de2bb2b4f15fec964",
+      "extracted_sha256": "2a59516b44025a54b200f76c8438bc4e9a3bd05ed8e9968675df7c4424640e39",
       "extraction_path": "tests/unit/test_model_residency.py",
       "status": "imported",
       "baseline_extracted_sha256": "15c633952d6fb1dfab0927a79b384862aab921245f645a987122fa5a7c0dcf8d"
@@ -1980,7 +1980,7 @@
       "source_path": null,
       "source_sha256": null,
       "extraction_path": "scripts/verify_source_baseline.py",
-      "extracted_sha256": "6daacbe3b41bf68d385ac0c5fcb280c212603299ccdbe24baf3fa19293cd619a",
+      "extracted_sha256": "0781eca597984ca7912343c1724abf24d807f6bea2c0523bb540ae321c47b32d",
       "reason": "Extraction provenance verifier for imported/adapted files, additions, retirements and unrecorded code.; remaining audit remediation: deterministic bounds, private storage, safe diagnostics and embedding contracts"
     },
     "src/persistent_cognition/resource_limits.py": {
@@ -2146,7 +2146,7 @@
     "benchmarks/cognitive_effort/measurement.py": {
       "source_path": null,
       "source_sha256": null,
-      "extracted_sha256": "528fe675c1894e636b80feb87d053b922324734033bf247eac2e86b4e925f31c",
+      "extracted_sha256": "cfc9df37f808f9f4978522e12251c58a5fe3346e6579280fab4a29806bb8d402",
       "extraction_path": "benchmarks/cognitive_effort/measurement.py",
       "status": "added",
       "reason": "COG-EFFORT-001: independent auditable cognitive-effort measurement, reproducible local runner and operator guidance."
@@ -2170,7 +2170,7 @@
     "benchmarks/cognitive_effort/runner.py": {
       "source_path": null,
       "source_sha256": null,
-      "extracted_sha256": "153c1222142055f958c18740dc1c353c2cee47ab062cc5c7cfba0bbfcfe43dcf",
+      "extracted_sha256": "89476af100711a2546926864c17a8b3b98bf3e08cc034f0440688d542e3ec84e",
       "extraction_path": "benchmarks/cognitive_effort/runner.py",
       "status": "added",
       "reason": "COG-EFFORT-001: independent auditable cognitive-effort measurement, reproducible local runner and operator guidance."
@@ -2178,7 +2178,7 @@
     "tests/test_cognitive_effort_benchmark.py": {
       "source_path": null,
       "source_sha256": null,
-      "extracted_sha256": "02cde0556f2ac87ded3152d42f3417de87c297b9d9e5c0e43a87d4dcd3338dbe",
+      "extracted_sha256": "746fe480c11b384c6ce2cc22a02a0e799886a18681fdb05de69b6f1a0add96cf",
       "extraction_path": "tests/test_cognitive_effort_benchmark.py",
       "status": "added",
       "reason": "COG-EFFORT-001: independent auditable cognitive-effort measurement, reproducible local runner and operator guidance."
@@ -2194,7 +2194,7 @@
     "docs/engineering/COGNITIVE_EFFORT_BENCHMARK.md": {
       "source_path": null,
       "source_sha256": null,
-      "extracted_sha256": "314e91086c7f686d06255a342f856b09a37448717191b1221303ee68a425fa8a",
+      "extracted_sha256": "76fd77cbbe1bd23f49e18d8e49e7a892e20378a9b909980ae4911535b9ab9dc8",
       "extraction_path": "docs/engineering/COGNITIVE_EFFORT_BENCHMARK.md",
       "status": "added",
       "reason": "COG-EFFORT-001: independent auditable cognitive-effort measurement, reproducible local runner and operator guidance."

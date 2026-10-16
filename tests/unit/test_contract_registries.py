@@ -75,3 +75,26 @@ def test_source_verifier_detects_new_unrecorded_code_and_missing_addition(tmp_pa
     }}}
     with pytest.raises(SystemExit, match="missing current file"):
         verify(manifest, tmp_path)
+
+
+@pytest.mark.parametrize("suffix", [".json", ".sql", ".ps1"])
+def test_source_verifier_rejects_unregistered_fixtures_and_scripts(tmp_path, suffix):
+    import runpy
+    from pathlib import Path
+    verify = runpy.run_path(str(Path(__file__).resolve().parents[2] / "scripts/verify_source_baseline.py"))["verify_manifest"]
+    path = tmp_path / "tests/fixtures" / ("unregistered" + suffix)
+    path.parent.mkdir(parents=True)
+    path.write_text("{}")
+    with pytest.raises(SystemExit, match="unrecorded code or fixture"):
+        verify({"files": {}}, tmp_path)
+
+
+def test_external_artifact_root_preserves_per_test_and_per_run_isolation(tmp_path, monkeypatch):
+    from tests.conftest import _test_artifact_root
+    root = tmp_path / "retained"
+    monkeypatch.setenv("PCR_TEST_ARTIFACT_ROOT", str(root))
+    paths = [_test_artifact_root(tmp_path / "scratch", node) for node in ("a", "a", "b")]
+    assert len(set(paths)) == 3
+    assert all(path.parent == root.resolve() and path.is_dir() for path in paths)
+    monkeypatch.delenv("PCR_TEST_ARTIFACT_ROOT")
+    assert _test_artifact_root(tmp_path, "a") == tmp_path / "persistent_cognition-artifacts"

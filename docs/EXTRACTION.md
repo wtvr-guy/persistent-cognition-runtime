@@ -25,7 +25,7 @@ The source application is unchanged. This repository has its own history and the
 - Isolated action feedback from pending entity reactions, quarantined failed situations with explicit reconciled recovery while healthy siblings continue, and based model admission only on actual model-using stages.
 - Corrected historical upstream links to the real `wtvr-guy/prometheist` repository; current imports/commands remain neutral.
 
-The current `SOURCE_BASELINE.json` records the retained runtime, tests, and tools. Run `scripts/verify_source_baseline.py` for current file counts. Original `source_path`/`source_sha256` are preserved for retained files independently of current `extraction_path`/`extracted_sha256`. The verifier also rejects unrecorded Python code. Runtime behavior is tested with retained and strengthened regressions; source parity alone is not a functional acceptance result.
+The current `SOURCE_BASELINE.json` records the retained runtime, tests, and tools. Run `scripts/verify_source_baseline.py` for current file counts. Original `source_path`/`source_sha256` are preserved for retained files independently of current `extraction_path`/`extracted_sha256`. The verifier also rejects unrecorded Python, JSON fixtures, SQL, and PowerShell files in governed source directories. Removed components remain auditable in Git history; the active manifest describes retained assets. Runtime behavior is tested with retained and strengthened regressions; source parity alone is not a functional acceptance result.
 
 ## Verification
 

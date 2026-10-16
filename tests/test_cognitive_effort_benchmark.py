@@ -174,7 +174,7 @@ def test_complete_deterministic_runner_smoke(tmp_path: Path, monkeypatch):
         deterministic_iterations=2, deterministic_repeats=1, retrieval_repeats=1,
         sample_ms=50, idle_seconds=0.05, timeout_seconds=1.0,
         native_timeout_seconds=1.0, expected_commit=None, allow_dirty=False,
-        model=None, ollama_url="http://127.0.0.1:11434", output_root=tmp_path,
+        model=None, ollama_url="https://unused-remote.example", output_root=tmp_path,
     )
     assert runner._run(args) == 0
     (run_dir,) = tuple(tmp_path.iterdir())
@@ -278,3 +278,79 @@ def test_production_policy_refuses_remote_configured_specialist(tmp_path: Path, 
     with pytest.raises(ValueError, match="different or remote provider"):
         runner._run(args)
     assert not tuple(tmp_path.glob("**/events.jsonl"))
+
+
+@pytest.mark.parametrize("exception", [KeyboardInterrupt, SystemExit])
+def test_operator_interrupts_propagate_and_leave_trial_incomplete(tmp_path, exception):
+    audit = AuditTrail(tmp_path / "run")
+    audit.append("run_start", run_id="stop")
+    def interrupt():
+        raise exception()
+    try:
+        with pytest.raises(exception):
+            run_trial(audit, "stopped", "interrupt", {}, interrupt, sample_seconds=.05)
+    finally:
+        audit.close()
+    check = verify_audit(audit.root)
+    assert not check["valid"]
+    assert any("incomplete trials" in error for error in check["errors"])
+
+
+def test_sampler_completes_a_baseline_before_start_returns(monkeypatch):
+    from benchmarks.cognitive_effort.measurement import Sampler
+    sampler = Sampler(60)
+    monkeypatch.setattr(sampler, "_capture", lambda: {"epoch_seconds": 1.0})
+    sampler.start()
+    try:
+        assert len(sampler.samples) == 1
+        assert sampler.samples[0]["epoch_seconds"] == 1.0
+    finally:
+        sampler.stop()
+    assert not sampler.errors
+
+
+def test_sampler_cpu_totals_retain_exited_children_and_distinguish_pid_reuse(monkeypatch):
+    from benchmarks.cognitive_effort.measurement import Sampler
+    sampler = Sampler(.05)
+    sampler.started_epoch = 100.0
+    frames = iter([
+        {"own_process_cpu": {"1:90": {"seconds": 5.0, "created_epoch": 90}}},
+        {"own_process_cpu": {"1:90": {"seconds": 5.1, "created_epoch": 90},
+                             "2:100.5": {"seconds": .4, "created_epoch": 100.5}}},
+        {"own_process_cpu": {"1:90": {"seconds": 5.2, "created_epoch": 90},
+                             "2:101.5": {"seconds": .2, "created_epoch": 101.5}},
+         "ollama_process_cpu": {"3:80": {"seconds": 200, "created_epoch": 80}}},
+        {"own_process_cpu": {"1:90": {"seconds": 5.3, "created_epoch": 90}}},
+    ])
+    monkeypatch.setattr(sampler, "_capture", lambda: next(frames))
+    for _ in range(4):
+        sampler._sample()
+    assert not sampler.errors
+    assert [s["own_cpu_cumulative_seconds"] for s in sampler.samples] == [0, .5, .8, .9]
+    assert sampler.samples[-1]["ollama_cpu_cumulative_seconds"] == 0
+
+
+def test_native_gate_retains_fixture_artifacts_in_audit_and_bundle(tmp_path, monkeypatch):
+    from types import SimpleNamespace
+    from benchmarks.cognitive_effort import runner
+    monkeypatch.setenv("TEST_DATABASE_URL", "postgresql://localhost/native_benchmark_test")
+    monkeypatch.delenv("DATABASE_URL", raising=False)
+    audit = AuditTrail(tmp_path / "native-run")
+    audit.append("run_start", run_id="native")
+    def fake_run(command, **kwargs):
+        environment = kwargs["env"]
+        root = Path(environment["PCR_TEST_ARTIFACT_ROOT"])
+        assert root == Path(environment["PCR_ARTIFACT_ROOT"])
+        (root / "case").mkdir()
+        (root / "case/receipt.json").write_text('{"exact":"retained"}')
+        return SimpleNamespace(returncode=0, stdout="native passed", stderr="")
+    monkeypatch.setattr(runner.subprocess, "run", fake_run)
+    result = runner._native_gate(audit, .05, 1, "test-model", SimpleNamespace(samples=[], errors=[]))
+    assert result["status"] == "PASS"
+    audit.append("run_end", issue_count=0, completed=True)
+    audit.close()
+    assert verify_audit(audit.root)["valid"]
+    bundle = package_run(audit.root)
+    assert verify_bundle(bundle)["valid"]
+    (audit.root / "native_artifacts/case/receipt.json").write_text("changed")
+    assert not verify_audit(audit.root)["valid"]

@@ -90,13 +90,25 @@ def _prepare_test_database():
     yield
 
 
+def _test_artifact_root(tmp_path, node_id):
+    external = os.environ.get("PCR_TEST_ARTIFACT_ROOT")
+    if not external:
+        return tmp_path / "persistent_cognition-artifacts"
+    import hashlib
+    import tempfile
+    root = pathlib.Path(external).resolve()
+    root.mkdir(parents=True, exist_ok=True)
+    prefix = hashlib.sha256(node_id.encode("utf-8")).hexdigest() + "-"
+    return pathlib.Path(tempfile.mkdtemp(prefix=prefix, dir=root))
+
+
 @pytest.fixture(autouse=True)
-def _isolated_artifact_root(tmp_path, monkeypatch):
+def _isolated_artifact_root(tmp_path, monkeypatch, request):
     """Give each test and its child processes an independent immutable journal."""
 
     monkeypatch.setenv(
         "PCR_ARTIFACT_ROOT",
-        str(tmp_path / "persistent_cognition-artifacts"),
+        str(_test_artifact_root(tmp_path, request.node.nodeid)),
     )
     yield
 
